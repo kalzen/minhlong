@@ -10,9 +10,18 @@ class PostCategory extends Model
     protected $fillable = [
         'name',
         'slug',
+        'sector_key',
+        'sort_order',
         'description',
         'status',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'sort_order' => 'integer',
+        ];
+    }
 
     public function posts(): HasMany
     {

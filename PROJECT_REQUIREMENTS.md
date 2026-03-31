@@ -6,6 +6,7 @@ Mục đích của tài liệu:
 1. Dễ hiểu cho người code.
 2. Dùng ngôn ngữ rõ ràng, tránh thuật ngữ kỹ thuật thừa.
 3. Đánh số từng mục để dễ tham chiếu khi yêu cầu triển khai trong Cursor.
+4. **Mục 12** gom **user story, chức năng backend CMS, build step, vị trí ảnh cấu hình** để chuẩn bị làm admin/backend (đa ngôn ngữ, Spatie, shadcn editor, thư viện file, liên hệ).
 
 ---
 
@@ -24,10 +25,12 @@ Các ý chính:
 
 - **Admin (doanh nghiệp)**:
   - Đăng nhập vào trang quản trị.
-  - Quản lý bài viết blog/tin tức.
-  - Quản lý trang nội dung chính (giới thiệu, dịch vụ chính…).
-  - Quản lý khách hàng gửi form liên hệ.
-  - Cấu hình settings website: logo, thông tin liên hệ (phone, email, address), tiêu đề & mô tả website, favicon, social links cơ bản.
+  - Quản lý **danh mục bài viết** và **danh mục dự án**; bài viết/blog **đa ngôn ngữ** với cơ chế **liên kết bản dịch** cùng chủ đề.
+  - Quản lý **dự án** (gán danh mục theo lĩnh vực), **upload ảnh** (Spatie Media Library), soạn thảo nội dung bằng **editor shadcn** (rich text).
+  - Quản lý **thư viện tài liệu** (CSV, Excel, Word, PDF) phục vụ mục **Hồ sơ / Báo cáo** — người dùng frontend có thể tải xuống.
+  - Quản lý **form liên hệ** từ frontend (danh sách, trạng thái, chi tiết).
+  - Quản lý trang nội dung chính (giới thiệu, dịch vụ chính…) khi đã nối CMS.
+  - Cấu hình **settings website**: tiêu đề site, **thông tin liên hệ**, và **thay thế hình ảnh** tại các **vị trí quan trọng** trên giao diện (xem mục 12.4).
   - Xem thống kê tổng quan trong dashboard.
 - **Khách truy cập (visitor)**:
   - Xem thông tin công ty, dịch vụ/sản phẩm, tin tức.
@@ -56,7 +59,8 @@ Các ý chính:
 4. Hệ thống **lưu lại thông tin khách hàng** khi gửi form liên hệ (tên, email, điện thoại, nội dung, thời gian).
 5. Có **dashboard** hiển thị thống kê cơ bản: số lượt truy cập (có thể đơn giản là tổng view), số liên hệ mới, số bài viết, số trang, và log hành động chính (tạo bài viết, chỉnh sửa settings…).
 6. Website frontend hiển thị đẹp, responsive, phù hợp cho 1 trang web doanh nghiệp cơ bản.
-7. Có thể mở rộng thêm các module: dịch vụ/sản phẩm, thư viện hình ảnh, FAQ… nhưng không bắt buộc giai đoạn đầu.
+7. **Backend CMS**: quản trị danh mục (bài viết + dự án), nội dung đa ngôn ngữ, thư viện file, cấu hình media toàn site, và xử lý liên hệ — theo user story & build step mục 3, 4, 7, **12**.
+8. Có thể mở rộng thêm các module: FAQ, newsletter… nhưng không bắt buộc giai đoạn đầu.
 
 ---
 
@@ -77,6 +81,18 @@ Các ý chính:
 | **US-011** | Là khách truy cập, tôi muốn gửi form liên hệ đơn giản (tên, email, SĐT, nội dung) và nhận thông báo gửi thành công. |
 | **US-012** | (Đề xuất) Là admin, tôi muốn export danh sách liên hệ ra file Excel để lưu trữ hoặc xử lý offline. |
 | **US-013** | (Đề xuất) Là admin, tôi muốn cấu hình SEO riêng cho từng bài viết (meta title, meta description, slug). |
+| **US-014** | Là admin, tôi muốn **quản lý danh mục bài viết** (CRUD, slug, thứ tự, trạng thái) để phân loại tin tức theo nhu cầu. |
+| **US-015** | Là admin, tôi muốn **quản lý danh mục dự án** (CRUD) để gom nhóm dự án theo lĩnh vực (Constructor, Land, Host, Power, Minerals, tin tức chung…). |
+| **US-016** | Là admin, tôi muốn khi cài đặt môi trường mới có **sẵn danh mục** (seed) khớp các lĩnh vực: **Constructor**, **Land**, **Host**, **Power**, **Minerals**, và **Tin tức chung** — cho cả danh mục bài viết và danh mục dự án (nếu áp dụng tương ứng). |
+| **US-017** | Là admin, tôi muốn **tạo bài viết theo từng ngôn ngữ** (locale), mỗi locale có tiêu đề, slug, mô tả, nội dung riêng. |
+| **US-018** | Là admin, tôi muốn **liên kết một cách thông minh** các bài cùng một chủ đề nhưng khác ngôn ngữ (ví dụ: EN ↔ VI ↔ ZH) để frontend hiển thị chuyển ngôn ngữ đúng bài và SEO có `hreflang` / `alternate`. |
+| **US-019** | Là admin, tôi muốn soạn **nội dung bài viết** bằng **editor shadcn** (rich text, thân thiện, hỗ trợ heading, list, link, embed cơ bản). |
+| **US-020** | Là admin, tôi muốn **upload ảnh** cho bài viết và media (đại diện, gallery) dùng **Spatie Laravel Media Library** (collection, disk, resize optional). |
+| **US-021** | Là admin, tôi muốn **cấu hình hình ảnh** tại các **vị trí cố định** trên website (hero, logo, favicon, khối dịch vụ, banner lĩnh vực…) thay cho file tĩnh trong `public/`. |
+| **US-022** | Là admin, tôi muốn chỉnh **tiêu đề website**, **meta mặc định**, và **thông tin liên hệ** (phone, email, địa chỉ, map, social) từ một màn hình cài đặt. |
+| **US-023** | Là admin, tôi muốn quản lý **thư viện tài liệu**: upload file **CSV, Excel (.xlsx), Word (.doc/.docx), PDF**; gán loại **Profile** hoặc **Báo cáo**; cho phép **public download** trên frontend. |
+| **US-024** | Là admin, tôi muốn xem **danh sách liên hệ** do khách gửi từ form frontend, lọc theo thời gian/trạng thái, xem chi tiết và đánh dấu đã xử lý. |
+| **US-025** | Là khách, tôi muốn đến trang **Hồ sơ / Báo cáo** (hoặc tương đương) và **tải xuống** các tài liệu do admin đăng (đúng định dạng). |
 
 ---
 
@@ -97,6 +113,17 @@ Các ý chính:
 | **F-011** | Dashboard thống kê | Hiển thị: tổng lượt truy cập (đơn giản), số liên hệ mới (theo ngày/tuần/tháng), số bài viết, log hành động gần đây (tạo/sửa/xóa bài, đổi settings…). | Trang đầu tiên sau khi đăng nhập admin. | Nếu một phần thống kê lỗi, không làm sập toàn bộ dashboard; hiển thị thông báo nhẹ ở khu vực đó. |
 | **F-012** | Ghi log truy cập | Lưu truy cập đơn giản: đường dẫn, IP, user-agent, thời gian; có thể gộp để đếm pageview. | Tự động ở frontend (middleware). | Có thể bỏ qua lỗi ghi log để không ảnh hưởng người dùng. |
 | **F-013** | Export liên hệ ra Excel (đề xuất) | Nút "Xuất Excel" trên màn danh sách liên hệ: xuất file Excel chứa các cột cơ bản. | Trong admin → "Khách hàng/Liên hệ". | Nếu xuất lỗi, hiển thị thông báo và không download file rỗng. |
+| **F-014** | Danh mục bài viết | CRUD: tên, slug, mô tả, sort order, `is_active`; không xóa cứng nếu còn bài (hoặc reassign). | Admin → Blog → Danh mục. | Validate slug unique; cảnh báo khi xóa có dữ liệu con. |
+| **F-015** | Danh mục dự án | CRUD tương tự danh mục bài viết; dùng để lọc/nhóm dự án theo lĩnh vực. | Admin → Dự án → Danh mục. | Giống F-014. |
+| **F-016** | Seeder danh mục theo lĩnh vực | Migration + seeder tạo sẵn danh mục: **Constructor**, **Land**, **Host**, **Power**, **Minerals**, **Tin tức chung** (key/slug cố định để code tham chiếu). | `php artisan migrate --seed`. | Idempotent seed (updateOrCreate) để chạy lại an toàn. |
+| **F-017** | Bài viết đa ngôn ngữ | Model `Post` + `PostTranslation` (hoặc `posts` + locale columns) hoặc bảng `post_translations`: mỗi bản ghi theo `locale` có title, slug, excerpt, body HTML, SEO meta. | Admin → Blog → Bài viết. | Slug unique theo **(locale, slug)**; không trùng logic với bài khác. |
+| **F-018** | Nhóm bản dịch (translation set) | Một **translation_group_id** (UUID) hoặc bảng `post_translation_links` gắn các bản `Post`/`PostTranslation` cùng chủ đề; admin chọn “bài tương ứng” khi tạo/sửa. | Form bài viết. | Không cho loop; một bài chỉ thuộc một nhóm. |
+| **F-019** | Editor nội dung (shadcn) | Giao diện admin (React/Inertia hoặc SPA) dùng **shadcn/ui** + editor TipTap (hoặc tương đương trong hệ sinh thái shadcn) lưu HTML sanitize; upload ảnh trong bài qua API Spatie. | Màn tạo/sửa bài. | XSS: sanitize HTML; giới hạn kích thước file upload. |
+| **F-020** | Media ảnh (Spatie) | Đăng ký `HasMedia` cho Post, Project, Document; collections: `featured`, `content`, `gallery`; disk `public` hoặc S3. | Trong form bài viết/dự án. | MIME whitelist; lỗi upload thông báo rõ. |
+| **F-021** | Cài đặt hình ảnh theo vị trí | Key-value hoặc bảng `media_settings` (position_key → media_id / path); map sang frontend (xem **12.4**). | Admin → Cài đặt → Hình ảnh / Media. | Fallback ảnh mặc định trong theme nếu chưa cấu hình. |
+| **F-022** | Cài đặt chung & liên hệ | Tiêu đề site, meta default, logo, favicon, phone, email, địa chỉ, map embed, social (mở rộng F-003/F-004). | Cài đặt. | Validate JSON/URL cho map. |
+| **F-023** | Thư viện tài liệu | Model `Document` hoặc `LibraryFile`: title, loại (profile \| report), file qua Spatie, `mime`, `disk`, `is_public`, `sort_order`; route download signed hoặc public nếu policy cho phép. | Admin → Thư viện. | Chỉ cho phép MIME: pdf, csv, xlsx/xls, doc/docx; virus scan (optional sau). |
+| **F-024** | Frontend Profile & Báo cáo | Trang list + nút tải file; chỉ hiển thị file `is_public`. | `/profile` / `/reports` hoặc route tương đương. | 404 nếu file ẩn; log download (optional). |
 
 ---
 
@@ -118,6 +145,11 @@ Các ý chính:
 | **S-012** | Trang blog | Danh sách bài blog với phân trang. | `/blog`. |
 | **S-013** | Trang chi tiết blog | Nội dung bài viết, bài liên quan. | `/blog/{slug}`. |
 | **S-014** | Trang liên hệ | Thông tin liên hệ + form liên hệ (F-008). | `/lien-he`. |
+| **S-015** | Danh mục dự án (admin) | Bảng danh mục dự án; thao tác CRUD. | Admin → Dự án → Danh mục. |
+| **S-016** | Danh sách / form dự án | Tiêu đề đa ngôn ngữ, danh mục, ảnh, mô tả, slug; liên kết bản dịch (optional). | Admin → Dự án. |
+| **S-017** | Cài đặt hình ảnh theo vị trí | Form chọn/upload ảnh cho từng `position_key` (hero, services…). | Admin → Cài đặt → Media / Hình ảnh. |
+| **S-018** | Thư viện tài liệu | Danh sách file Profile/Báo cáo; upload; bật/tắt public download. | Admin → Thư viện. |
+| **S-019** | Trang tải tài liệu (frontend) | Danh sách file được phép tải (Profile / Báo cáo). | Route public tùy cấu trúc URL. |
 
 ---
 
@@ -132,6 +164,13 @@ Các ý chính:
 | **D-005** | Liên hệ khách hàng | id, name, email, phone, message, status (new/processing/done), ip, user_agent, created_at, updated_at. |
 | **D-006** | Log truy cập | id, path, ip, user_agent, referrer (optional), created_at. |
 | **D-007** | Log hành động admin | id, user_id, action (ví dụ: `create_post`, `update_settings`), payload (json), created_at. |
+| **D-008** | Danh mục dự án | id, name, slug, description, sort_order, is_active, type hoặc `sector` enum (constructor, land, host, power, minerals, general_news) — tùy thiết kế; created_at, updated_at. |
+| **D-009** | Dự án (Project) | id, category_id (FK), translation_group_id (nullable, UUID) — nếu tách bảng translation tương tự Post; hoặc bảng `project_translations`; status; published_at; created_by. |
+| **D-010** | Nhóm bản dịch nội dung | `translation_group_id` (UUID) dùng chung cho Post/Project: mọi bản theo locale cùng group = cùng chủ đề; hoặc bảng pivot `content_translation_groups`. |
+| **D-011** | Bài viết đa ngôn ngữ | Cấu trúc gợi ý: `posts` (id, category_id, status, translation_group_id, author_id, published_at) + `post_translations` (post_id hoặc post_id per locale: id, locale, title, slug, excerpt, body, meta_title, meta_description); **hoặc** một bảng `posts` với `locale` + `master_id` trỏ bản gốc — cần chọn một pattern và nhất quán. |
+| **D-012** | Media (Spatie) | Bảng `media` của package; polymorphic `model_type`, `model_id`; collection names; order. |
+| **D-013** | Cài đặt vị trí ảnh | `site_media_positions` hoặc key trong settings: `position_key` (string), `media_id` FK hoặc path; updated_at. |
+| **D-014** | Thư viện file (Profile/Báo cáo) | id, title, category (`profile` \| `report`), is_public, sort_order, polymorphic media_id hoặc disk path; created_at. |
 
 ---
 
@@ -148,6 +187,16 @@ Các ý chính:
 | **B-007** | Dashboard & logs | Tạo bảng log truy cập (D-006) và log hành động admin (D-007); middleware ghi log truy cập; màn hình S-002. |
 | **B-008** | Export Excel (nếu làm) | Thêm chức năng export danh sách liên hệ ra Excel (F-013). |
 | **B-009** | Chuyển HTML sang Frontend | Có sẵn thư mục HTML (template/mockup); cần chuyển thành giao diện frontend của website, tích hợp HTML và đường dẫn resource hợp lý, tách layout/header/footer; phần nội dung đã có backend thì lấy dữ liệu thật (kèm seeder); phần chưa có backend giữ nội dung demo. Xem **Rule: Chuyển thư mục HTML sang Frontend** (mục 9). |
+| **B-010** | Chuẩn bị package & quy ước | Cài **spatie/laravel-medialibrary**; cấu hình disk, collections; quy ước đặt tên collection (`featured`, `content`, `documents`). Chuẩn bị stack admin cho **shadcn + editor** (ví dụ Inertia + React + TipTap) nếu tách khỏi Blade thuần. |
+| **B-011** | Danh mục & seed lĩnh vực | Migration `post_categories`, `project_categories` (hoặc gộp nếu dùng enum + một bảng); **CategorySeeder** tạo sẵn: Constructor, Land, Host, Power, Minerals, Tin tức chung — slug/key cố định (`constructor`, `land`, `host`, `power`, `minerals`, `general`). |
+| **B-012** | Mô hình đa ngôn ngữ cho Post | Triển khai D-011; policy slug unique theo locale; accessor URL frontend `/blog/{locale}/{slug}` hoặc prefix locale (thống nhất với middleware `SetLocale`). |
+| **B-013** | Liên kết bản dịch | Thêm `translation_group_id` (UUID) sinh khi tạo “chủ đề” mới; UI admin chọn bài/dự án cùng nhóm khi thêm ngôn ngữ; API `hreflang` và link chuyển ngôn trên trang chi tiết. |
+| **B-014** | Admin: CRUD Post + Editor | Form create/edit: shadcn editor, upload ảnh qua endpoint lưu Spatie, preview; tests Feature cho API và policy. |
+| **B-015** | Projects backend | CRUD dự án + đa ngôn ngữ + media; frontend trang listing/filter theo danh mục. |
+| **B-016** | Settings mở rộng | Bảng/key cho **vị trí ảnh** (12.4); helper `site_media('hero.home.main')` hoặc tương đương; cache config. |
+| **B-017** | Thư viện tài liệu | Model + upload validation MIME; route download; trang frontend Profile/Báo cáo. |
+| **B-018** | Liên hệ | Đảm bảo `Contact`/`Lead` lưu đủ field; admin index + filter; rate limit + honeypot (optional). |
+| **B-019** | QA & i18n | Test đa ngôn ngữ, seed demo mỗi locale; kiểm tra alternate links và 404 slug. |
 
 ---
 
@@ -157,7 +206,8 @@ Các ý chính:
 - **Bảo mật**: Hash mật khẩu (bcrypt), CSRF token cho form, rate limit form liên hệ (đề xuất), phân quyền rõ ràng cho admin.
 - **Hiệu năng**: Cache settings, cache danh mục/bài viết phổ biến nếu traffic cao (có thể làm sau).
 - **SEO & UX**: URL thân thiện (slug), thẻ meta cơ bản, Open Graph cho bài viết, sitemap (optional).
-- **Đa ngôn ngữ**: Website hỗ trợ đa ngôn ngữ (i18n); **ngôn ngữ mặc định là tiếng Anh (English)**. Khi triển khai mới hoặc chỉnh sửa giao diện/nội dung, ưu tiên nội dung và nhãn mặc định bằng tiếng Anh; chuẩn bị cấu trúc (locale, file dịch, URL) để mở rộng thêm ngôn ngữ sau. Xem **Rule: Đa ngôn ngữ** (mục 10).
+- **Đa ngôn ngữ**: Website hỗ trợ đa ngôn ngữ (i18n); **ngôn ngữ mặc định là tiếng Anh (English)**. Khi triển khai mới hoặc chỉnh sửa giao diện/nội dung, ưu tiên nội dung và nhãn mặc định bằng tiếng Anh; chuẩn bị cấu trúc (locale, file dịch, URL) để mở rộng thêm ngôn ngữ sau. Xem **Rule: Đa ngôn ngữ** (mục 10). Nội dung **bài viết/dự án** đa ngôn ngữ và **nhóm bản dịch** — xem **mục 12**.
+- **Backend CMS (dự kiến)**: Admin dùng **Spatie Media Library** cho ảnh/tài liệu; editor bài viết dùng **shadcn** (React) nếu admin xây bằng Inertia — xem **mục 12** và **F-014–F-024**.
 
 ---
 
@@ -189,6 +239,15 @@ Khi thực hiện **B-009** (hoặc khi có yêu cầu chuyển một folder HTM
 
 5. **Thứ tự ưu tiên**
    - Có thể thực hiện B-009 sau khi đã có layout và một số backend cơ bản (B-001, B-002, B-005…) để dễ map dữ liệu; hoặc làm B-009 trước rồi từ từ nối backend vào từng khối.
+
+---
+## 9.1 Rule: Khi tôi yêu cầu sửa nội dung thì chỉ sửa Blade
+
+Khi tôi yêu cầu bạn **sửa nội dung** (đổi text/heading/section layout, cập nhật link hiển thị, chỉnh cấu trúc phần hiển thị trên website), bạn **chỉ cần sửa các file `.blade.php`** tương ứng.
+
+Các file `.html` trong `public/frontend` chỉ để lưu nội dung tham chiếu để bạn lấy ra khi chuyển đổi (template/mockup), vì vậy **không cần sửa `.html`** trong các yêu cầu “sửa nội dung” của tôi.
+
+*(Ngoại lệ: chỉ sửa `.html` nếu tôi nói rõ ràng yêu cầu chỉnh sửa trực tiếp file HTML.)*
 
 ---
 
@@ -365,10 +424,216 @@ Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương h
 - **Chinese (reference):**  
   重点投资工业园区，致力推动工业项目发展，优化基础设施以吸引战略投资者。  
 
+#### 11.9 Minh Long Group — Organization Structure (Sơ đồ tổ chức)
+
+Tham chiếu nội dung từ sơ đồ tổ chức Minh Long Group (có song ngữ).
+
+Các đầu mối/đơn vị chính:
+
+- **KẾ TOÁN / Accounting**
+- **BAN KIỂM SOÁT TẬP ĐOÀN / Group Supervisory Board**
+- **BAN TÀI CHÍNH / Finance Board**
+- **BAN PHÁT TRIỂN DỰ ÁN ĐẦU TƯ / Investment Project Development Board**
+- **Minh Long Constructions**
+  - Tổng thầu thi công / General contractor
+  - Nhà máy Cơ khí / Mechanical factory
+  - Cơ Điện & PCCC / M&E and Fire Protection
+- **Minh Long Land**
+  - Bất động sản đô thị / Urban real estate
+  - BĐS công nghiệp / Industrial real estate
+- **Minh Long Power**
+  - Trạm phân phối điện / Power distribution station
+  - Năng lượng mặt trời / Solar energy
+- **Minh Long Minerals**
+  - Mỏ khoáng sản / Mineral mine
+  - Sản xuất vật liệu / Material production
+- **BAN XÚC TIẾN ĐẦU TƯ & KINH DOANH / Investment Promotion & Business Development**
+- **Minh Long Host**
+  - Quản lý Bất động sản / Property management
+
+Mermaid sơ đồ tổ chức (để dùng trực tiếp trong Markdown):
+
+```mermaid
+graph TB
+  G["Minh Long Group<br/>MINH LONG GROUP"]
+
+  AC["KẾ TOÁN<br/>Accounting"]
+  SV["BAN KIỂM SOÁT TẬP ĐOÀN<br/>Group Supervisory Board"]
+  FN["BAN TÀI CHÍNH<br/>Finance Board"]
+  ID["BAN PHÁT TRIỂN DỰ ÁN ĐẦU TƯ<br/>Investment Project Development Board"]
+  PD["BAN XÚC TIẾN ĐẦU TƯ & KINH DOANH<br/>Investment Promotion & Business Development"]
+
+  G --> AC
+  G --> SV
+  G --> FN
+  G --> ID
+  G --> PD
+
+  C["Minh Long Constructions"]
+  C1["Tổng thầu thi công<br/>General contractor"]
+  C2["Nhà máy Cơ khí<br/>Mechanical factory"]
+  C3["Cơ Điện & PCCC<br/>M&E and Fire Protection"]
+  ID --> C
+  C --> C1
+  C --> C2
+  C --> C3
+
+  L["Minh Long Land"]
+  L1["Bất động sản đô thị<br/>Urban real estate"]
+  L2["BĐS công nghiệp<br/>Industrial real estate"]
+  ID --> L
+  L --> L1
+  L --> L2
+
+  P["Minh Long Power"]
+  P1["Trạm phân phối điện<br/>Power distribution station"]
+  P2["Năng lượng mặt trời<br/>Solar energy"]
+  ID --> P
+  P --> P1
+  P --> P2
+
+  M["Minh Long Minerals"]
+  M1["Mỏ khoáng sản<br/>Mineral mine"]
+  M2["Sản xuất vật liệu<br/>Material production"]
+  ID --> M
+  M --> M1
+  M --> M2
+
+  H["Minh Long Host"]
+  H1["Quản lý Bất động sản<br/>Property management"]
+  PD --> H
+  H --> H1
+```
+
 ---
+
+#### 11.10 Minh Long Construction — Human Resources (Nguồn nhân lực)
+
+- **Nguồn ảnh:** `@public/frontend/images/hr/minh-long-construction-hr.png`
+- **Mục đích dùng nội dung:** tham chiếu cho section/khối nội dung liên quan đến **nguồn nhân lực, năng lực đội ngũ, và hoạt động tuyển dụng/nhân sự** của **Minh Long Construction**.
+
+#### 11.11 Minh Long Minerals — Mining & Processing (Khai thác & chế biến)
+
+- **Nguồn ảnh:** `@public/frontend/images/minerals/minh-long-minerals.png`
+
+Các mảng năng lực (từ nội dung trên ảnh):
+
+- **KHAI THÁC & CHẾ BIẾN** / **MINING & PROCESSING**
+- **SẢN XUẤT VẬT LIỆU XÂY DỰNG** / **PRODUCTION OF CONSTRUCTION MATERIALS**
+- **SAN LẤP MẶT BẰNG** / **LAND RECLAMATION**
+- **BUÔN BÁN VẬT LIỆU HẠ TẦNG** / **TRADING OF INFRASTRUCTURE MATERIALS**
+
+Tên nhãn tiếng Trung (tham chiếu từ ảnh):
+
+- 开采勘加工 / 生产建筑材料 / 土地平整回填 / 基建材料买卖
+
+Gợi ý copy cho website (tiếng Anh mặc định):
+
+- **Section heading:** Minh Long Minerals
+- **Short description (EN):**
+  Minh Long Minerals supports industrial land and construction execution through mining & processing, production of building materials, land reclamation, and trading of infrastructure materials.
+
+#### 11.12 Minh Long Host — Core Principles & Implementation Model (Nguyên lý & mô hình triển khai)
+
+- **Nguồn ảnh:** `@public/frontend/images/host/minh-long-host.png`
+
+Gợi ý nội dung (tiếng Anh mặc định cho website):
+
+- **Section title:** Minh Long Host
+- **Core principles (5):**
+  - Right strategy (Đúng chiến lược / Chiến lược đúng)
+  - Clean legal framework (Pháp lý chặt / Khung pháp lý rõ ràng)
+  - Technical standards (Kỹ thuật chuẩn / Tiêu chuẩn kỹ thuật)
+  - Financial safety (Tài chính toàn / An toàn tài chính)
+  - Efficient operation (Vận hành hiệu quả / Hiệu quả vận hành)
+- **Implementation model (từ ảnh):**
+  - Minh Long Group applies a structured model from **Group guidance** to **Project operation** and **Partner collaboration**.
+  - The **Group** provides strategic guidance & risk control.
+  - Each **project company** is responsible for execution & operations.
+  - Investors/partners participate via co-development and benefit-sharing.
+  - Projects are governed through a standardized chain to support planning, execution, and operation/asset optimization.
+- **Applied project groups (nhóm dự án áp dụng):**
+  - **Power & electrical infrastructure / Energy distribution & optimization**
+  - **Energy / renewable & performance optimization**
+  - **Red estate / real estate development & long-term asset management**
+  - **Funds & investment partners / developer-operator model with transparency**
+
+---
+
+## 12. Backend — Chuẩn bị CMS, đa ngôn ngữ, media & thư viện
+
+Mục này tóm tắt **chức năng**, **user story** (tham chiếu mục 3, US-014–US-025), **bước build** (mục 7, **B-010–B-019**), và **danh sách vị trí ảnh** để team không bỏ sót khi làm settings.
+
+### 12.1 Mô tả chức năng (tổng quan)
+
+| Nhóm | Chức năng |
+|------|-----------|
+| **Danh mục** | Hai loại: **danh mục bài viết** và **danh mục dự án**. CRUD đầy đủ, slug, sort, bật/tắt. |
+| **Seed** | Seeder tạo sẵn danh mục theo lĩnh vực: **Constructor** (xây dựng/tổng thầu), **Land**, **Host**, **Power**, **Minerals**, **Tin tức chung** — dùng key/slug cố định để code và filter ổn định. |
+| **Bài viết đa ngôn ngữ** | Mỗi ngôn ngữ = một bản ghi translation (hoặc bài con) với title, slug, excerpt, body, SEO; trạng thái publish theo locale. |
+| **Liên kết cùng chủ đề** | Một **translation group** (UUID) gắn các bản dịch; frontend đổi locale → resolve đúng slug bài tương ứng; hỗ trợ `<link rel="alternate" hreflang="...">`. |
+| **Editor** | **shadcn** + rich text (TipTap hoặc tương đương trong admin React/Inertia); lưu HTML đã sanitize. |
+| **Ảnh** | **Spatie Laravel Media Library** (package đúng tên *spatie/laravel-medialibrary*): ảnh đại diện, ảnh trong nội dung, gallery; có thể tái sử dụng cho cài đặt vị trí. |
+| **Cài đặt site** | Tiêu đề, meta mặc định, thông tin liên hệ; **ảnh theo vị trí** (xem 12.4). |
+| **Thư viện** | Upload **CSV, XLS/XLSX, DOC/DOCX, PDF**; phân loại **Profile** / **Báo cáo**; public download trên frontend. |
+| **Liên hệ** | Lưu submission từ form; admin quản lý danh sách + trạng thái. |
+
+### 12.2 Cơ chế “thông minh” cho bài cùng chủ đề, khác ngôn ngữ
+
+**Mục tiêu:** Tránh duplicate logic, SEO đúng, UX chuyển ngôn mượt.
+
+1. **Translation group ID** (`UUID`): Khi tạo chủ đề mới, sinh một `translation_group_id`. Mỗi bản locale (vi, en, zh…) tham chiếu cùng ID.
+2. **Ràng buộc:** Trong một nhóm, mỗi `locale` xuất hiện tối đa một lần (unique `(translation_group_id, locale)`).
+3. **Slug:** Unique trong phạm vi `(locale, slug)` — không bắt buộc slug giống nhau giữa các ngôn ngữ.
+4. **Frontend:** Trang chi tiết bài viết nhận bản ghi hiện tại; truy vấn các bản cùng `translation_group_id` để render switcher ngôn ngữ và thẻ `hreflang`.
+5. **Fallback:** Nếu thiếu bản cho một locale, có thể redirect về locale mặc định hoặc hiển thị banner “chưa có bản dịch” (quyết định product).
+
+### 12.3 Build step — thứ tự gợi ý (backend)
+
+1. Cài Spatie Media + config disk/collection (**B-010**).  
+2. Migration categories + **CategorySeeder** lĩnh vực (**B-011**).  
+3. Thiết kế bảng Post + translations + `translation_group_id` (**B-012**, **B-013**).  
+4. API upload ảnh (auth admin) + gắn Media vào Post.  
+5. Màn admin Post với shadcn editor (**B-014**).  
+6. Lặp lại pattern cho Project nếu cần (**B-015**).  
+7. Settings + bảng/key vị trí ảnh + helper Blade (**B-016**).  
+8. Thư viện file + trang download (**B-017**).  
+9. Contact + admin (**B-018**).  
+10. Test E2E i18n + alternate (**B-019**).
+
+### 12.4 Danh sách vị trí hình ảnh nên có trong Cài đặt (ghi nhớ)
+
+Các vị trí sau là **gợi ý** bám theo layout hiện tại (Minh Long — `layouts.minhlong`, `home-sections`, các trang lĩnh vực). Admin chọn file từ Media Library hoặc upload mới; frontend dùng helper: nếu không cấu hình thì fallback asset tĩnh hiện có.
+
+| `position_key` (gợi ý) | Mô tả vị trí trên site |
+|------------------------|-------------------------|
+| `brand.logo_header` | Logo header (thay `public/frontend/images/logo.png`). |
+| `brand.favicon` | Favicon (thay `favicon.png`). |
+| `hero.home.main` | Ảnh/lớp nền hero chính trang chủ (nếu tách khỏi CSS background). |
+| `hero.home.info_1` | Khối hero info box — ảnh 1 (`hero-info-image-1`). |
+| `hero.home.info_2` | Khối hero info box — ảnh 2 (`hero-info-image-2`). |
+| `home.about.image_1` | About trang chủ — ảnh 1. |
+| `home.about.image_2` | About trang chủ — ảnh 2. |
+| `home.services.land` | Khối Our Services — thẻ **Land** (`hero-image-gold.jpg` mặc định). |
+| `home.services.host` | Thẻ **Host** (`minhlong-host-1.png`). |
+| `home.services.minerals` | Thẻ **Minerals** (`minerals/about-quarry-conveyors.png`). |
+| `home.services.power` | Thẻ **Power** (`hero-image-silver.png`). |
+| `sector.land.hero` | Hero / ảnh nhận diện trang Minh Long Land. |
+| `sector.host.hero` | Trang Host (ví dụ `minhlong-host-1.png`). |
+| `sector.power.hero` | Trang Power (`hero-image-silver.png` / `power-*.jpg`). |
+| `sector.minerals.hero` | Trang Minerals (`minerals/...`). |
+| `og.default_image` | Ảnh mặc định Open Graph / share social khi bài không có ảnh. |
+
+*Có thể mở rộng thêm: ảnh footer, banner blog, watermark — không bắt buộc giai đoạn 1.*
+
+### 12.5 Ghi chú công nghệ
+
+- **Spatie Media Library:** dùng cho upload có cấu trúc (bài viết, dự án, thư viện; có thể gắn model `SiteSetting` cho ảnh theo vị trí).  
+- **shadcn editor:** đặt trong **admin** (React/Inertia) để đồng bộ component; Laravel nhận HTML/JSON và validate/sanitize.  
+- **Tài liệu thư viện:** MIME whitelist nghiêm; giới hạn dung lượng; quét virus (optional, sau MVP).
 
 ## Style & Clarity
 
 - Giữ câu ngắn, rõ.
 - Tránh thuật ngữ kiến trúc nặng trong tài liệu.
-- Có thể tham chiếu số mục (ví dụ: "Implement F-006 và B-003") khi yêu cầu Cursor triển khai.
+- Có thể tham chiếu số mục (ví dụ: "Implement F-006 và B-003", "CMS theo **mục 12** và F-014–F-024") khi yêu cầu Cursor triển khai.

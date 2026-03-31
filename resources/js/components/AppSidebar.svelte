@@ -18,7 +18,13 @@
         SidebarMenuItem,
     } from '@/components/ui/sidebar';
     import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import { dashboard } from '@/routes';
+    import FileStack from 'lucide-svelte/icons/file-stack';
+    import ImageIcon from 'lucide-svelte/icons/image';
+    import Inbox from 'lucide-svelte/icons/inbox';
+    import Newspaper from 'lucide-svelte/icons/newspaper';
+    import PanelsTopLeft from 'lucide-svelte/icons/panels-top-left';
     import type { NavItem } from '@/types';
 
     let {
@@ -32,6 +38,31 @@
             title: 'Dashboard',
             href: dashboard(),
             icon: LayoutGrid,
+        },
+        {
+            title: 'Posts',
+            href: admin.posts.index(),
+            icon: Newspaper,
+        },
+        {
+            title: 'Projects',
+            href: admin.projects.index(),
+            icon: PanelsTopLeft,
+        },
+        {
+            title: 'Library',
+            href: admin.libraryDocuments.index(),
+            icon: FileStack,
+        },
+        {
+            title: 'Contacts',
+            href: admin.contacts.index(),
+            icon: Inbox,
+        },
+        {
+            title: 'Site images',
+            href: admin.siteMedia.index(),
+            icon: ImageIcon,
         },
     ];
 

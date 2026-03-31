@@ -43,10 +43,10 @@
                     <div class="about-footer">
                         <div class="footer-logo d-flex align-items-center gap-2">
                             <img src="{{ asset('frontend/images/logo.png') }}" alt="{{ $siteName }}" style="height: 40px; width: auto;">
-                            <span style="color: #ffffff; font-weight: 700; letter-spacing: 0.08em;">MINH LONG</span>
+                            <span style="color: #ffffff; font-weight: 700; letter-spacing: 0.08em;">MINH LONG GROUP</span>
                         </div>
                         <div class="footer-working-hours">
-                            <h3>Working Hours:</h3>
+                            <h3>{{ __('site.footer.working_hours') }}</h3>
                             <ul>
                                 <li>Monday - Friday: 09:00 AM - 06:00 PM</li>
                                 <li>Saturday - Sunday: Closed</li>
@@ -58,19 +58,19 @@
                 <div class="col-xl-8">
                     <div class="footer-links-box">
                         <div class="footer-links footer-location-info">
-                            <h3>Contact Information</h3>
+                            <h3>{{ __('site.footer.contact_information') }}</h3>
                             <p>{{ $address }}</p>
                         </div>
                         <div class="footer-links footer-contact-links">
-                            <h3>Get in Touch</h3>
+                            <h3>{{ __('site.footer.get_in_touch') }}</h3>
                             <ul>
                                 <li><img src="{{ asset('frontend/images/icon-phone-white.svg') }}" alt=""> Phone: <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a></li>
                                 <li><img src="{{ asset('frontend/images/icon-mail-white.svg') }}" alt=""> Email: <a href="mailto:{{ $email }}">{{ $email }}</a></li>
                             </ul>
                         </div>
                         <div class="footer-links footer-newsletter-form">
-                            <h3>Newsletter Subscription</h3>
-                            <p>Stay updated on our latest projects, tips, and offers.</p>
+                            <h3>{{ __('site.footer.newsletter_title') }}</h3>
+                            <p>{{ __('site.footer.newsletter_body') }}</p>
                             <form id="newslettersForm" action="#" method="POST">
                                 <div class="form-group">
                                     <input type="email" name="mail" class="form-control" id="mail" placeholder="Enter Email Address*" required>
@@ -84,7 +84,7 @@
                             </form>
                         </div>
                         <div class="footer-links footer-social-links">
-                            <h3>Follow On Socials:</h3>
+                            <h3>{{ __('site.footer.follow_on_socials') }}</h3>
                             <ul>
                                 <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-dribbble" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 2.1a10 10 0 0 1 4 7.9 19.5 19.5 0 0 1 7.5-.6"/><path d="M6.3 5.3a10 10 0 0 0 4.9 4.2 19.4 19.4 0 0 0-6.2 7.1"/><path d="M12.5 12.5a19.3 19.3 0 0 1 3.5 7.4"/></svg>Dribbble</a></li>
                                 <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.5L18 10h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a></li>
@@ -99,11 +99,11 @@
                     <div class="footer-copyright">
                         <div class="footer-menu">
                             <ul>
-                                <li><a href="{{ route('site.home') }}">Home</a></li>
-                                <li><a href="{{ route('site.about') }}">About Us</a></li>
-                                <li><a href="{{ route('site.services') }}">Service</a></li>
-                                <li><a href="{{ route('site.blog.index') }}">Blog</a></li>
-                                <li><a href="{{ route('site.contact') }}">Contact</a></li>
+                                <li><a href="{{ route('home') }}">{{ __('site.footer.menu.home') }}</a></li>
+                                <li><a href="{{ route('site.about') }}">{{ __('site.footer.menu.about') }}</a></li>
+                                <li><a href="{{ route('site.services') }}">{{ __('site.footer.menu.service') }}</a></li>
+                                <li><a href="{{ route('site.blog.index') }}">{{ __('site.footer.menu.blog') }}</a></li>
+                                <li><a href="{{ route('site.contact') }}">{{ __('site.footer.menu.contact') }}</a></li>
                             </ul>
                         </div>
                         <div class="footer-copyright-text">

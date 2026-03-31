@@ -1,5 +1,13 @@
 @extends('layouts.minhlong')
 
+@push('head')
+    @isset($hreflangAlternates)
+        @foreach ($hreflangAlternates as $locale => $url)
+            <link rel="alternate" hreflang="{{ $locale }}" href="{{ $url }}">
+        @endforeach
+    @endisset
+@endpush
+
 @section('content')
 <div class="page-header parallaxie">
     <div class="container">
@@ -9,8 +17,8 @@
                     <h1 class="text-anime-style-3" data-cursor="-opaque">{{ $post->title }}</h1>
                     <div class="post-single-meta wow fadeInUp">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('site.home') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('site.blog.index') }}">Blog</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('site.nav.home') }}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('site.blog.index') }}">{{ __('site.breadcrumb.blog') }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($post->title, 30) }}</li>
                         </ol>
                         <ol class="breadcrumb">

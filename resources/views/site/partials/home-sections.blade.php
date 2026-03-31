@@ -82,7 +82,7 @@
         
                             <!-- Hero Info Counter Box Start -->
                             <div class="hero-info-counter-box">
-                                <h3>Đối tác toàn cầu</h3>
+                                <h3>{{ __('site.home.partners') }}</h3>
                                 <h2><span class="counter">120</span>+</h2>
                             </div>
                             <!-- Hero Info Counter Box End -->
@@ -147,9 +147,9 @@
                     <div class="about-us-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">About Us</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Minh Long Construction - Leading EPC partner for industrial projects</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Minh Long Construction and Industry Joint Stock Company is a leading EPC general contractor specializing in turnkey industrial projects. With a team of experts, advanced management processes, and strong commitments to schedule, quality, and safety, Minh Long delivers optimized construction solutions that reduce costs and create sustainable value for investors.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.home.about_section.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.about_section.headline') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.about_section.description') }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -161,8 +161,8 @@
                                     <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="">
                                 </div>
                                 <div class="about-body-item-content">
-                                    <h3>EPC Turnkey Excellence</h3>
-                                    <p>We execute end-to-end industrial construction with integrated planning and delivery.</p>
+                                    <h3>{{ __('site.home.about_section.item1_title') }}</h3>
+                                    <p>{{ __('site.home.about_section.item1_desc') }}</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
@@ -173,8 +173,8 @@
                                     <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="">
                                 </div>
                                 <div class="about-body-item-content">
-                                    <h3>Schedule, Quality & Safety</h3>
-                                    <p>Our teams follow advanced management processes to keep every project on track, safe, and high quality.</p>
+                                    <h3>{{ __('site.home.about_section.item2_title') }}</h3>
+                                    <p>{{ __('site.home.about_section.item2_desc') }}</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
@@ -188,16 +188,16 @@
                                 <!-- About Footer Content List Start -->
                                 <div class="about-footer-content-list">
                                     <ul>
-                                        <li>Leading EPC general contractor for turnkey industrial projects.</li>
-                                        <li>Optimized construction solutions that reduce total project cost.</li>
-                                        <li>Sustainable long-term value for investors and global partners.</li>
+                                        <li>{{ __('site.home.about_section.footer_list.0') }}</li>
+                                        <li>{{ __('site.home.about_section.footer_list.1') }}</li>
+                                        <li>{{ __('site.home.about_section.footer_list.2') }}</li>
                                     </ul>
                                 </div>
                                 <!-- About Footer Content List End -->
                                 
                                 <!-- About Us Button Start -->
                                 <div class="about-us-btn">
-                                    <a href="{{ route('site.about') }}" class="btn-default">More About Us</a>
+                                    <a href="{{ route('site.about') }}" class="btn-default">{{ __('site.home.about_section.more_about_us') }}</a>
                                 </div>
                                 <!-- About Us Button End -->
                             </div>
@@ -215,7 +215,7 @@
                                 
                                 <!-- Video Play Button Start -->
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                    <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>
@@ -241,34 +241,43 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Our Services</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Integrated construction solutions for industrial growth</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.home.services_section.title') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.services_section.subtitle') }}</h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
             </div>
             
+            @php
+                $homeServiceSectors = [
+                    ['route' => 'site.land', 'image' => 'frontend/images/hero-image-gold.jpg', 'delay' => null, 'active' => 'active'],
+                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-host-1.png', 'delay' => '0.2s', 'active' => ''],
+                    ['route' => 'site.minerals', 'image' => 'frontend/images/minerals/about-quarry-conveyors.png', 'delay' => '0.4s', 'active' => ''],
+                    ['route' => 'site.power', 'image' => 'frontend/images/hero-image-silver.png', 'delay' => '0.6s', 'active' => ''],
+                ];
+            @endphp
             <div class="row services-item-list">
+                @foreach ($homeServiceSectors as $index => $sector)
                 <div class="col-xl-3 col-md-6">
                     <!-- Services Item Start -->
-                    <div class="service-item wow fadeInUp active">
+                    <div class="service-item wow fadeInUp {{ $sector['active'] }}"@if ($sector['delay']) data-wow-delay="{{ $sector['delay'] }}"@endif>
                         <div class="service-item-header">
                             <div class="service-item-title">
-                                <h2><a href="service-single.html">Design Consulting</a></h2>
-                                <h3>01.</h3>
+                                <h2><a href="{{ route($sector['route']) }}">{{ __('site.home.services_section.items.'.$index.'.title') }}</a></h2>
+                                <h3>0{{ $index + 1 }}.</h3>
                             </div>
                             <div class="service-item-content">
-                                <p>Consulting and design for civil, industrial, and infrastructure projects.</p>
+                                <p>{{ __('site.home.services_section.items.'.$index.'.desc') }}</p>
                             </div>
                         </div>
                         <div class="service-image-box">
                             <div class="service-item-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/service-image-1.jpg" alt="">
+                                    <img src="{{ asset($sector['image']) }}" alt="{{ __('site.home.services_section.items.'.$index.'.title') }}">
                                 </figure>
                             </div>
                             <div class="service-item-btn">
-                                <a href="service-single.html">
+                                <a href="{{ route($sector['route']) }}">
                                     <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="">
                                 </a>
                             </div>
@@ -276,90 +285,7 @@
                     </div>
                     <!-- Services Item End -->
                 </div>
-                
-                <div class="col-xl-3 col-md-6">
-                    <!-- Services Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="service-item-header">
-                            <div class="service-item-title">
-                                <h2><a href="service-single.html">Construction Contractor</a></h2>
-                                <h3>02.</h3>
-                            </div>
-                            <div class="service-item-content">
-                                <p>Nationwide construction execution with strong commitments to quality, schedule, and safety.</p>
-                            </div>
-                        </div>
-                        <div class="service-image-box">
-                            <div class="service-item-image">
-                                <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/service-image-2.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="service-item-btn">
-                                <a href="service-single.html">
-                                    <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Services Item End -->
-                </div>
-                
-                <div class="col-xl-3 col-md-6">
-                    <!-- Services Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="service-item-header">
-                            <div class="service-item-title">
-                                <h2><a href="service-single.html">Steel Manufacturing Plant</a></h2>
-                                <h3>03.</h3>
-                            </div>
-                            <div class="service-item-content">
-                                <p>Manufacturing and supplying structural steel products that meet technical standards.</p>
-                            </div>
-                        </div>
-                        <div class="service-image-box">
-                            <div class="service-item-image">
-                                <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/service-image-3.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="service-item-btn">
-                                <a href="service-single.html">
-                                    <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Services Item End -->
-                </div>
-                
-                <div class="col-xl-3 col-md-6">
-                    <!-- Services Item Start -->
-                    <div class="service-item wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="service-item-header">
-                            <div class="service-item-title">
-                                <h2><a href="service-single.html">MEP & Fire Protection Contractor</a></h2>
-                                <h3>04.</h3>
-                            </div>
-                            <div class="service-item-content">
-                                <p>General contracting for MEP and fire protection systems, from design to installation.</p>
-                            </div>
-                        </div>
-                        <div class="service-image-box">
-                            <div class="service-item-image">
-                                <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/service-image-4.jpg" alt="">
-                                </figure>
-                            </div>
-                            <div class="service-item-btn">
-                                <a href="service-single.html">
-                                    <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Services Item End -->
-                </div>
+                @endforeach
 
                 <div class="col-lg-12">
                     <!-- Service Benefit Box Start -->
@@ -367,17 +293,17 @@
                         <!-- Service Benefit List Start -->
                         <div class="service-benefit-list">
                             <ul>
-                                <li>Design Consulting</li>
-                                <li>Construction Contracting</li>
-                                <li>Steel Manufacturing</li>
-                                <li>MEP & Fire Protection</li>
+                                <li>{{ __('site.home.services_section.benefits.0') }}</li>
+                                <li>{{ __('site.home.services_section.benefits.1') }}</li>
+                                <li>{{ __('site.home.services_section.benefits.2') }}</li>
+                                <li>{{ __('site.home.services_section.benefits.3') }}</li>
                             </ul>
                         </div>
                         <!-- Service Benefit List End -->
 
                         <!-- Section Footer Text Start -->
                         <div class="section-footer-text">
-                            <p><span>Free</span>Let's make something great work together. <a href="{{ route('site.contact') }}">Get Free Quote</a></p>
+                            <p><span>{{ __('site.home.services_section.free_prefix') }}</span>{{ __('site.home.services_section.free_text') }} <a href="{{ route('site.contact') }}">{{ __('site.home.services_section.free_quote_link') }}</a></p>
                         </div>
                         <!-- Section Footer Text End -->
                     </div>
@@ -397,9 +323,9 @@
                     <div class="what-we-do-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">what we do</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Main Contractor for Construction</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Hai Phong Electromechanical Company, a member of Minh Long Group, specializes in electrical infrastructure and M&amp;E systems for industrial and civil projects. With skilled engineers, strict construction processes, and commitments to schedule, quality, and safety, we deliver integrated, cost-optimized solutions for investors.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.home.what_we_do_section.eyebrow') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.what_we_do_section.title') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.what_we_do_section.description') }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -411,10 +337,10 @@
                                     <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-1.svg" alt="">
                                 </div>
                                 <div class="what-we-do-item-body">
-                                    <h3>Electrical Infrastructure & M&amp;E Systems</h3>
-                                    <p>Specialized execution for industrial and civil projects with technical precision.</p>
+                                    <h3>{{ __('site.home.what_we_do_section.item1_title') }}</h3>
+                                    <p>{{ __('site.home.what_we_do_section.item1_desc') }}</p>
                                     <ul>
-                                        <li>Integrated design and installation for reliable operations.</li>
+                                        <li>{{ __('site.home.what_we_do_section.item1_bullet') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -426,10 +352,10 @@
                                     <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-2.svg" alt="">
                                 </div>
                                 <div class="what-we-do-item-body">
-                                    <h3>Schedule, Quality & Safety Commitment</h3>
-                                    <p>Strict construction processes led by skilled engineers to ensure dependable outcomes.</p>
+                                    <h3>{{ __('site.home.what_we_do_section.item2_title') }}</h3>
+                                    <p>{{ __('site.home.what_we_do_section.item2_desc') }}</p>
                                     <ul>
-                                        <li>Cost-optimized, investor-focused delivery from start to completion.</li>
+                                        <li>{{ __('site.home.what_we_do_section.item2_bullet') }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -439,7 +365,7 @@
 
                         <!-- What We Do Button Start -->
                         <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="{{ route('site.about') }}" class="btn-default">Learn More About Us</a>
+                            <a href="{{ route('site.about') }}" class="btn-default">{{ __('site.home.what_we_do_section.button') }}</a>
                         </div>
                         <!-- What We Do Button End -->
                     </div>
@@ -472,7 +398,7 @@
                         </div>
                     </div>
                     <!-- Satisfy Client Images End -->
-                    <p>From vision to structure - <a href="{{ route('site.contact') }}">where creativity meets construction excellence.</a></p>
+                    <p>{{ __('site.home.features_section.trusted_description') }}</p>
                 </div>
                 <!-- Section Footer Text End -->
             </div>
@@ -489,14 +415,14 @@
                     <div class="our-story-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">watch our story</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Building trusted industrial and civil projects with EPC precision</h2>
+                            <h3 class="wow fadeInUp">{{ __('site.home.story_section.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.story_section.subtitle') }}</h2>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- Watch Video Circle Start -->
                         <div class="watch-video-circle">
-                            <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                            <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
                                 <img src="{{ asset('frontend') }}/images/watch-video-circle.svg" alt="">
                             </a>
                         </div>
@@ -516,8 +442,16 @@
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Our Features</h3>
-                        <h2 class="text-effect" data-cursor="-opaque">Built on engineering discipline <span class="feature-title-img-1"><img src="{{ asset('frontend') }}/images/icon-feature-title-1.svg" alt=""></span> and EPC expertise, we deliver <span class="feature-title-img-2"><img src="{{ asset('frontend') }}/images/icon-feature-title-2.svg" alt=""></span> projects with proven quality, safety, <span class="feature-title-img-3"><img src="{{ asset('frontend') }}/images/author-1.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-2.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-3.jpg" alt=""></span> and long-term value</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.home.features_section.title') }}</h3>
+                        <h2 class="text-effect" data-cursor="-opaque">
+                            {{ __('site.home.features_section.subtitle_part1') }}
+                            <span class="feature-title-img-1"><img src="{{ asset('frontend') }}/images/icon-feature-title-1.svg" alt=""></span>
+                            {{ __('site.home.features_section.subtitle_part2') }}
+                            <span class="feature-title-img-2"><img src="{{ asset('frontend') }}/images/icon-feature-title-2.svg" alt=""></span>
+                            {{ __('site.home.features_section.subtitle_part3') }}
+                            <span class="feature-title-img-3"><img src="{{ asset('frontend') }}/images/author-1.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-2.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-3.jpg" alt=""></span>
+                            {{ __('site.home.features_section.subtitle_part4') }}
+                        </h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -534,13 +468,13 @@
                         </div>
                         <div class="feature-item-content-box">
                             <div class="feature-item-content">
-                                <h3>End-to-End EPC Delivery</h3>
-                                <p>From planning and engineering to construction and handover, we manage projects in one integrated workflow.</p>
+                                <h3>{{ __('site.home.features_section.items.item1.title') }}</h3>
+                                <p>{{ __('site.home.features_section.items.item1.desc') }}</p>
                             </div>
                             <div class="feature-item-list">
                                 <ul>
-                                    <li>Single-point accountability for schedule and quality.</li>
-                                    <li>Integrated teams reduce risk and execution gaps.</li>
+                                    <li>{{ __('site.home.features_section.items.item1.bullets.0') }}</li>
+                                    <li>{{ __('site.home.features_section.items.item1.bullets.1') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -553,11 +487,11 @@
                     <div class="feature-item box-2 wow fadeInUp" data-wow-delay="0.2s">
                         <div class="feature-item-info">
                             <div class="feature-item-info-content">
-                                <p>Reliable Partner, Measurable Results</p>
-                                <h3>Request a project assessment from our engineering team</h3>
+                                <p>{{ __('site.home.features_section.items.item2.badge') }}</p>
+                                <h3>{{ __('site.home.features_section.items.item2.title') }}</h3>
                             </div>
                             <div class="feature-item-btn">
-                                <a href="{{ route('site.contact') }}" class="readmore-btn">Request Consultation</a>
+                                <a href="{{ route('site.contact') }}" class="readmore-btn">{{ __('site.home.features_section.items.item2.button') }}</a>
                             </div>
                         </div>
                         <div class="feature-item-image">
@@ -575,16 +509,16 @@
                         <div class="feature-item-content-box">
                             <div class="feature-item-content">
                                 <h2><span class="counter">300</span>+</h2>
-                                <h3>Specialized Engineers & Experts</h3>
+                                <h3>{{ __('site.home.features_section.items.item3.title') }}</h3>
                             </div>
                             <div class="feature-item-counter-info">
-                                <p>Skilled technical teams working under strict standards for safety, quality, and performance.</p>
+                                <p>{{ __('site.home.features_section.items.item3.desc') }}</p>
                             </div>
                         </div>
                         <div class="feature-item-tag-list">
                             <ul>
-                                <li>EPC Management</li>
-                                <li>M&amp;E Expertise</li>
+                                    <li>{{ __('site.home.features_section.items.item3.tags.0') }}</li>
+                                    <li>{{ __('site.home.features_section.items.item3.tags.1') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -606,7 +540,7 @@
                             </div>
                         </div>
                         <!-- Satisfy Client Images End -->
-                        <p>From concept to commissioning - <a href="{{ route('site.contact') }}">we build reliable projects with EPC precision.</a></p>
+                        <p>{{ __('site.home.features_section.trusted_description') }}</p>
                         <ul>
                             <li><span class="counter">4.9</span>/5</li>
                             <li>
@@ -626,7 +560,7 @@
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                                 </svg>
                             </li>
-                            <li>Trusted by 120+ partners</li>
+                            <li>{{ __('site.home.features_section.trusted_by') }}</li>
                         </ul>
                     </div>
                     <!-- Section Footer Text End -->
@@ -643,8 +577,8 @@
                 <div class="col-xl-6">
                     <!-- Section Title Start -->
                     <div class="section-title">
-                        <h3 class="wow fadeInUp">Our Projects</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Factory and industrial construction showcase</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.home.projects_section.title') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.projects_section.subtitle') }}</h2>
                     </div>
                     <!-- Section Title End -->
                 </div>
@@ -654,13 +588,13 @@
                     <div class="section-content-btn">
                         <!-- Section Title Content Start -->
                         <div class="section-title-content wow fadeInUp" data-wow-delay="0.2s">
-                            <p>Explore selected projects delivered in industrial zones across Vietnam. We execute civil, structural steel, and M&amp;E packages with strict control over schedule, safety, and quality.</p>
+                            <p>{{ __('site.home.projects_section.content') }}</p>
                         </div>
                         <!-- Section Title Content End -->
     
                         <!-- Section Button Start -->
                         <div class="section-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="{{ route('site.contact') }}" class="btn-default">Request Project Portfolio</a>
+                            <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.home.projects_section.button') }}</a>
                         </div>
                         <!-- Section Button End -->
                     </div>   
@@ -673,11 +607,11 @@
                     <!-- Our Gallery Nav start -->
                     <div class="project-nav wow fadeInUp" data-wow-delay="0.2s">
                         <ul>
-                            <li><a href="#" data-filter="*">all</a></li>
-                            <li><a href="#" class="active-btn" data-filter=".first">Factories</a></li>
-                            <li><a href="#" data-filter=".second">Industrial Zones</a></li>
-                            <li><a href="#" data-filter=".third">Warehouse & Logistics</a></li>
-                            <li><a href="#" data-filter=".fourth">M&amp;E / Utilities</a></li>
+                            <li><a href="#" data-filter="*">{{ __('site.home.projects_section.filters.all') }}</a></li>
+                            <li><a href="#" class="active-btn" data-filter=".first">{{ __('site.home.projects_section.filters.factories') }}</a></li>
+                            <li><a href="#" data-filter=".second">{{ __('site.home.projects_section.filters.industrial_zones') }}</a></li>
+                            <li><a href="#" data-filter=".third">{{ __('site.home.projects_section.filters.warehouse_logistics') }}</a></li>
+                            <li><a href="#" data-filter=".fourth">{{ __('site.home.projects_section.filters.mep_utilities') }}</a></li>
                         </ul>
                     </div>
                     <!-- Our Gallery Nav End -->
@@ -702,7 +636,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Phu My Precision Factory</a></h2>
-                                    <p>Factory Construction - Industrial Zone</p>
+                                    <p>{{ __('site.home.projects_section.categories.factory_construction') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -733,7 +667,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Hai Phong M&amp;E Utility Upgrade</a></h2>
-                                    <p>M&amp;E Systems - Industrial Complex</p>
+                                    <p>{{ __('site.home.projects_section.categories.me_systems') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -764,7 +698,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Bac Ninh Electronics Plant</a></h2>
-                                    <p>Turnkey Industrial Plant</p>
+                                    <p>{{ __('site.home.projects_section.categories.turnkey_industrial_plant') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -795,7 +729,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Long An Steel Fabrication Workshop</a></h2>
-                                    <p>Steel Structure Workshop</p>
+                                    <p>{{ __('site.home.projects_section.categories.steel_structure_workshop') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -826,7 +760,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Binh Duong Logistics Distribution Center</a></h2>
-                                    <p>Warehouse & Logistics Facility</p>
+                                    <p>{{ __('site.home.projects_section.categories.warehouse_logistics_facility') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -857,7 +791,7 @@
                                 <!-- Project Item Content Start -->
                                 <div class="project-item-content">
                                     <h2><a href="project-single.html">Dong Nai Fire Protection Retrofit</a></h2>
-                                    <p>Fire Protection & Compliance Upgrade</p>
+                                    <p>{{ __('site.home.projects_section.categories.fire_protection_upgrade') }}</p>
                                 </div>
                                 <!-- Project Item Content End -->
                                 
@@ -915,9 +849,9 @@
                     <div class="cta-box-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Contact Us Today!</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Plan your industrial-zone factory project with Minh Long</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">From civil works and structural steel to M&amp;E and fire protection, we provide integrated EPC execution for factories and industrial facilities. Share your project requirements and our team will propose an optimized implementation plan.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.home.cta_box.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.cta_box.subtitle') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.cta_box.description') }}</p>
                         </div>
                         <!-- Section Title End -->
                     
@@ -929,7 +863,7 @@
                                     <img src="{{ asset('frontend') }}/images/icon-cta-box-item-1.svg" alt="">
                                 </div>
                                 <div class="cta-box-item-content">
-                                    <h3>Fast technical response from EPC specialists</h3>
+                                    <h3>{{ __('site.home.cta_box.item1') }}</h3>
                                 </div>
                             </div>
                             <!-- CTA Box Item End -->
@@ -940,7 +874,7 @@
                                     <img src="{{ asset('frontend') }}/images/icon-cta-box-item-2.svg" alt="">
                                 </div>
                                 <div class="cta-box-item-content">
-                                    <h3>Execution focused on schedule, quality, and safety</h3>
+                                    <h3>{{ __('site.home.cta_box.item2') }}</h3>
                                 </div>
                             </div>
                             <!-- CTA Box Item End -->
@@ -949,7 +883,7 @@
 
                         <!-- CTA Box Btn Start -->
                         <div class="cta-box-btn wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="tel:{{ $phoneLink }}" class="btn-default btn-highlighted">Call Us: {{ $phone }}</a>  
+                            <a href="tel:{{ $phoneLink }}" class="btn-default btn-highlighted">{{ __('site.home.cta_box.call_prefix') }}: {{ $phone }}</a>  
                         </div>
                         <!-- CTA Box Btn End -->
                     </div> 
@@ -981,15 +915,15 @@
                         <div class="faqs-title-box">
                             <!-- Section Title Start -->
                             <div class="section-title">
-                                <h3 class="wow fadeInUp">Frequently Asked Questions</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">Answers for industrial construction and factory projects</h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">Review common questions about scope, timeline, and execution standards when developing factories in industrial zones with Minh Long.</p>
+                                <h3 class="wow fadeInUp">{{ __('site.home.faqs.title') }}</h3>
+                                <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.faqs.subtitle') }}</h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.faqs.description') }}</p>
                             </div>
                             <!-- Section Title End -->
 
                             <!-- Our FAQs Button Start -->
                             <div class="our-faqs-btn wow fadeInUp" data-wow-delay="0.4s">
-                                <a href="{{ route('site.contact') }}" class="btn-default">Talk to Our Team</a>   
+                                <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.home.faqs.button') }}</a>   
                             </div>
                             <!-- Our FAQs Button End -->
                         </div>
@@ -1001,7 +935,7 @@
                                 <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="">
                             </div>
                             <div class="faq-contact-box-content">
-                                <h3>Need support for a factory project?</h3>
+                                <h3>{{ __('site.home.faqs.contact_title') }}</h3>
                                 <p><a href="tel:{{ $phoneLink }}">{{ $phone }}</a></p>
                             </div>
                         </div>
@@ -1017,12 +951,12 @@
                         <div class="accordion-item wow fadeInUp">
                             <h2 class="accordion-header" id="heading1">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                    Q1. Can Minh Long execute full EPC scope for factory projects?
+                                    {{ __('site.home.faqs.q1') }}
                                 </button>
                             </h2>
                             <div id="collapse1" class="accordion-collapse collapse  show" aria-labelledby="heading1" data-bs-parent="#accordion">
                                 <div class="accordion-body">
-                                    <p>Yes. We provide integrated EPC execution, including civil works, structural steel, M&amp;E systems, and fire protection, coordinated under one project management framework.</p>
+                                    <p>{{ __('site.home.faqs.a1') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1032,12 +966,12 @@
                         <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
                             <h2 class="accordion-header" id="heading2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                    Q2. Do you work with projects in industrial zones across Vietnam?
+                                    {{ __('site.home.faqs.q2') }}
                                 </button>
                             </h2>
                             <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2" data-bs-parent="#accordion">
                                 <div class="accordion-body">
-                                    <p>Yes. Our teams are experienced in nationwide execution for factories and industrial facilities, with strong coordination for site conditions, utilities, and compliance requirements.</p>
+                                    <p>{{ __('site.home.faqs.a2') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1047,12 +981,12 @@
                         <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
                             <h2 class="accordion-header" id="heading3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    Q3. How do you control project schedule, quality, and safety?
+                                    {{ __('site.home.faqs.q3') }}
                                 </button>
                             </h2>
                             <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3" data-bs-parent="#accordion">
                                 <div class="accordion-body">
-                                    <p>We apply strict construction processes, milestone tracking, and QA/QC controls at each stage, combined with HSE management standards to maintain safe and predictable delivery.</p>
+                                    <p>{{ __('site.home.faqs.a3') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1062,12 +996,12 @@
                         <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
                             <h2 class="accordion-header" id="heading4">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                    Q4. Can Minh Long handle M&amp;E and fire protection packages?
+                                    {{ __('site.home.faqs.q4') }}
                                 </button>
                             </h2>
                             <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4" data-bs-parent="#accordion">
                                 <div class="accordion-body">
-                                    <p>Yes. We execute M&amp;E and fire protection systems from engineering coordination to installation and commissioning as part of integrated factory delivery.</p>
+                                    <p>{{ __('site.home.faqs.a4') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1077,12 +1011,12 @@
                         <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
                             <h2 class="accordion-header" id="heading5">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                    Q5. What information should we provide for an initial proposal?
+                                    {{ __('site.home.faqs.q5') }}
                                 </button>
                             </h2>
                             <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5" data-bs-parent="#accordion">
                                 <div class="accordion-body">
-                                    <p>Please share project location, required floor area, production needs, target timeline, and technical standards. Our team will prepare a preliminary scope and execution plan.</p>
+                                    <p>{{ __('site.home.faqs.a5') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -1104,15 +1038,15 @@
                     <div class="our-testimonial-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Our Testimonials</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Trusted feedback from industrial project owners</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Our clients trust Minh Long for disciplined execution, transparent coordination, and reliable project delivery in industrial zones.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.home.testimonials_section.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.testimonials_section.subtitle') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.testimonials_section.description') }}</p>
                         </div>
                         <!-- Section Title End -->
 
                         <!-- Testimonial Button Start -->
                         <div class="testimonial-btn wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="{{ route('site.contact') }}" class="btn-default">Discuss Your Project</a>
+                            <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.home.testimonials_section.button') }}</a>
                         </div>
                         <!-- Testimonial Button End -->
                     </div>

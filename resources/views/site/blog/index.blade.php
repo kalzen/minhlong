@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header-box">
-                    <h1 class="text-anime-style-3" data-cursor="-opaque">Latest Blog</h1>
+                    <h1 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.pages.blog.latest') }}</h1>
                     <nav class="wow fadeInUp">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('site.home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('site.nav.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('site.breadcrumb.blog') }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,14 +45,14 @@
             <div class="col-xl-4 col-md-6">
                 <div class="post-item wow fadeInUp" @if($index > 0) data-wow-delay="{{ min($index * 0.1, 0.4) }}s" @endif>
                     <div class="post-featured-image">
-                        <a href="{{ route('site.blog.show', $post->slug) }}" data-cursor-text="View">
+                        <a href="{{ route('site.blog.show', $post->slug) }}" data-cursor-text="{{ __('site.home.blog.view') }}">
                             <figure>
                                 <img src="{{ $imageSrc }}" alt="{{ $post->title }}" loading="lazy">
                             </figure>
                         </a>
                     </div>
-                    <div class="post-item-tags">
-                        <a href="{{ route('site.blog.show', $post->slug) }}">{{ $post->category?->name ?? 'Blog' }}</a>
+                        <div class="post-item-tags">
+                        <a href="{{ route('site.blog.show', $post->slug) }}">{{ $post->category?->name ?? __('site.breadcrumb.blog') }}</a>
                     </div>
                     <div class="post-item-body">
                         <div class="post-content-box">
@@ -66,14 +66,14 @@
                             </div>
                         </div>
                         <div class="post-item-btn">
-                            <a href="{{ route('site.blog.show', $post->slug) }}" class="readmore-btn">Read More</a>
+                            <a href="{{ route('site.blog.show', $post->slug) }}" class="readmore-btn">{{ __('site.common.read_more') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
             @empty
             <div class="col-12">
-                <p class="text-center">Chưa có bài viết nào.</p>
+                <p class="text-center">{{ __('site.home.blog.empty') }}</p>
             </div>
             @endforelse
         </div>

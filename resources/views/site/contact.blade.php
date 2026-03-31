@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header-box">
-                    <h1 class="text-anime-style-3" data-cursor="-opaque">Contact us</h1>
+                    <h1 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.pages.contact.title') }}</h1>
                     <nav class="wow fadeInUp">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('site.home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact us</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('site.nav.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('site.breadcrumb.contact') }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,9 +45,9 @@
             <div class="col-xl-5">
                 <div class="contact-us-content">
                     <div class="section-title">
-                        <h3 class="wow fadeInUp">Contact Us</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Let's connect & build your dream project</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.2s">We'd love to hear about your project. Reach out, share your ideas, and let's start shaping your dream into something real and lasting.</p>
+                        <h3 class="wow fadeInUp">{{ __('site.contact.heading') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.contact.title') }}</h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.contact.need_help') }}</p>
                     </div>
                     <div class="contact-info-list">
                         <div class="contact-info-item wow fadeInUp">
@@ -55,7 +55,7 @@
                                 <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="">
                             </div>
                             <div class="contact-info-item-content">
-                                <h3>Phone Number</h3>
+                                <h3>{{ __('site.contact.phone') }}</h3>
                                 <p><a href="tel:{{ $phoneLink }}">{{ $phone }}</a></p>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <img src="{{ asset('frontend') }}/images/icon-mail-primary.svg" alt="">
                             </div>
                             <div class="contact-info-item-content">
-                                <h3>Email Address</h3>
+                                <h3>{{ __('site.contact.email') }}</h3>
                                 <p><a href="mailto:{{ $email }}">{{ $email }}</a></p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <img src="{{ asset('frontend') }}/images/icon-location-primary.svg" alt="">
                             </div>
                             <div class="contact-info-item-content">
-                                <h3>Our Location</h3>
+                                <h3>{{ __('site.contact.location') }}</h3>
                                 <p>{{ $address }}</p>
                             </div>
                         </div>
@@ -83,32 +83,32 @@
             <div class="col-xl-7">
                 <div class="contact-us-form">
                     <div class="section-title">
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Get in touch with us</h2>
-                        <p class="wow fadeInUp">Need help or have a project? Get in touch — we're always ready to support you.</p>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.contact.form_title') }}</h2>
+                        <p class="wow fadeInUp">{{ __('site.contact.need_help') }}</p>
                     </div>
                     <div class="contact-form">
                         <form action="{{ route('site.contact.store') }}" method="POST" class="wow fadeInUp" data-wow-delay="0.2s">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-12 mb-4">
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Họ tên *" value="{{ old('name') }}" required>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="{{ __('site.contact.form.name_placeholder') }}" value="{{ old('name') }}" required>
                                     @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email *" value="{{ old('email') }}" required>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="{{ __('site.contact.form.email_placeholder') }}" value="{{ old('email') }}" required>
                                     @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Số điện thoại" value="{{ old('phone') }}">
+                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="{{ __('site.contact.form.phone_placeholder') }}" value="{{ old('phone') }}">
                                     @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="form-group col-md-12 mb-5">
-                                    <textarea name="message" class="form-control @error('message') is-invalid @enderror" id="message" rows="6" placeholder="Nội dung">{{ old('message') }}</textarea>
+                                    <textarea name="message" class="form-control @error('message') is-invalid @enderror" id="message" rows="6" placeholder="{{ __('site.contact.form.message_placeholder') }}">{{ old('message') }}</textarea>
                                     @error('message')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="contact-form-btn">
-                                        <button type="submit" class="btn-default"><span>Gửi tin nhắn</span></button>
+                                        <button type="submit" class="btn-default"><span>{{ __('site.contact.submit') }}</span></button>
                                     </div>
                                 </div>
                             </div>

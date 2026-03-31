@@ -12007,3 +12007,8 @@ header.main-header.header-silver .header-sticky.active{
 		display: none;
 	}
 }
+
+/* Typography override for Vietnamese locale */
+html[lang="vi"]{
+	--default-font: "Open Sans", sans-serif;
+}

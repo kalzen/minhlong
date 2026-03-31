@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header-box">
-                    <h1 class="text-anime-style-3" data-cursor="-opaque">About Minh Long Group</h1>
+                    <h1 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.pages.about.title') }}</h1>
                     <nav class="wow fadeInUp" aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('site.home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">About us</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('site.nav.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('site.breadcrumb.about') }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -50,13 +50,9 @@
             <div class="col-xl-7">
                 <div class="about-us-content">
                     <div class="section-title">
-                        <h3 class="wow fadeInUp">Who We Are</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Minh Long – Industrial EPC &amp; factory construction partner</h2>
-                        <p class="wow fadeInUp" data-wow-delay="0.2s">
-                            Minh Long Construction and Industry Joint Stock Company is a leading EPC general contractor specializing in turnkey industrial projects.
-                            With a team of experts, advanced management processes, and strong commitments to schedule, quality, and safety, Minh Long delivers optimized
-                            construction solutions that reduce costs and create sustainable value for investors.
-                        </p>
+                        <h3 class="wow fadeInUp">{{ __('site.about.who_we_are') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.about.headline') }}</h2>
+                        <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.about.description') }}</p>
                     </div>
 
                     <div class="about-us-body wow fadeInUp" data-wow-delay="0.4s">
@@ -100,7 +96,7 @@
                                 </figure>
                             </div>
                             <div class="video-play-button">
-                                <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                     </svg>

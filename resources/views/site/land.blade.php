@@ -13,7 +13,7 @@
                         <div class="hero-sub-heading-gold wow fadeInUp">
                             <!-- Satisfy Client Content Start -->
                             <div class="hero-sub-heading-content-gold">
-                                <p>Minh Long Land</p>
+                                <p>{{ __('site.land.hero.brand') }}</p>
                             </div>
                             <!-- Satisfy Client Content End -->
                         </div>
@@ -22,11 +22,10 @@
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h1 class="text-anime-style-3" data-cursor="-opaque">
-                                Investing in industrial parks and strategic infrastructure
+                                {{ __('site.land.hero.title') }}
                             </h1>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                We focus on heavy investment in industrial parks and large-scale industrial projects,
-                                optimizing infrastructure to attract strategic investors and long-term manufacturing tenants.
+                                {{ __('site.land.hero.description') }}
                             </p>
                         </div>
                         <!-- Section Title End -->
@@ -36,19 +35,19 @@
                             <!-- Hero Button Start -->
                             <div class="hero-btn-gold">
                                 <a href="{{ route('site.contact') }}" class="btn-default btn-highlighted">
-                                    Discuss Industrial Land Opportunities
+                                    {{ __('site.land.hero.cta') }}
                                 </a>
                             </div>
                             <!-- Hero Button End -->
 
                             <!-- Video Play Button Start -->
                             <div class="video-play-button">
-                                <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                     </svg>
                                 </a>
-                                <h3>Watch Our Industrial Story</h3>
+                                <h3>{{ __('site.land.hero.video') }}</h3>
                             </div>
                             <!-- Video Play Button End -->
                         </div>
@@ -86,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="hero-client-box-content-gold">
-                                <p>Preferred industrial partner for strategic investors</p>
+                                <p>{{ __('site.land.hero.client_text') }}</p>
                             </div>
                         </div>
                         <!-- Hero Client Box End -->
@@ -95,12 +94,12 @@
                         <div class="hero-video-box-gold">
                             <div class="hero-video-image-gold">
                                 <figure>
-                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                    <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}">
                                         <img src="{{ asset('frontend') }}/images/hero-video-image-gold.jpg" alt="Industrial park video">
                                     </a>
                                 </figure>
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play">
+                                    <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>
@@ -108,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="hero-video-content-gold">
-                                <h3>Industrial parks and factories ready for lease</h3>
+                                <h3>{{ __('site.land.hero.video_content') }}</h3>
                             </div>
                         </div>
                         <!-- Hero Video Box End -->
@@ -131,7 +130,7 @@
                             </figure>
                         </div>
                         <div class="about-us-image-title-gold">
-                            <h2>Industrial &amp; Land Development</h2>
+                            <h2>{{ __('site.land.about.image_title') }}</h2>
                         </div>
                     </div>
                 </div>
@@ -139,20 +138,18 @@
                 <div class="col-xl-6">
                     <div class="about-us-content-gold">
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Minh Long Land</h3>
+                            <h3 class="wow fadeInUp">{{ __('site.land.about.brand') }}</h3>
                             <h2 class="text-anime-style-3" data-cursor="-opaque">
-                                Real estate development arm of Minh Long Group
+                                {{ __('site.land.about.headline') }}
                             </h2>
                             <p class="wow fadeInUp" data-wow-delay="0.2s">
-                                Minh Long Land specializes in urban projects, industrial real estate, and social housing.
-                                With a sustainable vision, professional expertise, and robust governance processes, we create
-                                modern townships, efficient industrial clusters, and safe, affordable housing solutions for communities.
+                                {{ __('site.land.about.description') }}
                             </p>
                         </div>
 
                         <div class="about-us-body-gold wow fadeInUp" data-wow-delay="0.4s">
                             <div class="about-us-hightlighted-content">
-                                <h3>“Foundation for sustainable development for communities and investors.”</h3>
+                                <h3>{{ __('site.land.about.highlight') }}</h3>
                             </div>
                             <div class="about-body-items-list-gold">
                                 <div class="about-us-body-item-gold">
@@ -160,7 +157,7 @@
                                         <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-1.svg" alt="">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
-                                        <h3>Urban real estate</h3>
+                                        <h3>{{ __('site.land.about.items.item1_title') }}</h3>
                                     </div>
                                 </div>
                                 <div class="about-us-body-item-gold">
@@ -168,7 +165,7 @@
                                         <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-2.svg" alt="">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
-                                        <h3>Industrial real estate</h3>
+                                        <h3>{{ __('site.land.about.items.item2_title') }}</h3>
                                     </div>
                                 </div>
                                 <div class="about-us-body-item-gold">
@@ -176,7 +173,7 @@
                                         <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-3.svg" alt="">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
-                                        <h3>Social housing</h3>
+                                        <h3>{{ __('site.land.about.items.item3_title') }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +182,7 @@
                         <div class="about-us-footer-gold wow fadeInUp" data-wow-delay="0.6s">
                             <div class="about-us-counter-box-gold">
                                 <h2><span class="counter">3</span>+</h2>
-                                <p>Core real estate segments</p>
+                                <p>{{ __('site.land.about.counter') }}</p>
                             </div>
                         </div>
                     </div>
@@ -200,9 +197,9 @@
             <div class="row section-row">
                 <div class="col-lg-12">
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Our Services</h3>
+                        <h3 class="wow fadeInUp">{{ __('site.land.services.title') }}</h3>
                         <h2 class="text-anime-style-3" data-cursor="-opaque">
-                            Core real estate portfolio across urban, industrial and social housing
+                            {{ __('site.land.services.subtitle') }}
                         </h2>
                     </div>
                 </div>
@@ -217,14 +214,13 @@
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
-                                    Residential communities, commercial apartments, hotels and mixed-use urban buildings
-                                    in well-planned townships.
+                                    {{ __('site.land.services.items.item1_desc') }}
                                 </p>
                             </div>
                         </div>
                         <div class="service-item-body-gold">
                             <div class="service-item-title-gold">
-                                <h2>Urban real estate</h2>
+                                <h2>{{ __('site.land.services.items.item1_title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -238,14 +234,13 @@
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
-                                    Industrial parks, industrial clusters, warehouses and factories for lease with optimized
-                                    infrastructure for manufacturing tenants.
+                                    {{ __('site.land.services.items.item2_desc') }}
                                 </p>
                             </div>
                         </div>
                         <div class="service-item-body-gold">
                             <div class="service-item-title-gold">
-                                <h2>Industrial real estate</h2>
+                                <h2>{{ __('site.land.services.items.item2_title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -259,14 +254,13 @@
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
-                                    Low-rise and high-rise social housing projects that provide safe, affordable homes for
-                                    workers and local communities.
+                                    {{ __('site.land.services.items.item3_desc') }}
                                 </p>
                             </div>
                         </div>
                         <div class="service-item-body-gold">
                             <div class="service-item-title-gold">
-                                <h2>Social housing</h2>
+                                <h2>{{ __('site.land.services.items.item3_title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -281,9 +275,9 @@
             <div class="row section-row">
                 <div class="col-lg-12">
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">What We Do</h3>
+                        <h3 class="wow fadeInUp">{{ __('site.land.what_we_do.eyebrow') }}</h3>
                         <h2 class="text-anime-style-3" data-cursor="-opaque">
-                            Focused investment in industrial parks, large-scale industrial projects and strategic infrastructure
+                            {{ __('site.land.what_we_do.title') }}
                         </h2>
                     </div>
                 </div>
@@ -294,7 +288,7 @@
                     <div class="what-we-item-gold box-1 wow fadeInUp">
                         <div class="what-we-item-header-gold">
                             <div class="what-we-item-title-gold">
-                                <h3>Developing strategic industrial zones</h3>
+                                <h3>{{ __('site.land.what_we_do.item1_title') }}</h3>
                             </div>
                             <div class="icon-box">
                                 <img src="{{ asset('frontend') }}/images/icon-what-we-item-1-gold.svg" alt="">
@@ -321,7 +315,7 @@
                             </div>
                         </div>
                         <div class="what-we-item-title-gold">
-                            <h3>Optimizing infrastructure to attract strategic investors</h3>
+                            <h3>{{ __('site.land.what_we_do.item2_title') }}</h3>
                         </div>
                     </div>
                 </div>
@@ -335,7 +329,7 @@
                         </div>
                         <div class="what-we-counter-item-gold">
                             <h2><span class="counter">3</span></h2>
-                            <p>Flagship industrial and social housing projects</p>
+                            <p>{{ __('site.land.what_we_do.counter_text') }}</p>
                         </div>
                     </div>
                 </div>
@@ -348,7 +342,7 @@
                             </figure>
                         </div>
                         <div class="what-we-item-title-gold">
-                            <h3>Delivering integrated land and infrastructure solutions for strategic tenants</h3>
+                            <h3>{{ __('site.land.what_we_do.item4_title') }}</h3>
                         </div>
                         <div class="what-we-item-body-gold">
                             <div class="learn-more-circle-gold">
@@ -363,7 +357,7 @@
 
                 <div class="col-lg-12">
                     <div class="what-we-contect-list-gold wow fadeInUp" data-wow-delay="0.4s">
-                        <h3>Contact us today!</h3>
+                        <h3>{{ __('site.land.contact.today') }}</h3>
                         <ul>
                             <li><img src="{{ asset('frontend') }}/images/icon-phone-accent.svg" alt=""><a href="tel:{{ preg_replace('/\s+/', '', $settings['contact_phone'] ?? '088 6656 899') }}">{{ $settings['contact_phone'] ?? '088 6656 899' }}</a></li>
                             <li><img src="{{ asset('frontend') }}/images/icon-mail-accent.svg" alt=""><a href="mailto:{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}">{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}</a></li>
@@ -380,14 +374,14 @@
             <div class="row section-row align-items-center">
                 <div class="col-xl-6 col-lg-8">
                     <div class="section-title">
-                        <h3 class="wow fadeInUp">Latest Projects</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Explore our most recent complete project portfolio</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.land.projects.title') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.projects.subtitle') }}</h2>
                     </div>
                 </div>
 
                 <div class="col-xl-6 col-lg-4">
                     <div class="section-btn wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="{{ route('site.contact') }}" class="btn-default">View All Project</a>
+                        <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.projects.cta') }}</a>
                     </div>
                 </div>
             </div>
@@ -397,7 +391,7 @@
                     <div class="project-item-gold wow fadeInUp">
                         <div class="project-item-image-box-gold">
                             <div class="project-item-image-gold">
-                                <a href="{{ route('site.contact') }}" data-cursor-text="View">
+                                <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
                                         <img src="{{ asset('frontend') }}/images/project-image-1-gold.jpg" alt="LHP Social Housing Project – Hai Phong">
                                     </figure>
@@ -405,13 +399,13 @@
                             </div>
 
                             <div class="project-item-tag-gold">
-                                <a href="{{ route('site.contact') }}">Social housing</a>
+                                <a href="{{ route('site.contact') }}">{{ __('site.land.projects.tag1') }}</a>
                             </div>
                         </div>
 
                         <div class="project-item-body-gold">
                             <div class="project-item-content-gold">
-                                <h2><a href="{{ route('site.contact') }}">LHP Social Housing Project – Hai Phong</a></h2>
+                                <h2><a href="{{ route('site.contact') }}">{{ __('site.land.projects.project1_title') }}</a></h2>
                             </div>
 
                             <div class="project-readmore-btn-gold">
@@ -425,7 +419,7 @@
                     <div class="project-item-gold wow fadeInUp" data-wow-delay="0.2s">
                         <div class="project-item-image-box-gold">
                             <div class="project-item-image-gold">
-                                <a href="{{ route('site.contact') }}" data-cursor-text="View">
+                                <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
                                         <img src="{{ asset('frontend') }}/images/project-image-2-gold.jpg" alt="Ban Thien Industrial Cluster and factory complex for lease">
                                     </figure>
@@ -433,13 +427,13 @@
                             </div>
 
                             <div class="project-item-tag-gold">
-                                <a href="{{ route('site.contact') }}">Industrial cluster</a>
+                                <a href="{{ route('site.contact') }}">{{ __('site.land.projects.tag2') }}</a>
                             </div>
                         </div>
 
                         <div class="project-item-body-gold">
                             <div class="project-item-content-gold">
-                                <h2><a href="{{ route('site.contact') }}">Ban Thien Industrial Cluster &amp; factory complex for lease</a></h2>
+                                <h2><a href="{{ route('site.contact') }}">{{ __('site.land.projects.project2_title') }}</a></h2>
                             </div>
 
                             <div class="project-readmore-btn-gold">
@@ -469,36 +463,36 @@
                                     <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-white.svg" alt=""></a>
                                 </div>
                                 <div class="why-choose-item-content-gold">
-                                    <h3>Investor-oriented infrastructure delivery</h3>
-                                    <p>From internal roads to utilities, we optimize infrastructure for fast tenant onboarding.</p>
+                                    <h3>{{ __('site.land.why_choose.investor_infra_title') }}</h3>
+                                    <p>{{ __('site.land.why_choose.investor_infra_desc') }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="why-choose-counter-list-gold wow fadeInUp">
-                            <div class="why-choose-counter-item-gold"><h2><span class="counter">3</span>+</h2><p>Flagship projects</p></div>
-                            <div class="why-choose-counter-item-gold"><h2><span class="counter">30</span>+</h2><p>Industrial zone network</p></div>
-                            <div class="why-choose-counter-item-gold"><h2><span class="counter">120</span>+</h2><p>Strategic partners</p></div>
+                            <div class="why-choose-counter-item-gold"><h2><span class="counter">3</span>+</h2><p>{{ __('site.land.why_choose.counter1') }}</p></div>
+                            <div class="why-choose-counter-item-gold"><h2><span class="counter">30</span>+</h2><p>{{ __('site.land.why_choose.counter2') }}</p></div>
+                            <div class="why-choose-counter-item-gold"><h2><span class="counter">120</span>+</h2><p>{{ __('site.land.why_choose.counter3') }}</p></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6 order-xl-2 order-1">
                     <div class="why-choose-us-content-gold">
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Why Choose Us</h3>
-                            <h2 class="text-anime-style-2" data-cursor="-opaque">Land development with industrial execution discipline</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Minh Long Land combines planning, legal-readiness mindset, and implementation control to build high-quality industrial assets for long-term investors.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.land.why_choose.section_title') }}</h3>
+                            <h2 class="text-anime-style-2" data-cursor="-opaque">{{ __('site.land.why_choose.subtitle') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.land.why_choose.description') }}</p>
                         </div>
                         <div class="why-choose-body-gold wow fadeInUp" data-wow-delay="0.4s">
                             <div class="why-choose-body-item-gold">
                                 <div class="icon-box"><img src="{{ asset('frontend') }}/images/icon-why-choose-body-item-1-gold.svg" alt=""></div>
                                 <div class="why-choose-body-item-content-gold">
-                                    <h2>Risk-controlled project governance</h2>
-                                    <p>Strict schedule, quality, and safety controls from planning through handover.</p>
+                                    <h2>{{ __('site.land.why_choose.governance_title') }}</h2>
+                                    <p>{{ __('site.land.why_choose.governance_desc') }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="why-choose-us-btn-gold wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="{{ route('site.contact') }}" class="btn-default btn-highlighted">contact us</a>
+                            <a href="{{ route('site.contact') }}" class="btn-default btn-highlighted">{{ __('site.land.why_choose.button') }}</a>
                         </div>
                     </div>
                 </div>
@@ -512,16 +506,16 @@
             <div class="row section-row">
                 <div class="col-lg-12">
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">core Feature</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Core strengths of Minh Long Land</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.land.features.eyebrow') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.features.title') }}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>Urban planning</h3><p>Integrated planning for modern townships and community services.</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-1-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>Industrial park strategy</h3><p>Land-use and utility optimization for manufacturing and logistics tenants.</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-2-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>Leasable factory assets</h3><p>Warehouses and factory complexes built for scalable operations.</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-3-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>Social housing programs</h3><p>Safe and affordable homes for workers and local communities.</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-4-gold.png" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item1_title') }}</h3><p>{{ __('site.land.features.items.item1_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-1-gold.png" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item2_title') }}</h3><p>{{ __('site.land.features.items.item2_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-2-gold.png" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item3_title') }}</h3><p>{{ __('site.land.features.items.item3_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-3-gold.png" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item4_title') }}</h3><p>{{ __('site.land.features.items.item4_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-4-gold.png" alt=""></figure></div></div></div>
             </div>
         </div>
     </div>
@@ -536,18 +530,18 @@
                 <div class="col-lg-6">
                     <div class="cta-box-content-gold">
                         <div class="section-title section-title-center">
-                            <h3 class="wow fadeInUp">join us today</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Partner with Minh Long Land for long-term industrial growth</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">Tell us your investment criteria and preferred locations. We will align land, infrastructure, and project model to your growth strategy.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.land.cta_box.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.cta_box.headline') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.land.cta_box.description') }}</p>
                         </div>
                         <div class="cta-box-list-gold wow fadeInUp" data-wow-delay="0.4s">
                             <ul>
-                                <li>Industrial-ready land planning and utilities</li>
-                                <li>Execution mindset focused on investor returns</li>
+                                <li>{{ __('site.land.cta_box.list_item1') }}</li>
+                                <li>{{ __('site.land.cta_box.list_item2') }}</li>
                             </ul>
                         </div>
                         <div class="cta-box-btn-gold wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="{{ route('site.contact') }}" class="btn-default">Get Started Today</a>
+                            <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.cta_box.button') }}</a>
                         </div>
                     </div>
                 </div>
@@ -563,20 +557,20 @@
                     <div class="intro-video-box-gold">
                         <div class="intro-video-header-gold">
                             <div class="section-title">
-                                <h3 class="wow fadeInUp">Watch Video</h3>
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">See how we develop strategic industrial assets</h2>
-                                <p class="wow fadeInUp" data-wow-delay="0.2s">From land planning to infrastructure readiness and handover, Minh Long Land builds project platforms that attract high-quality investors.</p>
+                                <h3 class="wow fadeInUp">{{ __('site.land.intro_video.title') }}</h3>
+                                <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.intro_video.subtitle') }}</h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.land.intro_video.description') }}</p>
                             </div>
                             <div class="intro-video-button-gold">
-                                <a href="https://www.youtube.com/watch?v=Y-x0efG1seA" class="popup-video" data-cursor-text="Play"><img src="{{ asset('frontend') }}/images/intero-video-circle.svg" alt=""></a>
+                                <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}"><img src="{{ asset('frontend') }}/images/intero-video-circle.svg" alt=""></a>
                             </div>
                         </div>
                         <div class="intro-video-counter-box-gold">
-                            <div class="intro-video-counter-item-gold"><h2><span class="counter">3</span>+</h2><p>Flagship projects</p></div>
-                            <div class="intro-video-counter-item-gold"><h2><span class="counter">30</span>+</h2><p>Industrial zones</p></div>
-                            <div class="intro-video-counter-item-gold"><h2><span class="counter">120</span>+</h2><p>Partners</p></div>
-                            <div class="intro-video-counter-item-gold"><h2><span class="counter">98</span>%</h2><p>Schedule commitment</p></div>
-                            <div class="intro-video-counter-item-gold"><h2><span class="counter">15</span>+</h2><p>Years combined expertise</p></div>
+                            <div class="intro-video-counter-item-gold"><h2><span class="counter">3</span>+</h2><p>{{ __('site.land.intro_video.counter1') }}</p></div>
+                            <div class="intro-video-counter-item-gold"><h2><span class="counter">30</span>+</h2><p>{{ __('site.land.intro_video.counter2') }}</p></div>
+                            <div class="intro-video-counter-item-gold"><h2><span class="counter">120</span>+</h2><p>{{ __('site.land.intro_video.counter3') }}</p></div>
+                            <div class="intro-video-counter-item-gold"><h2><span class="counter">98</span>%</h2><p>{{ __('site.land.intro_video.counter4') }}</p></div>
+                            <div class="intro-video-counter-item-gold"><h2><span class="counter">15</span>+</h2><p>{{ __('site.land.intro_video.counter5') }}</p></div>
                         </div>
                     </div>
                 </div>
@@ -590,15 +584,15 @@
             <div class="row section-row">
                 <div class="col-lg-12">
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Development Models</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Flexible investment and development collaboration options</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.land.development_models.title') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.development_models.subtitle') }}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>Land reserve model</h3><h2>Phase 1<sub> /Entry</sub></h2><p>Site screening, legal baseline and land preparation roadmap.</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">Get Started</a></div></div></div></div>
-                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>Infrastructure co-development</h3><h2>Phase 2<sub> /Scale</sub></h2><p>Roads, utilities and industrial platform optimization.</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">Get Started</a></div></div></div></div>
-                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>Leasable asset expansion</h3><h2>Phase 3<sub> /Operate</sub></h2><p>Factory complexes and leasing-focused operations support.</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">Get Started</a></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>{{ __('site.land.development_models.model1_title') }}</h3><h2>{{ __('site.land.development_models.model1_phase') }}<sub> /{{ __('site.land.development_models.model1_sub') }}</sub></h2><p>{{ __('site.land.development_models.model1_desc') }}</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.development_models.button') }}</a></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>{{ __('site.land.development_models.model2_title') }}</h3><h2>{{ __('site.land.development_models.model2_phase') }}<sub> /{{ __('site.land.development_models.model2_sub') }}</sub></h2><p>{{ __('site.land.development_models.model2_desc') }}</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.development_models.button') }}</a></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="pricing-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="pricing-item-header-gold"><div class="pricing-item-content-gold"><h3>{{ __('site.land.development_models.model3_title') }}</h3><h2>{{ __('site.land.development_models.model3_phase') }}<sub> /{{ __('site.land.development_models.model3_sub') }}</sub></h2><p>{{ __('site.land.development_models.model3_desc') }}</p></div><div class="pricing-item-btn-gold"><a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.development_models.button') }}</a></div></div></div></div>
             </div>
         </div>
     </div>
@@ -610,12 +604,12 @@
                 <div class="col-xl-6">
                     <div class="our-testimonials-content-gold">
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Our Testimonials</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">Real feedback from investors and industrial partners</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">We take pride in long-term partnerships. Here is how Minh Long Land supports site selection, infrastructure readiness, and project execution for strategic investors.</p>
+                            <h3 class="wow fadeInUp">{{ __('site.land.testimonials.title') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.testimonials.subtitle') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.land.testimonials.description') }}</p>
                         </div>
                         <div class="testimonial-btn-gold wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="{{ route('site.contact') }}" class="btn-default">View All Reviews</a>
+                            <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.land.testimonials.cta') }}</a>
                         </div>
                     </div>
                 </div>
@@ -631,7 +625,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2"></polygon></svg>
                                 </div>
                                 <div class="testimonial-content-gold">
-                                    <p>"Minh Long Land helped us secure an industrial location with infrastructure-readiness and a clear development roadmap. The team was transparent and responsive from planning to launch."</p>
+                                    <p>"{{ __('site.land.testimonials.quote1') }}"</p>
                                 </div>
                             </div>
                             <div class="testimonial-item-body-gold">
@@ -642,8 +636,8 @@
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">
-                                        <h3>Dominick Parker</h3>
-                                        <p>Investment Director</p>
+                                        <h3>{{ __('site.land.testimonials.author1') }}</h3>
+                                        <p>{{ __('site.land.testimonials.role1') }}</p>
                                     </div>
                                 </div>
                                 <div class="testimonial-quote-gold">
@@ -662,7 +656,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5 12 2"></polygon></svg>
                                 </div>
                                 <div class="testimonial-content-gold">
-                                    <p>"What impressed us most was governance discipline: milestone clarity, schedule control, and practical infrastructure solutions aligned with our expansion strategy."</p>
+                                    <p>"{{ __('site.land.testimonials.quote2') }}"</p>
                                 </div>
                             </div>
                             <div class="testimonial-item-body-gold">
@@ -673,8 +667,8 @@
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">
-                                        <h3>Devon Lane</h3>
-                                        <p>Operations Partner</p>
+                                        <h3>{{ __('site.land.testimonials.author2') }}</h3>
+                                        <p>{{ __('site.land.testimonials.role2') }}</p>
                                     </div>
                                 </div>
                                 <div class="testimonial-quote-gold">
@@ -694,15 +688,15 @@
             <div class="row section-row">
                 <div class="col-lg-12">
                     <div class="section-title section-title-center">
-                        <h3 class="wow fadeInUp">Latest Blogs</h3>
-                        <h2 class="text-anime-style-3" data-cursor="-opaque">Industrial real estate insights and project updates</h2>
+                        <h3 class="wow fadeInUp">{{ __('site.land.blog.title') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.land.blog.subtitle') }}</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="View"><figure><img src="{{ asset('frontend') }}/images/post-1.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">Industrial park readiness: utilities and access planning</a></h2></div></div></div></div></div>
-                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp" data-wow-delay="0.2s"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="View"><figure><img src="{{ asset('frontend') }}/images/post-2.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">How strategic investors evaluate industrial locations</a></h2></div></div></div></div></div>
-                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp" data-wow-delay="0.4s"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="View"><figure><img src="{{ asset('frontend') }}/images/post-3.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">Social housing and industrial growth: integrated development</a></h2></div></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}"><figure><img src="{{ asset('frontend') }}/images/post-1.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">{{ __('site.land.blog.post1') }}</a></h2></div></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp" data-wow-delay="0.2s"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}"><figure><img src="{{ asset('frontend') }}/images/post-2.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">{{ __('site.land.blog.post2') }}</a></h2></div></div></div></div></div>
+                <div class="col-xl-4 col-md-6"><div class="post-item wow fadeInUp" data-wow-delay="0.4s"><div class="post-featured-image"><a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}"><figure><img src="{{ asset('frontend') }}/images/post-3.jpg" alt=""></figure></a></div><div class="post-item-body"><div class="post-content-box"><div class="post-item-content"><h2><a href="{{ route('site.blog.index') }}">{{ __('site.land.blog.post3') }}</a></h2></div></div></div></div></div>
             </div>
         </div>
     </div>
