@@ -73,7 +73,7 @@
                     </p>
                 {:else}
                     <ul class="space-y-2 text-sm">
-                        {#each dashboardStats.recentActivities as activity}
+                        {#each dashboardStats.recentActivities as activity (activity.id)}
                             <li class="flex items-center justify-between rounded border px-3 py-2 text-xs">
                                 <span>{activity.action}</span>
                                 <span class="text-muted-foreground">

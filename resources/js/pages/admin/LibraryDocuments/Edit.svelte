@@ -3,6 +3,7 @@
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import libraryDocuments from '@/routes/admin/library-documents';
     import type { BreadcrumbItem } from '@/types';
 
@@ -28,7 +29,7 @@
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Admin', href: toUrl(libraryDocuments.index()) },
+        { title: 'Admin', href: toUrl(admin.home()) },
         { title: 'Library', href: toUrl(libraryDocuments.index()) },
         { title: document ? 'Edit' : 'Upload', href: '#' },
     ];

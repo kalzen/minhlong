@@ -4,6 +4,7 @@
     import AppLayout from '@/layouts/AppLayout.svelte';
     import TipTapEditor from '@/components/TipTapEditor.svelte';
     import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import posts from '@/routes/admin/posts';
     import type { BreadcrumbItem } from '@/types';
 
@@ -47,7 +48,7 @@
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Admin', href: toUrl(posts.index()) },
+        { title: 'Admin', href: toUrl(admin.home()) },
         { title: 'Posts', href: toUrl(posts.index()) },
         { title: post ? 'Edit' : 'Create', href: '#' },
     ];

@@ -3,6 +3,7 @@
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import contacts from '@/routes/admin/contacts';
     import type { BreadcrumbItem } from '@/types';
 
@@ -21,7 +22,7 @@
     } = $props();
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Admin', href: toUrl(contacts.index()) },
+        { title: 'Admin', href: toUrl(admin.home()) },
         { title: 'Contact inbox', href: toUrl(contacts.index()) },
     ];
 </script>

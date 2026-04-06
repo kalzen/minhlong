@@ -3,6 +3,7 @@
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import siteMedia from '@/routes/admin/site-media';
     import type { BreadcrumbItem } from '@/types';
 
@@ -18,7 +19,7 @@
     } = $props();
 
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Admin', href: toUrl(siteMedia.index()) },
+        { title: 'Admin', href: toUrl(admin.home()) },
         { title: 'Site images', href: toUrl(siteMedia.index()) },
     ];
 
