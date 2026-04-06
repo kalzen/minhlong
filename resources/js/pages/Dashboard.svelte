@@ -1,30 +1,31 @@
 <script lang="ts">
     import AppHead from '@/components/AppHead.svelte';
-    import PlaceholderPattern from '@/components/PlaceholderPattern.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
-    import { dashboard } from '@/routes';
+    import { page } from '@inertiajs/svelte';
+    import { dashboard as dashboardRoute } from '@/routes';
     import type { BreadcrumbItem } from '@/types';
+
+    type DashboardPayload = {
+        totalVisits: number;
+        visitsToday: number;
+        totalUsers: number;
+        recentActivities: {
+            id: number;
+            action: string;
+            created_at: string;
+        }[];
+    };
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dashboard',
-            href: dashboard(),
+            href: dashboardRoute(),
         },
     ];
-    const page = $page as {
-        props: {
-            dashboard: {
-                totalVisits: number;
-                visitsToday: number;
-                totalUsers: number;
-                recentActivities: {
-                    id: number;
-                    action: string;
-                    created_at: string;
-                }[];
-            };
-        };
-    };
+
+    const dashboardStats = $derived(
+        ($page.props as { dashboard: DashboardPayload }).dashboard,
+    );
 </script>
 
 <AppHead title="Dashboard" />
@@ -39,7 +40,7 @@
             >
                 <p class="text-sm text-muted-foreground">Tổng lượt truy cập</p>
                 <p class="mt-2 text-2xl font-semibold">
-                    {page.props.dashboard.totalVisits}
+                    {dashboardStats.totalVisits}
                 </p>
             </div>
             <div
@@ -47,7 +48,7 @@
             >
                 <p class="text-sm text-muted-foreground">Lượt truy cập hôm nay</p>
                 <p class="mt-2 text-2xl font-semibold">
-                    {page.props.dashboard.visitsToday}
+                    {dashboardStats.visitsToday}
                 </p>
             </div>
             <div
@@ -55,7 +56,7 @@
             >
                 <p class="text-sm text-muted-foreground">Tổng người dùng</p>
                 <p class="mt-2 text-2xl font-semibold">
-                    {page.props.dashboard.totalUsers}
+                    {dashboardStats.totalUsers}
                 </p>
             </div>
         </div>
@@ -66,13 +67,13 @@
                 <h2 class="mb-3 text-base font-semibold">
                     Log hoạt động gần đây
                 </h2>
-                {#if page.props.dashboard.recentActivities.length === 0}
+                {#if dashboardStats.recentActivities.length === 0}
                     <p class="text-sm text-muted-foreground">
                         Chưa có hoạt động nào.
                     </p>
                 {:else}
                     <ul class="space-y-2 text-sm">
-                        {#each page.props.dashboard.recentActivities as activity}
+                        {#each dashboardStats.recentActivities as activity}
                             <li class="flex items-center justify-between rounded border px-3 py-2 text-xs">
                                 <span>{activity.action}</span>
                                 <span class="text-muted-foreground">
