@@ -1,7 +1,9 @@
 <script lang="ts">
     import { Link, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
+    import EditorMediaPicker from '@/components/EditorMediaPicker.svelte';
     import TipTapEditor from '@/components/TipTapEditor.svelte';
     import { Button } from '@/components/ui/button';
     import {
@@ -54,7 +56,17 @@
         meta_title: post?.meta_title ?? '',
         meta_description: post?.meta_description ?? '',
         featured: null as File | null,
+        featured_library_media_id: null as number | null,
     });
+
+    let featuredPickerOpen = $state(false);
+    let featuredPreviewFromLibrary = $state<string | null>(null);
+
+    function onFeaturedLibraryPick(sel: { url: string; mediaId: number }) {
+        get(form).setStore('featured_library_media_id', sel.mediaId);
+        get(form).setStore('featured', null);
+        featuredPreviewFromLibrary = sel.url;
+    }
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Admin', href: toUrl(admin.home()) },
@@ -152,7 +164,7 @@
                     <CardContent class="p-0 sm:p-2">
                         <TipTapEditor
                             value={$form.content ?? ''}
-                            onContentChange={(html) => form.setStore('content', html)}
+                            onContentChange={(html) => get(form).setStore('content', html)}
                             class="border-0 shadow-none"
                         />
                     </CardContent>
@@ -231,17 +243,22 @@
                         <CardDescription>Ảnh hiển thị trong danh sách và preview (collection Spatie: featured).</CardDescription>
                     </CardHeader>
                     <CardContent class="space-y-3">
-                        {#if post?.featured_url}
+                        {#if featuredPreviewFromLibrary ?? post?.featured_url}
                             <div class="overflow-hidden rounded-md border bg-muted/30">
                                 <img
-                                    src={post.featured_url}
+                                    src={featuredPreviewFromLibrary ?? post?.featured_url ?? ''}
                                     alt=""
                                     class="max-h-40 w-full object-cover"
                                 />
                             </div>
                         {/if}
+                        <div class="flex flex-wrap gap-2">
+                            <Button type="button" variant="secondary" size="sm" onclick={() => (featuredPickerOpen = true)}>
+                                Chọn từ thư viện ảnh
+                            </Button>
+                        </div>
                         <div class="space-y-2">
-                            <Label for="featured">Tải ảnh mới</Label>
+                            <Label for="featured">Hoặc tải file từ máy</Label>
                             <input
                                 id="featured"
                                 type="file"
@@ -249,10 +266,15 @@
                                 class="w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-primary-foreground hover:file:bg-primary/90"
                                 onchange={(e) => {
                                     const f = e.currentTarget.files?.[0];
-                                    form.setStore('featured', f ?? null);
+                                    get(form).setStore('featured', f ?? null);
+                                    get(form).setStore('featured_library_media_id', null);
+                                    featuredPreviewFromLibrary = null;
                                 }}
                             />
                         </div>
+                        <p class="text-xs text-muted-foreground">
+                            Ưu tiên: file tải lên sẽ thay thế ảnh chọn từ thư viện khi lưu.
+                        </p>
                     </CardContent>
                 </Card>
 
@@ -295,4 +317,6 @@
             </div>
         </div>
     </form>
+
+    <EditorMediaPicker bind:open={featuredPickerOpen} onPick={onFeaturedLibraryPick} />
 </AppLayout>

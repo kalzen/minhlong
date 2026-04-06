@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Link, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
@@ -106,7 +107,7 @@
                 class="text-sm"
                 onchange={(e) => {
                     const f = e.currentTarget.files?.[0];
-                    form.setStore('file', f ?? null);
+                    get(form).setStore('file', f ?? null);
                 }}
             />
         </div>

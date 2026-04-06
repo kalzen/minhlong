@@ -26,4 +26,5 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::get('editor-media', [EditorMediaController::class, 'index'])->name('editor-media.index');
     Route::post('editor-media', [EditorMediaController::class, 'store'])->name('editor-media.store');
+    Route::post('editor-media/folders', [EditorMediaController::class, 'storeFolder'])->name('editor-media.folders.store');
 });

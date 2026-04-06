@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\SyncsFeaturedFromEditorLibrary;
 use App\Http\Controllers\Controller;
+use App\Models\EditorMediaItem;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use Illuminate\Http\RedirectResponse;
@@ -14,12 +16,17 @@ use Inertia\Response;
 
 class ProjectController extends Controller
 {
+    use SyncsFeaturedFromEditorLibrary;
+
     public function index(Request $request): Response
     {
         $projects = Project::query()
             ->with('category')
             ->when($request->string('locale')->toString(), fn ($q, $locale) => $q->where('locale', $locale))
-            ->latest('updated_at')
+            ->orderByRaw('CASE WHEN translation_group_id IS NULL THEN 1 ELSE 0 END')
+            ->orderBy('translation_group_id')
+            ->orderBy('locale')
+            ->orderByDesc('updated_at')
             ->paginate(20)
             ->withQueryString();
 
@@ -48,9 +55,7 @@ class ProjectController extends Controller
         }
         $project = Project::query()->create($data + ['created_by' => $request->user()?->id]);
 
-        if ($request->hasFile('featured')) {
-            $project->addMediaFromRequest('featured')->toMediaCollection('featured');
-        }
+        $this->syncFeaturedFromEditorLibrary($request, $project);
 
         return redirect()->route('admin.projects.edit', $project)->with('success', 'Project created.');
     }
@@ -83,10 +88,7 @@ class ProjectController extends Controller
         $data = $this->validated($request, $project);
         $project->update($data);
 
-        if ($request->hasFile('featured')) {
-            $project->clearMediaCollection('featured');
-            $project->addMediaFromRequest('featured')->toMediaCollection('featured');
-        }
+        $this->syncFeaturedFromEditorLibrary($request, $project);
 
         return redirect()->route('admin.projects.edit', $project)->with('success', 'Project updated.');
     }
@@ -123,9 +125,16 @@ class ProjectController extends Controller
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
             'featured' => ['nullable', 'file', 'image', 'max:10240'],
+            'featured_library_media_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('media', 'id')->where(
+                    fn ($q) => $q->where('model_type', EditorMediaItem::class)->where('collection_name', 'image')
+                ),
+            ],
         ]);
 
-        unset($validated['featured']);
+        unset($validated['featured'], $validated['featured_library_media_id']);
 
         if (($validated['translation_group_id'] ?? '') === '') {
             $validated['translation_group_id'] = null;

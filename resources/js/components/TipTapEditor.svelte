@@ -27,6 +27,10 @@
         onContentChange?: (html: string) => void;
     } = $props();
 
+    function onLibraryPick(sel: { url: string; mediaId: number }) {
+        insertImageFromLibrary(sel.url);
+    }
+
     let el: HTMLDivElement | undefined = $state();
     let editor: Editor | undefined = $state();
     let mediaPickerOpen = $state(false);
@@ -218,4 +222,4 @@
     <div bind:this={el} class="tiptap-editor bg-background"></div>
 </div>
 
-<EditorMediaPicker bind:open={mediaPickerOpen} onPick={insertImageFromLibrary} />
+<EditorMediaPicker bind:open={mediaPickerOpen} onPick={onLibraryPick} />

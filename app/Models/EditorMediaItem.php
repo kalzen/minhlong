@@ -14,7 +14,13 @@ class EditorMediaItem extends Model implements HasMedia
 
     protected $fillable = [
         'user_id',
+        'editor_media_folder_id',
     ];
+
+    public function folder(): BelongsTo
+    {
+        return $this->belongsTo(EditorMediaFolder::class, 'editor_media_folder_id');
+    }
 
     public function registerMediaCollections(): void
     {

@@ -639,8 +639,9 @@ Các vị trí sau là **gợi ý** bám theo layout hiện tại (Minh Long —
 |----------|--------|
 | **Layout** | Trang form **rộng** (`max-width` lớn), grid **8/4** (lg): cột chính = tiêu đề, slug, excerpt, **nội dung**; cột phụ = xuất bản, locale, danh mục, nhóm bản dịch, trạng thái, ngày, ảnh đại diện, SEO — dễ quét mắt, thao tác ít bước. |
 | **Nội dung** | **TipTap** + component shadcn (Dialog, Button, …); thanh công cụ: định dạng, list, trích dẫn, liên kết, **chèn ảnh từ thư viện**, undo/redo; vùng soạn cao, dễ nhập bài dài. |
-| **Thư viện ảnh** | Dialog: danh sách ảnh (phân trang), upload file mới; chọn ảnh → chèn `<img>` vào editor với URL công khai. Dữ liệu: bảng `editor_media_items` + bản ghi trong `media` (Spatie), collection `image`. |
-| **API** | `GET /admin/editor-media` — JSON `{ data, meta }` (ảnh trong thư viện editor). `POST /admin/editor-media` — multipart `upload`, trả `{ url, thumb_url?, id }`. Middleware: `auth`, `verified`. |
+| **Thư viện ảnh** | Dialog kiểu **WordPress**: **thư mục** (`editor_media_folders`, cây `parent_id`), breadcrumb, tạo thư mục mới, vào/ra thư mục, lưới ảnh (phân trang), upload vào **thư mục hiện tại**. Chọn ảnh → trả `url` + `media_id` (Spatie `media.id`) để chèn trong editor hoặc làm **ảnh đại diện** bài/dự án (copy file sang collection `featured` của Post/Project). |
+| **Ảnh đại diện** | Nút **Chọn từ thư viện ảnh** + tùy chọn upload file; gửi `featured_library_media_id` (khi chọn thư viện) hoặc file `featured` (ưu tiên file khi lưu). |
+| **API** | `GET /admin/editor-media?folder_id=&page=` — JSON `{ current_folder_id, breadcrumbs, folders, data, meta }`. `POST /admin/editor-media` — multipart `upload`, optional `folder_id`. `POST /admin/editor-media/folders` — JSON `{ name, parent_id? }` tạo thư mục. Middleware: `auth`, `verified`. |
 
 ## Style & Clarity
 

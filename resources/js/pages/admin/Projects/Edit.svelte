@@ -1,8 +1,11 @@
 <script lang="ts">
     import { Link, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
+    import EditorMediaPicker from '@/components/EditorMediaPicker.svelte';
     import TipTapEditor from '@/components/TipTapEditor.svelte';
+    import { Button } from '@/components/ui/button';
     import { toUrl } from '@/lib/utils';
     import admin from '@/routes/admin';
     import projects from '@/routes/admin/projects';
@@ -45,7 +48,17 @@
         meta_title: project?.meta_title ?? '',
         meta_description: project?.meta_description ?? '',
         featured: null as File | null,
+        featured_library_media_id: null as number | null,
     });
+
+    let featuredPickerOpen = $state(false);
+    let featuredPreviewFromLibrary = $state<string | null>(null);
+
+    function onFeaturedLibraryPick(sel: { url: string; mediaId: number }) {
+        get(form).setStore('featured_library_media_id', sel.mediaId);
+        get(form).setStore('featured', null);
+        featuredPreviewFromLibrary = sel.url;
+    }
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Admin', href: toUrl(admin.home()) },
@@ -197,10 +210,20 @@
         </div>
 
         <div class="grid gap-2">
-            <label class="text-sm font-medium" for="featured">Featured image</label>
-            {#if project?.featured_url}
-                <p class="text-xs text-muted-foreground">Current: {project.featured_url}</p>
+            <span class="text-sm font-medium">Featured image</span>
+            {#if featuredPreviewFromLibrary ?? project?.featured_url}
+                <div class="overflow-hidden rounded-md border bg-muted/30">
+                    <img
+                        src={featuredPreviewFromLibrary ?? project?.featured_url ?? ''}
+                        alt=""
+                        class="max-h-40 w-full object-cover"
+                    />
+                </div>
             {/if}
+            <Button type="button" variant="secondary" size="sm" onclick={() => (featuredPickerOpen = true)}>
+                Chọn từ thư viện ảnh
+            </Button>
+            <label class="text-sm text-muted-foreground" for="featured">Or upload from computer</label>
             <input
                 id="featured"
                 type="file"
@@ -208,7 +231,9 @@
                 class="text-sm"
                 onchange={(e) => {
                     const f = e.currentTarget.files?.[0];
-                    form.setStore('featured', f ?? null);
+                    get(form).setStore('featured', f ?? null);
+                    get(form).setStore('featured_library_media_id', null);
+                    featuredPreviewFromLibrary = null;
                 }}
             />
         </div>
@@ -227,4 +252,6 @@
             Save
         </button>
     </form>
+
+    <EditorMediaPicker bind:open={featuredPickerOpen} onPick={onFeaturedLibraryPick} />
 </AppLayout>

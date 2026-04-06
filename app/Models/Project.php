@@ -46,6 +46,10 @@ class Project extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
+        if (! extension_loaded('gd') && ! extension_loaded('imagick')) {
+            return;
+        }
+
         $this->addMediaConversion('thumb')
             ->width(800)
             ->height(600)

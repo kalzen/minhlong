@@ -3,6 +3,16 @@
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
+    import { Badge } from '@/components/ui/badge';
+    import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+    import {
+        Table,
+        TableBody,
+        TableCell,
+        TableHead,
+        TableHeader,
+        TableRow,
+    } from '@/components/ui/table';
     import admin from '@/routes/admin';
     import libraryDocuments from '@/routes/admin/library-documents';
     import type { BreadcrumbItem } from '@/types';
@@ -36,54 +46,74 @@
 <AppHead title="Library documents" />
 
 <AppLayout {breadcrumbs}>
-    <div class="flex flex-col gap-4 p-4">
-        <div class="flex items-center justify-between">
-            <h1 class="text-xl font-semibold">Library (Profile & Reports)</h1>
+    <div class="mx-auto flex max-w-5xl flex-col gap-6 p-4 md:p-6">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <h1 class="text-2xl font-semibold tracking-tight">Library (Profile & Reports)</h1>
+                <p class="mt-1 text-sm text-muted-foreground">Documents available for download on the site.</p>
+            </div>
             <Link
                 href={toUrl(libraryDocuments.create())}
-                class="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground"
+                class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
             >
                 Upload
             </Link>
         </div>
 
-        <div class="overflow-x-auto rounded-lg border">
-            <table class="w-full text-left text-sm">
-                <thead class="bg-muted/50">
-                    <tr>
-                        <th class="p-2">Title</th>
-                        <th class="p-2">Type</th>
-                        <th class="p-2">Public</th>
-                        <th class="p-2">File</th>
-                        <th class="p-2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each documents as row (row.id)}
-                        <tr class="border-t">
-                            <td class="p-2">{row.title}</td>
-                            <td class="p-2">{row.library_category}</td>
-                            <td class="p-2">{row.is_public ? 'yes' : 'no'}</td>
-                            <td class="p-2">{row.file_name ?? '—'}</td>
-                            <td class="p-2 text-right">
-                                <Link
-                                    href={toUrl(libraryDocuments.edit({ library_document: row.id }))}
-                                    class="text-primary underline"
-                                >
-                                    Edit
-                                </Link>
-                                <button
-                                    type="button"
-                                    class="ml-2 text-destructive underline"
-                                    onclick={() => remove(row.id)}
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
-        </div>
+        <Card class="overflow-hidden shadow-sm">
+            <CardHeader class="border-b bg-muted/20 py-4">
+                <CardTitle class="text-base">Files</CardTitle>
+            </CardHeader>
+            <CardContent class="p-0">
+                <Table>
+                    <TableHeader>
+                        <TableRow class="hover:bg-transparent">
+                            <TableHead>Title</TableHead>
+                            <TableHead class="w-[100px]">Type</TableHead>
+                            <TableHead class="w-[100px]">Public</TableHead>
+                            <TableHead class="hidden sm:table-cell">File</TableHead>
+                            <TableHead class="w-[140px] text-right">Actions</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {#each documents as row (row.id)}
+                            <TableRow>
+                                <TableCell class="max-w-[min(100vw,20rem)] whitespace-normal font-medium">
+                                    {row.title}
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant="outline">{row.library_category}</Badge>
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant={row.is_public ? 'default' : 'secondary'}>
+                                        {row.is_public ? 'yes' : 'no'}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell class="hidden font-mono text-xs text-muted-foreground sm:table-cell">
+                                    {row.file_name ?? '—'}
+                                </TableCell>
+                                <TableCell class="text-right">
+                                    <div class="flex flex-wrap justify-end gap-1">
+                                        <Link
+                                            href={toUrl(libraryDocuments.edit({ library_document: row.id }))}
+                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-primary hover:underline"
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            type="button"
+                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"
+                                            onclick={() => remove(row.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        {/each}
+                    </TableBody>
+                </Table>
+            </CardContent>
+        </Card>
     </div>
 </AppLayout>
