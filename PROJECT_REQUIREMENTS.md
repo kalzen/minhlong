@@ -191,7 +191,7 @@ Các ý chính:
 | **B-011** | Danh mục & seed lĩnh vực | Migration `post_categories`, `project_categories` (hoặc gộp nếu dùng enum + một bảng); **CategorySeeder** tạo sẵn: Constructor, Land, Host, Power, Minerals, Tin tức chung — slug/key cố định (`constructor`, `land`, `host`, `power`, `minerals`, `general`). |
 | **B-012** | Mô hình đa ngôn ngữ cho Post | Triển khai D-011; policy slug unique theo locale; accessor URL frontend `/blog/{locale}/{slug}` hoặc prefix locale (thống nhất với middleware `SetLocale`). |
 | **B-013** | Liên kết bản dịch | Thêm `translation_group_id` (UUID) sinh khi tạo “chủ đề” mới; UI admin chọn bài/dự án cùng nhóm khi thêm ngôn ngữ; API `hreflang` và link chuyển ngôn trên trang chi tiết. |
-| **B-014** | Admin: CRUD Post + Editor | Form create/edit: shadcn editor, upload ảnh qua endpoint lưu Spatie, preview; tests Feature cho API và policy. |
+| **B-014** | Admin: CRUD Post + Editor | Form create/edit **full width** (layout rộng, nhóm trường hợp lý: nội dung chính / sidebar xuất bản & SEO). **TipTap** (toolbar shadcn/ui) cho body HTML; nút chèn ảnh mở **thư viện ảnh** (dialog: lưới ảnh đã upload + upload mới). Backend: model `EditorMediaItem` + **Spatie** collection `image`, conversion `thumb` (khi server có **GD hoặc Imagick**); API `GET/POST /admin/editor-media` (JSON, auth). Tests Feature cho route editor-media và policy. |
 | **B-015** | Projects backend | CRUD dự án + đa ngôn ngữ + media; frontend trang listing/filter theo danh mục. |
 | **B-016** | Settings mở rộng | Bảng/key cho **vị trí ảnh** (12.4); helper `site_media('hero.home.main')` hoặc tương đương; cache config. |
 | **B-017** | Thư viện tài liệu | Model + upload validation MIME; route download; trang frontend Profile/Báo cáo. |
@@ -593,8 +593,8 @@ Mục này tóm tắt **chức năng**, **user story** (tham chiếu mục 3, US
 1. Cài Spatie Media + config disk/collection (**B-010**).  
 2. Migration categories + **CategorySeeder** lĩnh vực (**B-011**).  
 3. Thiết kế bảng Post + translations + `translation_group_id` (**B-012**, **B-013**).  
-4. API upload ảnh (auth admin) + gắn Media vào Post.  
-5. Màn admin Post với shadcn editor (**B-014**).  
+4. API **thư viện ảnh editor** (`EditorMediaItem` + Spatie): `GET/POST /admin/editor-media` — ảnh trong nội dung bài không gắn trực tiếp vào Post mà lưu qua model phụ, URL trả về cho TipTap.  
+5. Màn admin Post full width + TipTap + picker thư viện (**B-014**).  
 6. Lặp lại pattern cho Project nếu cần (**B-015**).  
 7. Settings + bảng/key vị trí ảnh + helper Blade (**B-016**).  
 8. Thư viện file + trang download (**B-017**).  
@@ -631,6 +631,16 @@ Các vị trí sau là **gợi ý** bám theo layout hiện tại (Minh Long —
 - **Spatie Media Library:** dùng cho upload có cấu trúc (bài viết, dự án, thư viện; có thể gắn model `SiteSetting` cho ảnh theo vị trí).  
 - **shadcn editor:** đặt trong **admin** (React/Inertia) để đồng bộ component; Laravel nhận HTML/JSON và validate/sanitize.  
 - **Tài liệu thư viện:** MIME whitelist nghiêm; giới hạn dung lượng; quét virus (optional, sau MVP).
+- **Conversion ảnh (thumb, resize):** cần **GD** hoặc **Imagick** trên PHP; môi trường thiếu cả hai có thể bỏ qua conversion (chỉ lưu file gốc).
+
+### 12.6 Form tạo/sửa bài viết — UX & thư viện ảnh trong editor
+
+| Hạng mục | Mô tả |
+|----------|--------|
+| **Layout** | Trang form **rộng** (`max-width` lớn), grid **8/4** (lg): cột chính = tiêu đề, slug, excerpt, **nội dung**; cột phụ = xuất bản, locale, danh mục, nhóm bản dịch, trạng thái, ngày, ảnh đại diện, SEO — dễ quét mắt, thao tác ít bước. |
+| **Nội dung** | **TipTap** + component shadcn (Dialog, Button, …); thanh công cụ: định dạng, list, trích dẫn, liên kết, **chèn ảnh từ thư viện**, undo/redo; vùng soạn cao, dễ nhập bài dài. |
+| **Thư viện ảnh** | Dialog: danh sách ảnh (phân trang), upload file mới; chọn ảnh → chèn `<img>` vào editor với URL công khai. Dữ liệu: bảng `editor_media_items` + bản ghi trong `media` (Spatie), collection `image`. |
+| **API** | `GET /admin/editor-media` — JSON `{ data, meta }` (ảnh trong thư viện editor). `POST /admin/editor-media` — multipart `upload`, trả `{ url, thumb_url?, id }`. Middleware: `auth`, `verified`. |
 
 ## Style & Clarity
 

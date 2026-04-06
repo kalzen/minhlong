@@ -3,6 +3,15 @@
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import TipTapEditor from '@/components/TipTapEditor.svelte';
+    import { Button } from '@/components/ui/button';
+    import {
+        Card,
+        CardContent,
+        CardDescription,
+        CardHeader,
+        CardTitle,
+    } from '@/components/ui/card';
+    import { Label } from '@/components/ui/label';
     import { toUrl } from '@/lib/utils';
     import admin from '@/routes/admin';
     import posts from '@/routes/admin/posts';
@@ -68,163 +77,222 @@
 <AppHead title={post ? 'Edit post' : 'New post'} />
 
 <AppLayout {breadcrumbs}>
-    <form class="mx-auto flex max-w-3xl flex-col gap-4 p-4" onsubmit={submit}>
-        <div class="flex items-center justify-between">
-            <h1 class="text-xl font-semibold">{post ? 'Edit post' : 'New post'}</h1>
-            <Link href={toUrl(posts.index())} class="text-sm text-muted-foreground underline">
-                Back
-            </Link>
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="locale">Locale</label>
-            <select
-                id="locale"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.locale}
-            >
-                {#each locales as loc (loc)}
-                    <option value={loc}>{loc}</option>
-                {/each}
-            </select>
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="category_id">Category</label>
-            <select
-                id="category_id"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.category_id}
-            >
-                <option value={null}>—</option>
-                {#each categories as c (c.id)}
-                    <option value={c.id}>{c.name}</option>
-                {/each}
-            </select>
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="translation_group_id">Translation group (UUID)</label>
-            <input
-                id="translation_group_id"
-                type="text"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm font-mono"
-                bind:value={$form.translation_group_id}
-                placeholder="Leave empty to auto-generate on create"
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="title">Title</label>
-            <input
-                id="title"
-                type="text"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.title}
-                required
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="slug">Slug</label>
-            <input
-                id="slug"
-                type="text"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.slug}
-                required
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="excerpt">Excerpt</label>
-            <textarea
-                id="excerpt"
-                rows="3"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.excerpt}
-            ></textarea>
-        </div>
-
-        <div class="grid gap-2">
-            <span class="text-sm font-medium">Content</span>
-            <TipTapEditor
-                value={$form.content ?? ''}
-                onContentChange={(html) => form.setStore('content', html)}
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="status">Status</label>
-            <select
-                id="status"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.status}
-            >
-                <option value="draft">draft</option>
-                <option value="published">published</option>
-            </select>
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="published_at">Published at</label>
-            <input
-                id="published_at"
-                type="datetime-local"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.published_at}
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="meta_title">Meta title</label>
-            <input
-                id="meta_title"
-                type="text"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.meta_title}
-            />
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="meta_description">Meta description</label>
-            <textarea
-                id="meta_description"
-                rows="2"
-                class="rounded-md border border-input bg-background px-3 py-2 text-sm"
-                bind:value={$form.meta_description}
-            ></textarea>
-        </div>
-
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="featured">Featured image</label>
-            {#if post?.featured_url}
-                <p class="text-xs text-muted-foreground">Current: {post.featured_url}</p>
-            {/if}
-            <input
-                id="featured"
-                type="file"
-                accept="image/*"
-                class="text-sm"
-                onchange={(e) => {
-                    const f = e.currentTarget.files?.[0];
-                    form.setStore('featured', f ?? null);
-                }}
-            />
-        </div>
-
-        {#if $form.errors && Object.keys($form.errors).length > 0}
-            <div class="rounded-md border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive">
-                {JSON.stringify($form.errors)}
+    <form class="mx-auto w-full max-w-[min(100%,88rem)] px-4 py-6 md:px-6 lg:px-8" onsubmit={submit}>
+        <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <h1 class="text-2xl font-semibold tracking-tight">
+                    {post ? 'Chỉnh sửa bài viết' : 'Bài viết mới'}
+                </h1>
+                <p class="mt-1 text-sm text-muted-foreground">
+                    Soạn nội dung, ảnh đại diện và SEO. Nội dung hỗ trợ chèn ảnh từ thư viện (Spatie).
+                </p>
             </div>
-        {/if}
+            <div class="flex flex-wrap items-center gap-2">
+                <Link
+                    href={toUrl(posts.index())}
+                    class="inline-flex h-9 items-center rounded-md border border-input bg-background px-4 text-sm font-medium hover:bg-muted/60"
+                >
+                    Quay lại danh sách
+                </Link>
+                <Button type="submit" disabled={$form.processing}>
+                    {$form.processing ? 'Đang lưu…' : 'Lưu bài viết'}
+                </Button>
+            </div>
+        </div>
 
-        <button
-            type="submit"
-            class="inline-flex w-fit rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
-            disabled={$form.processing}
-        >
-            Save
-        </button>
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+            <!-- Main column -->
+            <div class="flex flex-col gap-6 lg:col-span-8">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Nội dung chính</CardTitle>
+                        <CardDescription>Tiêu đề, đường dẫn và phần mô tả ngắn hiển thị ở danh sách blog.</CardDescription>
+                    </CardHeader>
+                    <CardContent class="space-y-4">
+                        <div class="space-y-2">
+                            <Label for="title">Tiêu đề</Label>
+                            <input
+                                id="title"
+                                type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                                bind:value={$form.title}
+                                required
+                            />
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="slug">Slug (URL)</Label>
+                            <input
+                                id="slug"
+                                type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                                bind:value={$form.slug}
+                                required
+                            />
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="excerpt">Tóm tắt / Excerpt</Label>
+                            <textarea
+                                id="excerpt"
+                                rows="3"
+                                class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                                bind:value={$form.excerpt}
+                            ></textarea>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card class="overflow-hidden">
+                    <CardHeader>
+                        <CardTitle>Nội dung bài viết</CardTitle>
+                        <CardDescription>
+                            Editor định dạng (TipTap). Dùng nút <strong>Thư viện ảnh</strong> để chọn hoặc tải ảnh lên
+                            (lưu qua Spatie Media Library).
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent class="p-0 sm:p-2">
+                        <TipTapEditor
+                            value={$form.content ?? ''}
+                            onContentChange={(html) => form.setStore('content', html)}
+                            class="border-0 shadow-none"
+                        />
+                    </CardContent>
+                </Card>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="flex flex-col gap-6 lg:col-span-4">
+                <Card class="lg:sticky lg:top-4">
+                    <CardHeader>
+                        <CardTitle>Xuất bản & ngôn ngữ</CardTitle>
+                        <CardDescription>Trạng thái, thời điểm đăng và ngôn ngữ bài viết.</CardDescription>
+                    </CardHeader>
+                    <CardContent class="space-y-4">
+                        <div class="space-y-2">
+                            <Label for="locale">Ngôn ngữ (locale)</Label>
+                            <select
+                                id="locale"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.locale}
+                            >
+                                {#each locales as loc (loc)}
+                                    <option value={loc}>{loc}</option>
+                                {/each}
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="category_id">Danh mục</Label>
+                            <select
+                                id="category_id"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.category_id}
+                            >
+                                <option value={null}>— Chưa chọn —</option>
+                                {#each categories as c (c.id)}
+                                    <option value={c.id}>{c.name}</option>
+                                {/each}
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="translation_group_id">Nhóm bản dịch (UUID)</Label>
+                            <input
+                                id="translation_group_id"
+                                type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-mono"
+                                bind:value={$form.translation_group_id}
+                                placeholder="Để trống để tự tạo khi thêm mới"
+                            />
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="status">Trạng thái</Label>
+                            <select
+                                id="status"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.status}
+                            >
+                                <option value="draft">Bản nháp</option>
+                                <option value="published">Đã xuất bản</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="published_at">Ngày giờ xuất bản</Label>
+                            <input
+                                id="published_at"
+                                type="datetime-local"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.published_at}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Ảnh đại diện</CardTitle>
+                        <CardDescription>Ảnh hiển thị trong danh sách và preview (collection Spatie: featured).</CardDescription>
+                    </CardHeader>
+                    <CardContent class="space-y-3">
+                        {#if post?.featured_url}
+                            <div class="overflow-hidden rounded-md border bg-muted/30">
+                                <img
+                                    src={post.featured_url}
+                                    alt=""
+                                    class="max-h-40 w-full object-cover"
+                                />
+                            </div>
+                        {/if}
+                        <div class="space-y-2">
+                            <Label for="featured">Tải ảnh mới</Label>
+                            <input
+                                id="featured"
+                                type="file"
+                                accept="image/*"
+                                class="w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-primary-foreground hover:file:bg-primary/90"
+                                onchange={(e) => {
+                                    const f = e.currentTarget.files?.[0];
+                                    form.setStore('featured', f ?? null);
+                                }}
+                            />
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle>SEO</CardTitle>
+                        <CardDescription>Meta title và mô tả cho công cụ tìm kiếm.</CardDescription>
+                    </CardHeader>
+                    <CardContent class="space-y-4">
+                        <div class="space-y-2">
+                            <Label for="meta_title">Meta title</Label>
+                            <input
+                                id="meta_title"
+                                type="text"
+                                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.meta_title}
+                            />
+                        </div>
+                        <div class="space-y-2">
+                            <Label for="meta_description">Meta description</Label>
+                            <textarea
+                                id="meta_description"
+                                rows="3"
+                                class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                bind:value={$form.meta_description}
+                            ></textarea>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                {#if $form.errors && Object.keys($form.errors).length > 0}
+                    <div class="rounded-md border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive">
+                        {JSON.stringify($form.errors)}
+                    </div>
+                {/if}
+
+                <Button type="submit" class="w-full" size="lg" disabled={$form.processing}>
+                    {$form.processing ? 'Đang lưu…' : 'Lưu bài viết'}
+                </Button>
+            </div>
+        </div>
     </form>
 </AppLayout>

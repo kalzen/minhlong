@@ -24,5 +24,6 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('site-media', [SiteMediaPlacementController::class, 'index'])->name('site-media.index');
     Route::post('site-media/{site_media_placement}', [SiteMediaPlacementController::class, 'update'])->name('site-media.update');
 
+    Route::get('editor-media', [EditorMediaController::class, 'index'])->name('editor-media.index');
     Route::post('editor-media', [EditorMediaController::class, 'store'])->name('editor-media.store');
 });
