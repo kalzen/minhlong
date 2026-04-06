@@ -643,8 +643,17 @@ Các vị trí sau là **gợi ý** bám theo layout hiện tại (Minh Long —
 | **Ảnh đại diện** | Nút **Chọn từ thư viện ảnh** + tùy chọn upload file; gửi `featured_library_media_id` (khi chọn thư viện) hoặc file `featured` (ưu tiên file khi lưu). |
 | **API** | `GET /admin/editor-media?folder_id=&page=` — JSON `{ current_folder_id, breadcrumbs, folders, data, meta }`. `POST /admin/editor-media` — multipart `upload`, optional `folder_id`. `POST /admin/editor-media/folders` — JSON `{ name, parent_id? }` tạo thư mục. Middleware: `auth`, `verified`. |
 
+### 12.7 Văn bản mô tả trên giao diện quản trị (dashboard / admin)
+
+Các **nhãn phụ, gợi ý (helper text), mô tả dưới tiêu đề** trong trang quản trị phục vụ **người biên tập nội dung** (thường không chuyên kỹ thuật).
+
+- **Viết theo góc nhìn người dùng cuối trong admin:** họ cần biết *kết quả hiển thị cho khách truy cập website* là gì, và *bước tiếp theo* (ví dụ bấm nút nào, chọn mục nào) — không cần biết hệ thống dùng thư viện hay package nào.
+- **Tránh** trong copy UI: tên framework/editor/thư viện (ví dụ TipTap, Spatie, tên collection nội bộ, API route) — những nội dung đó chỉ nằm trong tài liệu kỹ thuật hoặc mục **12.5**.
+- **Ưu tiên** ngôn ngữ đời thường: “ảnh hiển thị trong danh sách bài”, “bấm Thư viện ảnh để chọn hoặc tải lên”, thay vì mô tả kiến trúc lưu trữ.
+
 ## Style & Clarity
 
 - Giữ câu ngắn, rõ.
 - Tránh thuật ngữ kiến trúc nặng trong tài liệu.
+- Văn bản gợi ý trên giao diện quản trị (dashboard): xem **12.7** — ưu tiên người đọc không chuyên kỹ thuật.
 - Có thể tham chiếu số mục (ví dụ: "Implement F-006 và B-003", "CMS theo **mục 12** và F-014–F-024") khi yêu cầu Cursor triển khai.

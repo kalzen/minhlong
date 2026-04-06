@@ -161,6 +161,10 @@
 
         <div class="grid gap-2">
             <span class="text-sm font-medium">Content</span>
+            <p class="text-sm text-muted-foreground">
+                Soạn nội dung chi tiết dự án. Để chèn hoặc tải ảnh, bấm <strong>Thư viện ảnh</strong> trên thanh công cụ
+                phía trên khung soạn thảo.
+            </p>
             <TipTapEditor
                 value={$form.content ?? ''}
                 onContentChange={(html) => form.setStore('content', html)}

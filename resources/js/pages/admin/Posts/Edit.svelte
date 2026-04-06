@@ -96,7 +96,8 @@
                     {post ? 'Chỉnh sửa bài viết' : 'Bài viết mới'}
                 </h1>
                 <p class="mt-1 text-sm text-muted-foreground">
-                    Soạn nội dung, ảnh đại diện và SEO. Nội dung hỗ trợ chèn ảnh từ thư viện (Spatie).
+                    Soạn nội dung, chọn ảnh đại diện và SEO. Trong bài có thể chèn ảnh từ thư viện — bấm nút Thư viện ảnh
+                    trên thanh công cụ phía trên khung soạn thảo.
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
@@ -157,8 +158,9 @@
                     <CardHeader>
                         <CardTitle>Nội dung bài viết</CardTitle>
                         <CardDescription>
-                            Editor định dạng (TipTap). Dùng nút <strong>Thư viện ảnh</strong> để chọn hoặc tải ảnh lên
-                            (lưu qua Spatie Media Library).
+                            Soạn nội dung như trên Word: đoạn văn, tiêu đề, in đậm, liên kết, ảnh minh họa… Bấm
+                            <strong>Thư viện ảnh</strong> trên thanh công cụ để chọn ảnh đã có hoặc tải ảnh mới — ảnh
+                            được lưu chung để bạn dùng lại cho các bài khác.
                         </CardDescription>
                     </CardHeader>
                     <CardContent class="p-0 sm:p-2">
@@ -240,7 +242,9 @@
                 <Card>
                     <CardHeader>
                         <CardTitle>Ảnh đại diện</CardTitle>
-                        <CardDescription>Ảnh hiển thị trong danh sách và preview (collection Spatie: featured).</CardDescription>
+                        <CardDescription>
+                            Ảnh hiển thị trong danh sách bài trên website và khi bài được chia sẻ (xem trước).
+                        </CardDescription>
                     </CardHeader>
                     <CardContent class="space-y-3">
                         {#if featuredPreviewFromLibrary ?? post?.featured_url}
