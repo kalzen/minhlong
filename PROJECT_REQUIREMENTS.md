@@ -14,7 +14,7 @@ Mục đích của tài liệu:
 
 **Website Doanh Nghiệp** là website giới thiệu công ty, dịch vụ/sản phẩm, tin tức/blog, và kênh liên hệ. Hệ thống có **khu vực quản trị (admin)** để quản lý nội dung và cấu hình website.
 
-- **Chủ thể website / Brand owner:** **MinhLong Group** (thống nhất dùng tên này trong nội dung giao diện và tài liệu).
+- **Chủ thể website / Brand owner:** **Minh Long Group** — **tập đoàn đa lĩnh vực** (xây dựng, năng lượng, bất động sản, khoáng sản, quản lý vận hành…). Thống nhất dùng tên **Minh Long Group** trong nội dung giao diện và tài liệu; trang **Giới thiệu / About** phải phản ánh định vị tập đoàn, không chỉ một công ty xây dựng đơn lẻ (xem **mục 11.5**).
 
 Các ý chính:
 - Website có **trang giới thiệu**, **trang dịch vụ/sản phẩm**, **trang blog/tin tức**, **trang liên hệ**, và các trang tĩnh khác (ví dụ: Tuyển dụng, Chính sách… nếu cần).
@@ -276,6 +276,30 @@ Website sử dụng **đa ngôn ngữ**. Khi triển khai hoặc chỉnh sửa, 
 
 Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương hiệu. Website mặc định dùng **bản tiếng Anh** (xem mục 10).
 
+### 11.0 Nguồn brochure Canva (MINHLONG GROUP 2026)
+
+- **Liên kết xem / chia sẻ:** `https://canva.link/oz35w5y4l5b3cea` (redirect tới editor thiết kế).  
+- **Thiết kế (tham chiếu):** *MINHLONG GROUP 2026 * — Trifold Brochure (EU)*, file editor dạng `https://www.canva.com/design/DAHF5EOaWJk/.../edit`.  
+- **Ghi chú ngôn ngữ (bản EN trên brochure):** dòng tiêu đề lớn thường là **Shaping the Big Block**; trong đoạn văn, chủ đề được trích dẫn là **"Defining the Big Block"** trong **"Pyramid Journey"** — website dùng đúng hai cách diễn đạt này (tiêu đề hiển thị vs. tên chủ đề trong câu).  
+- **Ghi chú ngôn ngữ (ZH trên brochure):** chủ đề **定义大型板块** (kèm ghi chú *Defining Large Blocks*); **金字塔之旅** tương ứng *Pyramid Journey*.
+
+### 11.0.1 Quy trình OCR / trích xuất văn bản brochure theo từng bước (đủ 77 trang)
+
+File thiết kế có **77 trang** — không nên đọc “một lượt” trong một phiên AI. Hãy chia **theo phase** và **theo lô trang**; chi tiết checklist và template nằm trong thư mục `docs/brochure-extraction/` (xem `README.md` và `checklist.md`).
+
+| Bước | Việc làm | Gợi ý công cụ |
+|------|----------|----------------|
+| **1 — Chuẩn bị** | Xác nhận quyền xem/sửa file Canva; ghi lại **số trang hiện tại** (editor: `1 / 77`). Quyết định thứ tự: **theo số trang 1→77** hoặc **theo chủ đề** (bảng mục lục nếu có). | Canva editor |
+| **2 — Xuất nguồn in ấn (khuyến nghị)** | Trong Canva: **Share** hoặc **File → Download** → **PDF Print** (hoặc PNG từng trang). Lưu vào repo hoặc thư mục ngoài repo: `docs/brochure-extraction/source/minhlong-2026.pdf`. | Canva |
+| **3 — OCR hàng loạt** | Đưa PDF vào công cụ OCR: Adobe Acrobat “Scan & OCR”, Google Drive (upload PDF → mở bằng Google Docs), hoặc **Tesseract** trên máy (`tesseract input.pdf output -l vie+eng+chi_sim`). Xuất **một file .txt hoặc .md** theo trang hoặc theo chương. | OCR cục bộ / cloud |
+| **4 — Nếu không có PDF** | Lặp theo **từng trang** trong editor: dùng nút **Pages** / **Grid view** / mũi tên chuyển trang; với mỗi trang: **chụp màn hình** hoặc **copy text** từ khung text (nếu Canva cho chọn), hoặc dùng **MCP browser** `browser_navigate` + `browser_snapshot` (text trong snapshot có thể **cắt ngắn** — ưu tiên vẫn là PDF + OCR). | Canva + Cursor Browser |
+| **5 — Lô làm việc (batch)** | Mỗi phiên (người hoặc AI) xử lý **5–15 trang**: tạo file `docs/brochure-extraction/pages/page-XXX.md` (một file một trang) hoặc gom **một file `batch-001-015.md`**. Trong mỗi file ghi: **số trang**, **ngôn ngữ**, **raw OCR**, **ghi chú chủ đề** (Group / Construction / Power / …). | Markdown |
+| **6 — Gộp & làm sạch** | Sau khi đủ 77 trang: gộp thành `brochure-full-text.md` (hoặc tách theo **mục**: 01-cover, 02-timeline, …). Loại trùng, sửa lỗi OCR (ký tự lạ), **đối chiếu song ngữ** VI/EN/ZH nếu cùng một ý. | Editor |
+| **7 — Ánh xạ nội dung → website** | Map từng khối văn vào `PROJECT_REQUIREMENTS.md` (mục 11.x) và/hoặc trực tiếp `resources/lang/{vi,en,zh}/site.php` + Blade tĩnh. Ưu tiên: **Hero/About** → **4 trụ cột** → **từng trang lĩnh vực** (land, power, …). | Theo bảng mục 11.13 |
+| **8 — Kiểm thử** | Chạy `php artisan test --compact tests/Feature/Site/` sau khi đổi copy; rà soát UI từng locale. | Pest |
+
+**Nguyên tắc:** Một lần OCR **không** cần hoàn hảo — có thể **chỉnh tay** sau bước 6; quan trọng là **đủ 77 trang** được lưu vết trong `checklist.md`.
+
 ### 11.1 Branding
 
 - **Tên thương hiệu:** Minh Long Group  
@@ -292,9 +316,16 @@ Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương h
 ### 11.3 Hero section — Content for website (English, default)
 
 - **Hero tagline / eyebrow (small):** THE PYRAMID JOURNEY  
-- **Hero title (main):** Shaping a Great Mass  
+- **Hero title (main):** Shaping the Big Block  
 - **Hero description:**  
-  In 2026, Minh Long Group enters a new phase of development under the theme "Shaping a Great Mass" as part of the "Pyramid Journey." This marks the maturation of a multi-sector corporation operating on a synchronized system with a long-term vision. Minh Long Group aims for development under a unified structure, enhancing management capacity, expanding operational scale, and increasing the value of domestic and international partnerships. "Shaping a Great Mass" represents a commitment to building a sustainable foundation, ready for significant leaps in scale, quality, and market position in the upcoming period.
+  In 2026, Minh Long Group enters a new development phase with the theme "Defining the Big Block" within the "Pyramid Journey." This marks the maturity of a multi-sector conglomerate operating on a unified system platform with a long-term vision. Minh Long Group is committed to development under a unified structure, enhancing management capacity, expanding operational scale, and increasing the value of partnerships at home and abroad. "Defining the Big Block" reflects a commitment to building a sustainable foundation, ready for significant advances in scale, quality, and market position in the period ahead.
+
+### 11.3a Hero / About — Chinese (中文, brochure-aligned)
+
+- **Eyebrow / tagline:** 金字塔之旅  
+- **Main title:** 定义大型板块  
+- **Body:**  
+  2026年，明龙集团（Minh Long Group）以“金字塔之旅”（Pyramid Journey）为主题，迈入了“定义大型板块”（Defining Large Blocks）这一全新发展阶段。这标志着一个跨领域集团在统一的系统平台与长远愿景下的成熟与完善。明龙集团致力于以统一的结构发展，提升治理能力，扩大经营规模，并提升国内外合作伙伴的价值。“定义大型板块”体现了公司建设可持续基础的承诺，为未来在规模、质量与市场地位上的重大跃升做好准备。
 
 ### 11.4 Gợi ý giao diện hero
 
@@ -302,13 +333,50 @@ Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương h
 - **Màu:** Nâu đỏ (accent/logo), đen (chữ chính); nền off-white/beige nhạt.  
 - **Font:** Script hoặc serif cho title; sans-serif cho tagline và body.
 
-### 11.5 Company introduction content (About Us source)
+### 11.5 About Us — Tập đoàn Minh Long Group (nguồn brochure Canva 2026)
 
-- **Section title:** XAY DUNG MINH LONG  
+**Nguồn tham chiếu nội dung:** Brochure *MINHLONG GROUP 2026* (xem **11.0**). Khối giới thiệu tập đoàn trên website **khớp văn bản** với **11.2** (VI), **11.3** (EN), **11.3a** (ZH) — cùng dùng cho hero và khu About (trang chủ + `/gioi-thieu`).
+
+**Định vị cho trang Giới thiệu / About Us:**
+
+- Minh Long Group được trình bày là **tập đoàn đa lĩnh vực**, vận hành trên nền tảng hệ thống thống nhất và tầm nhìn dài hạn; **không** mở đầu About chỉ bằng mô tả một đơn vị EPC xây dựng.
+- Cấu trúc gợi ý: (1) **câu chuyện & tầm nhìn tập đoàn** — đoạn dưới; (2) **các trụ cột / thương hiệu thành viên** trên brochure: **Construction**, **Power** (giải pháp năng lượng toàn diện), **Land**, **Minerals**, **Host** (khi có trên website); (3) chi tiết từng lĩnh vực tham chiếu **11.6–11.12**.
+
+**Đoạn giới thiệu tập đoàn (VI) — dùng làm khối chính About:**
+
+- **Tiêu đề phụ (eyebrow):** HÀNH TRÌNH KIM TỰ THÁP  
+- **Tiêu đề chính:** Định hình khối lớn  
+- **Nội dung:** Giữ nguyên đoạn **11.2** (đoạn mô tả đầy đủ).
+
+**Đoạn giới thiệu tập đoàn (EN — mặc định website):**
+
+- **Eyebrow:** THE PYRAMID JOURNEY  
+- **Title (hiển thị):** Shaping the Big Block  
+- **Body:** Giữ nguyên đoạn **11.3** (trong đó chủ đề trong ngoặc kép là *Defining the Big Block*).
+
+**Đoạn giới thiệu tập đoàn (ZH):**
+
+- Dùng nguyên văn **11.3a** (金字塔之旅 / 定义大型板块 + đoạn body).
+
+**Khẩu hiệu theo trụ cột trên brochure (rút gọn cho UI):**
+
+| Thương hiệu | Gợi ý nhận diện ngắn (VI) |
+|-------------|---------------------------|
+| Minh Long Construction | Tổng thầu EPC, thi công công nghiệp & hạ tầng |
+| Minh Long Power | Giải pháp năng lượng toàn diện |
+| Minh Long Land | Bất động sản đô thị & công nghiệp, nhà ở xã hội |
+| Minh Long Minerals | Khai thác, vật liệu, hỗ trợ nền công nghiệp & xây dựng |
+| Minh Long Host | Quản lý bất động sản / vận hành (khi triển khai trang riêng) |
+
+#### 11.5.1 Công ty thành viên — Xây dựng (Minh Long Construction)
+
+Dùng **sau** khối giới thiệu tập đoàn khi cần đoạn chuyên sâu về năng lực xây dựng.
+
+- **Section title:** XÂY DỰNG MINH LONG  
 - **Sub-title:** MINH LONG CONSTRUCTION / 明龙建设 或 明龙建筑
 
 - **Vietnamese source text:**  
-  Cong ty Co phan Xay dung va Cong nghiep Minh Long la tong thau EPC hang dau chuyen thi cong tron goi cong trinh cong nghiep. Voi doi ngu chuyen gia, quy trinh quan tri tien tien va cam ket tien do - chat luong - an toan, Minh Long mang den giai phap thi cong toi uu, tiet kiem chi phi va gia tri ben vung cho chu dau tu.
+  Công ty Cổ phần Xây dựng và Công nghiệp Minh Long là tổng thầu EPC hàng đầu, chuyên thi công trọn gói công trình công nghiệp. Với đội ngũ chuyên gia, quy trình quản trị tiên tiến và cam kết tiến độ — chất lượng — an toàn, Minh Long mang đến giải pháp thi công tối ưu, tiết kiệm chi phí và giá trị bền vững cho chủ đầu tư.
 
 - **English website version (default):**  
   Minh Long Construction and Industry Joint Stock Company is a leading EPC general contractor specializing in turnkey industrial projects. With a team of experts, advanced management processes, and strong commitments to schedule, quality, and safety, Minh Long delivers optimized construction solutions that reduce costs and create sustainable value for investors.
@@ -316,8 +384,8 @@ Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương h
 - **Chinese reference text (optional for later i18n):**  
   明龙建设与工业股份公司是领先的EPC总承包商，专注于工业工程的交钥匙施工。凭借专家团队、先进的管理流程以及对进度、品质与安全的承诺，明龙为业主提供优化的施工解决方案，降低成本并创造可持续价值。
 
-- **Content intent for About Us on homepage:**  
-  Nhan manh vai tro tong thau EPC, nang luc quan tri, cam ket tien do/quality/safety, va gia tri ben vung cho doi tac - nha dau tu.
+- **Content intent (About + trang chủ):**  
+  **Tập đoàn trước** (mục 11.5), **EPC / xây dựng sau** (11.5.1): nhấn mạnh vai trò tổng thầu, quản trị, cam kết tiến độ — chất lượng — an toàn, và giá trị bền vững cho đối tác — nhà đầu tư.
 
 ### 11.6 Services content source (Homepage services section)
 
@@ -350,20 +418,20 @@ Tài liệu tham chiếu để tạo/cập nhật nội dung hero và thương h
 
 ### 11.7 What We Do content source (Homepage what-we-do section)
 
-- **Section title (VI):** TONG THAU THI CONG XAY DUNG  
+- **Section title (VI):** Tổng thầu thi công xây dựng  
 - **Section description (VI):**  
-  XAY DUNG MINH LONG se la to chuc mang toi cac trai nghiem dich vu "Tu van thiet ke, thi cong xay dung, hoan thien cong trinh" tuyet voi nhat o cac du an Dan dung & Cong nghiep.
+  Xây dựng Minh Long mang đến trải nghiệm trọn gói “Tư vấn thiết kế, thi công xây dựng, hoàn thiện công trình” cho các dự án dân dụng và công nghiệp, trong hệ sinh thái tập đoàn đa lĩnh vực Minh Long Group. Với đội ngũ chuyên gia, quy trình quản trị kỷ luật và cam kết tiến độ — chất lượng — an toàn, chúng tôi mang đến giải pháp tối ưu chi phí và giá trị bền vững cho nhà đầu tư.
 
 - **Section title (EN - website default):** Main Contractor for Construction  
 - **Section description (EN - website default):**  
-  Hai Phong Electromechanical Company, a member of Minh Long Group, specializes in electrical infrastructure and M&E systems for industrial and civil projects. With skilled engineers, strict construction processes, and commitments to schedule, quality, and safety, the company delivers integrated, cost-optimized solutions for investors.
+  Minh Long Constructions delivers end-to-end construction services—design consulting, civil and industrial execution, and project completion—for civil and industrial projects, as part of Minh Long Group’s multi-sector ecosystem. Expert teams, disciplined management, and commitments to schedule, quality, and safety deliver optimized cost and sustainable value for investors.
 
-- **Chinese reference (optional for i18n):**  
-  建築總承包商  
-  海防机电公司，明龙集团成员，专注于工业与民用工程的电力基础设施及机电（M&E）系统施工。凭借高技能工程师、严格的施工流程以及对进度、质量与安全的承诺，公司为业主提供集成化、成本优化的解决方案。
+- **Chinese reference (i18n):**  
+  建筑施工主承包商  
+  明龙建设作为明龙集团多领域平台的一部分，为民用与工业项目提供从设计咨询、施工执行到工程完善的一体化服务。凭借专业团队、严格管理与进度—品质—安全承诺，我们为投资人提供成本优化且可持续的成果。
 
 - **Content intent for What We Do on homepage:**  
-  Nhan manh vai tro tong thau thi cong, nang luc M&E, va cam ket thi cong: dung tien do - dung chat luong - dung an toan.
+  Nhấn mạnh **Minh Long Constructions** (tổng thầu, cơ khí, cơ điện & PCCC theo **11.9**), không thu hẹp cả khối chỉ còn một đơn vị điện địa phương; vẫn giữ cam kết tiến độ — chất lượng — an toàn.
 
 ### 11.8 Minh Long Land — Services & projects
 
@@ -557,6 +625,15 @@ Gợi ý nội dung (tiếng Anh mặc định cho website):
   - **Energy / renewable & performance optimization**
   - **Red estate / real estate development & long-term asset management**
   - **Funds & investment partners / developer-operator model with transparency**
+
+### 11.13 Website — Khối trang chủ & giới thiệu tổ chức (đồng bộ brochure + sơ đồ 11.9)
+
+Các chuỗi sau được dùng trong `resources/lang/{locale}/site.php` (blog, services, what we do, features, projects, story, CTA, FAQ, testimonials, contact) để **nhất quán với tập đoàn đa lĩnh vực** (Construction, Land, Power, Minerals, Host) và **không** mặc định gắn nhầm toàn site vào một đơn vị điện cơ địa phương.
+
+- **Góc nhìn tổ chức:** Minh Long Group vận hành theo nền tảng thống nhất (*Pyramid Journey* / *Định hình khối lớn*); các công ty thành viên đảm nhiệm từng trụ cột (tham chiếu **11.9**).  
+- **What we do (trang chủ):** Mô tả **Minh Long Constructions** — tổng thầu, nhà máy cơ khí, cơ điện & PCCC — dưới dạng trải nghiệm dịch vụ tư vấn — thi công — hoàn thiện (dân dụng & công nghiệp), **không** dùng bản copy chỉ nói về một công ty điện đơn lẻ (xem **11.7** đã chỉnh).  
+- **Dịch vụ 4 trụ cột:** Land / Host / Minerals / Power — mô tả rút gọn theo **11.8.1**, **11.11**, **11.12**, sơ đồ **11.9** (Power: trạm phân phối điện, năng lượng mặt trời; Minerals: khai thác, vật liệu, san lấp,…).  
+- **Features / Projects / CTA / FAQ / Testimonials / Contact:** Ưu tiên ngôn ngữ “đối tác — nhà đầu tư — Minh Long Group” và **tùy ngữ công trình**; có thể vẫn nhắc EPC/M&E như một phần năng lực Construction, không thay thế định vị tập đoàn.
 
 ---
 

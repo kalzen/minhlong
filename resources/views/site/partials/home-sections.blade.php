@@ -147,9 +147,9 @@
                     <div class="about-us-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">{{ __('site.home.about_section.title') }}</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.home.about_section.headline') }}</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.home.about_section.description') }}</p>
+                            <h3 class="wow fadeInUp">{{ __('site.about.who_we_are') }}</h3>
+                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.about.headline') }}</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.about.description') }}</p>
                         </div>
                         <!-- Section Title End -->
 
@@ -161,8 +161,8 @@
                                     <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="">
                                 </div>
                                 <div class="about-body-item-content">
-                                    <h3>{{ __('site.home.about_section.item1_title') }}</h3>
-                                    <p>{{ __('site.home.about_section.item1_desc') }}</p>
+                                    <h3>{{ __('site.about.item1_title') }}</h3>
+                                    <p>{{ __('site.about.item1_desc') }}</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
@@ -173,8 +173,8 @@
                                     <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="">
                                 </div>
                                 <div class="about-body-item-content">
-                                    <h3>{{ __('site.home.about_section.item2_title') }}</h3>
-                                    <p>{{ __('site.home.about_section.item2_desc') }}</p>
+                                    <h3>{{ __('site.about.item2_title') }}</h3>
+                                    <p>{{ __('site.about.item2_desc') }}</p>
                                 </div>
                             </div>
                             <!-- About Body Item End -->
@@ -188,9 +188,9 @@
                                 <!-- About Footer Content List Start -->
                                 <div class="about-footer-content-list">
                                     <ul>
-                                        <li>{{ __('site.home.about_section.footer_list.0') }}</li>
-                                        <li>{{ __('site.home.about_section.footer_list.1') }}</li>
-                                        <li>{{ __('site.home.about_section.footer_list.2') }}</li>
+                                        @foreach (__('site.about.footer_list') as $line)
+                                            <li>{{ $line }}</li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- About Footer Content List End -->
@@ -250,10 +250,10 @@
             
             @php
                 $homeServiceSectors = [
-                    ['route' => 'site.land', 'image' => 'frontend/images/hero-image-gold.jpg', 'delay' => null, 'active' => 'active'],
-                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-host-1.png', 'delay' => '0.2s', 'active' => ''],
+                    ['route' => 'site.land', 'image' => 'frontend/images/minhlong-land.png', 'delay' => null, 'active' => 'active'],
+                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-construction.png', 'delay' => '0.2s', 'active' => ''],
                     ['route' => 'site.minerals', 'image' => 'frontend/images/minerals/about-quarry-conveyors.png', 'delay' => '0.4s', 'active' => ''],
-                    ['route' => 'site.power', 'image' => 'frontend/images/hero-image-silver.png', 'delay' => '0.6s', 'active' => ''],
+                    ['route' => 'site.power', 'image' => 'frontend/images/minhlong-power.jpg', 'delay' => '0.6s', 'active' => ''],
                 ];
             @endphp
             <div class="row services-item-list">
@@ -263,7 +263,10 @@
                     <div class="service-item wow fadeInUp {{ $sector['active'] }}"@if ($sector['delay']) data-wow-delay="{{ $sector['delay'] }}"@endif>
                         <div class="service-item-header">
                             <div class="service-item-title">
-                                <h2><a href="{{ route($sector['route']) }}">{{ __('site.home.services_section.items.'.$index.'.title') }}</a></h2>
+                                <div class="service-item-heading">
+                                    <h2><a href="{{ route($sector['route']) }}">{{ __('site.home.services_section.items.'.$index.'.title') }}</a></h2>
+                                    <p class="service-item-pillar-label">{{ __('site.home.services_section.items.'.$index.'.pillar_label') }}</p>
+                                </div>
                                 <h3>0{{ $index + 1 }}.</h3>
                             </div>
                             <div class="service-item-content">

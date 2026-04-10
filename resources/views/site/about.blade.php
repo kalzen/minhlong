@@ -30,14 +30,14 @@
                     <div class="about-us-image-box-1">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/about-us-image-1.jpg" alt="Minh Long industrial construction">
+                                <img src="{{ asset('frontend') }}/images/about-us-image-1.jpg" alt="{{ __('site.about.image_1_alt') }}">
                             </figure>
                         </div>
                     </div>
                     <div class="about-us-image-box-2">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/about-us-image-2.jpg" alt="Minh Long EPC site">
+                                <img src="{{ asset('frontend') }}/images/about-us-image-2.jpg" alt="{{ __('site.about.image_2_alt') }}">
                             </figure>
                         </div>
                         <div class="year-experience-circle">
@@ -61,8 +61,8 @@
                                 <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="">
                             </div>
                             <div class="about-body-item-content">
-                                <h3>EPC turnkey delivery</h3>
-                                <p>Integrated scope from civil works, steel structure, and finishing to M&amp;E and fire protection (PCCC).</p>
+                                <h3>{{ __('site.about.item1_title') }}</h3>
+                                <p>{{ __('site.about.item1_desc') }}</p>
                             </div>
                         </div>
                         <div class="about-body-item">
@@ -70,8 +70,8 @@
                                 <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="">
                             </div>
                             <div class="about-body-item-content">
-                                <h3>Industrial-zone expertise</h3>
-                                <p>Experience delivering factories and logistics facilities in major industrial zones across Viet Nam.</p>
+                                <h3>{{ __('site.about.item2_title') }}</h3>
+                                <p>{{ __('site.about.item2_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -80,19 +80,19 @@
                         <div class="about-us-footer-content">
                             <div class="about-footer-content-list">
                                 <ul>
-                                    <li>Single-point accountability for schedule, quality, and safety.</li>
-                                    <li>Lean construction approach to optimize total investment cost.</li>
-                                    <li>Long-term partnership mindset with industrial investors.</li>
+                                    @foreach (__('site.about.footer_list') as $line)
+                                        <li>{{ $line }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="about-us-btn">
-                                <a href="{{ route('site.contact') }}" class="btn-default">Discuss Your Project</a>
+                                <a href="{{ route('site.contact') }}" class="btn-default">{{ __('site.about.footer_cta') }}</a>
                             </div>
                         </div>
                         <div class="about-us-video-box">
                             <div class="about-video-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/about-intro-video-image.jpg" alt="Minh Long project highlight">
+                                    <img src="{{ asset('frontend') }}/images/about-intro-video-image.jpg" alt="{{ __('site.about.video_poster_alt') }}">
                                 </figure>
                             </div>
                             <div class="video-play-button">
@@ -110,14 +110,57 @@
     </div>
 </div>
 
+{{-- Brochure: tagline, vision, competitive edge, chairman letter --}}
+<div class="about-brochure-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="about-brochure-tagline wow fadeInUp">
+                    <p>{{ __('site.about.group_tagline') }}</p>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="about-brochure-card wow fadeInUp">
+                            <h3>{{ __('site.about.vision_title') }}</h3>
+                            <p>{{ __('site.about.vision') }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="about-brochure-card wow fadeInUp" data-wow-delay="0.1s">
+                            <h3>{{ __('site.about.advantage_title') }}</h3>
+                            <p>{{ __('site.about.competitive_edge') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-chairman-letter wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="section-title">
+                        <h3>{{ __('site.about.chairman.eyebrow') }}</h3>
+                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.about.chairman.title') }}</h2>
+                    </div>
+                    <div class="about-chairman-body">
+                        {!! nl2br(e(__('site.about.chairman.body'))) !!}
+                    </div>
+                    <div class="about-chairman-signature">
+                        <p class="about-chairman-name">{{ __('site.about.chairman.signature') }}</p>
+                        <p class="about-chairman-role">{{ __('site.about.chairman.role') }}</p>
+                        <p class="about-chairman-date">{{ __('site.about.chairman.date') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- EPC Capabilities --}}
 <div class="our-approach dark-section parallaxie">
     <div class="container">
         <div class="row section-row">
             <div class="col-lg-12">
                 <div class="section-title section-title-center">
-                    <h3 class="wow fadeInUp">Our EPC capabilities</h3>
-                    <h2 class="text-anime-style-3" data-cursor="-opaque">From concept to commissioning for factory projects</h2>
+                    <h3 class="wow fadeInUp">{{ __('site.about.approach.eyebrow') }}</h3>
+                    <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.about.approach.title') }}</h2>
                 </div>
             </div>
         </div>
@@ -134,11 +177,11 @@
                         </figure>
                     </div>
                     <div class="approach-item-content">
-                        <h3>Design &amp; consulting</h3>
-                        <p>Consulting and design services for civil, industrial, and infrastructure packages in factories.</p>
+                        <h3>{{ __('site.about.approach.card1_title') }}</h3>
+                        <p>{{ __('site.about.approach.card1_desc') }}</p>
                         <ul>
-                            <li>Master planning and layout optimization.</li>
-                            <li>Coordination with utilities and industrial zone requirements.</li>
+                            <li>{{ __('site.about.approach.card1_li1') }}</li>
+                            <li>{{ __('site.about.approach.card1_li2') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -155,11 +198,11 @@
                         </figure>
                     </div>
                     <div class="approach-item-content">
-                        <h3>Construction &amp; installation</h3>
-                        <p>Civil works, steel structure, finishing, and M&amp;E installation under one integrated schedule.</p>
+                        <h3>{{ __('site.about.approach.card2_title') }}</h3>
+                        <p>{{ __('site.about.approach.card2_desc') }}</p>
                         <ul>
-                            <li>HSE management and on-site supervision.</li>
-                            <li>Progress tracking and transparent reporting.</li>
+                            <li>{{ __('site.about.approach.card2_li1') }}</li>
+                            <li>{{ __('site.about.approach.card2_li2') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -176,11 +219,11 @@
                         </figure>
                     </div>
                     <div class="approach-item-content">
-                        <h3>QA/QC &amp; commissioning</h3>
-                        <p>Structured QA/QC for steel, coatings, M&amp;E, and fire protection to meet investor and regulatory standards.</p>
+                        <h3>{{ __('site.about.approach.card3_title') }}</h3>
+                        <p>{{ __('site.about.approach.card3_desc') }}</p>
                         <ul>
-                            <li>Testing, commissioning, and documentation.</li>
-                            <li>Support for handover and operation readiness.</li>
+                            <li>{{ __('site.about.approach.card3_li1') }}</li>
+                            <li>{{ __('site.about.approach.card3_li2') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -195,8 +238,8 @@
         <div class="row section-row">
             <div class="col-lg-12">
                 <div class="section-title section-title-center">
-                    <h3 class="wow fadeInUp">Key metrics</h3>
-                    <h2 class="text-anime-style-3" data-cursor="-opaque">Industrial projects delivered with EPC precision</h2>
+                    <h3 class="wow fadeInUp">{{ __('site.about.metrics.eyebrow') }}</h3>
+                    <h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.about.metrics.title') }}</h2>
                 </div>
             </div>
         </div>
@@ -206,11 +249,11 @@
                 <div class="feature-item box-1 wow fadeInUp">
                     <div class="feature-item-content-box">
                         <div class="feature-item-content">
-                            <h2><span class="counter">120</span>+</h2>
-                            <h3>Industrial partners</h3>
+                            <h2><span class="counter">{{ __('site.about.metrics.stat1_value') }}</span>{{ __('site.about.metrics.stat1_suffix') }}</h2>
+                            <h3>{{ __('site.about.metrics.stat1_label') }}</h3>
                         </div>
                         <div class="feature-item-counter-info">
-                            <p>Investors and manufacturers trusting Minh Long for factory and logistics facilities.</p>
+                            <p>{{ __('site.about.metrics.stat1_desc') }}</p>
                         </div>
                     </div>
                 </div>
@@ -220,11 +263,11 @@
                 <div class="feature-item box-2 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="feature-item-content-box">
                         <div class="feature-item-content">
-                            <h2><span class="counter">30</span>+</h2>
-                            <h3>Industrial zones</h3>
+                            <h2><span class="counter">{{ __('site.about.metrics.stat2_value') }}</span>{{ __('site.about.metrics.stat2_suffix') }}</h2>
+                            <h3>{{ __('site.about.metrics.stat2_label') }}</h3>
                         </div>
                         <div class="feature-item-counter-info">
-                            <p>Projects delivered in key industrial zones across Viet Nam.</p>
+                            <p>{{ __('site.about.metrics.stat2_desc') }}</p>
                         </div>
                     </div>
                 </div>
@@ -234,11 +277,11 @@
                 <div class="feature-item box-3 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="feature-item-content-box">
                         <div class="feature-item-content">
-                            <h2><span class="counter">300</span>+</h2>
-                            <h3>Engineers &amp; experts</h3>
+                            <h2><span class="counter">{{ __('site.about.metrics.stat3_value') }}</span>{{ __('site.about.metrics.stat3_suffix') }}</h2>
+                            <h3>{{ __('site.about.metrics.stat3_label') }}</h3>
                         </div>
                         <div class="feature-item-counter-info">
-                            <p>Technical teams focused on schedule, quality, and safety in every project.</p>
+                            <p>{{ __('site.about.metrics.stat3_desc') }}</p>
                         </div>
                     </div>
                 </div>

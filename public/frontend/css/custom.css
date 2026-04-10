@@ -1371,9 +1371,22 @@ header.main-header .header-sticky.active{
 
 .service-item-title{
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	gap: 10px 20px;
+}
+
+.service-item-heading{
+	flex: 1;
+	min-width: 0;
+}
+
+.service-item-pillar-label{
+	margin: 8px 0 0;
+	font-size: 14px;
+	line-height: 1.45em;
+	color: var(--text-color);
+	font-weight: 500;
 }
 
 .service-item-title h2,
@@ -12005,6 +12018,90 @@ header.main-header.header-silver .header-sticky.active{
 
 	.footer-menu-silver.footer-privacy-policy-silver ul li::before{
 		display: none;
+	}
+}
+
+/* About page — brochure tagline, vision, chairman letter */
+.about-brochure-section{
+	padding: 80px 0;
+	background: var(--secondary-color);
+}
+
+.about-brochure-tagline{
+	text-align: center;
+	margin-bottom: 48px;
+}
+
+.about-brochure-tagline p{
+	font-family: var(--accent-font);
+	font-size: 22px;
+	font-weight: 600;
+	color: var(--primary-color);
+	line-height: 1.4;
+	margin: 0;
+}
+
+.about-brochure-card{
+	background: var(--bg-color);
+	border: 1px solid var(--divider-color);
+	padding: 28px 32px;
+	height: 100%;
+	border-radius: 4px;
+}
+
+.about-brochure-card h3{
+	font-family: var(--accent-font);
+	font-size: 22px;
+	color: var(--primary-color);
+	margin-bottom: 16px;
+}
+
+.about-brochure-card p{
+	margin: 0;
+	line-height: 1.65em;
+}
+
+.about-chairman-letter{
+	padding: 40px 0 0;
+	border-top: 1px solid var(--divider-color);
+}
+
+.about-chairman-body{
+	margin: 24px 0 32px;
+	line-height: 1.75em;
+}
+
+.about-chairman-signature{
+	border-left: 4px solid var(--accent-color);
+	padding-left: 24px;
+}
+
+.about-chairman-name{
+	font-family: var(--accent-font);
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--primary-color);
+	margin: 0 0 8px;
+}
+
+.about-chairman-role,
+.about-chairman-date{
+	margin: 0;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.about-chairman-date{
+	margin-top: 8px;
+}
+
+@media (max-width: 767px){
+	.about-brochure-section{
+		padding: 60px 0;
+	}
+
+	.about-brochure-tagline p{
+		font-size: 18px;
 	}
 }
 
