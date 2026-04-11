@@ -406,13 +406,13 @@
 
                         <!-- Profile PDFs modal -->
                         <div class="modal fade" id="profileDownloadModal" tabindex="-1" aria-labelledby="profileDownloadModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                                 <div class="modal-content profile-download-modal">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="profileDownloadModalLabel">{{ __('site.home.what_we_do_section.profile_download_modal_title') }}</h5>
+                                    <div class="modal-header profile-download-modal__header">
+                                        <h5 class="modal-title profile-download-modal__title" id="profileDownloadModalLabel">{{ __('site.home.what_we_do_section.profile_download_modal_title') }}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('site.home.what_we_do_section.profile_download_close') }}"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body profile-download-modal__body">
                                         @php
                                             $profileDocsWithFile = ($profileDocuments ?? collect())->filter(
                                                 fn ($d) => $d->hasDownloadTarget()
@@ -423,22 +423,33 @@
                                         @else
                                             @foreach ($profileDocsWithFile as $doc)
                                                 <div class="profile-download-row">
-                                                    <span class="profile-download-row__icon profile-download-row__icon--pdf" aria-hidden="true">
-                                                        <i class="fa-solid fa-file-pdf"></i>
-                                                    </span>
-                                                    <span class="profile-download-row__name">{{ $doc->title }}</span>
+                                                    <div class="profile-download-row__main">
+                                                        <span class="profile-download-row__icon" aria-hidden="true">
+                                                            {{-- Lucide file-text --}}
+                                                            <svg class="lucide lucide-file-text" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                                                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                                                <path d="M10 9H8" />
+                                                                <path d="M16 13H8" />
+                                                                <path d="M16 17H8" />
+                                                            </svg>
+                                                        </span>
+                                                        <span class="profile-download-row__name">{{ $doc->title }}</span>
+                                                    </div>
                                                     <a
                                                         href="{{ $doc->publicDownloadHref() }}"
-                                                        class="profile-download-row__download"
-                                                        title="{{ __('site.library.download') }}"
+                                                        class="btn-default profile-download-row__cta"
                                                         @if ($doc->isExternalLink()) target="_blank" rel="noopener noreferrer" @endif
                                                     >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                                            <polyline points="7 10 12 15 17 10"></polyline>
-                                                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                                                        </svg>
-                                                        <span class="visually-hidden">{{ __('site.library.download') }}</span>
+                                                        <span class="profile-download-row__cta-label">{{ __('site.library.download') }}</span>
+                                                        <span class="profile-download-row__cta-icon" aria-hidden="true">
+                                                            {{-- Lucide download --}}
+                                                            <svg class="lucide lucide-download" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                                <polyline points="7 10 12 15 17 10" />
+                                                                <line x1="12" y1="15" x2="12" y2="3" />
+                                                            </svg>
+                                                        </span>
                                                     </a>
                                                 </div>
                                             @endforeach
