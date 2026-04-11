@@ -6,13 +6,29 @@ use App\Models\LibraryDocument;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
-class ProfileBrochureSeeder extends Seeder
+/**
+ * Seed riêng các tài liệu profile PDF (thư viện download — S-018 / modal trang chủ).
+ *
+ * Trên hosting, sau khi upload mã nguồn, đặt 3 file PDF vào **một trong hai** thư mục:
+ * - `docs/brochure-extraction/ocr/`
+ * - `database/seeders/brochures/` (tiện khi không deploy thư mục `docs/`)
+ *
+ * Tên file bắt buộc:
+ * - Minhlong-construction.pdf
+ * - Minhlong-group.pdf
+ * - Minhlong-power.pdf
+ *
+ * Chạy lệnh:
+ *
+ * ```bash
+ * php artisan db:seed --class=Database\\Seeders\\LibraryProfileDocumentsSeeder --force
+ * ```
+ *
+ * Seeder idempotent: `updateOrCreate` theo title + category; copy lại ra `public/downloads/profiles/`
+ * và gắn lại media Spatie (collection `file`).
+ */
+class LibraryProfileDocumentsSeeder extends Seeder
 {
-    /**
-     * Copy profile PDFs into public/downloads/profiles and attach to library_documents (Spatie).
-     *
-     * Source order: docs/brochure-extraction/ocr, then database/seeders/brochures.
-     */
     public function run(): void
     {
         $items = [
@@ -40,7 +56,7 @@ class ProfileBrochureSeeder extends Seeder
             $source = $this->resolveSourcePath($item['file']);
             if ($source === null) {
                 if ($this->command !== null) {
-                    $this->command->warn("Profile brochure skipped (file not found): {$item['file']}");
+                    $this->command->warn("Bỏ qua (không tìm thấy file): {$item['file']}");
                 }
 
                 continue;

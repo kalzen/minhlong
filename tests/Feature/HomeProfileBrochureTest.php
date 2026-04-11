@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\LibraryDocument;
-use Database\Seeders\ProfileBrochureSeeder;
+use Database\Seeders\LibraryProfileDocumentsSeeder;
 use Illuminate\Support\Facades\File;
 
 beforeEach(function () {
@@ -27,7 +27,7 @@ afterEach(function () {
 });
 
 test('home page shows profile download button modal and seeded pdf download links', function () {
-    $this->seed(ProfileBrochureSeeder::class);
+    $this->seed(LibraryProfileDocumentsSeeder::class);
 
     $response = $this->get(route('home'));
 
@@ -47,7 +47,7 @@ test('home page shows profile download button modal and seeded pdf download link
 });
 
 test('library download route returns file for profile document', function () {
-    $this->seed(ProfileBrochureSeeder::class);
+    $this->seed(LibraryProfileDocumentsSeeder::class);
 
     $doc = LibraryDocument::query()
         ->where('library_category', LibraryDocument::CATEGORY_PROFILE)
