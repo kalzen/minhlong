@@ -15,6 +15,45 @@ test('authenticated users can view library documents index', function () {
     $this->get(route('admin.library-documents.index'))->assertOk();
 });
 
+test('authenticated user can create a library document with an external url only', function () {
+    $this->actingAs(User::factory()->create());
+
+    $url = 'https://drive.google.com/file/d/15EZEFhFdqU0yh8aD55I7YYnOppQh8K2B/view?usp=drive_link';
+
+    $response = $this->post(route('admin.library-documents.store'), [
+        'title' => 'Profile via Drive',
+        'library_category' => LibraryDocument::CATEGORY_PROFILE,
+        'link_type' => LibraryDocument::LINK_EXTERNAL,
+        'is_public' => 1,
+        'sort_order' => 2,
+        'external_url' => $url,
+    ]);
+
+    $response->assertRedirect(route('admin.library-documents.index'));
+    $this->assertDatabaseHas('library_documents', [
+        'title' => 'Profile via Drive',
+        'library_category' => LibraryDocument::CATEGORY_PROFILE,
+        'link_type' => LibraryDocument::LINK_EXTERNAL,
+        'is_public' => true,
+        'sort_order' => 2,
+        'external_url' => $url,
+    ]);
+});
+
+test('store rejects create when link type is missing', function () {
+    $this->actingAs(User::factory()->create());
+
+    $response = $this->post(route('admin.library-documents.store'), [
+        'title' => 'Incomplete',
+        'library_category' => LibraryDocument::CATEGORY_REPORT,
+        'is_public' => 1,
+        'sort_order' => 0,
+    ]);
+
+    $response->assertSessionHasErrors('link_type');
+    $this->assertDatabaseMissing('library_documents', ['title' => 'Incomplete']);
+});
+
 test('authenticated user can create a library document with a pdf', function () {
     $this->actingAs(User::factory()->create());
 
@@ -26,6 +65,7 @@ test('authenticated user can create a library document with a pdf', function () 
     $response = $this->post(route('admin.library-documents.store'), [
         'title' => 'Company profile 2026',
         'library_category' => LibraryDocument::CATEGORY_PROFILE,
+        'link_type' => LibraryDocument::LINK_INTERNAL,
         'is_public' => 1,
         'sort_order' => 5,
         'file' => $file,
@@ -35,6 +75,7 @@ test('authenticated user can create a library document with a pdf', function () 
     $this->assertDatabaseHas('library_documents', [
         'title' => 'Company profile 2026',
         'library_category' => LibraryDocument::CATEGORY_PROFILE,
+        'link_type' => LibraryDocument::LINK_INTERNAL,
         'is_public' => true,
         'sort_order' => 5,
     ]);
@@ -48,6 +89,7 @@ test('store rejects disallowed mime types', function () {
     $response = $this->post(route('admin.library-documents.store'), [
         'title' => 'Bad',
         'library_category' => LibraryDocument::CATEGORY_REPORT,
+        'link_type' => LibraryDocument::LINK_INTERNAL,
         'is_public' => 1,
         'sort_order' => 0,
         'file' => $file,
@@ -63,6 +105,7 @@ test('authenticated user can update and delete a library document', function () 
     $doc = LibraryDocument::query()->create([
         'title' => 'Original title',
         'library_category' => LibraryDocument::CATEGORY_PROFILE,
+        'link_type' => LibraryDocument::LINK_INTERNAL,
         'is_public' => true,
         'sort_order' => 1,
     ]);
@@ -75,6 +118,7 @@ test('authenticated user can update and delete a library document', function () 
         [
             'title' => 'Updated title',
             'library_category' => LibraryDocument::CATEGORY_REPORT,
+            'link_type' => LibraryDocument::LINK_INTERNAL,
             'is_public' => 0,
             'sort_order' => 9,
         ]

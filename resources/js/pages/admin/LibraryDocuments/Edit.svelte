@@ -8,6 +8,9 @@
     import libraryDocuments from '@/routes/admin/library-documents';
     import type { BreadcrumbItem } from '@/types';
 
+    const LINK_INTERNAL = 'internal';
+    const LINK_EXTERNAL = 'external';
+
     let {
         document,
     }: {
@@ -15,17 +18,21 @@
             id: number;
             title: string;
             library_category: string;
+            link_type: string;
             is_public: boolean;
             sort_order: number;
             file_name: string | undefined;
+            external_url: string | null;
         } | null;
     } = $props();
 
     const form = useForm({
         title: document?.title ?? '',
         library_category: document?.library_category ?? 'profile',
+        link_type: document?.link_type ?? LINK_INTERNAL,
         is_public: document?.is_public ?? true,
         sort_order: document?.sort_order ?? 0,
+        external_url: document?.external_url ?? '',
         file: null as File | null,
     });
 
@@ -99,22 +106,54 @@
             />
         </div>
 
-        {#if document?.file_name}
-            <p class="text-xs text-muted-foreground">Current file: {document.file_name}</p>
-        {/if}
+        <fieldset class="grid gap-2">
+            <legend class="text-sm font-medium">Download source</legend>
+            <div class="flex flex-col gap-2 sm:flex-row sm:gap-6">
+                <label class="flex cursor-pointer items-center gap-2 text-sm">
+                    <input type="radio" name="link_type" value={LINK_INTERNAL} bind:group={$form.link_type} />
+                    Internal — upload file on this site
+                </label>
+                <label class="flex cursor-pointer items-center gap-2 text-sm">
+                    <input type="radio" name="link_type" value={LINK_EXTERNAL} bind:group={$form.link_type} />
+                    External — link only (e.g. Google Drive)
+                </label>
+            </div>
+        </fieldset>
 
-        <div class="grid gap-2">
-            <label class="text-sm font-medium" for="file">File (csv, xlsx, doc, pdf)</label>
-            <input
-                id="file"
-                type="file"
-                class="text-sm"
-                onchange={(e) => {
-                    const f = e.currentTarget.files?.[0];
-                    get(form).setStore('file', f ?? null);
-                }}
-            />
-        </div>
+        {#if $form.link_type === LINK_INTERNAL}
+            {#if document?.file_name}
+                <p class="text-xs text-muted-foreground">Current file: {document.file_name}</p>
+            {/if}
+            <div class="grid gap-2">
+                <label class="text-sm font-medium" for="file">File (csv, xlsx, doc, pdf)</label>
+                <input
+                    id="file"
+                    type="file"
+                    class="text-sm"
+                    onchange={(e) => {
+                        const f = e.currentTarget.files?.[0];
+                        get(form).setStore('file', f ?? null);
+                    }}
+                />
+                <p class="text-xs text-muted-foreground">
+                    Public pages use the site download URL. Replace the file by choosing a new one and saving.
+                </p>
+            </div>
+        {:else}
+            <div class="grid gap-2">
+                <label class="text-sm font-medium" for="external_url">External URL</label>
+                <input
+                    id="external_url"
+                    type="url"
+                    class="rounded-md border border-input px-3 py-2 text-sm"
+                    bind:value={$form.external_url}
+                    placeholder="https://..."
+                />
+                <p class="text-xs text-muted-foreground">
+                    The public site will open this link directly (new tab). No file is stored on this server.
+                </p>
+            </div>
+        {/if}
 
         {#if Object.keys($form.errors).length > 0}
             <ul class="list-inside list-disc text-sm text-destructive">

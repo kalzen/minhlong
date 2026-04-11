@@ -27,7 +27,7 @@ class HomeController extends Controller
                 ->orderBy('sort_order')
                 ->orderBy('id')
                 ->get()
-                ->filter(fn (LibraryDocument $doc) => $doc->getFirstMedia('file') !== null)
+                ->filter(fn (LibraryDocument $doc) => $doc->hasDownloadTarget())
                 ->values();
         }
 

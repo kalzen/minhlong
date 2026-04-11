@@ -9,7 +9,10 @@
 /resources/js/routes
 /resources/js/wayfinder
 /vendor
-/docs
+# Bỏ qua toàn bộ docs; cho phép thư mục ocr (file được track do .gitignore trong thư mục đó — chỉ 3 PDF profile)
+/docs/**
+!/docs/brochure-extraction/
+!/docs/brochure-extraction/ocr/
 .DS_Store
 .env
 .env.backup

@@ -24,9 +24,11 @@
             id: number;
             title: string;
             library_category: string;
+            link_type: string;
             is_public: boolean;
             sort_order: number;
             file_name: string | undefined;
+            external_url: string | null;
         }[];
     } = $props();
 
@@ -71,7 +73,7 @@
                             <TableHead>Title</TableHead>
                             <TableHead class="w-[100px]">Type</TableHead>
                             <TableHead class="w-[100px]">Public</TableHead>
-                            <TableHead class="hidden sm:table-cell">File</TableHead>
+                            <TableHead class="hidden sm:table-cell">Source</TableHead>
                             <TableHead class="w-[140px] text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -96,8 +98,14 @@
                                         {row.is_public ? 'yes' : 'no'}
                                     </Badge>
                                 </TableCell>
-                                <TableCell class="hidden font-mono text-xs text-muted-foreground sm:table-cell">
-                                    {row.file_name ?? '—'}
+                                <TableCell class="hidden max-w-[14rem] truncate text-xs text-muted-foreground sm:table-cell">
+                                    {#if row.link_type === 'external' && row.external_url}
+                                        <span title={row.external_url}>External URL</span>
+                                    {:else if row.file_name}
+                                        <span class="font-mono">{row.file_name}</span>
+                                    {:else}
+                                        —
+                                    {/if}
                                 </TableCell>
                                 <TableCell class="text-right">
                                     <div class="flex flex-wrap justify-end gap-1">

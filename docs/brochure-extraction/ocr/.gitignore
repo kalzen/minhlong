@@ -1,6 +1,6 @@
+# Chỉ track 3 PDF cho seeder; các file .txt/OCR khác vẫn bị bỏ qua
 *
 !.gitignore
-!README.txt
 !Minhlong-construction.pdf
 !Minhlong-group.pdf
 !Minhlong-power.pdf

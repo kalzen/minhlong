@@ -22,9 +22,11 @@ class LibraryDocumentController extends Controller
                 'id' => $doc->id,
                 'title' => $doc->title,
                 'library_category' => $doc->library_category,
+                'link_type' => $doc->link_type,
                 'is_public' => $doc->is_public,
                 'sort_order' => $doc->sort_order,
                 'file_name' => $doc->getFirstMedia('file')?->file_name,
+                'external_url' => $doc->external_url,
             ]);
 
         return Inertia::render('admin/LibraryDocuments/Index', [
@@ -43,14 +45,22 @@ class LibraryDocumentController extends Controller
     {
         $data = $request->validated();
 
+        $linkType = $data['link_type'];
+
         $doc = LibraryDocument::query()->create([
             'title' => $data['title'],
             'library_category' => $data['library_category'],
+            'link_type' => $linkType,
             'is_public' => $request->boolean('is_public', true),
             'sort_order' => $data['sort_order'] ?? 0,
+            'external_url' => $linkType === LibraryDocument::LINK_EXTERNAL
+                ? ($data['external_url'] ?? null)
+                : null,
         ]);
 
-        $doc->addMediaFromRequest('file')->toMediaCollection('file');
+        if ($linkType === LibraryDocument::LINK_INTERNAL && $request->hasFile('file')) {
+            $doc->addMediaFromRequest('file')->toMediaCollection('file');
+        }
 
         return redirect()->route('admin.library-documents.index')->with('success', __('Document uploaded.'));
     }
@@ -65,6 +75,8 @@ class LibraryDocumentController extends Controller
                 'is_public' => $libraryDocument->is_public,
                 'sort_order' => $libraryDocument->sort_order,
                 'file_name' => $libraryDocument->getFirstMedia('file')?->file_name,
+                'external_url' => $libraryDocument->external_url,
+                'link_type' => $libraryDocument->link_type,
             ],
         ]);
     }
@@ -72,15 +84,29 @@ class LibraryDocumentController extends Controller
     public function update(UpdateLibraryDocumentRequest $request, LibraryDocument $libraryDocument): RedirectResponse
     {
         $data = $request->validated();
+        $linkType = $data['link_type'];
 
-        $libraryDocument->update([
+        $payload = [
             'title' => $data['title'],
             'library_category' => $data['library_category'],
+            'link_type' => $linkType,
             'is_public' => $request->has('is_public') ? $request->boolean('is_public') : $libraryDocument->is_public,
             'sort_order' => $data['sort_order'] ?? $libraryDocument->sort_order,
-        ]);
+        ];
 
-        if ($request->hasFile('file')) {
+        if ($linkType === LibraryDocument::LINK_EXTERNAL) {
+            if (array_key_exists('external_url', $data)) {
+                $payload['external_url'] = $data['external_url'];
+            }
+        } else {
+            $payload['external_url'] = null;
+        }
+
+        $libraryDocument->update($payload);
+
+        if ($linkType === LibraryDocument::LINK_EXTERNAL) {
+            $libraryDocument->clearMediaCollection('file');
+        } elseif ($request->hasFile('file')) {
             $libraryDocument->clearMediaCollection('file');
             $libraryDocument->addMediaFromRequest('file')->toMediaCollection('file');
         }

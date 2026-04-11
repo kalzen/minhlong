@@ -415,7 +415,7 @@
                                     <div class="modal-body">
                                         @php
                                             $profileDocsWithFile = ($profileDocuments ?? collect())->filter(
-                                                fn ($d) => $d->getFirstMedia('file') !== null
+                                                fn ($d) => $d->hasDownloadTarget()
                                             );
                                         @endphp
                                         @if ($profileDocsWithFile->isEmpty())
@@ -427,7 +427,12 @@
                                                         <i class="fa-solid fa-file-pdf"></i>
                                                     </span>
                                                     <span class="profile-download-row__name">{{ $doc->title }}</span>
-                                                    <a href="{{ route('site.library.download', $doc) }}" class="profile-download-row__download" download title="{{ __('site.library.download') }}">
+                                                    <a
+                                                        href="{{ $doc->publicDownloadHref() }}"
+                                                        class="profile-download-row__download"
+                                                        title="{{ __('site.library.download') }}"
+                                                        @if ($doc->isExternalLink()) target="_blank" rel="noopener noreferrer" @endif
+                                                    >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                                             <polyline points="7 10 12 15 17 10"></polyline>

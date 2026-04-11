@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\LibraryDocument;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -17,7 +18,7 @@ class LibraryController extends Controller
             ->orderBy('sort_order')
             ->orderByDesc('id')
             ->get()
-            ->filter(fn (LibraryDocument $doc) => $doc->getFirstMedia('file') !== null);
+            ->filter(fn (LibraryDocument $doc) => $doc->hasDownloadTarget());
 
         return view('site.library.index', [
             'title' => __('site.library.page_title'),
@@ -26,9 +27,17 @@ class LibraryController extends Controller
         ]);
     }
 
-    public function download(LibraryDocument $libraryDocument): BinaryFileResponse|Response
+    public function download(LibraryDocument $libraryDocument): BinaryFileResponse|RedirectResponse|Response
     {
         if (! $libraryDocument->is_public) {
+            abort(404);
+        }
+
+        if ($libraryDocument->isExternalLink()) {
+            if (filled($libraryDocument->external_url)) {
+                return redirect()->away($libraryDocument->external_url);
+            }
+
             abort(404);
         }
 

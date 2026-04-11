@@ -33,12 +33,15 @@
                         </thead>
                         <tbody>
                             @forelse ($documents as $doc)
-                                @php($media = $doc->getFirstMedia('file'))
                                 <tr>
                                     <td>{{ $doc->title }}</td>
                                     <td>
-                                        @if ($media)
-                                            <a href="{{ route('site.library.download', $doc) }}" class="btn-default btn-highlighted btn-sm">{{ __('site.library.download') }}</a>
+                                        @if ($doc->hasDownloadTarget())
+                                            <a
+                                                href="{{ $doc->publicDownloadHref() }}"
+                                                class="btn-default btn-highlighted btn-sm"
+                                                @if ($doc->isExternalLink()) target="_blank" rel="noopener noreferrer" @endif
+                                            >{{ __('site.library.download') }}</a>
                                         @else
                                             —
                                         @endif
