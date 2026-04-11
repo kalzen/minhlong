@@ -29,7 +29,7 @@
             <div class="col-xl-6">
                 <div class="hero-image-silver">
                     <figure>
-                        <img src="{{ asset('frontend/images/hero-image-silver.png') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}">
+                        <img src="{{ asset('frontend/images/power-3.jpg') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}">
                     </figure>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="about-us-image-box-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-image-box-1-silver">
                         <figure class="image-anime">
-                            <img src="{{ asset('frontend/images/about-us-image-1-silver.jpg') }}" alt="{{ __('site.power.about.title') }}">
+                            <img src="{{ asset('frontend/images/power-4.jpg') }}" alt="{{ __('site.power.about.title') }}">
                         </figure>
                     </div>
                     <div class="about-image-box-2-silver">
@@ -89,7 +89,7 @@
                     'frontend/images/minhlong-power.jpg',
                     'frontend/images/power-1.jpg',
                     'frontend/images/power-2.JPG',
-                    'frontend/images/about-us-image-1-silver.jpg',
+                    'frontend/images/power-4.jpg',
                 ];
             @endphp
             @foreach (range(1, 4) as $i)
@@ -390,7 +390,7 @@
     </div>
 </div>
 
-<div class="our-working-process-silver dark-section">
+<div class="our-working-process-silver our-working-process-power-bg dark-section">
     <div class="container">
         <div class="row section-row">
             <div class="col-lg-12">

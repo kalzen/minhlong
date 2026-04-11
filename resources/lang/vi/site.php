@@ -59,6 +59,10 @@ return [
         ],
         'about_section' => [
             'more_about_us' => 'Xem thêm về chúng tôi',
+            'audio_title' => 'Định hình khối lớn',
+            'audio_play' => 'Phát audio',
+            'audio_pause' => 'Tạm dừng',
+            'audio_toggle_aria' => 'Phát hoặc tạm dừng audio: Định hình khối lớn',
         ],
         'services_section' => [
             'title' => 'Dịch vụ của chúng tôi',

@@ -194,12 +194,36 @@
                                     </ul>
                                 </div>
                                 <!-- About Footer Content List End -->
-                                
-                                <!-- About Us Button Start -->
-                                <div class="about-us-btn">
-                                    <a href="{{ route('site.about') }}" class="btn-default">{{ __('site.home.about_section.more_about_us') }}</a>
+
+                                <div class="about-us-footer-actions wow fadeInUp" data-wow-delay="0.65s">
+                                    <p class="about-audio-block__title">{{ __('site.home.about_section.audio_title') }}</p>
+                                    <div class="about-us-footer-actions__row">
+                                        <div class="about-audio-block">
+                                            <audio id="home-about-audio" preload="metadata" src="{{ asset('frontend/audio/minhlong.mp3') }}"></audio>
+                                            <button
+                                                type="button"
+                                                id="home-about-audio-toggle"
+                                                class="btn-default about-audio-toggle"
+                                                aria-pressed="false"
+                                                aria-controls="home-about-audio"
+                                                aria-label="{{ __('site.home.about_section.audio_toggle_aria') }}"
+                                            >
+                                                <span class="about-audio-toggle__icon-play" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                                </span>
+                                                <span class="about-audio-toggle__icon-pause" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                                                </span>
+                                                <span class="about-audio-toggle__text-play">{{ __('site.home.about_section.audio_play') }}</span>
+                                                <span class="about-audio-toggle__text-pause">{{ __('site.home.about_section.audio_pause') }}</span>
+                                            </button>
+                                        </div>
+                                        <div class="about-us-btn">
+                                            <a href="{{ route('site.about') }}" class="btn-default">{{ __('site.home.about_section.more_about_us') }}</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- About Us Button End -->
+                                <!-- About Us actions row End -->
                             </div>
                             <!-- About Us Footer Content End -->
 
@@ -215,7 +239,7 @@
                                 
                                 <!-- Video Play Button Start -->
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
+                                    <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=3s" class="popup-video" data-cursor-text="Play">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>
@@ -250,17 +274,23 @@
             
             @php
                 $homeServiceSectors = [
-                    ['route' => 'site.land', 'image' => 'frontend/images/minhlong-land.png', 'delay' => null, 'active' => 'active'],
-                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-construction.png', 'delay' => '0.2s', 'active' => ''],
-                    ['route' => 'site.minerals', 'image' => 'frontend/images/minerals/about-quarry-conveyors.png', 'delay' => '0.4s', 'active' => ''],
-                    ['route' => 'site.power', 'image' => 'frontend/images/minhlong-power.jpg', 'delay' => '0.6s', 'active' => ''],
+                    ['route' => 'site.land', 'image' => 'frontend/images/minhlong-land.png', 'delay' => null, 'active' => 'active', 'image_full' => true],
+                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-host.jpg', 'delay' => '0.2s', 'active' => '', 'image_full' => true],
+                    ['route' => 'site.minerals', 'image' => 'frontend/images/minerals/about-quarry-conveyors.png', 'delay' => '0.4s', 'active' => '', 'image_full' => false],
+                    ['route' => 'site.power', 'image' => 'frontend/images/minhlong-power.jpg', 'delay' => '0.6s', 'active' => '', 'image_full' => false],
                 ];
             @endphp
             <div class="row services-item-list">
                 @foreach ($homeServiceSectors as $index => $sector)
                 <div class="col-xl-3 col-md-6">
                     <!-- Services Item Start -->
-                    <div class="service-item wow fadeInUp {{ $sector['active'] }}"@if ($sector['delay']) data-wow-delay="{{ $sector['delay'] }}"@endif>
+                    <div @class([
+                        'service-item',
+                        'wow',
+                        'fadeInUp',
+                        $sector['active'],
+                        'service-item--home-image-full' => ! empty($sector['image_full']),
+                    ])@if ($sector['delay']) data-wow-delay="{{ $sector['delay'] }}"@endif>
                         <div class="service-item-header">
                             <div class="service-item-title">
                                 <div class="service-item-heading">
@@ -410,7 +440,7 @@
     <!-- What We Do Setion End -->
 
     <!-- Watch Our Story Section Start -->
-    <div class="our-story dark-section parallaxie">
+    <div class="our-story our-story-home-bg dark-section parallaxie">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -844,12 +874,12 @@
     <!-- Our Projects Section End -->
 
     <!-- CTA Box Section Start -->
-    <div class="cta-box dark-section parallaxie">
+    <div class="cta-box cta-box-home-bg dark-section parallaxie">
         <div class="container">
             <div class="row">
-                <div class="col-xl-7 col-md-9">
+                <div class="col-12">
                     <!-- CTA Box Content Start -->
-                    <div class="cta-box-content">
+                    <div class="cta-box-content cta-box-content--home">
                         <!-- Section Title Start -->
                         <div class="section-title">
                             <h3 class="wow fadeInUp">{{ __('site.home.cta_box.title') }}</h3>
@@ -891,16 +921,6 @@
                         <!-- CTA Box Btn End -->
                     </div> 
                     <!-- CTA Box Content End -->
-                </div>
-
-                <div class="col-xl-5 col-md-3">
-                    <!-- CTA Box Image Start -->
-                    <div class="cta-box-image">
-                        <figure>
-                            <img src="{{ asset('frontend') }}/images/cta-box-image.png" alt="">
-                        </figure>
-                    </div>
-                    <!-- CTA Box Image End -->
                 </div>
             </div>
         </div>
@@ -1144,4 +1164,34 @@
     </div>
     <!-- Our Testimonial Section End -->
 
-    
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('home-about-audio-toggle');
+    var audio = document.getElementById('home-about-audio');
+    if (!btn || !audio) {
+        return;
+    }
+
+    function syncUi() {
+        var playing = !audio.paused;
+        btn.classList.toggle('is-playing', playing);
+        btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    }
+
+    btn.addEventListener('click', function () {
+        if (audio.paused) {
+            audio.play().catch(function () {});
+        } else {
+            audio.pause();
+        }
+    });
+
+    audio.addEventListener('play', syncUi);
+    audio.addEventListener('pause', syncUi);
+    audio.addEventListener('ended', syncUi);
+    syncUi();
+});
+</script>
+@endpush
+

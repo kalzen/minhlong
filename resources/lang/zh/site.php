@@ -59,6 +59,10 @@ return [
         ],
         'about_section' => [
             'more_about_us' => '了解更多关于我们',
+            'audio_title' => '定义大型板块',
+            'audio_play' => '播放音频',
+            'audio_pause' => '暂停',
+            'audio_toggle_aria' => '播放或暂停音频：定义大型板块',
         ],
         'services_section' => [
             'title' => '我们的服务',

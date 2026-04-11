@@ -4,13 +4,15 @@ test('home page our services section links to land host minerals and power', fun
     $response = $this->get(route('home'));
 
     $response->assertOk();
+    $response->assertSee('favicon.svg', false);
     $response->assertSee('our-services', false);
     $response->assertSee(route('site.land'), false);
     $response->assertSee(route('site.host'), false);
     $response->assertSee(route('site.minerals'), false);
     $response->assertSee(route('site.power'), false);
     $response->assertSee('minhlong-land.png', false);
-    $response->assertSee('minhlong-construction.png', false);
+    $response->assertSee('minhlong-host.jpg', false);
+    $response->assertSee('service-item--home-image-full', false);
     $response->assertSee('minerals/about-quarry-conveyors.png', false);
     $response->assertSee('minhlong-power.jpg', false);
 });
@@ -19,6 +21,9 @@ test('minh long power page renders what we do stats block', function () {
     $response = $this->get(route('site.power'));
 
     $response->assertOk();
+    $response->assertSee('power-3.jpg', false);
+    $response->assertSee('power-4.jpg', false);
+    $response->assertSee('our-working-process-power-bg', false);
     $response->assertSee('what-we-counter-box-silver', false);
     $response->assertSee('what-we-counter-info-silver', false);
     $response->assertSee('Comprehensive energy solutions', false);
@@ -60,4 +65,25 @@ test('home page renders minh long group organization copy', function () {
     $response->assertSee('Minh Long Group', false);
     $response->assertSee('Minh Long Constructions delivers', false);
     $response->assertSee('At Minh Long Construction, we believe', false);
+    $response->assertSee('cta-box-home-bg', false);
+    $response->assertDontSee('cta-box-image.png', false);
+});
+
+test('home page about section uses pyramid journey video and shaping the big block audio', function () {
+    $response = $this->get(route('home'));
+
+    $response->assertOk();
+    $response->assertSee('4hWRk3EEybA', false);
+    $response->assertSee('minhlong.mp3', false);
+    $response->assertSee('home-about-audio', false);
+    $response->assertSee('Play audio', false);
+    $response->assertSee('about-us-footer-actions', false);
+    $response->assertSee('about-us-footer-actions__row', false);
+});
+
+test('home page our story section uses minh long group parallax background class', function () {
+    $response = $this->get(route('home'));
+
+    $response->assertOk();
+    $response->assertSee('our-story-home-bg', false);
 });

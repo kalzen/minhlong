@@ -7,7 +7,7 @@
     <meta name="description" content="{{ $metaDescription ?? config('app.name') }}">
     <meta name="keywords" content="">
     <title>{{ $title ?? config('app.name') }} - {{ config('app.name') }}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/images/favicon.png') }}">
+    <link rel="icon" href="{{ asset('frontend/images/favicon.svg') }}" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet">

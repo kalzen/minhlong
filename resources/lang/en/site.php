@@ -59,6 +59,10 @@ return [
         ],
         'about_section' => [
             'more_about_us' => 'More About Us',
+            'audio_title' => 'Shaping the Big Block',
+            'audio_play' => 'Play audio',
+            'audio_pause' => 'Pause',
+            'audio_toggle_aria' => 'Play or pause audio: Shaping the Big Block',
         ],
         'services_section' => [
             'title' => 'Our Services',

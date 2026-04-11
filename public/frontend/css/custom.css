@@ -1273,6 +1273,86 @@ header.main-header .header-sticky.active{
 	margin-top: 30px;
 }
 
+.about-us-footer-actions{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 14px;
+	margin-top: 28px;
+	padding-top: 24px;
+	border-top: 1px solid var(--divider-color);
+}
+
+.about-us-footer-actions > .about-audio-block__title{
+	margin: 0;
+}
+
+.about-us-footer-actions__row{
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 16px 24px;
+}
+
+.about-us-footer-actions .about-audio-block{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	flex: 0 0 auto;
+}
+
+.about-us-footer-actions .about-us-btn{
+	border: 0;
+	padding: 0;
+	margin: 0;
+	flex: 0 0 auto;
+}
+
+@media (max-width: 400px){
+	.about-us-footer-actions__row{
+		flex-wrap: wrap;
+	}
+}
+
+.about-audio-block{
+	margin-top: 28px;
+	padding-top: 24px;
+	border-top: 1px solid var(--divider-color);
+}
+
+.about-audio-block__title{
+	margin: 0 0 14px;
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: var(--primary-color);
+}
+
+.about-audio-toggle{
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.about-audio-toggle .about-audio-toggle__icon-pause,
+.about-audio-toggle .about-audio-toggle__text-pause{
+	display: none;
+}
+
+.about-audio-toggle.is-playing .about-audio-toggle__icon-play,
+.about-audio-toggle.is-playing .about-audio-toggle__text-play{
+	display: none;
+}
+
+.about-audio-toggle.is-playing .about-audio-toggle__icon-pause{
+	display: inline-flex;
+	align-items: center;
+}
+
+.about-audio-toggle.is-playing .about-audio-toggle__text-pause{
+	display: inline;
+}
+
 .about-us-video-box{
 	position: relative;
 	width: calc(47% - 15px);
@@ -1427,10 +1507,6 @@ header.main-header .header-sticky.active{
 	transition: all 0.6s ease-in-out;
 }
 
-.service-item.active .service-item-image img,
-.service-item:hover .service-item-image img{
-	transform: scale(1.08);
-}
 
 .service-item-btn{
 	position: absolute;
@@ -1773,6 +1849,10 @@ header.main-header .header-sticky.active{
 	position: relative;
 	background-image: url('../images/our-story-bg-image.jpg');
 	padding: 200px 0;
+}
+
+.our-story.our-story-home-bg{
+	background-image: url('../images/MinhLonggroup-dark-section.png');
 }
 
 .our-story::before{
@@ -2395,6 +2475,15 @@ header.main-header .header-sticky.active{
 	background-image: url('../images/cta-box-bg-img.jpg');
 	padding: 150px 0;
 	overflow: hidden;
+}
+
+.cta-box.cta-box-home-bg{
+	background-image: url('../images/minhlong-group-background-2.png');
+}
+
+.cta-box.cta-box-home-bg .cta-box-content--home{
+	margin-right: 0;
+	max-width: 920px;
 }
 
 .cta-box::before{
@@ -9815,9 +9904,11 @@ header.main-header.header-silver .header-sticky.active{
 
 .about-image-box-2-silver img{
 	width: 100%;
-	aspect-ratio: 1 / 0.6;
-	object-fit: cover;
+	/* aspect-ratio: 0 / 0.6; */
+	object-fit: contain;
 	border-radius: 10px 10px 0 10px;
+	border: 11px solid white;
+	background: white;
 }
 
 .about-counter-box-silver{
@@ -10578,6 +10669,10 @@ header.main-header.header-silver .header-sticky.active{
 	background-size: cover;
 	padding: 100px 0;
 	overflow: hidden;
+}
+
+.our-working-process-silver.our-working-process-power-bg{
+	background-image: url('../images/power-background.png');
 }
 
 .our-working-process-silver::before{
