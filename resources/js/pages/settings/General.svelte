@@ -1,8 +1,10 @@
 <script lang="ts">
-    import { useForm } from '@inertiajs/svelte';
+    import { Link, useForm } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
+    import { toUrl } from '@/lib/utils';
+    import admin from '@/routes/admin';
     import type { BreadcrumbItem } from '@/types';
 
     type SiteSettingsPayload = {
@@ -90,6 +92,19 @@
 
     <SettingsLayout>
         <div class="space-y-8">
+            <section class="rounded-lg border border-dashed bg-muted/30 p-4">
+                <p class="text-sm text-muted-foreground">
+                    Để đổi banner, logo, ảnh trang chủ và ảnh các trang ngành, mở
+                    <Link
+                        class="font-medium text-primary underline-offset-4 hover:underline"
+                        href={toUrl(admin.siteMedia.index())}
+                    >
+                        chỉnh sửa hình ảnh website
+                    </Link>
+                    .
+                </p>
+            </section>
+
             <section class="space-y-4">
                 <h2 class="text-lg font-semibold">Thông tin chung</h2>
 

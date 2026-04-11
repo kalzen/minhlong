@@ -3,6 +3,32 @@
 use App\Models\SiteMediaLink;
 use App\Models\SiteMediaPlacement;
 use App\Models\User;
+use Inertia\Testing\AssertableInertia as Assert;
+
+test('admin site media index includes section metadata per placement', function () {
+    $user = User::factory()->create();
+    SiteMediaPlacement::query()->create([
+        'position_key' => 'sector.land.hero',
+        'label' => 'Land hero',
+    ]);
+
+    $this->withoutVite();
+
+    $this->actingAs($user)
+        ->get(route('admin.site-media.index'))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('admin/SiteMedia/Index')
+            ->has('placements', 1)
+            ->has('placements.0', fn (Assert $p) => $p
+                ->where('position_key', 'sector.land.hero')
+                ->where('section', 'sectors')
+                ->where('section_order', 20)
+                ->where('section_title', 'Trang ngành (Land, Host, Power, Minerals)')
+                ->etc()
+            )
+        );
+});
 
 test('admin can save site image url on a placement', function () {
     $user = User::factory()->create();

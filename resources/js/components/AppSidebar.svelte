@@ -20,6 +20,7 @@
     import admin from '@/routes/admin';
     import { dashboard } from '@/routes';
     import FileStack from 'lucide-svelte/icons/file-stack';
+    import ImageIcon from 'lucide-svelte/icons/image';
     import Inbox from 'lucide-svelte/icons/inbox';
     import Newspaper from 'lucide-svelte/icons/newspaper';
     import PanelsTopLeft from 'lucide-svelte/icons/panels-top-left';
@@ -57,6 +58,11 @@
             title: 'Contacts',
             href: admin.contacts.index(),
             icon: Inbox,
+        },
+        {
+            title: 'Hình ảnh website',
+            href: admin.siteMedia.index(),
+            icon: ImageIcon,
         },
         {
             title: 'Site settings',
