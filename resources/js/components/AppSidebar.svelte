@@ -24,6 +24,7 @@
     import Inbox from 'lucide-svelte/icons/inbox';
     import Newspaper from 'lucide-svelte/icons/newspaper';
     import PanelsTopLeft from 'lucide-svelte/icons/panels-top-left';
+    import Settings from 'lucide-svelte/icons/settings';
     import type { NavItem } from '@/types';
 
     let {
@@ -62,6 +63,11 @@
             title: 'Site images',
             href: admin.siteMedia.index(),
             icon: ImageIcon,
+        },
+        {
+            title: 'Site settings',
+            href: '/settings/general',
+            icon: Settings,
         },
     ];
 

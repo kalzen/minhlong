@@ -289,6 +289,9 @@ return [
         'play' => 'Play',
     ],
     'footer' => [
+        'address_haiphong' => 'Hải Phòng',
+        'address_hanoi' => 'Hà Nội',
+        'address_fallback' => 'Minh Long Group, Viet Nam',
         'working_hours' => 'Working Hours:',
         'contact_information' => 'Contact Information',
         'get_in_touch' => 'Get in Touch',

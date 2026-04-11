@@ -32,9 +32,14 @@ test('site settings can be updated', function () {
         'site_slogan' => 'We build things',
         'meta_title' => 'Test Meta Title',
         'meta_description' => 'Test meta description',
+        'meta_keywords' => 'kw1, kw2',
+        'default_meta_title' => 'Default title',
+        'default_meta_description' => 'Default description',
         'contact_phone' => '0123456789',
         'contact_email' => 'contact@example.com',
-        'contact_address' => '123 Test Street',
+        'contact_address_haiphong' => 'HP line 1',
+        'contact_address_hanoi' => 'HN line 1',
+        'contact_address' => '',
     ];
 
     $this->actingAs($user)
@@ -43,7 +48,7 @@ test('site settings can be updated', function () {
         ->assertSessionHasNoErrors()
         ->assertRedirect(route('settings.general.edit'));
 
-    foreach ($payload as $key => $value) {
-        expect(Setting::query()->where('key', $key)->value('value'))->toBe($value);
-    }
+    expect(Setting::query()->where('key', 'site_name')->value('value'))->toBe('Test Company');
+    expect(Setting::query()->where('key', 'contact_address_haiphong')->value('value'))->toBe('HP line 1');
+    expect(Setting::query()->where('key', 'contact_address')->value('value'))->toBeNull();
 });

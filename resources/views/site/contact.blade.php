@@ -4,7 +4,6 @@
 @php
     $phone = $settings['contact_phone'] ?? '088 6656 899';
     $email = $settings['contact_email'] ?? 'info@mlgroup.vn';
-    $address = $settings['contact_address'] ?? 'Minh Long Group, Viet Nam';
     $phoneLink = str_replace(' ', '', $phone);
 @endphp
 <div class="page-header parallaxie">
@@ -74,7 +73,9 @@
                             </div>
                             <div class="contact-info-item-content">
                                 <h3>{{ __('site.contact.location') }}</h3>
-                                <p>{{ $address }}</p>
+                                <div class="contact-page-addresses">
+                                    @include('partials.contact-address-block')
+                                </div>
                             </div>
                         </div>
                     </div>

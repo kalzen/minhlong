@@ -289,6 +289,9 @@ return [
         'play' => 'Phát',
     ],
     'footer' => [
+        'address_haiphong' => 'Hải Phòng',
+        'address_hanoi' => 'Hà Nội',
+        'address_fallback' => 'Tập đoàn Minh Long, Việt Nam',
         'working_hours' => 'Giờ làm việc:',
         'contact_information' => 'Thông tin liên hệ',
         'get_in_touch' => 'Liên hệ',

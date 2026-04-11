@@ -32,7 +32,9 @@ class SiteSettingsSeeder extends Seeder
             ['key' => 'meta_robots', 'value' => 'index, follow', 'group' => 'seo', 'type' => 'string'],
             ['key' => 'contact_phone', 'value' => '088 6656 899', 'group' => 'contact', 'type' => 'string'],
             ['key' => 'contact_email', 'value' => 'info@mlgroup.vn', 'group' => 'contact', 'type' => 'string'],
-            ['key' => 'contact_address', 'value' => 'Minh Long Group, Viet Nam', 'group' => 'contact', 'type' => 'string'],
+            ['key' => 'contact_address_haiphong', 'value' => 'SH6.11 Vinhomes Marina, Phường An Biên, Hải Phòng', 'group' => 'contact', 'type' => 'string'],
+            ['key' => 'contact_address_hanoi', 'value' => '676 Hoàng Hoa Thám, Ba Đình, Hà Nội', 'group' => 'contact', 'type' => 'string'],
+            ['key' => 'contact_address', 'value' => null, 'group' => 'contact', 'type' => 'string'],
         ];
 
         foreach ($settings as $item) {

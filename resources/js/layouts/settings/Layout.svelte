@@ -19,6 +19,10 @@
 
     const sidebarNavItems: NavItem[] = [
         {
+            title: 'Website',
+            href: '/settings/general',
+        },
+        {
             title: 'Profile',
             href: editProfile(),
         },

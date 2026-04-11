@@ -289,6 +289,9 @@ return [
         'play' => '播放',
     ],
     'footer' => [
+        'address_haiphong' => '海防',
+        'address_hanoi' => '河内',
+        'address_fallback' => '明龙集团，越南',
         'working_hours' => '工作时间：',
         'contact_information' => '联系信息',
         'get_in_touch' => '立即联系',

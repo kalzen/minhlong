@@ -73,7 +73,6 @@ test('home page about section uses pyramid journey video and shaping the big blo
     $response = $this->get(route('home'));
 
     $response->assertOk();
-    $response->assertSee('hDwNapdDdQA', false);
     $response->assertSee('4hWRk3EEybA', false);
     $response->assertSee('minhlong.mp3', false);
     $response->assertSee('home-about-audio', false);

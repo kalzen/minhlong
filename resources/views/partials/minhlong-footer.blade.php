@@ -1,7 +1,6 @@
 @php
     $phone = $settings['contact_phone'] ?? '088 6656 899';
     $email = $settings['contact_email'] ?? 'info@mlgroup.vn';
-    $address = $settings['contact_address'] ?? 'Minh Long Group, Viet Nam';
     $siteName = $settings['site_name'] ?? config('app.name');
 @endphp
 <footer class="main-footer dark-section">
@@ -59,7 +58,9 @@
                     <div class="footer-links-box">
                         <div class="footer-links footer-location-info">
                             <h3>{{ __('site.footer.contact_information') }}</h3>
-                            <p>{{ $address }}</p>
+                            <div class="footer-address-block">
+                                @include('partials.contact-address-block')
+                            </div>
                         </div>
                         <div class="footer-links footer-contact-links">
                             <h3>{{ __('site.footer.get_in_touch') }}</h3>
