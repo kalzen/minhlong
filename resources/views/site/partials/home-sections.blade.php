@@ -239,7 +239,7 @@
                                 
                                 <!-- Video Play Button Start -->
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=12s" class="popup-video" data-cursor-text="Play">
+                                    <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>
@@ -512,7 +512,7 @@
 
                         <!-- Watch Video Circle Start -->
                         <div class="watch-video-circle">
-                            <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=12s" class="popup-video" data-cursor-text="Play">
+                            <a href="https://www.youtube.com/watch?v=4hWRk3EEybA" class="popup-video" data-cursor-text="Play">
                                 <img src="{{ asset('frontend') }}/images/watch-video-circle.svg" alt="">
                             </a>
                         </div>
