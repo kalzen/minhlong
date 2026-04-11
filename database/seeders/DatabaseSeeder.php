@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             SiteMediaPlacementSeeder::class,
             SiteMediaLinkSeeder::class,
             PostSeeder::class,
+            ProfileBrochureSeeder::class,
         ]);
     }
 }

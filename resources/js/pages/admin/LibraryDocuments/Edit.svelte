@@ -37,14 +37,18 @@
 
     function submit(e: Event) {
         e.preventDefault();
+        const withPublicFlag = (data: Record<string, unknown>) => ({
+            ...data,
+            is_public: data.is_public ? 1 : 0,
+        });
         if (document?.id) {
             form
-                .transform((data) => ({ ...data, _method: 'put' }))
+                .transform((data) => ({ ...withPublicFlag(data), _method: 'put' }))
                 .post(libraryDocuments.update.url({ library_document: document.id }), {
                     forceFormData: true,
                 });
         } else {
-            form.post(libraryDocuments.store.url(), { forceFormData: true });
+            form.transform(withPublicFlag).post(libraryDocuments.store.url(), { forceFormData: true });
         }
     }
 </script>
@@ -113,7 +117,11 @@
         </div>
 
         {#if Object.keys($form.errors).length > 0}
-            <p class="text-sm text-destructive">{JSON.stringify($form.errors)}</p>
+            <ul class="list-inside list-disc text-sm text-destructive">
+                {#each Object.entries($form.errors) as [key, messages] (key)}
+                    <li>{key}: {Array.isArray(messages) ? messages.join(' ') : String(messages)}</li>
+                {/each}
+            </ul>
         {/if}
 
         <button

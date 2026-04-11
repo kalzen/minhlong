@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreLibraryDocumentRequest;
+use App\Http\Requests\Admin\UpdateLibraryDocumentRequest;
 use App\Models\LibraryDocument;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -38,15 +39,9 @@ class LibraryDocumentController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreLibraryDocumentRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'library_category' => ['required', 'in:profile,report'],
-            'is_public' => ['boolean'],
-            'sort_order' => ['integer', 'min:0', 'max:65535'],
-            'file' => ['required', 'file', 'max:51200'],
-        ]);
+        $data = $request->validated();
 
         $doc = LibraryDocument::query()->create([
             'title' => $data['title'],
@@ -57,7 +52,7 @@ class LibraryDocumentController extends Controller
 
         $doc->addMediaFromRequest('file')->toMediaCollection('file');
 
-        return redirect()->route('admin.library-documents.index')->with('success', 'Document uploaded.');
+        return redirect()->route('admin.library-documents.index')->with('success', __('Document uploaded.'));
     }
 
     public function edit(LibraryDocument $libraryDocument): Response
@@ -74,20 +69,14 @@ class LibraryDocumentController extends Controller
         ]);
     }
 
-    public function update(Request $request, LibraryDocument $libraryDocument): RedirectResponse
+    public function update(UpdateLibraryDocumentRequest $request, LibraryDocument $libraryDocument): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'library_category' => ['required', 'in:profile,report'],
-            'is_public' => ['boolean'],
-            'sort_order' => ['integer', 'min:0', 'max:65535'],
-            'file' => ['nullable', 'file', 'max:51200'],
-        ]);
+        $data = $request->validated();
 
         $libraryDocument->update([
             'title' => $data['title'],
             'library_category' => $data['library_category'],
-            'is_public' => array_key_exists('is_public', $data) ? $request->boolean('is_public') : $libraryDocument->is_public,
+            'is_public' => $request->has('is_public') ? $request->boolean('is_public') : $libraryDocument->is_public,
             'sort_order' => $data['sort_order'] ?? $libraryDocument->sort_order,
         ]);
 
@@ -96,13 +85,14 @@ class LibraryDocumentController extends Controller
             $libraryDocument->addMediaFromRequest('file')->toMediaCollection('file');
         }
 
-        return redirect()->route('admin.library-documents.index')->with('success', 'Document updated.');
+        return redirect()->route('admin.library-documents.index')->with('success', __('Document updated.'));
     }
 
     public function destroy(LibraryDocument $libraryDocument): RedirectResponse
     {
+        $libraryDocument->clearMediaCollection('file');
         $libraryDocument->delete();
 
-        return redirect()->route('admin.library-documents.index')->with('success', 'Document deleted.');
+        return redirect()->route('admin.library-documents.index')->with('success', __('Document deleted.'));
     }
 }

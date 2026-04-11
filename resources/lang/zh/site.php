@@ -110,6 +110,10 @@ return [
             'item2_desc' => '流程透明、质控严格，符合集团标准。',
             'item2_bullet' => '面向工业与基础设施范围、以投资人为中心的交付。',
             'button' => '了解更多关于我们',
+            'profile_download_button' => '下载简介',
+            'profile_download_modal_title' => '公司简介（PDF）',
+            'profile_download_close' => '关闭',
+            'profile_download_empty' => '暂无简介文件，请稍后再试。',
         ],
         'projects_section' => [
             'title' => '我们的项目',

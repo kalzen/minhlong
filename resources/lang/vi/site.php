@@ -110,6 +110,10 @@ return [
             'item2_desc' => 'Quy trình minh bạch và QA/QC chặt chẽ phù hợp tiêu chuẩn tập đoàn.',
             'item2_bullet' => 'Giao hàng hướng đến nhà đầu tư trên phạm vi công nghiệp và hạ tầng.',
             'button' => 'Tìm hiểu thêm về chúng tôi',
+            'profile_download_button' => 'Tải profile',
+            'profile_download_modal_title' => 'Hồ sơ công ty (PDF)',
+            'profile_download_close' => 'Đóng',
+            'profile_download_empty' => 'Chưa có file profile. Vui lòng thử lại sau.',
         ],
         'projects_section' => [
             'title' => 'Dự án tiêu biểu',

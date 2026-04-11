@@ -398,9 +398,50 @@
 
                         <!-- What We Do Button Start -->
                         <div class="what-we-do-btn wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="{{ route('site.about') }}" class="btn-default">{{ __('site.home.what_we_do_section.button') }}</a>
+                            <button type="button" class="btn-default btn-profile-download" data-bs-toggle="modal" data-bs-target="#profileDownloadModal">
+                                {{ __('site.home.what_we_do_section.profile_download_button') }}
+                            </button>
                         </div>
                         <!-- What We Do Button End -->
+
+                        <!-- Profile PDFs modal -->
+                        <div class="modal fade" id="profileDownloadModal" tabindex="-1" aria-labelledby="profileDownloadModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content profile-download-modal">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="profileDownloadModalLabel">{{ __('site.home.what_we_do_section.profile_download_modal_title') }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ __('site.home.what_we_do_section.profile_download_close') }}"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @php
+                                            $profileDocsWithFile = ($profileDocuments ?? collect())->filter(
+                                                fn ($d) => $d->getFirstMedia('file') !== null
+                                            );
+                                        @endphp
+                                        @if ($profileDocsWithFile->isEmpty())
+                                            <p class="profile-download-modal__empty mb-0">{{ __('site.home.what_we_do_section.profile_download_empty') }}</p>
+                                        @else
+                                            @foreach ($profileDocsWithFile as $doc)
+                                                <div class="profile-download-row">
+                                                    <span class="profile-download-row__icon profile-download-row__icon--pdf" aria-hidden="true">
+                                                        <i class="fa-solid fa-file-pdf"></i>
+                                                    </span>
+                                                    <span class="profile-download-row__name">{{ $doc->title }}</span>
+                                                    <a href="{{ route('site.library.download', $doc) }}" class="profile-download-row__download" download title="{{ __('site.library.download') }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                                        </svg>
+                                                        <span class="visually-hidden">{{ __('site.library.download') }}</span>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- What We Do Content End -->
                 </div>

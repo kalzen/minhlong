@@ -110,6 +110,10 @@ return [
             'item2_desc' => 'Transparent processes and rigorous QA/QC aligned with group standards.',
             'item2_bullet' => 'Investor-focused delivery across industrial and infrastructure scopes.',
             'button' => 'Learn More About Us',
+            'profile_download_button' => 'Download profile',
+            'profile_download_modal_title' => 'Company profiles (PDF)',
+            'profile_download_close' => 'Close',
+            'profile_download_empty' => 'No profile files are available yet. Please try again later.',
         ],
         'projects_section' => [
             'title' => 'Our Projects',

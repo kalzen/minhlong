@@ -148,8 +148,8 @@ Các ý chính:
 | **S-015** | Danh mục dự án (admin) | Bảng danh mục dự án; thao tác CRUD. | Admin → Dự án → Danh mục. |
 | **S-016** | Danh sách / form dự án | Tiêu đề đa ngôn ngữ, danh mục, ảnh, mô tả, slug; liên kết bản dịch (optional). | Admin → Dự án. |
 | **S-017** | Cài đặt hình ảnh theo vị trí | Form chọn/upload ảnh cho từng `position_key` (hero, services…). | Admin → Cài đặt → Media / Hình ảnh. |
-| **S-018** | Thư viện tài liệu | Danh sách file Profile/Báo cáo; upload; bật/tắt public download. | Admin → Thư viện. |
-| **S-019** | Trang tải tài liệu (frontend) | Danh sách file được phép tải (Profile / Báo cáo). | Route public tùy cấu trúc URL. |
+| **S-018** | Thư viện tài liệu | Danh sách file Profile/Báo cáo; upload; bật/tắt public download; thêm / sửa / xóa (CRUD). | Admin → **Library** → `/admin/library-documents` (Inertia: `admin/LibraryDocuments/*`). MIME: PDF, Word, Excel, CSV, TXT (khớp `LibraryDocument` + Form Request). |
+| **S-019** | Trang tải tài liệu (frontend) | Danh sách file được phép tải (Profile / Báo cáo). | **`/thu-vien`** (`site.library.index`); tải xuống `GET /thu-vien/{id}/tai-xuong`. Block “Tải profile” trên trang chủ (modal) chỉ liệt kê tài liệu loại **profile**. |
 
 ---
 

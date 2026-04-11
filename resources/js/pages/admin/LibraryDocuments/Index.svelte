@@ -76,6 +76,13 @@
                         </TableRow>
                     </TableHeader>
                     <TableBody>
+                        {#if documents.length === 0}
+                            <TableRow>
+                                <TableCell colspan={5} class="py-10 text-center text-sm text-muted-foreground">
+                                    No documents yet. Upload a profile or report file for public download (S-018).
+                                </TableCell>
+                            </TableRow>
+                        {/if}
                         {#each documents as row (row.id)}
                             <TableRow>
                                 <TableCell class="max-w-[min(100vw,20rem)] whitespace-normal font-medium">
