@@ -2006,15 +2006,47 @@ header.main-header .header-sticky.active{
 	min-width: 0;
 }
 
-.profile-download-row__cta{
-	flex: 0 0 auto;
+/**
+ * Same look as .btn-default (accent fill, primary text) but no ::before arrow / ::after sweep —
+ * icon is the Lucide download in the markup.
+ */
+.btn-default-download{
+	font-family: var(--accent-font);
+	position: relative;
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	gap: 10px;
-	padding: 0.55rem 1rem 0.55rem 1.15rem;
-	min-height: 44px;
-	white-space: nowrap;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1em;
+	text-transform: capitalize;
+	color: var(--primary-color);
+	background: var(--accent-color);
+	border-radius: 5px;
+	padding: 14px 20px 14px 22px;
+	border: none;
 	text-decoration: none;
+	white-space: nowrap;
+	transition: color 0.35s ease-in-out, background 0.35s ease-in-out;
+	z-index: 1;
+}
+
+.btn-default-download::before,
+.btn-default-download::after{
+	content: none !important;
+	display: none !important;
+}
+
+.btn-default-download:hover,
+.btn-default-download:focus{
+	color: var(--white-color);
+	background: var(--primary-color);
+}
+
+.profile-download-row__cta{
+	flex: 0 0 auto;
+	min-height: 44px;
 }
 
 .profile-download-row__cta-label{
@@ -2043,7 +2075,7 @@ header.main-header .header-sticky.active{
 		flex-wrap: wrap;
 	}
 
-	.profile-download-row__cta{
+	.profile-download-row__cta.btn-default-download{
 		width: 100%;
 		justify-content: space-between;
 	}

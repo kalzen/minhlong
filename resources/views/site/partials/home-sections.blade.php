@@ -438,7 +438,7 @@
                                                     </div>
                                                     <a
                                                         href="{{ $doc->publicDownloadHref() }}"
-                                                        class="btn-default profile-download-row__cta"
+                                                        class="btn-default-download profile-download-row__cta"
                                                         @if ($doc->isExternalLink()) target="_blank" rel="noopener noreferrer" @endif
                                                     >
                                                         <span class="profile-download-row__cta-label">{{ __('site.library.download') }}</span>
