@@ -1,33 +1,55 @@
 <script lang="ts">
-    import { useForm, usePage } from '@inertiajs/svelte';
+    import { useForm } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
     import type { BreadcrumbItem } from '@/types';
 
-    const page = usePage<{
-        props: {
-            settings: {
-                site_name: string | null;
-                site_slogan: string | null;
-                meta_title: string | null;
-                meta_description: string | null;
-                meta_keywords: string | null;
-                default_meta_title: string | null;
-                default_meta_description: string | null;
-                contact_phone: string | null;
-                contact_email: string | null;
-                contact_address_haiphong: string | null;
-                contact_address_hanoi: string | null;
-                contact_address: string | null;
-                social_facebook: string | null;
-                social_linkedin: string | null;
-                social_instagram: string | null;
-                social_youtube: string | null;
-                social_zalo: string | null;
-            };
-        };
-    }>();
+    type SiteSettingsPayload = {
+        site_name: string | null;
+        site_slogan: string | null;
+        meta_title: string | null;
+        meta_description: string | null;
+        meta_keywords: string | null;
+        default_meta_title: string | null;
+        default_meta_description: string | null;
+        contact_phone: string | null;
+        contact_email: string | null;
+        contact_address_haiphong: string | null;
+        contact_address_hanoi: string | null;
+        contact_address: string | null;
+        social_facebook: string | null;
+        social_linkedin: string | null;
+        social_instagram: string | null;
+        social_youtube: string | null;
+        social_zalo: string | null;
+    };
+
+    const emptySettings = (): SiteSettingsPayload => ({
+        site_name: null,
+        site_slogan: null,
+        meta_title: null,
+        meta_description: null,
+        meta_keywords: null,
+        default_meta_title: null,
+        default_meta_description: null,
+        contact_phone: null,
+        contact_email: null,
+        contact_address_haiphong: null,
+        contact_address_hanoi: null,
+        contact_address: null,
+        social_facebook: null,
+        social_linkedin: null,
+        social_instagram: null,
+        social_youtube: null,
+        social_zalo: null,
+    });
+
+    let {
+        settings = emptySettings(),
+    }: {
+        settings?: SiteSettingsPayload;
+    } = $props();
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -37,23 +59,23 @@
     ];
 
     const form = useForm({
-        site_name: page.props.settings.site_name ?? '',
-        site_slogan: page.props.settings.site_slogan ?? '',
-        meta_title: page.props.settings.meta_title ?? '',
-        meta_description: page.props.settings.meta_description ?? '',
-        meta_keywords: page.props.settings.meta_keywords ?? '',
-        default_meta_title: page.props.settings.default_meta_title ?? '',
-        default_meta_description: page.props.settings.default_meta_description ?? '',
-        contact_phone: page.props.settings.contact_phone ?? '',
-        contact_email: page.props.settings.contact_email ?? '',
-        contact_address_haiphong: page.props.settings.contact_address_haiphong ?? '',
-        contact_address_hanoi: page.props.settings.contact_address_hanoi ?? '',
-        contact_address: page.props.settings.contact_address ?? '',
-        social_facebook: page.props.settings.social_facebook ?? '',
-        social_linkedin: page.props.settings.social_linkedin ?? '',
-        social_instagram: page.props.settings.social_instagram ?? '',
-        social_youtube: page.props.settings.social_youtube ?? '',
-        social_zalo: page.props.settings.social_zalo ?? '',
+        site_name: settings.site_name ?? '',
+        site_slogan: settings.site_slogan ?? '',
+        meta_title: settings.meta_title ?? '',
+        meta_description: settings.meta_description ?? '',
+        meta_keywords: settings.meta_keywords ?? '',
+        default_meta_title: settings.default_meta_title ?? '',
+        default_meta_description: settings.default_meta_description ?? '',
+        contact_phone: settings.contact_phone ?? '',
+        contact_email: settings.contact_email ?? '',
+        contact_address_haiphong: settings.contact_address_haiphong ?? '',
+        contact_address_hanoi: settings.contact_address_hanoi ?? '',
+        contact_address: settings.contact_address ?? '',
+        social_facebook: settings.social_facebook ?? '',
+        social_linkedin: settings.social_linkedin ?? '',
+        social_instagram: settings.social_instagram ?? '',
+        social_youtube: settings.social_youtube ?? '',
+        social_zalo: settings.social_zalo ?? '',
     });
 
     function submit() {
