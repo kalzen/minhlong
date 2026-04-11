@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Link, page } from '@inertiajs/svelte';
-    import BookOpen from 'lucide-svelte/icons/book-open';
-    import Folder from 'lucide-svelte/icons/folder';
+    import Globe from 'lucide-svelte/icons/globe';
     import LayoutGrid from 'lucide-svelte/icons/layout-grid';
     import Menu from 'lucide-svelte/icons/menu';
     import Search from 'lucide-svelte/icons/search';
@@ -67,14 +66,10 @@
 
     const rightNavItems: NavItem[] = [
         {
-            title: 'Repository',
-            href: 'https://github.com/laravel/svelte-starter-kit',
-            icon: Folder,
-        },
-        {
-            title: 'Documentation',
-            href: 'https://laravel.com/docs/starter-kits#svelte',
-            icon: BookOpen,
+            title: 'Minh Long Group',
+            href: '/',
+            icon: Globe,
+            openInNewTab: false,
         },
     ];
 </script>
@@ -130,8 +125,12 @@
                                 {#each rightNavItems as item (toUrl(item.href))}
                                     <a
                                         href={toUrl(item.href)}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        target={item.openInNewTab === false
+                                            ? undefined
+                                            : '_blank'}
+                                        rel={item.openInNewTab === false
+                                            ? undefined
+                                            : 'noopener noreferrer'}
                                         class="flex items-center space-x-2 text-sm font-medium"
                                     >
                                         {#if item.icon}
@@ -205,8 +204,12 @@
                                         {#snippet child({ props })}
                                             <a
                                                 href={toUrl(item.href)}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
+                                                target={item.openInNewTab === false
+                                                    ? undefined
+                                                    : '_blank'}
+                                                rel={item.openInNewTab === false
+                                                    ? undefined
+                                                    : 'noopener noreferrer'}
                                                 {...props}
                                                 class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9 group cursor-pointer"
                                             >

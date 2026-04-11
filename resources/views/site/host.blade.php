@@ -60,7 +60,7 @@
                         <!-- Hero Image Start -->
                         <div class="hero-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend/images/minhlong-host-1.png') }}" alt="{{ __('site.host.hero.brand') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero') }}" alt="{{ __('site.host.hero.brand') }}">
                             </figure>
                         </div>
                         <!-- Hero Image End -->

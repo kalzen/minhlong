@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         User::query()->updateOrCreate(
             ['email' => 'admin@mlgroup.vn'],
             [
-                'name' => 'Admin',
+                'name' => 'Minh Long Admin',
                 'password' => Hash::make('123456a@'),
                 'email_verified_at' => now(),
             ],
@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SectorPostCategorySeeder::class,
             SectorProjectCategorySeeder::class,
             SiteMediaPlacementSeeder::class,
+            SiteMediaLinkSeeder::class,
             PostSeeder::class,
         ]);
     }

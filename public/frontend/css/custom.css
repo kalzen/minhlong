@@ -850,6 +850,15 @@ header.main-header .header-sticky.active{
 	color: var(--white-color);
 }
 
+/* Home hero + about: YouTube play glyph stays white (SVG uses stroke, not .icon i) */
+.hero .video-play-button a svg,
+.hero .video-play-button:hover a svg,
+.about-us-video-box .video-play-button a svg,
+.about-us-video-box .video-play-button:hover a svg{
+	stroke: #ffffff !important;
+	color: #ffffff;
+}
+
 .hero .year-experience-circle{
 	text-align: center;
 }

@@ -15,4 +15,6 @@ export type NavItem = {
     href: NonNullable<LinkComponentBaseProps['href']>;
     icon?: NavIcon;
     isActive?: boolean;
+    /** When false, link opens in the same tab (default: true for external links). */
+    openInNewTab?: boolean;
 };

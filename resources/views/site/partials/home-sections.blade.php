@@ -25,7 +25,7 @@
                             <!-- Hero Info Image Start -->
                             <div class="hero-info-image">
                                 <figure class="image-anime reveal">
-                                    <img src="{{ asset('frontend') }}/images/hero-info-image-1.jpg" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('hero.home.info_1') }}" alt="">
                                 </figure>
                             </div>
                             <!-- Hero Info Image End -->
@@ -35,7 +35,7 @@
                         <!-- Hero Info Item Start -->
                         <div class="hero-info-item box-2">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('frontend') }}/images/hero-info-image-2.jpg" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('hero.home.info_2') }}" alt="">
                             </figure>
                         </div>
                         <!-- Hero Info Item End -->
@@ -114,7 +114,7 @@
                             <!-- About Us Image 1 Start -->
                             <div class="about-us-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/about-us-image-1.jpg" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_1') }}" alt="">
                                 </figure>
                             </div>
                             <!-- About Us Image 1 End --> 
@@ -126,7 +126,7 @@
                             <!-- About Us Image 2 Start -->
                             <div class="about-us-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/about-us-image-2.jpg" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_2') }}" alt="">
                                 </figure>
                             </div>
                             <!-- About Us Image 2 End -->
@@ -232,15 +232,15 @@
                                 <!-- Intro Video Image Start -->
                                 <div class="about-video-image">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/about-intro-video-image.jpg" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.video_poster') }}" alt="">
                                     </figure>
                                 </div>
                                 <!-- Intro Video Image End -->
                                 
                                 <!-- Video Play Button Start -->
                                 <div class="video-play-button">
-                                    <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=3s" class="popup-video" data-cursor-text="Play">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=12s" class="popup-video" data-cursor-text="Play">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                         </svg>
                                     </a>
@@ -274,10 +274,10 @@
             
             @php
                 $homeServiceSectors = [
-                    ['route' => 'site.land', 'image' => 'frontend/images/minhlong-land.png', 'delay' => null, 'active' => 'active', 'image_full' => true],
-                    ['route' => 'site.host', 'image' => 'frontend/images/minhlong-host.jpg', 'delay' => '0.2s', 'active' => '', 'image_full' => true],
-                    ['route' => 'site.minerals', 'image' => 'frontend/images/minerals/about-quarry-conveyors.png', 'delay' => '0.4s', 'active' => '', 'image_full' => false],
-                    ['route' => 'site.power', 'image' => 'frontend/images/minhlong-power.jpg', 'delay' => '0.6s', 'active' => '', 'image_full' => false],
+                    ['route' => 'site.land', 'image' => \App\Support\SiteMedia::urlOrDefault('home.services.land'), 'delay' => null, 'active' => 'active', 'image_full' => true],
+                    ['route' => 'site.host', 'image' => \App\Support\SiteMedia::urlOrDefault('home.services.host'), 'delay' => '0.2s', 'active' => '', 'image_full' => true],
+                    ['route' => 'site.minerals', 'image' => \App\Support\SiteMedia::urlOrDefault('home.services.minerals'), 'delay' => '0.4s', 'active' => '', 'image_full' => false],
+                    ['route' => 'site.power', 'image' => \App\Support\SiteMedia::urlOrDefault('home.services.power'), 'delay' => '0.6s', 'active' => '', 'image_full' => false],
                 ];
             @endphp
             <div class="row services-item-list">
@@ -306,7 +306,7 @@
                         <div class="service-image-box">
                             <div class="service-item-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset($sector['image']) }}" alt="{{ __('site.home.services_section.items.'.$index.'.title') }}">
+                                    <img src="{{ $sector['image'] }}" alt="{{ __('site.home.services_section.items.'.$index.'.title') }}">
                                 </figure>
                             </div>
                             <div class="service-item-btn">
@@ -455,7 +455,7 @@
 
                         <!-- Watch Video Circle Start -->
                         <div class="watch-video-circle">
-                            <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="Play">
+                            <a href="https://www.youtube.com/watch?v=4hWRk3EEybA&amp;t=12s" class="popup-video" data-cursor-text="Play">
                                 <img src="{{ asset('frontend') }}/images/watch-video-circle.svg" alt="">
                             </a>
                         </div>

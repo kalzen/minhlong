@@ -60,7 +60,7 @@
                         <!-- Hero Image Start -->
                         <div class="hero-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/hero-image-gold.jpg" alt="Industrial park overview">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.hero') }}" alt="Industrial park overview">
                             </figure>
                         </div>
                         <!-- Hero Image End -->

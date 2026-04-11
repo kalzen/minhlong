@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2" href="{{ route('home') }}">
-                    <img src="{{ asset('frontend/images/logo.png') }}" alt="{{ $settings['site_name'] ?? config('app.name') }}" style="height: 40px; width: auto;">
+                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('brand.logo_header') }}" alt="{{ $settings['site_name'] ?? config('app.name') }}" style="height: 40px; width: auto;">
                     <span style="color: #ffffff; font-weight: 700; letter-spacing: 0.08em;">MINH LONG GROUP</span>
                 </a>
                         <div class="collapse navbar-collapse main-menu">

@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @php
+        $siteName = $settings['site_name'] ?? config('app.name');
+        $globalMetaTitle = $settings['meta_title'] ?? $settings['default_meta_title'] ?? null;
+        $seoDescription = $metaDescription ?? $settings['meta_description'] ?? $settings['default_meta_description'] ?? null;
+        $seoKeywords = $settings['meta_keywords'] ?? '';
+        $ogType = $settings['og_type'] ?? 'website';
+        $twitterCard = $settings['twitter_card'] ?? 'summary_large_image';
+        $metaRobots = $settings['meta_robots'] ?? 'index, follow';
+        $useHomeMetaTitle = request()->routeIs('home') && filled($globalMetaTitle);
+        $documentTitle = $useHomeMetaTitle
+            ? $globalMetaTitle
+            : (($metaTitle ?? $title ?? $globalMetaTitle ?? $siteName).' - '.$siteName);
+        $ogImageRaw = \App\Support\SiteMedia::urlOrDefault('og.default_image');
+        $ogImageAbsolute = $ogImageRaw !== '' ? \App\Support\SiteMedia::absoluteUrl($ogImageRaw) : '';
+    @endphp
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta name="description" content="{{ $metaDescription ?? config('app.name') }}">
-    <meta name="keywords" content="">
-    <title>{{ $title ?? config('app.name') }} - {{ config('app.name') }}</title>
-    <link rel="icon" href="{{ asset('frontend/images/favicon.svg') }}" type="image/svg+xml">
+    <meta name="description" content="{{ $seoDescription ?? $siteName }}">
+    <meta name="keywords" content="{{ $seoKeywords }}">
+    <meta name="robots" content="{{ $metaRobots }}">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <title>{{ $documentTitle }}</title>
+    <meta property="og:type" content="{{ $ogType }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:title" content="{{ $documentTitle }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($seoDescription ?? $siteName), 300) }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @if($ogImageAbsolute !== '')
+        <meta property="og:image" content="{{ $ogImageAbsolute }}">
+    @endif
+    <meta name="twitter:card" content="{{ $twitterCard }}">
+    <meta name="twitter:title" content="{{ $documentTitle }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($seoDescription ?? $siteName), 200) }}">
+    @if($ogImageAbsolute !== '')
+        <meta name="twitter:image" content="{{ $ogImageAbsolute }}">
+    @endif
+    <link rel="icon" href="{{ \App\Support\SiteMedia::urlOrDefault('brand.favicon') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet">
@@ -34,7 +65,7 @@
         <div class="loading-container">
             <div class="loading"></div>
             <div id="loading-icon">
-                <img src="{{ asset('frontend/images/logo.png') }}" alt="{{ $settings['site_name'] ?? config('app.name') }}">
+                <img src="{{ \App\Support\SiteMedia::urlOrDefault('brand.logo_header') }}" alt="{{ $settings['site_name'] ?? config('app.name') }}">
             </div>
         </div>
     </div>

@@ -31,8 +31,8 @@
                             <a
                                 {...props}
                                 href={toUrl(item.href)}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                target={item.openInNewTab === false ? undefined : '_blank'}
+                                rel={item.openInNewTab === false ? undefined : 'noopener noreferrer'}
                                 class={props.class}
                             >
                                 {#if item.icon}

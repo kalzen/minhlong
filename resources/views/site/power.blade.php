@@ -29,7 +29,7 @@
             <div class="col-xl-6">
                 <div class="hero-image-silver">
                     <figure>
-                        <img src="{{ asset('frontend/images/power-3.jpg') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}">
+                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.hero') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}">
                     </figure>
                 </div>
             </div>

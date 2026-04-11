@@ -68,7 +68,7 @@
             <div class="col-xl-6">
                 <div class="hero-image-silver">
                     <figure>
-                        <img src="https://images.pexels.com/photos/8247090/pexels-photo-8247090.jpeg" alt="{{ __('site.minerals.hero.brand') }}" loading="eager" decoding="async">
+                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.hero') }}" alt="{{ __('site.minerals.hero.brand') }}" loading="eager" decoding="async">
                     </figure>
                 </div>
             </div>

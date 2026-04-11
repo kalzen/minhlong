@@ -4,6 +4,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Sync public disk URL with the current HTTP request
+    |--------------------------------------------------------------------------
+    |
+    | When true, the public disk "url" is set from the incoming request root on each
+    | web request so uploaded files resolve under the same host/path as the page
+    | (fixes broken images if APP_URL does not match how you open the site).
+    |
+    */
+
+    'sync_public_disk_url_with_request' => env('SYNC_PUBLIC_DISK_URL_WITH_REQUEST', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
     |
