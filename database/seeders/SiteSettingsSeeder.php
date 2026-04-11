@@ -35,6 +35,11 @@ class SiteSettingsSeeder extends Seeder
             ['key' => 'contact_address_haiphong', 'value' => 'SH6.11 Vinhomes Marina, Phường An Biên, Hải Phòng', 'group' => 'contact', 'type' => 'string'],
             ['key' => 'contact_address_hanoi', 'value' => '676 Hoàng Hoa Thám, Ba Đình, Hà Nội', 'group' => 'contact', 'type' => 'string'],
             ['key' => 'contact_address', 'value' => null, 'group' => 'contact', 'type' => 'string'],
+            ['key' => 'social_facebook', 'value' => null, 'group' => 'social', 'type' => 'string'],
+            ['key' => 'social_linkedin', 'value' => null, 'group' => 'social', 'type' => 'string'],
+            ['key' => 'social_instagram', 'value' => null, 'group' => 'social', 'type' => 'string'],
+            ['key' => 'social_youtube', 'value' => null, 'group' => 'social', 'type' => 'string'],
+            ['key' => 'social_zalo', 'value' => null, 'group' => 'social', 'type' => 'string'],
         ];
 
         foreach ($settings as $item) {

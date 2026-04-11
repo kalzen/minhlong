@@ -29,6 +29,11 @@ class SiteSettingsController extends Controller
         'contact_address_haiphong',
         'contact_address_hanoi',
         'contact_address',
+        'social_facebook',
+        'social_linkedin',
+        'social_instagram',
+        'social_youtube',
+        'social_zalo',
     ];
 
     /**
@@ -55,6 +60,11 @@ class SiteSettingsController extends Controller
                 'contact_address_haiphong' => $settings['contact_address_haiphong'] ?? null,
                 'contact_address_hanoi' => $settings['contact_address_hanoi'] ?? null,
                 'contact_address' => $settings['contact_address'] ?? null,
+                'social_facebook' => $settings['social_facebook'] ?? null,
+                'social_linkedin' => $settings['social_linkedin'] ?? null,
+                'social_instagram' => $settings['social_instagram'] ?? null,
+                'social_youtube' => $settings['social_youtube'] ?? null,
+                'social_zalo' => $settings['social_zalo'] ?? null,
             ],
         ]);
     }
@@ -89,6 +99,7 @@ class SiteSettingsController extends Controller
         return match (true) {
             str_starts_with($key, 'contact_') => 'contact',
             str_starts_with($key, 'meta_') => 'seo',
+            str_starts_with($key, 'social_') => 'social',
             default => 'general',
         };
     }

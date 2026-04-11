@@ -35,6 +35,11 @@ class SiteSettingsUpdateRequest extends FormRequest
             'contact_address_haiphong' => ['nullable', 'string', 'max:500'],
             'contact_address_hanoi' => ['nullable', 'string', 'max:500'],
             'contact_address' => ['nullable', 'string', 'max:1000'],
+            'social_facebook' => ['nullable', 'string', 'url', 'max:500'],
+            'social_linkedin' => ['nullable', 'string', 'url', 'max:500'],
+            'social_instagram' => ['nullable', 'string', 'url', 'max:500'],
+            'social_youtube' => ['nullable', 'string', 'url', 'max:500'],
+            'social_zalo' => ['nullable', 'string', 'url', 'max:500'],
         ];
     }
 }

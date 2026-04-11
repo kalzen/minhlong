@@ -20,6 +20,11 @@
                 contact_address_haiphong: string | null;
                 contact_address_hanoi: string | null;
                 contact_address: string | null;
+                social_facebook: string | null;
+                social_linkedin: string | null;
+                social_instagram: string | null;
+                social_youtube: string | null;
+                social_zalo: string | null;
             };
         };
     }>();
@@ -44,6 +49,11 @@
         contact_address_haiphong: page.props.settings.contact_address_haiphong ?? '',
         contact_address_hanoi: page.props.settings.contact_address_hanoi ?? '',
         contact_address: page.props.settings.contact_address ?? '',
+        social_facebook: page.props.settings.social_facebook ?? '',
+        social_linkedin: page.props.settings.social_linkedin ?? '',
+        social_instagram: page.props.settings.social_instagram ?? '',
+        social_youtube: page.props.settings.social_youtube ?? '',
+        social_zalo: page.props.settings.social_zalo ?? '',
     });
 
     function submit() {
@@ -237,6 +247,80 @@
                         </p>
                         {#if $form.errors.contact_address}
                             <p class="mt-1 text-sm text-red-600">{$form.errors.contact_address}</p>
+                        {/if}
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-lg font-semibold">Mạng xã hội (footer)</h2>
+                <p class="text-sm text-muted-foreground">
+                    Nhập URL đầy đủ (https://…). Để trống để ẩn icon tương ứng trên website.
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="mb-1 block text-sm font-medium" for="social_facebook">Facebook</label>
+                        <input
+                            id="social_facebook"
+                            type="url"
+                            bind:value={$form.social_facebook}
+                            class="w-full rounded border px-3 py-2 text-sm"
+                            placeholder="https://"
+                        />
+                        {#if $form.errors.social_facebook}
+                            <p class="mt-1 text-sm text-red-600">{$form.errors.social_facebook}</p>
+                        {/if}
+                    </div>
+                    <div>
+                        <label class="mb-1 block text-sm font-medium" for="social_linkedin">LinkedIn</label>
+                        <input
+                            id="social_linkedin"
+                            type="url"
+                            bind:value={$form.social_linkedin}
+                            class="w-full rounded border px-3 py-2 text-sm"
+                            placeholder="https://"
+                        />
+                        {#if $form.errors.social_linkedin}
+                            <p class="mt-1 text-sm text-red-600">{$form.errors.social_linkedin}</p>
+                        {/if}
+                    </div>
+                    <div>
+                        <label class="mb-1 block text-sm font-medium" for="social_instagram">Instagram</label>
+                        <input
+                            id="social_instagram"
+                            type="url"
+                            bind:value={$form.social_instagram}
+                            class="w-full rounded border px-3 py-2 text-sm"
+                            placeholder="https://"
+                        />
+                        {#if $form.errors.social_instagram}
+                            <p class="mt-1 text-sm text-red-600">{$form.errors.social_instagram}</p>
+                        {/if}
+                    </div>
+                    <div>
+                        <label class="mb-1 block text-sm font-medium" for="social_youtube">YouTube</label>
+                        <input
+                            id="social_youtube"
+                            type="url"
+                            bind:value={$form.social_youtube}
+                            class="w-full rounded border px-3 py-2 text-sm"
+                            placeholder="https://"
+                        />
+                        {#if $form.errors.social_youtube}
+                            <p class="mt-1 text-sm text-red-600">{$form.errors.social_youtube}</p>
+                        {/if}
+                    </div>
+                    <div>
+                        <label class="mb-1 block text-sm font-medium" for="social_zalo">Zalo</label>
+                        <input
+                            id="social_zalo"
+                            type="url"
+                            bind:value={$form.social_zalo}
+                            class="w-full rounded border px-3 py-2 text-sm"
+                            placeholder="https://zalo.me/…"
+                        />
+                        {#if $form.errors.social_zalo}
+                            <p class="mt-1 text-sm text-red-600">{$form.errors.social_zalo}</p>
                         {/if}
                     </div>
                 </div>

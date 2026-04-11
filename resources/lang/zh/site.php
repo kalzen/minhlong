@@ -298,6 +298,11 @@ return [
         'newsletter_title' => '订阅简报',
         'newsletter_body' => '获取最新项目、技巧与优惠信息。',
         'follow_on_socials' => '关注我们的社交平台：',
+        'social_facebook' => 'Facebook',
+        'social_linkedin' => 'LinkedIn',
+        'social_instagram' => 'Instagram',
+        'social_youtube' => 'YouTube',
+        'social_zalo' => 'Zalo',
         'menu' => [
             'home' => '首页',
             'about' => '关于我们',

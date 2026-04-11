@@ -298,6 +298,11 @@ return [
         'newsletter_title' => 'Newsletter Subscription',
         'newsletter_body' => 'Stay updated on our latest projects, tips, and offers.',
         'follow_on_socials' => 'Follow On Socials:',
+        'social_facebook' => 'Facebook',
+        'social_linkedin' => 'LinkedIn',
+        'social_instagram' => 'Instagram',
+        'social_youtube' => 'YouTube',
+        'social_zalo' => 'Zalo',
         'menu' => [
             'home' => 'Home',
             'about' => 'About Us',

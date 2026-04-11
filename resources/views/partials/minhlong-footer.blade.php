@@ -84,15 +84,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="footer-links footer-social-links">
-                            <h3>{{ __('site.footer.follow_on_socials') }}</h3>
-                            <ul>
-                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-dribbble" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 2.1a10 10 0 0 1 4 7.9 19.5 19.5 0 0 1 7.5-.6"/><path d="M6.3 5.3a10 10 0 0 0 4.9 4.2 19.4 19.4 0 0 0-6.2 7.1"/><path d="M12.5 12.5a19.3 19.3 0 0 1 3.5 7.4"/></svg>Dribbble</a></li>
-                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-facebook" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.5L18 10h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a></li>
-                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-linkedin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
-                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-instagram" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a></li>
-                            </ul>
-                        </div>
+                        @include('partials.social-footer-links')
                     </div>
                 </div>
 

@@ -40,6 +40,11 @@ test('site settings can be updated', function () {
         'contact_address_haiphong' => 'HP line 1',
         'contact_address_hanoi' => 'HN line 1',
         'contact_address' => '',
+        'social_facebook' => 'https://facebook.com/example',
+        'social_linkedin' => '',
+        'social_instagram' => '',
+        'social_youtube' => '',
+        'social_zalo' => '',
     ];
 
     $this->actingAs($user)
@@ -51,4 +56,6 @@ test('site settings can be updated', function () {
     expect(Setting::query()->where('key', 'site_name')->value('value'))->toBe('Test Company');
     expect(Setting::query()->where('key', 'contact_address_haiphong')->value('value'))->toBe('HP line 1');
     expect(Setting::query()->where('key', 'contact_address')->value('value'))->toBeNull();
+    expect(Setting::query()->where('key', 'social_facebook')->value('value'))->toBe('https://facebook.com/example');
+    expect(Setting::query()->where('key', 'social_linkedin')->value('value'))->toBeNull();
 });

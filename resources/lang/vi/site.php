@@ -298,6 +298,11 @@ return [
         'newsletter_title' => 'Đăng ký nhận tin',
         'newsletter_body' => 'Cập nhật các dự án mới nhất, mẹo hay và ưu đãi hấp dẫn.',
         'follow_on_socials' => 'Theo dõi trên mạng xã hội:',
+        'social_facebook' => 'Facebook',
+        'social_linkedin' => 'LinkedIn',
+        'social_instagram' => 'Instagram',
+        'social_youtube' => 'YouTube',
+        'social_zalo' => 'Zalo',
         'menu' => [
             'home' => 'Trang chủ',
             'about' => 'Giới thiệu',
