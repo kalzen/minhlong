@@ -1,4 +1,7 @@
 *
 !private/
 !public/
+!library-profile-seeds/
+!library-profile-seeds/.gitignore
+!library-profile-seeds/README.txt
 !.gitignore

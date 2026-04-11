@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\File;
 /**
  * Seed riêng các tài liệu profile PDF (thư viện download — S-018 / modal trang chủ).
  *
- * Trên hosting, sau khi upload mã nguồn, đặt 3 file PDF vào **một trong hai** thư mục:
- * - `docs/brochure-extraction/ocr/`
- * - `database/seeders/brochures/` (tiện khi không deploy thư mục `docs/`)
+ * Trên hosting, đặt 3 file PDF vào **một trong các** thư mục (theo thứ tự ưu tiên):
+ * 1. `storage/app/library-profile-seeds/` — **khuyến nghị** (upload qua FTP/cPanel vào `storage/app/...`)
+ * 2. `database/seeders/brochures/`
+ * 3. `docs/brochure-extraction/ocr/`
  *
  * Tên file bắt buộc:
  * - Minhlong-construction.pdf
@@ -51,12 +52,16 @@ class LibraryProfileDocumentsSeeder extends Seeder
 
         $publicDir = public_path('downloads/profiles');
         File::ensureDirectoryExists($publicDir);
+        File::ensureDirectoryExists(storage_path('app/library-profile-seeds'));
+
+        $seededCount = 0;
 
         foreach ($items as $item) {
             $source = $this->resolveSourcePath($item['file']);
             if ($source === null) {
                 if ($this->command !== null) {
-                    $this->command->warn("Bỏ qua (không tìm thấy file): {$item['file']}");
+                    $this->command->warn("Không tìm thấy: {$item['file']}");
+                    $this->command->line('  → Upload vào: '.storage_path('app/library-profile-seeds'));
                 }
 
                 continue;
@@ -81,14 +86,27 @@ class LibraryProfileDocumentsSeeder extends Seeder
                 ->usingFileName($item['file'])
                 ->usingName(pathinfo($item['file'], PATHINFO_FILENAME))
                 ->toMediaCollection('file');
+
+            $seededCount++;
+        }
+
+        if ($seededCount === 0 && $this->command !== null) {
+            $this->command->newLine();
+            $this->command->error('Chưa seed được PDF nào — thiếu file trên server.');
+            $this->command->line('Tạo/thả 3 file vào một trong các thư mục sau rồi chạy lại seeder:');
+            $this->command->line('  1. '.storage_path('app/library-profile-seeds').'  (khuyến nghị)');
+            $this->command->line('  2. '.base_path('database/seeders/brochures'));
+            $this->command->line('  3. '.base_path('docs/brochure-extraction/ocr'));
+            $this->command->newLine();
         }
     }
 
     private function resolveSourcePath(string $filename): ?string
     {
         $candidates = [
-            base_path('docs/brochure-extraction/ocr/'.$filename),
+            storage_path('app/library-profile-seeds/'.$filename),
             base_path('database/seeders/brochures/'.$filename),
+            base_path('docs/brochure-extraction/ocr/'.$filename),
         ];
 
         foreach ($candidates as $path) {
