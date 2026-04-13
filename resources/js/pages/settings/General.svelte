@@ -5,6 +5,7 @@
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
     import { toUrl } from '@/lib/utils';
     import admin from '@/routes/admin';
+    import settingsRoutes from '@/routes/settings';
     import type { BreadcrumbItem } from '@/types';
 
     type SiteSettingsPayload = {
@@ -81,7 +82,7 @@
     });
 
     function submit() {
-        form.put(route('settings.general.update'));
+        form.put(settingsRoutes.general.update.url());
     }
 </script>
 

@@ -58,7 +58,7 @@ return [
             'empty' => 'Chưa có bài viết nào.',
         ],
         'about_section' => [
-            'more_about_us' => 'Xem thêm về chúng tôi',
+            'more_about_us' => 'Về chúng tôi',
             'audio_title' => 'Định hình khối lớn',
             'audio_play' => 'Phát audio',
             'audio_pause' => 'Tạm dừng',
