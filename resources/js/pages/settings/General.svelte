@@ -5,8 +5,10 @@
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
     import { toUrl } from '@/lib/utils';
     import admin from '@/routes/admin';
-    import settingsRoutes from '@/routes/settings';
     import type { BreadcrumbItem } from '@/types';
+
+    /** Matches `Route::put('settings/general', …)->name('settings.general.update')` — never use global `route()` (Ziggy is not loaded in `app.blade.php`). */
+    const siteSettingsUpdateUrl = '/settings/general';
 
     type SiteSettingsPayload = {
         site_name: string | null;
@@ -82,7 +84,7 @@
     });
 
     function submit() {
-        form.put(settingsRoutes.general.update.url());
+        form.put(siteSettingsUpdateUrl);
     }
 </script>
 
