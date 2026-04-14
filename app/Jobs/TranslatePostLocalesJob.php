@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Services\PostAutoTranslationService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 
 class TranslatePostLocalesJob implements ShouldQueue
 {
@@ -30,6 +31,14 @@ class TranslatePostLocalesJob implements ShouldQueue
             return;
         }
 
-        $postAutoTranslationService->translatePostToMissingLocales($post, $this->userId);
+        $result = $postAutoTranslationService->translatePostToMissingLocales($post, $this->userId);
+
+        if (($result['status'] ?? '') !== 'ok') {
+            Log::warning('Post auto-translation skipped', [
+                'post_id' => $post->id,
+                'user_id' => $this->userId,
+                'reason' => $result['reason'] ?? 'unknown',
+            ]);
+        }
     }
 }

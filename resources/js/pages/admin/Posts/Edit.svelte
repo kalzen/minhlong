@@ -385,6 +385,7 @@
                                 type="text"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                                 bind:value={$form.meta_title}
+                                maxlength="255"
                             />
                         </div>
                         <div class="space-y-2">
@@ -394,6 +395,7 @@
                                 rows="3"
                                 class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                                 bind:value={$form.meta_description}
+                                maxlength="255"
                             ></textarea>
                         </div>
                     </CardContent>

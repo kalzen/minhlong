@@ -143,8 +143,8 @@ PROMPT,
         }
 
         return response()->json([
-            'meta_title' => (string) ($response['meta_title'] ?? ''),
-            'meta_description' => (string) ($response['meta_description'] ?? ''),
+            'meta_title' => mb_substr((string) ($response['meta_title'] ?? ''), 0, 255),
+            'meta_description' => mb_substr((string) ($response['meta_description'] ?? ''), 0, 255),
         ]);
     }
 
@@ -213,7 +213,7 @@ PROMPT,
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],
             'meta_title' => ['nullable', 'string', 'max:255'],
-            'meta_description' => ['nullable', 'string', 'max:500'],
+            'meta_description' => ['nullable', 'string', 'max:255'],
             'featured' => ['nullable', 'file', 'image', 'max:10240'],
             'featured_library_media_id' => [
                 'nullable',
@@ -228,6 +228,14 @@ PROMPT,
 
         if (($validated['translation_group_id'] ?? '') === '') {
             $validated['translation_group_id'] = null;
+        }
+
+        if (is_string($validated['meta_title'] ?? null)) {
+            $validated['meta_title'] = mb_substr($validated['meta_title'], 0, 255);
+        }
+
+        if (is_string($validated['meta_description'] ?? null)) {
+            $validated['meta_description'] = mb_substr($validated['meta_description'], 0, 255);
         }
 
         return $validated;

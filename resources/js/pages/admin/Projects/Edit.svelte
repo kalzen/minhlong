@@ -200,6 +200,7 @@
                 type="text"
                 class="rounded-md border border-input bg-background px-3 py-2 text-sm"
                 bind:value={$form.meta_title}
+                maxlength="255"
             />
         </div>
 
@@ -210,6 +211,7 @@
                 rows="2"
                 class="rounded-md border border-input bg-background px-3 py-2 text-sm"
                 bind:value={$form.meta_description}
+                maxlength="255"
             ></textarea>
         </div>
 

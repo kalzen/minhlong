@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Ai\Agents\PostTranslationAgent;
 use App\Models\Post;
 use App\Models\UserAiApiKey;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Laravel\Ai\Enums\Lab;
 
@@ -15,10 +16,17 @@ class PostAutoTranslationService
      */
     private const SUPPORTED_LOCALES = ['en', 'vi', 'zh'];
 
-    public function translatePostToMissingLocales(Post $sourcePost, int $userId): void
+    /**
+     * @return array{status: string, reason: string|null, translated_locales: list<string>}
+     */
+    public function translatePostToMissingLocales(Post $sourcePost, int $userId): array
     {
         if ($sourcePost->translation_group_id === null) {
-            return;
+            return [
+                'status' => 'skipped',
+                'reason' => 'missing_translation_group',
+                'translated_locales' => [],
+            ];
         }
 
         $apiKey = UserAiApiKey::query()
@@ -27,10 +35,6 @@ class PostAutoTranslationService
             ->orderByDesc('is_default')
             ->orderByDesc('id')
             ->first();
-
-        if (! $apiKey instanceof UserAiApiKey) {
-            return;
-        }
 
         $existingLocales = Post::query()
             ->where('translation_group_id', $sourcePost->translation_group_id)
@@ -42,18 +46,36 @@ class PostAutoTranslationService
             ->values();
 
         if ($targetLocales->isEmpty()) {
-            return;
+            return [
+                'status' => 'skipped',
+                'reason' => 'no_missing_locales',
+                'translated_locales' => [],
+            ];
         }
 
-        config([
-            "ai.providers.{$apiKey->provider}.key" => $apiKey->api_key,
-            'ai.default' => $apiKey->provider,
-        ]);
+        $providerName = $apiKey?->provider ?? (string) config('ai.default', 'openai');
+        $provider = $this->labFromProvider($providerName);
+        $model = $apiKey?->model ?: $this->defaultModelForProvider($providerName);
 
-        $provider = $this->labFromProvider($apiKey->provider);
+        if ($apiKey instanceof UserAiApiKey) {
+            config([
+                "ai.providers.{$providerName}.key" => $apiKey->api_key,
+                'ai.default' => $providerName,
+            ]);
+        }
+
+        $providerKey = config("ai.providers.{$providerName}.key");
+        if (! is_string($providerKey) || trim($providerKey) === '') {
+            return [
+                'status' => 'skipped',
+                'reason' => 'missing_provider_key',
+                'translated_locales' => [],
+            ];
+        }
+
+        $translatedLocales = [];
 
         foreach ($targetLocales as $targetLocale) {
-            $model = $apiKey->model ?: $this->defaultModelForProvider($apiKey->provider);
             $translated = (new PostTranslationAgent)->prompt(
                 $this->buildPrompt($sourcePost, $targetLocale),
                 model: $model,
@@ -73,12 +95,31 @@ class PostAutoTranslationService
                     'content' => $translated['content'] ?? null,
                     'status' => $sourcePost->status,
                     'published_at' => $sourcePost->published_at,
-                    'meta_title' => $translated['meta_title'] ?? null,
-                    'meta_description' => $translated['meta_description'] ?? null,
+                    'meta_title' => is_string($translated['meta_title'] ?? null)
+                        ? mb_substr($translated['meta_title'], 0, 255)
+                        : null,
+                    'meta_description' => is_string($translated['meta_description'] ?? null)
+                        ? mb_substr($translated['meta_description'], 0, 255)
+                        : null,
                     'created_by' => $sourcePost->created_by,
                 ],
             );
+
+            $translatedLocales[] = $targetLocale;
         }
+
+        Log::info('Post auto-translation completed', [
+            'post_id' => $sourcePost->id,
+            'translation_group_id' => $sourcePost->translation_group_id,
+            'provider' => $providerName,
+            'translated_locales' => $translatedLocales,
+        ]);
+
+        return [
+            'status' => 'ok',
+            'reason' => null,
+            'translated_locales' => $translatedLocales,
+        ];
     }
 
     private function uniqueSlug(string $title, string $locale): string
