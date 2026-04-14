@@ -269,7 +269,7 @@
                                                         ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
                                                         : 'border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive/10',
                                                 )}
-                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                disabled={processingLocaleByGroup[group.key] != null}
                                                 onclick={() => onLocaleClick(group, locale)}
                                             >
                                                 <LocaleFlag locale={locale} size="sm" />
@@ -307,7 +307,7 @@
                                                     (selectedLocaleByGroup[group.key] = (
                                                         event.currentTarget as HTMLSelectElement
                                                     ).value)}
-                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                disabled={processingLocaleByGroup[group.key] != null}
                                             >
                                                 {#each missingLocales(group.locales) as locale (locale)}
                                                     <option value={locale}>{locale.toUpperCase()}</option>
@@ -316,7 +316,7 @@
                                             <button
                                                 type="button"
                                                 class="inline-flex h-8 items-center rounded-md border px-2 text-sm font-medium hover:bg-muted disabled:opacity-60"
-                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                disabled={processingLocaleByGroup[group.key] != null}
                                                 onclick={() => addLocale(group)}
                                             >
                                                 Thêm ngôn ngữ
