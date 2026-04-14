@@ -1,5 +1,6 @@
 <script lang="ts">
     import { router, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
@@ -67,7 +68,7 @@
 
     function submitCreate(e: Event) {
         e.preventDefault();
-        createForm.post('/settings/ai-keys');
+        get(createForm).post('/settings/ai-keys');
     }
 
     function saveRow(id: number) {
