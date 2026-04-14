@@ -22,6 +22,7 @@
         TableHeader,
         TableRow,
     } from '@/components/ui/table';
+    import { Check, X } from 'lucide-svelte';
     import admin from '@/routes/admin';
     import posts from '@/routes/admin/posts';
     import type { BreadcrumbItem } from '@/types';
@@ -59,6 +60,7 @@
 
     const groups = $derived(groupByTranslationGroup(postPaginator.data));
     const processingLocaleByGroup = $state<Record<string, string | null>>({});
+    const localeColumns = LOCALE_ORDER;
 
     function remove(id: number) {
         if (!confirm('Delete this post?')) {
@@ -81,6 +83,19 @@
         return LOCALE_ORDER.filter((locale) => !set.has(locale));
     }
 
+    function postByLocale(group: { posts: PostRow[] }, locale: string): PostRow | null {
+        return group.posts.find((post) => post.locale === locale) ?? null;
+    }
+
+    function primaryPost(group: { posts: PostRow[] }): PostRow {
+        return (
+            postByLocale(group, 'vi')
+            ?? postByLocale(group, 'en')
+            ?? postByLocale(group, 'zh')
+            ?? group.posts[0]
+        );
+    }
+
     function translateGroupLocale(groupKey: string, sourcePostId: number, locale: string): void {
         processingLocaleByGroup[groupKey] = locale;
 
@@ -96,6 +111,19 @@
                 },
             },
         );
+    }
+
+    function onLocaleClick(group: { key: string; posts: PostRow[] }, locale: string): void {
+        const localizedPost = postByLocale(group, locale);
+
+        if (localizedPost) {
+            router.visit(toUrl(posts.edit({ post: localizedPost.id })));
+
+            return;
+        }
+
+        const sourcePost = primaryPost(group);
+        translateGroupLocale(group.key, sourcePost.id, locale);
     }
 </script>
 
@@ -154,124 +182,86 @@
                 Chưa có bài viết nào. Tạo bài mới để bắt đầu.
             </div>
         {:else}
-        <div class="flex flex-col gap-5">
-            {#each groups as group (group.key)}
-                <Card class="overflow-hidden shadow-sm">
-                    <CardHeader class="border-b bg-muted/20 py-4">
-                        <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
-                            <div class="space-y-1">
-                                <CardTitle class="text-base">
+        <Card class="overflow-hidden shadow-sm">
+            <CardHeader class="border-b bg-muted/20 py-4">
+                <CardTitle class="text-base">Danh sách nhóm bài viết</CardTitle>
+                <CardDescription>Mỗi nhóm là 1 dòng. Bấm cờ để sửa hoặc tự dịch AI.</CardDescription>
+            </CardHeader>
+            <CardContent class="p-0">
+                <Table>
+                    <TableHeader>
+                        <TableRow class="hover:bg-transparent">
+                            <TableHead class="w-[170px]">Nhóm</TableHead>
+                            <TableHead>Tiêu đề đại diện</TableHead>
+                            <TableHead class="hidden md:table-cell w-[140px]">Danh mục</TableHead>
+                            <TableHead class="w-[320px]">Ngôn ngữ</TableHead>
+                            <TableHead class="w-[120px] text-right">Thao tác</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {#each groups as group (group.key)}
+                            <TableRow>
+                                <TableCell>
                                     {#if group.translation_group_id}
-                                        Nhóm bản dịch
-                                        <span class="ml-1 font-mono text-sm font-normal text-muted-foreground"
-                                            >{shortGroupId(group.translation_group_id)}</span
-                                        >
+                                        <div class="font-mono text-xs text-muted-foreground">
+                                            {shortGroupId(group.translation_group_id)}
+                                        </div>
                                     {:else}
-                                        Bài chưa gộp nhóm
+                                        <span class="text-xs text-muted-foreground">single</span>
                                     {/if}
-                                </CardTitle>
-                                <CardDescription class="font-mono text-xs break-all">
-                                    {#if group.translation_group_id}
-                                        {group.translation_group_id}
-                                    {:else}
-                                        Mỗi dòng là một bài độc lập (không có translation_group_id).
-                                    {/if}
-                                </CardDescription>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="text-xs text-muted-foreground">Ngôn ngữ trong nhóm:</span>
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    {#each sortLocales(group.locales) as loc (loc)}
-                                        <span class="flex items-center gap-1 rounded-full border bg-background px-2 py-0.5 text-xs shadow-sm">
-                                            <LocaleFlag locale={loc} size="sm" />
-                                            <span class="uppercase text-muted-foreground">{loc}</span>
-                                        </span>
-                                    {/each}
-                                </div>
-                                {#if missingLocales(group.locales).length > 0}
-                                    <div class="ml-2 flex flex-wrap items-center gap-1.5">
-                                        {#each missingLocales(group.locales) as missingLocale (missingLocale)}
+                                </TableCell>
+                                <TableCell class="max-w-[min(100vw,30rem)] whitespace-normal">
+                                    <span class="font-medium">{primaryPost(group).title}</span>
+                                    <div class="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                                        /{primaryPost(group).slug}
+                                    </div>
+                                </TableCell>
+                                <TableCell class="hidden text-muted-foreground md:table-cell">
+                                    {primaryPost(group).category?.name ?? '—'}
+                                </TableCell>
+                                <TableCell>
+                                    <div class="flex flex-wrap items-center gap-2">
+                                        {#each localeColumns as locale (locale)}
+                                            {@const localePost = postByLocale(group, locale)}
                                             <button
                                                 type="button"
-                                                class="inline-flex h-7 items-center gap-1 rounded-full border border-primary/40 bg-primary/5 px-2 text-xs font-medium text-primary hover:bg-primary/10 disabled:opacity-60"
+                                                class={cn(
+                                                    'inline-flex h-8 items-center gap-1.5 rounded-full border px-2.5 text-xs font-medium transition disabled:opacity-60',
+                                                    localePost
+                                                        ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                                                        : 'border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive/10',
+                                                )}
                                                 disabled={processingLocaleByGroup[group.key] !== null}
-                                                onclick={() =>
-                                                    translateGroupLocale(
-                                                        group.key,
-                                                        group.posts[0].id,
-                                                        missingLocale,
-                                                    )}
+                                                onclick={() => onLocaleClick(group, locale)}
                                             >
-                                                <LocaleFlag locale={missingLocale} size="sm" />
-                                                Translate
+                                                <LocaleFlag locale={locale} size="sm" />
+                                                <span class="uppercase">{locale}</span>
+                                                {#if localePost}
+                                                    <Check class="h-3.5 w-3.5" />
+                                                {:else}
+                                                    <X class="h-3.5 w-3.5" />
+                                                {/if}
                                             </button>
                                         {/each}
                                     </div>
-                                {/if}
-                            </div>
-                        </div>
-                    </CardHeader>
-                    <CardContent class="p-0">
-                        <Table>
-                            <TableHeader>
-                                <TableRow class="hover:bg-transparent">
-                                    <TableHead class="w-[100px]">Locale</TableHead>
-                                    <TableHead>Tiêu đề</TableHead>
-                                    <TableHead class="hidden md:table-cell">Danh mục</TableHead>
-                                    <TableHead class="w-[120px]">Trạng thái</TableHead>
-                                    <TableHead class="w-[140px] text-right">Thao tác</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {#each group.posts as row (row.id)}
-                                    <TableRow>
-                                        <TableCell>
-                                            <div class="flex items-center gap-2">
-                                                <LocaleFlag locale={row.locale} size="md" />
-                                                <span class="text-xs font-medium uppercase text-muted-foreground"
-                                                    >{row.locale}</span
-                                                >
-                                            </div>
-                                        </TableCell>
-                                        <TableCell class="max-w-[min(100vw,28rem)] whitespace-normal">
-                                            <span class="font-medium">{row.title}</span>
-                                            <div class="mt-0.5 font-mono text-[11px] text-muted-foreground">
-                                                /{row.slug}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell class="hidden text-muted-foreground md:table-cell">
-                                            {row.category?.name ?? '—'}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Badge variant={row.status === 'published' ? 'default' : 'secondary'}>
-                                                {row.status}
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell class="text-right">
-                                            <div class="flex flex-wrap justify-end gap-1">
-                                                <Link
-                                                    href={toUrl(posts.edit({ post: row.id }))}
-                                                    class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-primary hover:underline"
-                                                >
-                                                    Edit
-                                                </Link>
-                                                <button
-                                                    type="button"
-                                                    class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"
-                                                    onclick={() => remove(row.id)}
-                                                >
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                {/each}
-                            </TableBody>
-                        </Table>
-                    </CardContent>
-                </Card>
-            {/each}
-        </div>
+                                </TableCell>
+                                <TableCell class="text-right">
+                                    <div class="flex justify-end">
+                                        <button
+                                            type="button"
+                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"
+                                            onclick={() => remove(primaryPost(group).id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        {/each}
+                    </TableBody>
+                </Table>
+            </CardContent>
+        </Card>
         {/if}
 
         {#if postPaginator.links && postPaginator.links.length > 0}

@@ -168,6 +168,7 @@ PROMPT,
             $post->fresh(),
             (int) $request->user()->id,
             [$data['locale']],
+            true,
         );
 
         if (($result['status'] ?? '') !== 'ok' || ($result['translated_locales'] ?? []) === []) {

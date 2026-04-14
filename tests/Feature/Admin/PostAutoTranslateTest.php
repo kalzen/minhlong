@@ -141,6 +141,11 @@ test('admin can manually translate a post to a selected locale', function () {
         ])
         ->assertRedirect();
 
-    expect(Post::query()->where('translation_group_id', $source->translation_group_id)->where('locale', 'en')->exists())
-        ->toBeTrue();
+    $translated = Post::query()
+        ->where('translation_group_id', $source->translation_group_id)
+        ->where('locale', 'en')
+        ->first();
+
+    expect($translated)->not->toBeNull();
+    expect($translated?->status)->toBe('published');
 });

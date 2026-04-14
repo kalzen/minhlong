@@ -60,8 +60,12 @@ class PostAutoTranslationService
      * @param  list<string>  $targetLocales
      * @return array{status: string, reason: string|null, translated_locales: list<string>}
      */
-    public function translatePostToLocales(Post $sourcePost, int $userId, array $targetLocales): array
-    {
+    public function translatePostToLocales(
+        Post $sourcePost,
+        int $userId,
+        array $targetLocales,
+        bool $publishTranslated = false
+    ): array {
         $targetLocales = collect($targetLocales)
             ->filter(fn (string $locale) => in_array($locale, self::SUPPORTED_LOCALES, true))
             ->reject(fn (string $locale) => $locale === $sourcePost->locale)
@@ -129,8 +133,10 @@ class PostAutoTranslationService
                 'slug' => $this->uniqueSlug((string) ($translated['title'] ?? $sourcePost->title), $targetLocale),
                 'excerpt' => $translated['excerpt'] ?? null,
                 'content' => $translated['content'] ?? null,
-                'status' => $sourcePost->status,
-                'published_at' => $sourcePost->published_at,
+                'status' => $publishTranslated ? 'published' : $sourcePost->status,
+                'published_at' => $publishTranslated
+                    ? ($sourcePost->published_at ?? now())
+                    : $sourcePost->published_at,
                 'meta_title' => is_string($translated['meta_title'] ?? null)
                     ? mb_substr($translated['meta_title'], 0, 255)
                     : null,
