@@ -142,11 +142,11 @@
     function submit(e: Event) {
         e.preventDefault();
         if (post?.id) {
-            form
+            get(form)
                 .transform((data) => ({ ...data, _method: 'put' }))
                 .post(posts.update.url({ post: post.id }), { forceFormData: true });
         } else {
-            form.post(posts.store.url(), { forceFormData: true });
+            get(form).post(posts.store.url(), { forceFormData: true });
         }
     }
 </script>

@@ -46,3 +46,21 @@ test('user can store multiple ai keys and set default per provider', function ()
                 ->value('name')
         )->toBe('OpenAI backup');
 });
+
+test('user can delete own ai api key', function () {
+    $user = User::factory()->create();
+    $key = UserAiApiKey::query()->create([
+        'user_id' => $user->id,
+        'provider' => 'openai',
+        'name' => 'My key',
+        'api_key' => 'sk-openai-my-key-abcdefghijklmnopqrstuvwxyz',
+        'is_default' => false,
+        'is_active' => true,
+    ]);
+
+    $this->actingAs($user)
+        ->delete(route('settings.ai-keys.destroy', $key))
+        ->assertRedirect(route('settings.ai-keys.edit'));
+
+    expect(UserAiApiKey::query()->whereKey($key->id)->exists())->toBeFalse();
+});

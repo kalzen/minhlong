@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Link, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import SettingsLayout from '@/layouts/settings/Layout.svelte';
@@ -84,7 +85,7 @@
     });
 
     function submit() {
-        form.put(siteSettingsUpdateUrl);
+        get(form).put(siteSettingsUpdateUrl);
     }
 </script>
 

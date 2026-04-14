@@ -104,7 +104,7 @@ class AiApiKeyController extends Controller
 
     private function authorizeOwnership(Request $request, UserAiApiKey $userAiApiKey): void
     {
-        abort_unless($userAiApiKey->user_id === $request->user()->id, 403);
+        abort_unless((int) $userAiApiKey->user_id === (int) $request->user()->id, 403);
     }
 
     private function maskKey(string $apiKey): string

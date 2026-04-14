@@ -49,13 +49,13 @@
             is_public: data.is_public ? 1 : 0,
         });
         if (document?.id) {
-            form
+            get(form)
                 .transform((data) => ({ ...withPublicFlag(data), _method: 'put' }))
                 .post(libraryDocuments.update.url({ library_document: document.id }), {
                     forceFormData: true,
                 });
         } else {
-            form.transform(withPublicFlag).post(libraryDocuments.store.url(), { forceFormData: true });
+            get(form).transform(withPublicFlag).post(libraryDocuments.store.url(), { forceFormData: true });
         }
     }
 </script>

@@ -734,3 +734,28 @@ Các **nhãn phụ, gợi ý (helper text), mô tả dưới tiêu đề** trong
 - Tránh thuật ngữ kiến trúc nặng trong tài liệu.
 - Văn bản gợi ý trên giao diện quản trị (dashboard): xem **12.7** — ưu tiên người đọc không chuyên kỹ thuật.
 - Có thể tham chiếu số mục (ví dụ: "Implement F-006 và B-003", "CMS theo **mục 12** và F-014–F-024") khi yêu cầu Cursor triển khai.
+
+## Known Runtime Pitfalls (Admin)
+
+### A. Lỗi `Uncaught TypeError: s.post is not a function` ở `settings/ai-keys`
+
+**Triệu chứng**
+- Khi bấm lưu API key ở `/settings/ai-keys`, không lưu được.
+- Browser logs ghi:
+  - `Uncaught TypeError: s.post is not a function`
+  - `window_error` / `uncaught_error` tại trang settings.
+
+**Nguyên nhân thường gặp**
+- Trong Svelte + Inertia (`@inertiajs/svelte`), object từ `useForm(...)` là store/proxy.
+- Gọi trực tiếp `form.post(...)` có thể lỗi runtime sau khi bundle/minify.
+
+**Cách sửa chuẩn**
+- Dùng `get(form).post(...)` thay vì gọi trực tiếp.
+- Ví dụ:
+  - Sai: `createForm.post('/settings/ai-keys')`
+  - Đúng: `get(createForm).post('/settings/ai-keys')`
+- Nhớ import: `import { get } from 'svelte/store';`
+
+**Checklist sau khi sửa**
+- Chạy `npm run build` để chắc chắn bundle production không lỗi.
+- Nếu production vẫn lỗi, kiểm tra cache asset cũ (`public/build/*`, CDN/browser cache) và purge.

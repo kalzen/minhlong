@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Link, useForm } from '@inertiajs/svelte';
+    import { get } from 'svelte/store';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
     import { toUrl } from '@/lib/utils';
@@ -34,7 +35,7 @@
 
     function submit(e: Event) {
         e.preventDefault();
-        form.patch(contacts.update.url({ contact: contact.id }));
+        get(form).patch(contacts.update.url({ contact: contact.id }));
     }
 </script>
 

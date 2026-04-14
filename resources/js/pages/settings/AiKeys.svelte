@@ -68,15 +68,30 @@
 
     function submitCreate(e: Event) {
         e.preventDefault();
-        get(createForm).post('/settings/ai-keys');
+        get(createForm).post('/settings/ai-keys', {
+            preserveScroll: true,
+            onSuccess: () => {
+                router.reload({ only: ['keys'] });
+            },
+        });
     }
 
     function saveRow(id: number) {
-        router.put(`/settings/ai-keys/${id}`, rowDrafts[id]);
+        router.put(`/settings/ai-keys/${id}`, rowDrafts[id], {
+            preserveScroll: true,
+            onSuccess: () => {
+                router.reload({ only: ['keys'] });
+            },
+        });
     }
 
     function deleteRow(id: number) {
-        router.delete(`/settings/ai-keys/${id}`);
+        router.delete(`/settings/ai-keys/${id}`, {
+            preserveScroll: true,
+            onSuccess: () => {
+                router.reload({ only: ['keys'] });
+            },
+        });
     }
 </script>
 

@@ -69,11 +69,11 @@
     function submit(e: Event) {
         e.preventDefault();
         if (project?.id) {
-            form
+            get(form)
                 .transform((data) => ({ ...data, _method: 'put' }))
                 .post(projects.update.url({ project: project.id }), { forceFormData: true });
         } else {
-            form.post(projects.store.url(), { forceFormData: true });
+            get(form).post(projects.store.url(), { forceFormData: true });
         }
     }
 </script>
