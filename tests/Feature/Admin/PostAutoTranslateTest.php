@@ -7,6 +7,7 @@ use App\Models\PostCategory;
 use App\Models\User;
 use App\Models\UserAiApiKey;
 use Illuminate\Support\Str;
+use Laravel\Ai\Exceptions\ProviderOverloadedException;
 
 test('creating a post auto-generates missing locale translations with ai', function () {
     $user = User::factory()->create();
@@ -210,4 +211,45 @@ test('admin can auto-translate all missing locales of a group', function () {
 
     expect($translatedZh)->not->toBeNull();
     expect($translatedZh?->status)->toBe('published');
+});
+
+test('translate locale handles provider overloaded gracefully', function () {
+    $user = User::factory()->create();
+    $category = PostCategory::query()->create([
+        'name' => 'Company News',
+        'slug' => 'company-news',
+        'status' => 'published',
+    ]);
+
+    UserAiApiKey::query()->create([
+        'user_id' => $user->id,
+        'provider' => 'gemini',
+        'name' => 'Gemini free',
+        'api_key' => 'gm-free-key',
+        'is_default' => true,
+        'is_active' => true,
+    ]);
+
+    $source = Post::query()->create([
+        'category_id' => $category->id,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Bai viet goc',
+        'slug' => 'bai-viet-goc',
+        'excerpt' => 'Tom tat',
+        'content' => '<p>Noi dung</p>',
+        'status' => 'draft',
+        'created_by' => $user->id,
+    ]);
+
+    PostTranslationAgent::fake(function (): never {
+        throw ProviderOverloadedException::forProvider('gemini');
+    });
+
+    $this->actingAs($user)
+        ->post("http://localhost/admin/posts/{$source->id}/translate-locale", [
+            'locale' => 'en',
+        ])
+        ->assertRedirect()
+        ->assertSessionHas('error');
 });

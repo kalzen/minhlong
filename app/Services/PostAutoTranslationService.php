@@ -8,6 +8,7 @@ use App\Models\UserAiApiKey;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Laravel\Ai\Enums\Lab;
+use Laravel\Ai\Exceptions\ProviderOverloadedException;
 
 class PostAutoTranslationService
 {
@@ -28,13 +29,6 @@ class PostAutoTranslationService
                 'translated_locales' => [],
             ];
         }
-
-        $apiKey = UserAiApiKey::query()
-            ->where('user_id', $userId)
-            ->where('is_active', true)
-            ->orderByDesc('is_default')
-            ->orderByDesc('id')
-            ->first();
 
         $existingLocales = Post::query()
             ->where('translation_group_id', $sourcePost->translation_group_id)
@@ -108,6 +102,7 @@ class PostAutoTranslationService
         }
 
         $translatedLocales = [];
+        $lastFailureReason = null;
 
         foreach ($targetLocales as $targetLocale) {
             $alreadyExists = Post::query()
@@ -119,11 +114,33 @@ class PostAutoTranslationService
                 continue;
             }
 
-            $translated = (new PostTranslationAgent)->prompt(
-                $this->buildPrompt($sourcePost, $targetLocale),
-                model: $model,
-                provider: $provider,
-            );
+            try {
+                $translated = (new PostTranslationAgent)->prompt(
+                    $this->buildPrompt($sourcePost, $targetLocale),
+                    model: $model,
+                    provider: $provider,
+                );
+            } catch (ProviderOverloadedException $exception) {
+                $lastFailureReason = 'provider_overloaded';
+                Log::warning('AI provider overloaded during post translation', [
+                    'post_id' => $sourcePost->id,
+                    'target_locale' => $targetLocale,
+                    'provider' => $providerName,
+                    'message' => $exception->getMessage(),
+                ]);
+
+                continue;
+            } catch (\Exception $exception) {
+                $lastFailureReason = 'provider_error';
+                Log::warning('AI provider failed during post translation', [
+                    'post_id' => $sourcePost->id,
+                    'target_locale' => $targetLocale,
+                    'provider' => $providerName,
+                    'message' => $exception->getMessage(),
+                ]);
+
+                continue;
+            }
 
             Post::query()->create([
                 'category_id' => $sourcePost->category_id,
@@ -155,6 +172,14 @@ class PostAutoTranslationService
             'provider' => $providerName,
             'translated_locales' => $translatedLocales,
         ]);
+
+        if ($translatedLocales === []) {
+            return [
+                'status' => 'skipped',
+                'reason' => $lastFailureReason ?? 'translation_failed',
+                'translated_locales' => [],
+            ];
+        }
 
         return [
             'status' => 'ok',

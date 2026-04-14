@@ -174,7 +174,14 @@ PROMPT,
         );
 
         if (($result['status'] ?? '') !== 'ok' || ($result['translated_locales'] ?? []) === []) {
-            return back()->with('error', 'Không thể tạo bản dịch. Vui lòng kiểm tra AI API key hoặc thử lại.');
+            $reason = (string) ($result['reason'] ?? '');
+            $errorMessage = match ($reason) {
+                'provider_overloaded' => 'AI provider hiện đang quá tải. Vui lòng thử lại sau hoặc đổi sang provider khác.',
+                'missing_provider_key' => 'Chưa có AI API key hoạt động. Vui lòng thêm key ở Settings > AI API keys.',
+                default => 'Không thể tạo bản dịch. Vui lòng kiểm tra AI API key hoặc thử lại.',
+            };
+
+            return back()->with('error', $errorMessage);
         }
 
         return back()->with('success', 'Đã tạo bản dịch '.$data['locale'].'.');
@@ -215,7 +222,14 @@ PROMPT,
         );
 
         if (($result['status'] ?? '') !== 'ok') {
-            return back()->with('error', 'Không thể dịch tự động. Vui lòng kiểm tra AI API key.');
+            $reason = (string) ($result['reason'] ?? '');
+            $errorMessage = match ($reason) {
+                'provider_overloaded' => 'AI provider hiện đang quá tải. Vui lòng thử lại sau hoặc đổi sang provider khác.',
+                'missing_provider_key' => 'Chưa có AI API key hoạt động. Vui lòng thêm key ở Settings > AI API keys.',
+                default => 'Không thể dịch tự động. Vui lòng kiểm tra AI API key.',
+            };
+
+            return back()->with('error', $errorMessage);
         }
 
         return back()->with('success', 'Đã dịch tự động các ngôn ngữ còn thiếu.');
