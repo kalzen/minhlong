@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Settings\AiApiKeyController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\SecurityController;
 use App\Http\Controllers\Settings\SiteSettingsController;
@@ -13,6 +14,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('settings/general', [SiteSettingsController::class, 'edit'])->name('settings.general.edit');
     Route::put('settings/general', [SiteSettingsController::class, 'update'])->name('settings.general.update');
+    Route::get('settings/ai-keys', [AiApiKeyController::class, 'edit'])->name('settings.ai-keys.edit');
+    Route::post('settings/ai-keys', [AiApiKeyController::class, 'store'])->name('settings.ai-keys.store');
+    Route::put('settings/ai-keys/{user_ai_api_key}', [AiApiKeyController::class, 'update'])->name('settings.ai-keys.update');
+    Route::delete('settings/ai-keys/{user_ai_api_key}', [AiApiKeyController::class, 'destroy'])->name('settings.ai-keys.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\SyncsFeaturedFromEditorLibrary;
 use App\Http\Controllers\Controller;
+use App\Jobs\TranslatePostLocalesJob;
 use App\Models\EditorMediaItem;
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Throwable;
 
 class PostController extends Controller
 {
@@ -56,6 +58,11 @@ class PostController extends Controller
         $post = Post::query()->create($data + ['created_by' => $request->user()?->id]);
 
         $this->syncFeaturedFromEditorLibrary($request, $post);
+        try {
+            TranslatePostLocalesJob::dispatchSync($post->id, $request->user()->id);
+        } catch (Throwable $throwable) {
+            report($throwable);
+        }
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post created.');
     }

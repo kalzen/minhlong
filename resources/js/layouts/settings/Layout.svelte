@@ -23,6 +23,10 @@
             href: '/settings/general',
         },
         {
+            title: 'AI API keys',
+            href: '/settings/ai-keys',
+        },
+        {
             title: 'Profile',
             href: editProfile(),
         },
