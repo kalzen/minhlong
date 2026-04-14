@@ -3,10 +3,9 @@
     import LocaleFlag from '@/components/LocaleFlag.svelte';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
-    import { LOCALE_ORDER, sortLocales } from '@/lib/locale-flags';
+    import { LOCALE_ORDER } from '@/lib/locale-flags';
     import { groupByTranslationGroup } from '@/lib/translation-groups';
     import { cn, toUrl } from '@/lib/utils';
-    import { Badge } from '@/components/ui/badge';
     import {
         Card,
         CardContent,
@@ -60,6 +59,7 @@
 
     const groups = $derived(groupByTranslationGroup(postPaginator.data));
     const processingLocaleByGroup = $state<Record<string, string | null>>({});
+    const selectedLocaleByGroup = $state<Record<string, string>>({});
     const localeColumns = LOCALE_ORDER;
 
     function remove(id: number) {
@@ -81,6 +81,17 @@
         const set = new Set(locales);
 
         return LOCALE_ORDER.filter((locale) => !set.has(locale));
+    }
+
+    function selectedMissingLocale(group: { key: string; locales: string[] }): string {
+        const options = missingLocales(group.locales);
+        const selected = selectedLocaleByGroup[group.key];
+
+        if (selected && options.includes(selected)) {
+            return selected;
+        }
+
+        return options[0] ?? '';
     }
 
     function postByLocale(group: { posts: PostRow[] }, locale: string): PostRow | null {
@@ -124,6 +135,33 @@
 
         const sourcePost = primaryPost(group);
         translateGroupLocale(group.key, sourcePost.id, locale);
+    }
+
+    function addLocale(group: { key: string; posts: PostRow[]; locales: string[] }): void {
+        const locale = selectedMissingLocale(group);
+
+        if (!locale) {
+            return;
+        }
+
+        translateGroupLocale(group.key, primaryPost(group).id, locale);
+    }
+
+    function autoTranslateMissing(group: { key: string; posts: PostRow[] }): void {
+        processingLocaleByGroup[group.key] = 'all';
+
+        router.post(
+            `/admin/posts/${primaryPost(group).id}/translate-missing-locales`,
+            {},
+            {
+                preserveScroll: true,
+                preserveState: true,
+                only: ['posts', 'filters', 'flash', 'errors'],
+                onFinish: () => {
+                    processingLocaleByGroup[group.key] = null;
+                },
+            },
+        );
     }
 </script>
 
@@ -195,7 +233,7 @@
                             <TableHead>Tiêu đề đại diện</TableHead>
                             <TableHead class="hidden md:table-cell w-[140px]">Danh mục</TableHead>
                             <TableHead class="w-[320px]">Ngôn ngữ</TableHead>
-                            <TableHead class="w-[120px] text-right">Thao tác</TableHead>
+                            <TableHead class="w-[260px] text-right">Thao tác</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -246,7 +284,44 @@
                                     </div>
                                 </TableCell>
                                 <TableCell class="text-right">
-                                    <div class="flex justify-end">
+                                    <div class="flex flex-wrap justify-end gap-2">
+                                        <Link
+                                            href={toUrl(posts.edit({ post: primaryPost(group).id }))}
+                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-primary hover:underline"
+                                        >
+                                            Edit
+                                        </Link>
+                                        {#if missingLocales(group.locales).length > 0}
+                                            <button
+                                                type="button"
+                                                class="inline-flex h-8 items-center rounded-md border border-primary/40 bg-primary/5 px-2 text-sm font-medium text-primary hover:bg-primary/10 disabled:opacity-60"
+                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                onclick={() => autoTranslateMissing(group)}
+                                            >
+                                                Dịch tự động
+                                            </button>
+                                            <select
+                                                class="h-8 rounded-md border bg-background px-2 text-xs"
+                                                value={selectedMissingLocale(group)}
+                                                onchange={(event) =>
+                                                    (selectedLocaleByGroup[group.key] = (
+                                                        event.currentTarget as HTMLSelectElement
+                                                    ).value)}
+                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                            >
+                                                {#each missingLocales(group.locales) as locale (locale)}
+                                                    <option value={locale}>{locale.toUpperCase()}</option>
+                                                {/each}
+                                            </select>
+                                            <button
+                                                type="button"
+                                                class="inline-flex h-8 items-center rounded-md border px-2 text-sm font-medium hover:bg-muted disabled:opacity-60"
+                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                onclick={() => addLocale(group)}
+                                            >
+                                                Thêm ngôn ngữ
+                                            </button>
+                                        {/if}
                                         <button
                                             type="button"
                                             class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"

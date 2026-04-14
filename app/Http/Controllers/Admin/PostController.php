@@ -25,6 +25,8 @@ class PostController extends Controller
 {
     use SyncsFeaturedFromEditorLibrary;
 
+    private const SUPPORTED_LOCALES = ['en', 'vi', 'zh'];
+
     public function index(Request $request): Response
     {
         $posts = Post::query()
@@ -176,6 +178,47 @@ PROMPT,
         }
 
         return back()->with('success', 'Đã tạo bản dịch '.$data['locale'].'.');
+    }
+
+    public function translateMissingLocales(
+        Request $request,
+        Post $post,
+        PostAutoTranslationService $postAutoTranslationService
+    ): RedirectResponse {
+        if ($post->translation_group_id === null) {
+            $post->update([
+                'translation_group_id' => (string) Str::uuid(),
+            ]);
+        }
+
+        $post = $post->fresh();
+
+        $existingLocales = Post::query()
+            ->where('translation_group_id', $post->translation_group_id)
+            ->pluck('locale')
+            ->all();
+
+        $targetLocales = collect(self::SUPPORTED_LOCALES)
+            ->reject(fn (string $locale) => in_array($locale, $existingLocales, true))
+            ->values()
+            ->all();
+
+        if ($targetLocales === []) {
+            return back()->with('success', 'Nhóm này đã đủ tất cả ngôn ngữ.');
+        }
+
+        $result = $postAutoTranslationService->translatePostToLocales(
+            $post,
+            (int) $request->user()->id,
+            $targetLocales,
+            true,
+        );
+
+        if (($result['status'] ?? '') !== 'ok') {
+            return back()->with('error', 'Không thể dịch tự động. Vui lòng kiểm tra AI API key.');
+        }
+
+        return back()->with('success', 'Đã dịch tự động các ngôn ngữ còn thiếu.');
     }
 
     public function edit(Post $post): Response

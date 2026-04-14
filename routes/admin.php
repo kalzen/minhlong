@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('posts', PostController::class)->except(['show']);
     Route::post('posts/seo-meta-suggestion', [PostController::class, 'seoMetaSuggestion'])->name('posts.seo-meta-suggestion');
     Route::post('posts/{post}/translate-locale', [PostController::class, 'translateLocale'])->name('posts.translate-locale');
+    Route::post('posts/{post}/translate-missing-locales', [PostController::class, 'translateMissingLocales'])->name('posts.translate-missing-locales');
     Route::resource('projects', ProjectController::class)->except(['show']);
     Route::resource('library-documents', LibraryDocumentController::class)->parameters([
         'library-documents' => 'library_document',

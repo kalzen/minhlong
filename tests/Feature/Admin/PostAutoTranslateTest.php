@@ -149,3 +149,65 @@ test('admin can manually translate a post to a selected locale', function () {
     expect($translated)->not->toBeNull();
     expect($translated?->status)->toBe('published');
 });
+
+test('admin can auto-translate all missing locales of a group', function () {
+    $user = User::factory()->create();
+    $category = PostCategory::query()->create([
+        'name' => 'Company News',
+        'slug' => 'company-news',
+        'status' => 'published',
+    ]);
+
+    UserAiApiKey::query()->create([
+        'user_id' => $user->id,
+        'provider' => 'openai',
+        'name' => 'OpenAI main',
+        'api_key' => 'sk-openai-abcdefghijklmnopqrstuvwxyz',
+        'is_default' => true,
+        'is_active' => true,
+    ]);
+
+    $translationGroupId = (string) Str::uuid();
+    Post::query()->create([
+        'category_id' => $category->id,
+        'translation_group_id' => $translationGroupId,
+        'locale' => 'vi',
+        'title' => 'Bai viet vi',
+        'slug' => 'bai-viet-vi',
+        'excerpt' => 'Tom tat vi',
+        'content' => '<p>Noi dung vi</p>',
+        'status' => 'draft',
+        'created_by' => $user->id,
+    ]);
+    $sourceEn = Post::query()->create([
+        'category_id' => $category->id,
+        'translation_group_id' => $translationGroupId,
+        'locale' => 'en',
+        'title' => 'English source',
+        'slug' => 'english-source',
+        'excerpt' => 'English excerpt',
+        'content' => '<p>English content</p>',
+        'status' => 'draft',
+        'created_by' => $user->id,
+    ]);
+
+    PostTranslationAgent::fake(fn (): array => [
+        'title' => 'Chinese translated title',
+        'excerpt' => 'Chinese translated excerpt',
+        'content' => '<p>Chinese translated content</p>',
+        'meta_title' => 'Chinese translated meta title',
+        'meta_description' => 'Chinese translated meta description',
+    ]);
+
+    $this->actingAs($user)
+        ->post("http://localhost/admin/posts/{$sourceEn->id}/translate-missing-locales")
+        ->assertRedirect();
+
+    $translatedZh = Post::query()
+        ->where('translation_group_id', $translationGroupId)
+        ->where('locale', 'zh')
+        ->first();
+
+    expect($translatedZh)->not->toBeNull();
+    expect($translatedZh?->status)->toBe('published');
+});
