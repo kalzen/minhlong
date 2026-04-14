@@ -53,6 +53,36 @@ class PostAutoTranslationService
             ];
         }
 
+        return $this->translatePostToLocales($sourcePost, $userId, $targetLocales->all());
+    }
+
+    /**
+     * @param  list<string>  $targetLocales
+     * @return array{status: string, reason: string|null, translated_locales: list<string>}
+     */
+    public function translatePostToLocales(Post $sourcePost, int $userId, array $targetLocales): array
+    {
+        $targetLocales = collect($targetLocales)
+            ->filter(fn (string $locale) => in_array($locale, self::SUPPORTED_LOCALES, true))
+            ->reject(fn (string $locale) => $locale === $sourcePost->locale)
+            ->values()
+            ->all();
+
+        if ($targetLocales === []) {
+            return [
+                'status' => 'skipped',
+                'reason' => 'no_target_locales',
+                'translated_locales' => [],
+            ];
+        }
+
+        $apiKey = UserAiApiKey::query()
+            ->where('user_id', $userId)
+            ->where('is_active', true)
+            ->orderByDesc('is_default')
+            ->orderByDesc('id')
+            ->first();
+
         $providerName = $apiKey?->provider ?? (string) config('ai.default', 'openai');
         $provider = $this->labFromProvider($providerName);
         $model = $apiKey?->model ?: $this->defaultModelForProvider($providerName);
@@ -76,34 +106,39 @@ class PostAutoTranslationService
         $translatedLocales = [];
 
         foreach ($targetLocales as $targetLocale) {
+            $alreadyExists = Post::query()
+                ->where('translation_group_id', $sourcePost->translation_group_id)
+                ->where('locale', $targetLocale)
+                ->exists();
+
+            if ($alreadyExists) {
+                continue;
+            }
+
             $translated = (new PostTranslationAgent)->prompt(
                 $this->buildPrompt($sourcePost, $targetLocale),
                 model: $model,
                 provider: $provider,
             );
 
-            Post::query()->updateOrCreate(
-                [
-                    'translation_group_id' => $sourcePost->translation_group_id,
-                    'locale' => $targetLocale,
-                ],
-                [
-                    'category_id' => $sourcePost->category_id,
-                    'title' => (string) ($translated['title'] ?? $sourcePost->title),
-                    'slug' => $this->uniqueSlug((string) ($translated['title'] ?? $sourcePost->title), $targetLocale),
-                    'excerpt' => $translated['excerpt'] ?? null,
-                    'content' => $translated['content'] ?? null,
-                    'status' => $sourcePost->status,
-                    'published_at' => $sourcePost->published_at,
-                    'meta_title' => is_string($translated['meta_title'] ?? null)
-                        ? mb_substr($translated['meta_title'], 0, 255)
-                        : null,
-                    'meta_description' => is_string($translated['meta_description'] ?? null)
-                        ? mb_substr($translated['meta_description'], 0, 255)
-                        : null,
-                    'created_by' => $sourcePost->created_by,
-                ],
-            );
+            Post::query()->create([
+                'category_id' => $sourcePost->category_id,
+                'translation_group_id' => $sourcePost->translation_group_id,
+                'locale' => $targetLocale,
+                'title' => (string) ($translated['title'] ?? $sourcePost->title),
+                'slug' => $this->uniqueSlug((string) ($translated['title'] ?? $sourcePost->title), $targetLocale),
+                'excerpt' => $translated['excerpt'] ?? null,
+                'content' => $translated['content'] ?? null,
+                'status' => $sourcePost->status,
+                'published_at' => $sourcePost->published_at,
+                'meta_title' => is_string($translated['meta_title'] ?? null)
+                    ? mb_substr($translated['meta_title'], 0, 255)
+                    : null,
+                'meta_description' => is_string($translated['meta_description'] ?? null)
+                    ? mb_substr($translated['meta_description'], 0, 255)
+                    : null,
+                'created_by' => $sourcePost->created_by,
+            ]);
 
             $translatedLocales[] = $targetLocale;
         }

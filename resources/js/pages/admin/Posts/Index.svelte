@@ -3,7 +3,7 @@
     import LocaleFlag from '@/components/LocaleFlag.svelte';
     import AppHead from '@/components/AppHead.svelte';
     import AppLayout from '@/layouts/AppLayout.svelte';
-    import { sortLocales } from '@/lib/locale-flags';
+    import { LOCALE_ORDER, sortLocales } from '@/lib/locale-flags';
     import { groupByTranslationGroup } from '@/lib/translation-groups';
     import { cn, toUrl } from '@/lib/utils';
     import { Badge } from '@/components/ui/badge';
@@ -58,6 +58,7 @@
     ];
 
     const groups = $derived(groupByTranslationGroup(postPaginator.data));
+    const processingLocaleByGroup = $state<Record<string, string | null>>({});
 
     function remove(id: number) {
         if (!confirm('Delete this post?')) {
@@ -72,6 +73,29 @@
         }
 
         return uuid.slice(0, 8);
+    }
+
+    function missingLocales(locales: string[]): string[] {
+        const set = new Set(locales);
+
+        return LOCALE_ORDER.filter((locale) => !set.has(locale));
+    }
+
+    function translateGroupLocale(groupKey: string, sourcePostId: number, locale: string): void {
+        processingLocaleByGroup[groupKey] = locale;
+
+        router.post(
+            `/admin/posts/${sourcePostId}/translate-locale`,
+            { locale },
+            {
+                preserveScroll: true,
+                preserveState: true,
+                only: ['posts', 'filters', 'flash', 'errors'],
+                onFinish: () => {
+                    processingLocaleByGroup[groupKey] = null;
+                },
+            },
+        );
     }
 </script>
 
@@ -164,6 +188,26 @@
                                         </span>
                                     {/each}
                                 </div>
+                                {#if missingLocales(group.locales).length > 0}
+                                    <div class="ml-2 flex flex-wrap items-center gap-1.5">
+                                        {#each missingLocales(group.locales) as missingLocale (missingLocale)}
+                                            <button
+                                                type="button"
+                                                class="inline-flex h-7 items-center gap-1 rounded-full border border-primary/40 bg-primary/5 px-2 text-xs font-medium text-primary hover:bg-primary/10 disabled:opacity-60"
+                                                disabled={processingLocaleByGroup[group.key] !== null}
+                                                onclick={() =>
+                                                    translateGroupLocale(
+                                                        group.key,
+                                                        group.posts[0].id,
+                                                        missingLocale,
+                                                    )}
+                                            >
+                                                <LocaleFlag locale={missingLocale} size="sm" />
+                                                Translate
+                                            </button>
+                                        {/each}
+                                    </div>
+                                {/if}
                             </div>
                         </div>
                     </CardHeader>

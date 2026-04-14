@@ -102,7 +102,7 @@
                 .querySelector('meta[name="csrf-token"]')
                 ?.getAttribute('content');
 
-            const response = await fetch(posts.seoMetaSuggestion.url(), {
+            const response = await fetch('/admin/posts/seo-meta-suggestion', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

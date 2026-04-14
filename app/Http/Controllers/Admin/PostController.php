@@ -10,6 +10,7 @@ use App\Models\EditorMediaItem;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\UserAiApiKey;
+use App\Services\PostAutoTranslationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -146,6 +147,34 @@ PROMPT,
             'meta_title' => mb_substr((string) ($response['meta_title'] ?? ''), 0, 255),
             'meta_description' => mb_substr((string) ($response['meta_description'] ?? ''), 0, 255),
         ]);
+    }
+
+    public function translateLocale(
+        Request $request,
+        Post $post,
+        PostAutoTranslationService $postAutoTranslationService
+    ): RedirectResponse {
+        $data = $request->validate([
+            'locale' => ['required', 'string', Rule::in(['en', 'vi', 'zh'])],
+        ]);
+
+        if ($post->translation_group_id === null) {
+            $post->update([
+                'translation_group_id' => (string) Str::uuid(),
+            ]);
+        }
+
+        $result = $postAutoTranslationService->translatePostToLocales(
+            $post->fresh(),
+            (int) $request->user()->id,
+            [$data['locale']],
+        );
+
+        if (($result['status'] ?? '') !== 'ok' || ($result['translated_locales'] ?? []) === []) {
+            return back()->with('error', 'Không thể tạo bản dịch. Vui lòng kiểm tra AI API key hoặc thử lại.');
+        }
+
+        return back()->with('success', 'Đã tạo bản dịch '.$data['locale'].'.');
     }
 
     public function edit(Post $post): Response
