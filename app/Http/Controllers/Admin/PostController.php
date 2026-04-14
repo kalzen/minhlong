@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Ai\Agents\PostSeoMetaAgent;
 use App\Http\Controllers\Admin\Concerns\SyncsFeaturedFromEditorLibrary;
 use App\Http\Controllers\Controller;
 use App\Jobs\TranslatePostLocalesJob;
 use App\Models\EditorMediaItem;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\UserAiApiKey;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
+use Laravel\Ai\Enums\Lab;
 use Throwable;
 
 class PostController extends Controller
@@ -65,6 +69,83 @@ class PostController extends Controller
         }
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Post created.');
+    }
+
+    public function seoMetaSuggestion(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'excerpt' => ['nullable', 'string'],
+            'content' => ['nullable', 'string'],
+            'locale' => ['required', 'string', 'max:8'],
+        ]);
+
+        $apiKey = UserAiApiKey::query()
+            ->where('user_id', $request->user()->id)
+            ->where('is_active', true)
+            ->orderByDesc('is_default')
+            ->orderByDesc('id')
+            ->first();
+
+        if (! $apiKey instanceof UserAiApiKey) {
+            return response()->json([
+                'message' => 'Chưa có AI API key hoạt động. Vui lòng thêm key ở Settings > AI API keys.',
+            ], 422);
+        }
+
+        config([
+            "ai.providers.{$apiKey->provider}.key" => $apiKey->api_key,
+            'ai.default' => $apiKey->provider,
+        ]);
+
+        $provider = match ($apiKey->provider) {
+            'openai' => Lab::OpenAI,
+            'anthropic' => Lab::Anthropic,
+            'gemini' => Lab::Gemini,
+            'xai' => Lab::xAI,
+            'deepseek' => Lab::DeepSeek,
+            'groq' => Lab::Groq,
+            'mistral' => Lab::Mistral,
+            default => Lab::OpenAI,
+        };
+
+        $model = $apiKey->model ?: match ($apiKey->provider) {
+            'openai' => 'gpt-5.4',
+            'anthropic' => 'claude-haiku-4-5-20251001',
+            'gemini' => 'gemini-2.5-flash',
+            'xai' => 'grok-3-mini',
+            'deepseek' => 'deepseek-chat',
+            'groq' => 'llama-3.3-70b-versatile',
+            'mistral' => 'mistral-small-latest',
+            default => 'gpt-5.4',
+        };
+
+        try {
+            $response = (new PostSeoMetaAgent)->prompt(
+                <<<PROMPT
+Generate SEO metadata for the following blog post.
+
+Locale: {$validated['locale']}
+Title: {$validated['title']}
+Excerpt: {$validated['excerpt']}
+Content (HTML):
+{$validated['content']}
+PROMPT,
+                model: $model,
+                provider: $provider,
+            );
+        } catch (Throwable $throwable) {
+            report($throwable);
+
+            return response()->json([
+                'message' => 'Không thể tạo SEO bằng AI. Vui lòng thử lại.',
+            ], 422);
+        }
+
+        return response()->json([
+            'meta_title' => (string) ($response['meta_title'] ?? ''),
+            'meta_description' => (string) ($response['meta_description'] ?? ''),
+        ]);
     }
 
     public function edit(Post $post): Response

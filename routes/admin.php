@@ -12,6 +12,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/', fn () => redirect()->route('admin.posts.index'))->name('home');
 
     Route::resource('posts', PostController::class)->except(['show']);
+    Route::post('posts/seo-meta-suggestion', [PostController::class, 'seoMetaSuggestion'])->name('posts.seo-meta-suggestion');
     Route::resource('projects', ProjectController::class)->except(['show']);
     Route::resource('library-documents', LibraryDocumentController::class)->parameters([
         'library-documents' => 'library_document',

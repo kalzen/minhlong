@@ -13,6 +13,7 @@
         CardHeader,
         CardTitle,
     } from '@/components/ui/card';
+    import Sparkles from 'lucide-svelte/icons/sparkles';
     import { Label } from '@/components/ui/label';
     import { toUrl } from '@/lib/utils';
     import admin from '@/routes/admin';
@@ -61,11 +62,75 @@
 
     let featuredPickerOpen = $state(false);
     let featuredPreviewFromLibrary = $state<string | null>(null);
+    let autoSlugEnabled = $state(!post);
+    let seoGenerating = $state(false);
+    let seoError = $state<string | null>(null);
 
     function onFeaturedLibraryPick(sel: { url: string; mediaId: number }) {
         get(form).setStore('featured_library_media_id', sel.mediaId);
         get(form).setStore('featured', null);
         featuredPreviewFromLibrary = sel.url;
+    }
+
+    function slugify(input: string): string {
+        return input
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
+    function onTitleInput(value: string) {
+        get(form).setStore('title', value);
+        if (autoSlugEnabled) {
+            get(form).setStore('slug', slugify(value));
+        }
+    }
+
+    function onSlugInput(value: string) {
+        autoSlugEnabled = false;
+        get(form).setStore('slug', value);
+    }
+
+    async function generateSeoWithAi() {
+        seoError = null;
+        seoGenerating = true;
+
+        try {
+            const csrfToken = document
+                .querySelector('meta[name="csrf-token"]')
+                ?.getAttribute('content');
+
+            const response = await fetch(posts.seoMetaSuggestion.url(), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken ?? '',
+                    Accept: 'application/json',
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({
+                    title: $form.title,
+                    excerpt: $form.excerpt,
+                    content: $form.content,
+                    locale: $form.locale,
+                }),
+            });
+
+            const payload = await response.json();
+            if (!response.ok) {
+                seoError = payload?.message ?? 'Không thể tạo SEO bằng AI.';
+                return;
+            }
+
+            get(form).setStore('meta_title', payload.meta_title ?? '');
+            get(form).setStore('meta_description', payload.meta_description ?? '');
+        } catch {
+            seoError = 'Không thể gọi AI lúc này. Vui lòng thử lại.';
+        } finally {
+            seoGenerating = false;
+        }
     }
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -128,7 +193,8 @@
                                 id="title"
                                 type="text"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                                bind:value={$form.title}
+                                value={$form.title}
+                                oninput={(e) => onTitleInput(e.currentTarget.value)}
                                 required
                             />
                         </div>
@@ -138,9 +204,17 @@
                                 id="slug"
                                 type="text"
                                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-                                bind:value={$form.slug}
+                                value={$form.slug}
+                                oninput={(e) => onSlugInput(e.currentTarget.value)}
                                 required
                             />
+                            <p class="text-xs text-muted-foreground">
+                                {#if autoSlugEnabled}
+                                    Slug đang tự cập nhật theo tiêu đề.
+                                {:else}
+                                    Slug đã chỉnh tay, sẽ không tự đổi theo tiêu đề nữa.
+                                {/if}
+                            </p>
                         </div>
                         <div class="space-y-2">
                             <Label for="excerpt">Tóm tắt / Excerpt</Label>
@@ -288,6 +362,22 @@
                         <CardDescription>Meta title và mô tả cho công cụ tìm kiếm.</CardDescription>
                     </CardHeader>
                     <CardContent class="space-y-4">
+                        <div class="flex items-center justify-between gap-2 rounded-md border bg-muted/30 p-3">
+                            <p class="text-xs text-muted-foreground">Dùng AI để gợi ý thẻ SEO theo title, excerpt, content và locale.</p>
+                            <Button
+                                type="button"
+                                variant="secondary"
+                                size="sm"
+                                onclick={generateSeoWithAi}
+                                disabled={seoGenerating}
+                            >
+                                <Sparkles class="mr-1 h-4 w-4" />
+                                {seoGenerating ? 'Đang tạo...' : 'AI tạo SEO'}
+                            </Button>
+                        </div>
+                        {#if seoError}
+                            <p class="text-sm text-red-600">{seoError}</p>
+                        {/if}
                         <div class="space-y-2">
                             <Label for="meta_title">Meta title</Label>
                             <input
