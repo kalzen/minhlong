@@ -72,5 +72,26 @@ test('home lists only posts for session locale', function () {
         ->get(route('home'))
         ->assertOk()
         ->assertSee('Vi only home', false)
-        ->assertDontSee('En only home', false);
+        ->assertDontSee('En only home', false)
+        ->assertSee(route('site.blog.show', ['slug' => 'vi-only-home']), false);
+});
+
+test('home blog placeholder when no posts for locale links to blog index', function () {
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'en',
+        'title' => 'English only',
+        'slug' => 'english-only-placeholder',
+        'excerpt' => 'x',
+        'content' => '<p>x</p>',
+        'status' => 'published',
+        'published_at' => now(),
+    ]);
+
+    $this->withSession(['locale' => 'vi'])
+        ->get(route('home'))
+        ->assertOk()
+        ->assertSee(route('site.blog.index'), false)
+        ->assertDontSee('english-only-placeholder', false);
 });

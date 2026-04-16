@@ -59,67 +59,70 @@
                 </div>
             </div>
             @empty
-            {{-- Demo content when no posts --}}
+            @php
+                $blogIndexUrl = route('site.blog.index');
+            @endphp
+            {{-- Placeholder cards when no posts for this locale: link to blog listing (not static HTML) --}}
             <div class="col-xl-4 col-md-6">
                 <div class="post-item wow fadeInUp">
                     <div class="post-featured-image">
-                            <a href="#" data-cursor-text="{{ __('site.home.blog.view') }}">
+                            <a href="{{ $blogIndexUrl }}" data-cursor-text="{{ __('site.home.blog.view') }}">
                             <figure>
                                 <img src="{{ asset('frontend') }}/images/post-1.jpg" alt="">
                             </figure>
                         </a>
                     </div>
-                    <div class="post-item-tags"><a href="#">Industrial EPC</a></div>
+                    <div class="post-item-tags"><a href="{{ $blogIndexUrl }}">Industrial EPC</a></div>
                     <div class="post-item-body">
                         <div class="post-content-box">
                             <div class="post-item-meta"><ul><li>OCT 25, 2025</li></ul></div>
                             <div class="post-item-content">
-                                <h2><a href="#">How to plan an industrial-zone factory project for faster delivery</a></h2>
+                                <h2><a href="{{ $blogIndexUrl }}">How to plan an industrial-zone factory project for faster delivery</a></h2>
                             </div>
                         </div>
-                        <div class="post-item-btn"><a href="#" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
+                        <div class="post-item-btn"><a href="{{ $blogIndexUrl }}" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
                 <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
                     <div class="post-featured-image">
-                            <a href="#" data-cursor-text="{{ __('site.home.blog.view') }}">
+                            <a href="{{ $blogIndexUrl }}" data-cursor-text="{{ __('site.home.blog.view') }}">
                             <figure>
                                 <img src="{{ asset('frontend') }}/images/post-2.jpg" alt="">
                             </figure>
                         </a>
                     </div>
-                    <div class="post-item-tags"><a href="#">M&amp;E Systems</a></div>
+                    <div class="post-item-tags"><a href="{{ $blogIndexUrl }}">M&amp;E Systems</a></div>
                     <div class="post-item-body">
                         <div class="post-content-box">
                             <div class="post-item-meta"><ul><li>SEP 25, 2025</li></ul></div>
                             <div class="post-item-content">
-                                <h2><a href="#">M&amp;E coordination strategies that reduce rework on factory sites</a></h2>
+                                <h2><a href="{{ $blogIndexUrl }}">M&amp;E coordination strategies that reduce rework on factory sites</a></h2>
                             </div>
                         </div>
-                        <div class="post-item-btn"><a href="#" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
+                        <div class="post-item-btn"><a href="{{ $blogIndexUrl }}" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-4 col-md-6">
                 <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
                     <div class="post-featured-image">
-                            <a href="#" data-cursor-text="{{ __('site.home.blog.view') }}">
+                            <a href="{{ $blogIndexUrl }}" data-cursor-text="{{ __('site.home.blog.view') }}">
                             <figure>
                                 <img src="{{ asset('frontend') }}/images/post-3.jpg" alt="">
                             </figure>
                         </a>
                     </div>
-                    <div class="post-item-tags"><a href="#">Safety & Quality</a></div>
+                    <div class="post-item-tags"><a href="{{ $blogIndexUrl }}">Safety & Quality</a></div>
                     <div class="post-item-body">
                         <div class="post-content-box">
                             <div class="post-item-meta"><ul><li>NOV 02, 2025</li></ul></div>
                             <div class="post-item-content">
-                                <h2><a href="#">QA/QC checklist for steel structure and fire protection packages</a></h2>
+                                <h2><a href="{{ $blogIndexUrl }}">QA/QC checklist for steel structure and fire protection packages</a></h2>
                             </div>
                         </div>
-                        <div class="post-item-btn"><a href="#" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
+                        <div class="post-item-btn"><a href="{{ $blogIndexUrl }}" class="readmore-btn">{{ __('site.home.blog.read_more') }}</a></div>
                     </div>
                 </div>
             </div>
