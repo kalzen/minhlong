@@ -537,62 +537,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xl-4 col-md-6">
-                <div class="post-item wow fadeInUp">
-                    <div class="post-featured-image">
-                        <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}">
-                            <figure><img src="{{ asset('frontend/images/post-1.jpg') }}" alt=""></figure>
-                        </a>
-                    </div>
-                    <div class="post-item-body">
-                        <div class="post-content-box">
-                            <div class="post-item-content">
-                                <h2>
-                                    <a href="{{ route('site.blog.index') }}">{{ __('site.minerals.blog.post1') }}</a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="post-featured-image">
-                        <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}">
-                            <figure><img src="{{ asset('frontend/images/post-2.jpg') }}" alt=""></figure>
-                        </a>
-                    </div>
-                    <div class="post-item-body">
-                        <div class="post-content-box">
-                            <div class="post-item-content">
-                                <h2>
-                                    <a href="{{ route('site.blog.index') }}">{{ __('site.minerals.blog.post2') }}</a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="post-featured-image">
-                        <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}">
-                            <figure><img src="{{ asset('frontend/images/post-3.jpg') }}" alt=""></figure>
-                        </a>
-                    </div>
-                    <div class="post-item-body">
-                        <div class="post-content-box">
-                            <div class="post-item-content">
-                                <h2>
-                                    <a href="{{ route('site.blog.index') }}">{{ __('site.minerals.blog.post3') }}</a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('site.partials.blog-post-cards', ['posts' => $latestBlogPosts ?? collect()])
         </div>
     </div>
 </div>

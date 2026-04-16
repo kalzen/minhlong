@@ -14,6 +14,7 @@ class HomeController extends Controller
     {
         $posts = Post::query()
             ->where('status', 'published')
+            ->forLocale(app()->getLocale())
             ->with('category')
             ->latest('published_at')
             ->limit(3)

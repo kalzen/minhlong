@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\Models\Setting;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
@@ -52,6 +53,23 @@ class AppServiceProvider extends ServiceProvider
             'site.minerals',
             'site.library.index',
         ], $shareSettings);
+
+        View::composer([
+            'site.land',
+            'site.host',
+            'site.power',
+            'site.minerals',
+        ], function ($view): void {
+            $view->with('latestBlogPosts', Schema::hasTable('posts')
+                ? Post::query()
+                    ->where('status', 'published')
+                    ->forLocale(app()->getLocale())
+                    ->with('category')
+                    ->latest('published_at')
+                    ->limit(3)
+                    ->get()
+                : collect());
+        });
     }
 
     /**

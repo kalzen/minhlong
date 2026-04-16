@@ -466,28 +466,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach ([1, 2, 3] as $idx => $n)
-                <div class="col-xl-4 col-md-6">
-                    <div class="post-item wow fadeInUp" @if($idx > 0) data-wow-delay="{{ (string) ($idx * 0.2) }}s" @endif>
-                        <div class="post-featured-image">
-                            <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}">
-                                <figure>
-                                    <img src="{{ asset('frontend/images/post-'.$n.'.jpg') }}" alt="{{ __('site.power.blog.post'.$n) }}">
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="post-item-body">
-                            <div class="post-content-box">
-                                <div class="post-item-content">
-                                    <h2>
-                                        <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ __('site.common.view') }}">{{ __('site.power.blog.post'.$n) }}</a>
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            @include('site.partials.blog-post-cards', ['posts' => $latestBlogPosts ?? collect()])
         </div>
     </div>
 </div>

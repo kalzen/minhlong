@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\View\View;
 
 class BlogController extends Controller
 {
@@ -27,16 +28,37 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(string $slug): View|Response
+    public function show(string $slug): View|RedirectResponse|Response
     {
         $locale = app()->getLocale();
 
         $post = Post::query()
             ->where('status', 'published')
-            ->forLocale($locale)
             ->where('slug', $slug)
+            ->where('locale', $locale)
             ->with('category')
-            ->firstOrFail();
+            ->first();
+
+        if (! $post instanceof Post) {
+            $otherLocalePost = Post::query()
+                ->where('status', 'published')
+                ->where('slug', $slug)
+                ->first();
+
+            if ($otherLocalePost instanceof Post && $otherLocalePost->translation_group_id !== null) {
+                $localized = Post::query()
+                    ->where('status', 'published')
+                    ->where('locale', $locale)
+                    ->where('translation_group_id', $otherLocalePost->translation_group_id)
+                    ->first();
+
+                if ($localized instanceof Post) {
+                    return redirect()->route('site.blog.show', ['slug' => $localized->slug]);
+                }
+            }
+
+            abort(404);
+        }
 
         $alternates = [];
         if ($post->translation_group_id !== null) {
