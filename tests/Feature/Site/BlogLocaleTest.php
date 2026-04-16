@@ -95,3 +95,57 @@ test('home blog placeholder when no posts for locale links to blog index', funct
         ->assertSee(route('site.blog.index'), false)
         ->assertDontSee('english-only-placeholder', false);
 });
+
+test('home shows latest locale posts first', function () {
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Old post',
+        'slug' => 'old-post',
+        'status' => 'published',
+        'published_at' => now()->subDays(3),
+    ]);
+
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Newest post',
+        'slug' => 'newest-post',
+        'status' => 'published',
+        'published_at' => now(),
+    ]);
+
+    $this->withSession(['locale' => 'vi'])
+        ->get(route('home'))
+        ->assertOk()
+        ->assertSeeInOrder(['Newest post', 'Old post'], false);
+});
+
+test('service subpages show latest locale posts first', function () {
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Older service post',
+        'slug' => 'older-service-post',
+        'status' => 'published',
+        'published_at' => now()->subDay(),
+    ]);
+
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Latest service post',
+        'slug' => 'latest-service-post',
+        'status' => 'published',
+        'published_at' => now(),
+    ]);
+
+    $this->withSession(['locale' => 'vi'])
+        ->get(route('site.land'))
+        ->assertOk()
+        ->assertSeeInOrder(['Latest service post', 'Older service post'], false);
+});
