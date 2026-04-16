@@ -96,56 +96,98 @@ test('home blog placeholder when no posts for locale links to blog index', funct
         ->assertDontSee('english-only-placeholder', false);
 });
 
-test('home shows latest locale posts first', function () {
+test('home orders locale posts by newest translation group activity', function () {
+    $groupRecentlyUpdatedByEn = (string) Str::uuid();
+    $groupRecentViOnly = (string) Str::uuid();
+
     Post::query()->create([
         'category_id' => null,
-        'translation_group_id' => (string) Str::uuid(),
+        'translation_group_id' => $groupRecentlyUpdatedByEn,
         'locale' => 'vi',
-        'title' => 'Old post',
-        'slug' => 'old-post',
+        'title' => 'VI from group A',
+        'slug' => 'vi-group-a',
         'status' => 'published',
-        'published_at' => now()->subDays(3),
+        'published_at' => now()->subDays(7),
+    ]);
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => $groupRecentlyUpdatedByEn,
+        'locale' => 'en',
+        'title' => 'EN from group A',
+        'slug' => 'en-group-a',
+        'status' => 'published',
+        'published_at' => now(),
     ]);
 
     Post::query()->create([
         'category_id' => null,
-        'translation_group_id' => (string) Str::uuid(),
+        'translation_group_id' => $groupRecentViOnly,
         'locale' => 'vi',
-        'title' => 'Newest post',
-        'slug' => 'newest-post',
+        'title' => 'VI from group B',
+        'slug' => 'vi-group-b',
         'status' => 'published',
-        'published_at' => now(),
+        'published_at' => now()->subDay(),
+    ]);
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => $groupRecentViOnly,
+        'locale' => 'en',
+        'title' => 'EN from group B',
+        'slug' => 'en-group-b',
+        'status' => 'published',
+        'published_at' => now()->subDays(20),
     ]);
 
     $this->withSession(['locale' => 'vi'])
         ->get(route('home'))
         ->assertOk()
-        ->assertSeeInOrder(['Newest post', 'Old post'], false);
+        ->assertSeeInOrder(['VI from group A', 'VI from group B'], false);
 });
 
-test('service subpages show latest locale posts first', function () {
+test('service subpages order locale posts by newest translation group activity', function () {
+    $groupRecentlyUpdatedByEn = (string) Str::uuid();
+    $groupRecentViOnly = (string) Str::uuid();
+
     Post::query()->create([
         'category_id' => null,
-        'translation_group_id' => (string) Str::uuid(),
+        'translation_group_id' => $groupRecentlyUpdatedByEn,
         'locale' => 'vi',
-        'title' => 'Older service post',
-        'slug' => 'older-service-post',
+        'title' => 'Land VI from group A',
+        'slug' => 'land-vi-group-a',
         'status' => 'published',
-        'published_at' => now()->subDay(),
+        'published_at' => now()->subDays(6),
+    ]);
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => $groupRecentlyUpdatedByEn,
+        'locale' => 'en',
+        'title' => 'Land EN from group A',
+        'slug' => 'land-en-group-a',
+        'status' => 'published',
+        'published_at' => now(),
     ]);
 
     Post::query()->create([
         'category_id' => null,
-        'translation_group_id' => (string) Str::uuid(),
+        'translation_group_id' => $groupRecentViOnly,
         'locale' => 'vi',
-        'title' => 'Latest service post',
-        'slug' => 'latest-service-post',
+        'title' => 'Land VI from group B',
+        'slug' => 'land-vi-group-b',
         'status' => 'published',
-        'published_at' => now(),
+        'published_at' => now()->subDay(),
+    ]);
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => $groupRecentViOnly,
+        'locale' => 'en',
+        'title' => 'Land EN from group B',
+        'slug' => 'land-en-group-b',
+        'status' => 'published',
+        'published_at' => now()->subDays(14),
     ]);
 
     $this->withSession(['locale' => 'vi'])
         ->get(route('site.land'))
         ->assertOk()
-        ->assertSeeInOrder(['Latest service post', 'Older service post'], false);
+        ->assertSeeInOrder(['Land VI from group A', 'Land VI from group B'], false);
 });

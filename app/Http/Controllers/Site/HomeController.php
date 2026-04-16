@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->forLocale(app()->getLocale())
             ->withFeaturedMedia()
             ->with('category')
-            ->orderByRaw('COALESCE(published_at, created_at) DESC')
+            ->orderByLatestTranslationGroup()
             ->limit(3)
             ->get();
 

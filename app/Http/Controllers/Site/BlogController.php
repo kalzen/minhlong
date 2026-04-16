@@ -20,7 +20,7 @@ class BlogController extends Controller
             ->forLocale($locale)
             ->withFeaturedMedia()
             ->with('category')
-            ->orderByRaw('COALESCE(published_at, created_at) DESC')
+            ->orderByLatestTranslationGroup()
             ->paginate(9);
 
         return view('site.blog.index', [

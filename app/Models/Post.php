@@ -100,6 +100,30 @@ class Post extends Model implements HasMedia
     }
 
     /**
+     * Sort locale records by newest activity of their translation group first.
+     *
+     * For translated posts, the newest publish/create time among sibling locales
+     * decides the group's position. Non-grouped posts still fall back to their own
+     * publish/create time.
+     *
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
+    public function scopeOrderByLatestTranslationGroup(Builder $query): Builder
+    {
+        return $query
+            ->orderByRaw(
+                '(select max(coalesce(grouped.published_at, grouped.created_at))
+                    from posts as grouped
+                    where grouped.status = ?
+                      and grouped.translation_group_id = posts.translation_group_id
+                ) desc',
+                ['published']
+            )
+            ->orderByRaw('COALESCE(published_at, created_at) DESC');
+    }
+
+    /**
      * Public URL for the representative image: Spatie `featured` media first, then legacy `thumbnail_path`.
      * Returns null when neither resolves (callers use default placeholder images).
      */

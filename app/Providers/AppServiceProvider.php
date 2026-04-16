@@ -66,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
                     ->forLocale(app()->getLocale())
                     ->withFeaturedMedia()
                     ->with('category')
-                    ->orderByRaw('COALESCE(published_at, created_at) DESC')
+                    ->orderByLatestTranslationGroup()
                     ->limit(3)
                     ->get()
                 : collect());
