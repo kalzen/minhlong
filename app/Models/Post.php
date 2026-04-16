@@ -85,4 +85,44 @@ class Post extends Model implements HasMedia
     {
         return $query->where('locale', $locale ?? app()->getLocale());
     }
+
+    /**
+     * Eager-load featured images for listing cards (avoids N+1 when resolving URLs).
+     *
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
+    public function scopeWithFeaturedMedia(Builder $query): Builder
+    {
+        return $query->with(['media' => function ($mediaQuery): void {
+            $mediaQuery->where('collection_name', 'featured');
+        }]);
+    }
+
+    /**
+     * Public URL for the representative image: Spatie `featured` media first, then legacy `thumbnail_path`.
+     * Returns null when neither resolves (callers use default placeholder images).
+     */
+    public function publicFeaturedImageUrl(): ?string
+    {
+        $fromMedia = $this->getFirstMediaUrl('featured');
+        if (is_string($fromMedia) && $fromMedia !== '') {
+            return $fromMedia;
+        }
+
+        $path = $this->thumbnail_path;
+        if (! filled($path)) {
+            return null;
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if (is_file(public_path($path))) {
+            return asset($path);
+        }
+
+        return null;
+    }
 }

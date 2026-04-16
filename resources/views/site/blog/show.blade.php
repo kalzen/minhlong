@@ -48,10 +48,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                @if($post->thumbnail_path)
+                @php
+                    $featuredHeroUrl = $post->publicFeaturedImageUrl();
+                @endphp
+                @if(filled($featuredHeroUrl))
                 <div class="post-image">
                     <figure class="image-anime reveal">
-                        <img src="{{ asset($post->thumbnail_path) }}" alt="{{ $post->title }}">
+                        <img src="{{ $featuredHeroUrl }}" alt="{{ $post->title }}">
                     </figure>
                 </div>
                 @endif

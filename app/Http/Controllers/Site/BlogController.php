@@ -18,6 +18,7 @@ class BlogController extends Controller
         $posts = Post::query()
             ->where('status', 'published')
             ->forLocale($locale)
+            ->withFeaturedMedia()
             ->with('category')
             ->latest('published_at')
             ->paginate(9);
@@ -36,6 +37,7 @@ class BlogController extends Controller
             ->where('status', 'published')
             ->where('slug', $slug)
             ->where('locale', $locale)
+            ->withFeaturedMedia()
             ->with('category')
             ->first();
 

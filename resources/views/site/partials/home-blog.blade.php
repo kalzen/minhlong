@@ -10,24 +10,16 @@
         </div>
         <div class="row">
             @php
-                $unsplashFallbacks = [
-                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
-                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-                    'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80',
+                $defaultListingImages = [
+                    asset('frontend/images/post-1.jpg'),
+                    asset('frontend/images/post-2.jpg'),
+                    asset('frontend/images/post-3.jpg'),
                 ];
             @endphp
             @forelse($posts ?? [] as $index => $post)
             @php
-                $thumbnailPath = $post->thumbnail_path;
-                $imageSrc = $unsplashFallbacks[$index % count($unsplashFallbacks)];
-
-                if (filled($thumbnailPath)) {
-                    if (str_starts_with($thumbnailPath, 'http://') || str_starts_with($thumbnailPath, 'https://')) {
-                        $imageSrc = $thumbnailPath;
-                    } elseif (is_file(public_path($thumbnailPath))) {
-                        $imageSrc = asset($thumbnailPath);
-                    }
-                }
+                $imageSrc = $post->publicFeaturedImageUrl()
+                    ?? $defaultListingImages[$index % count($defaultListingImages)];
             @endphp
             <div class="col-xl-4 col-md-6">
                 <div class="post-item wow fadeInUp" @if($index > 0) data-wow-delay="{{ $index * 0.2 }}s" @endif>
