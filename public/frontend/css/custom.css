@@ -4531,10 +4531,20 @@ header.main-header .header-sticky.active{
 	margin-bottom: 30px;
 }
 
+.page-single-post .post-image{
+	display: flex;
+	justify-content: center;
+}
+
 .post-image figure{
 	display: block;	
 	border-radius: 10px;
 	overflow: hidden;
+}
+
+.page-single-post .post-image figure{
+	width: 80%;
+	margin: 0 auto;
 }
 
 .post-image img{
@@ -4542,6 +4552,13 @@ header.main-header .header-sticky.active{
 	aspect-ratio: 1 / 0.50;
 	object-fit: cover;
 	border-radius: 10px;
+}
+
+.page-single-post .post-image img{
+	width: 100%;
+	height: auto;
+	aspect-ratio: auto;
+	object-fit: contain;
 }
 
 .post-content{
