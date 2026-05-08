@@ -8,6 +8,16 @@
                     <div class="hero-info-list">
                         <!-- Hero Info Item Start -->
                         <div class="hero-info-item box-1">
+                            @php
+                                $heroInfoSlides1 = array_values(array_filter([
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1_slide_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1_slide_3'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1_slide_4'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1_slide_5'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_1_slide_6'),
+                                ], fn ($url) => filled($url)));
+                            @endphp
                             <!-- Hero Info Content Box Start -->
                             <div class="hero-info-content-box">
                                 <div class="hero-info-item-content">
@@ -24,9 +34,17 @@
                             
                             <!-- Hero Info Image Start -->
                             <div class="hero-info-image">
-                                <figure class="image-anime reveal">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('hero.home.info_1') }}" alt="">
-                                </figure>
+                                <div class="swiper hero-info-slider hero-info-slider-1">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($heroInfoSlides1 as $slideUrl)
+                                            <div class="swiper-slide">
+                                                <figure class="image-anime reveal">
+                                                    <img src="{{ $slideUrl }}" alt="">
+                                                </figure>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                             <!-- Hero Info Image End -->
                         </div>
@@ -34,9 +52,27 @@
         
                         <!-- Hero Info Item Start -->
                         <div class="hero-info-item box-2">
-                            <figure class="image-anime reveal">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('hero.home.info_2') }}" alt="">
-                            </figure>
+                            @php
+                                $heroInfoSlides2 = array_values(array_filter([
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2_slide_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2_slide_3'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2_slide_4'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2_slide_5'),
+                                    \App\Support\SiteMedia::urlOrDefault('hero.home.info_2_slide_6'),
+                                ], fn ($url) => filled($url)));
+                            @endphp
+                            <div class="swiper hero-info-slider hero-info-slider-2">
+                                <div class="swiper-wrapper">
+                                    @foreach ($heroInfoSlides2 as $slideUrl)
+                                        <div class="swiper-slide">
+                                            <figure class="image-anime reveal">
+                                                <img src="{{ $slideUrl }}" alt="">
+                                            </figure>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                         <!-- Hero Info Item End -->
         
@@ -109,39 +145,13 @@
                 <div class="col-xl-5">
                     <!-- About Us Image Box Start -->
                     <div class="about-us-image-box wow fadeInUp">
-                            @php
-                                $aboutImageSlides1 = array_values(array_filter([
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_2'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_3'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_4'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_5'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_6'),
-                                ], fn ($url) => filled($url)));
-                                $aboutImageSlides2 = array_values(array_filter([
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_2'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_3'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_4'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_5'),
-                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_6'),
-                                ], fn ($url) => filled($url)));
-                            @endphp
                         <!-- About Us Image Box 1 Start -->
                         <div class="about-us-image-box-1">
                             <!-- About Us Image 1 Start -->
                             <div class="about-us-image">
-                                    <div class="swiper pyramid-journey-slider pyramid-journey-slider-1">
-                                        <div class="swiper-wrapper">
-                                            @foreach ($aboutImageSlides1 as $slideUrl)
-                                                <div class="swiper-slide">
-                                                    <figure class="image-anime">
-                                                        <img src="{{ $slideUrl }}" alt="">
-                                                    </figure>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                <figure class="image-anime">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_1') }}" alt="">
+                                </figure>
                             </div>
                             <!-- About Us Image 1 End --> 
                         </div>
@@ -151,17 +161,9 @@
                          <div class="about-us-image-box-2">
                             <!-- About Us Image 2 Start -->
                             <div class="about-us-image">
-                                <div class="swiper pyramid-journey-slider pyramid-journey-slider-2">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($aboutImageSlides2 as $slideUrl)
-                                            <div class="swiper-slide">
-                                                <figure class="image-anime">
-                                                    <img src="{{ $slideUrl }}" alt="">
-                                                </figure>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+                                <figure class="image-anime">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_2') }}" alt="">
+                                </figure>
                             </div>
                             <!-- About Us Image 2 End -->
                         
@@ -1258,9 +1260,9 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var slider1 = document.querySelector('.pyramid-journey-slider-1');
+    var slider1 = document.querySelector('.hero-info-slider-1');
     if (slider1 && typeof Swiper !== 'undefined') {
-        new Swiper('.pyramid-journey-slider-1', {
+        new Swiper('.hero-info-slider-1', {
             slidesPerView: 1,
             speed: 900,
             loop: true,
@@ -1275,9 +1277,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var slider2 = document.querySelector('.pyramid-journey-slider-2');
+    var slider2 = document.querySelector('.hero-info-slider-2');
     if (slider2 && typeof Swiper !== 'undefined') {
-        new Swiper('.pyramid-journey-slider-2', {
+        new Swiper('.hero-info-slider-2', {
             slidesPerView: 1,
             speed: 900,
             loop: true,

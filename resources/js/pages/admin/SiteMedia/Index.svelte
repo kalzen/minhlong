@@ -37,16 +37,16 @@
     let searchTerm = $state('');
     let activeSection = $state('all');
 
-    function isPyramidSliderKey(positionKey: string): boolean {
+    function isHeroInfoSliderKey(positionKey: string): boolean {
         return (
-            positionKey === 'home.about.image_1' ||
-            positionKey === 'home.about.image_2' ||
-            /^home\.about\.image_[12]_slide_\d+$/.test(positionKey)
+            positionKey === 'hero.home.info_1' ||
+            positionKey === 'hero.home.info_2' ||
+            /^hero\.home\.info_[12]_slide_\d+$/.test(positionKey)
         );
     }
 
     function sliderOrder(positionKey: string): number {
-        if (positionKey === 'home.about.image_1' || positionKey === 'home.about.image_2') {
+        if (positionKey === 'hero.home.info_1' || positionKey === 'hero.home.info_2') {
             return 1;
         }
 
@@ -129,12 +129,12 @@
             .filter(([, block]) => block.rows.length > 0);
     });
 
-    const pyramidSliderGroups = $derived.by(() => {
+    const heroInfoSliderGroups = $derived.by(() => {
         const map = new Map<string, PlacementRow[]>();
-        const rows = placements.filter((row) => isPyramidSliderKey(row.position_key));
+        const rows = placements.filter((row) => isHeroInfoSliderKey(row.position_key));
 
         for (const row of rows) {
-            const groupKey = row.position_key.startsWith('home.about.image_1') ? 'image_1' : 'image_2';
+            const groupKey = row.position_key.startsWith('hero.home.info_1') ? 'image_1' : 'image_2';
             if (!map.has(groupKey)) {
                 map.set(groupKey, []);
             }
@@ -220,7 +220,7 @@
                     {#if sectionKey === 'home'}
                         <div class="grid gap-4 lg:grid-cols-2">
                             <div class="rounded-lg border p-4">
-                                <h3 class="text-sm font-semibold">Slider THE PYRAMID JOURNEY - Khung ảnh trái</h3>
+                                <h3 class="text-sm font-semibold">Slider Hero Info 1 (hero.home.info_1)</h3>
                                 <p class="mt-1 text-xs text-muted-foreground">
                                     Upload nhiều ảnh một lần: hệ thống tự gán theo thứ tự vào các slide.
                                 </p>
@@ -229,10 +229,10 @@
                                     accept="image/*"
                                     multiple
                                     class="mt-3 block text-sm"
-                                    onchange={(e) => uploadSliderBatch(pyramidSliderGroups.image_1, e.currentTarget.files)}
+                                    onchange={(e) => uploadSliderBatch(heroInfoSliderGroups.image_1, e.currentTarget.files)}
                                 />
                                 <div class="mt-3 grid grid-cols-2 gap-3">
-                                    {#each pyramidSliderGroups.image_1 as row (row.id)}
+                                    {#each heroInfoSliderGroups.image_1 as row (row.id)}
                                         <div class="rounded border p-2">
                                             <p class="truncate font-mono text-[11px]">{row.position_key}</p>
                                             {#if row.preview_url}
@@ -254,7 +254,7 @@
                                 </div>
                             </div>
                             <div class="rounded-lg border p-4">
-                                <h3 class="text-sm font-semibold">Slider THE PYRAMID JOURNEY - Khung ảnh phải</h3>
+                                <h3 class="text-sm font-semibold">Slider Hero Info 2 (hero.home.info_2)</h3>
                                 <p class="mt-1 text-xs text-muted-foreground">
                                     Upload nhiều ảnh một lần: hệ thống tự gán theo thứ tự vào các slide.
                                 </p>
@@ -263,10 +263,10 @@
                                     accept="image/*"
                                     multiple
                                     class="mt-3 block text-sm"
-                                    onchange={(e) => uploadSliderBatch(pyramidSliderGroups.image_2, e.currentTarget.files)}
+                                    onchange={(e) => uploadSliderBatch(heroInfoSliderGroups.image_2, e.currentTarget.files)}
                                 />
                                 <div class="mt-3 grid grid-cols-2 gap-3">
-                                    {#each pyramidSliderGroups.image_2 as row (row.id)}
+                                    {#each heroInfoSliderGroups.image_2 as row (row.id)}
                                         <div class="rounded border p-2">
                                             <p class="truncate font-mono text-[11px]">{row.position_key}</p>
                                             {#if row.preview_url}
@@ -290,7 +290,7 @@
                         </div>
                     {/if}
                     <div class="grid gap-6">
-                        {#each block.rows.filter((row) => !isPyramidSliderKey(row.position_key)) as row (row.id)}
+                        {#each block.rows.filter((row) => !isHeroInfoSliderKey(row.position_key)) as row (row.id)}
                             <div class="rounded-lg border p-4">
                                 <p class="font-mono text-sm font-medium">{row.position_key}</p>
                                 {#if row.label}
