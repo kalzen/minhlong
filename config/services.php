@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'aimarketing' => [
+        'api_token' => env('AIMARKETING_API_TOKEN'),
+    ],
+
 ];

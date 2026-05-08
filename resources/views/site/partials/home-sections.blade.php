@@ -113,10 +113,18 @@
                                 $aboutImageSlides1 = array_values(array_filter([
                                     \App\Support\SiteMedia::urlOrDefault('home.about.image_1'),
                                     \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_3'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_4'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_5'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_6'),
                                 ], fn ($url) => filled($url)));
                                 $aboutImageSlides2 = array_values(array_filter([
                                     \App\Support\SiteMedia::urlOrDefault('home.about.image_2'),
                                     \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_3'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_4'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_5'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_6'),
                                 ], fn ($url) => filled($url)));
                             @endphp
                         <!-- About Us Image Box 1 Start -->

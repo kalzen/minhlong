@@ -37,6 +37,27 @@
     let searchTerm = $state('');
     let activeSection = $state('all');
 
+    function isPyramidSliderKey(positionKey: string): boolean {
+        return (
+            positionKey === 'home.about.image_1' ||
+            positionKey === 'home.about.image_2' ||
+            /^home\.about\.image_[12]_slide_\d+$/.test(positionKey)
+        );
+    }
+
+    function sliderOrder(positionKey: string): number {
+        if (positionKey === 'home.about.image_1' || positionKey === 'home.about.image_2') {
+            return 1;
+        }
+
+        const match = positionKey.match(/_slide_(\d+)$/);
+        if (!match) {
+            return 999;
+        }
+
+        return Number.parseInt(match[1], 10);
+    }
+
     $effect(() => {
         const sig = placements
             .map((p) => `${p.id}:${p.stored_image_url ?? ''}`)
@@ -108,10 +129,41 @@
             .filter(([, block]) => block.rows.length > 0);
     });
 
+    const pyramidSliderGroups = $derived.by(() => {
+        const map = new Map<string, PlacementRow[]>();
+        const rows = placements.filter((row) => isPyramidSliderKey(row.position_key));
+
+        for (const row of rows) {
+            const groupKey = row.position_key.startsWith('home.about.image_1') ? 'image_1' : 'image_2';
+            if (!map.has(groupKey)) {
+                map.set(groupKey, []);
+            }
+            map.get(groupKey)!.push(row);
+        }
+
+        return {
+            image_1: (map.get('image_1') ?? []).sort((a, b) => sliderOrder(a.position_key) - sliderOrder(b.position_key)),
+            image_2: (map.get('image_2') ?? []).sort((a, b) => sliderOrder(a.position_key) - sliderOrder(b.position_key)),
+        };
+    });
+
     function upload(id: number, file: File) {
         const fd = new FormData();
         fd.append('image', file);
         router.post(siteMedia.update.url({ site_media_placement: id }), fd);
+    }
+
+    function uploadSliderBatch(slots: PlacementRow[], files: FileList | null) {
+        if (!files || files.length === 0) {
+            return;
+        }
+
+        const filesArray = Array.from(files);
+        const maxCount = Math.min(slots.length, filesArray.length);
+
+        for (let i = 0; i < maxCount; i += 1) {
+            upload(slots[i].id, filesArray[i]);
+        }
     }
 
     function saveUrl(id: number) {
@@ -165,8 +217,80 @@
                         <h2 class="text-lg font-semibold">{block.title}</h2>
                         <p class="text-xs text-muted-foreground">{block.rows.length} vị trí ảnh</p>
                     </div>
+                    {#if sectionKey === 'home'}
+                        <div class="grid gap-4 lg:grid-cols-2">
+                            <div class="rounded-lg border p-4">
+                                <h3 class="text-sm font-semibold">Slider THE PYRAMID JOURNEY - Khung ảnh trái</h3>
+                                <p class="mt-1 text-xs text-muted-foreground">
+                                    Upload nhiều ảnh một lần: hệ thống tự gán theo thứ tự vào các slide.
+                                </p>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    class="mt-3 block text-sm"
+                                    onchange={(e) => uploadSliderBatch(pyramidSliderGroups.image_1, e.currentTarget.files)}
+                                />
+                                <div class="mt-3 grid grid-cols-2 gap-3">
+                                    {#each pyramidSliderGroups.image_1 as row (row.id)}
+                                        <div class="rounded border p-2">
+                                            <p class="truncate font-mono text-[11px]">{row.position_key}</p>
+                                            {#if row.preview_url}
+                                                <img src={row.preview_url} alt="" class="mt-2 h-20 w-full rounded object-cover" />
+                                            {/if}
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                class="mt-2 block w-full text-xs"
+                                                onchange={(e) => {
+                                                    const f = e.currentTarget.files?.[0];
+                                                    if (f) {
+                                                        upload(row.id, f);
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    {/each}
+                                </div>
+                            </div>
+                            <div class="rounded-lg border p-4">
+                                <h3 class="text-sm font-semibold">Slider THE PYRAMID JOURNEY - Khung ảnh phải</h3>
+                                <p class="mt-1 text-xs text-muted-foreground">
+                                    Upload nhiều ảnh một lần: hệ thống tự gán theo thứ tự vào các slide.
+                                </p>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    class="mt-3 block text-sm"
+                                    onchange={(e) => uploadSliderBatch(pyramidSliderGroups.image_2, e.currentTarget.files)}
+                                />
+                                <div class="mt-3 grid grid-cols-2 gap-3">
+                                    {#each pyramidSliderGroups.image_2 as row (row.id)}
+                                        <div class="rounded border p-2">
+                                            <p class="truncate font-mono text-[11px]">{row.position_key}</p>
+                                            {#if row.preview_url}
+                                                <img src={row.preview_url} alt="" class="mt-2 h-20 w-full rounded object-cover" />
+                                            {/if}
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                class="mt-2 block w-full text-xs"
+                                                onchange={(e) => {
+                                                    const f = e.currentTarget.files?.[0];
+                                                    if (f) {
+                                                        upload(row.id, f);
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    {/each}
+                                </div>
+                            </div>
+                        </div>
+                    {/if}
                     <div class="grid gap-6">
-                        {#each block.rows as row (row.id)}
+                        {#each block.rows.filter((row) => !isPyramidSliderKey(row.position_key)) as row (row.id)}
                             <div class="rounded-lg border p-4">
                                 <p class="font-mono text-sm font-medium">{row.position_key}</p>
                                 {#if row.label}
