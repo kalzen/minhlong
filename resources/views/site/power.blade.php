@@ -44,12 +44,12 @@
                 <div class="about-us-image-box-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-image-box-1-silver">
                         <figure class="image-anime">
-                            <img src="{{ asset('frontend/images/power-4.jpg') }}" alt="{{ __('site.power.about.title') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_1') }}" alt="{{ __('site.power.about.title') }}">
                         </figure>
                     </div>
                     <div class="about-image-box-2-silver">
                         <figure>
-                            <img src="{{ asset('frontend/images/about-us-image-2-silver.png') }}" alt="{{ __('site.power.about.headline') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_2') }}" alt="{{ __('site.power.about.headline') }}">
                         </figure>
                     </div>
                     <div class="about-counter-box-silver">
@@ -86,10 +86,10 @@
         <div class="row">
             @php
                 $powerServiceImages = [
-                    'frontend/images/minhlong-power.jpg',
-                    'frontend/images/power-1.jpg',
-                    'frontend/images/power-2.JPG',
-                    'frontend/images/power-4.jpg',
+                    \App\Support\SiteMedia::urlOrDefault('sector.power.service_image_1'),
+                    \App\Support\SiteMedia::urlOrDefault('sector.power.service_image_2'),
+                    \App\Support\SiteMedia::urlOrDefault('sector.power.service_image_3'),
+                    \App\Support\SiteMedia::urlOrDefault('sector.power.service_image_4'),
                 ];
             @endphp
             @foreach (range(1, 4) as $i)
@@ -107,7 +107,7 @@
                         <div class="service-item-image-silver">
                             <figure class="image-anime">
                                 <img
-                                    src="{{ asset($powerServiceImages[$i - 1]) }}"
+                                    src="{{ $powerServiceImages[$i - 1] }}"
                                     alt="{{ __('site.power.services.item'.$i.'_title') }}"
                                     loading="lazy"
                                     decoding="async"
@@ -138,7 +138,7 @@
                     <div class="what-we-body-silver">
                         <div class="what-we-body-image-silver">
                             <figure>
-                                <img src="{{ asset('frontend/images/power-1.jpg') }}" alt="{{ __('site.power.what_we_do.counter') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_body_image') }}" alt="{{ __('site.power.what_we_do.counter') }}">
                             </figure>
                         </div>
                         <div class="what-we-counter-box-silver">
@@ -172,7 +172,7 @@
                     <div class="what-we-content-body-silver">
                         <div class="what-we-content-image-silver">
                             <figure class="image-anime reveal">
-                                <img src="{{ asset('frontend/images/power-2.JPG') }}" alt="{{ __('site.power.what_we_do.title') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_content_image') }}" alt="{{ __('site.power.what_we_do.title') }}">
                             </figure>
                         </div>
                         <div class="what-we-items-btn-silver">

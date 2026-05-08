@@ -70,17 +70,17 @@
                             <div class="satisfy-client-images">
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.hero_client_author_1') }}" alt="">
                                     </figure>
                                 </div>
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/author-2.jpg" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.hero_client_author_2') }}" alt="">
                                     </figure>
                                 </div>
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/author-3.jpg" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.hero_client_author_3') }}" alt="">
                                     </figure>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="hero-video-image-gold">
                                 <figure>
                                     <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}">
-                                        <img src="{{ asset('frontend') }}/images/hero-video-image-gold.jpg" alt="Industrial park video">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.hero_video_poster') }}" alt="Industrial park video">
                                     </a>
                                 </figure>
                                 <div class="video-play-button">
@@ -126,7 +126,7 @@
                     <div class="about-us-images-gold wow fadeInUp" data-wow-delay="0.2s">
                         <div class="about-us-image-gold">
                             <figure>
-                                <img src="{{ asset('frontend') }}/images/about-us-image-gold.png" alt="Minh Long Land industrial parks">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.about_image') }}" alt="Minh Long Land industrial parks">
                             </figure>
                         </div>
                         <div class="about-us-image-title-gold">
@@ -296,7 +296,7 @@
                         </div>
                         <div class="what-we-item-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/what-we-item-image-1-gold.jpg" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.what_we_image_1') }}" alt="">
                             </figure>
                         </div>
                     </div>
@@ -307,7 +307,7 @@
                         <div class="what-we-item-header-gold">
                             <div class="what-we-item-shape-image-gold">
                                 <figure>
-                                    <img src="{{ asset('frontend') }}/images/what-we-item-shape-image-1-gold.jpg" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.what_we_shape_1') }}" alt="">
                                 </figure>
                             </div>
                             <div class="what-we-item-btn-gold">
@@ -324,7 +324,7 @@
                     <div class="what-we-counter-box-gold box-3 wow fadeInUp" data-wow-delay="0.4s">
                         <div class="what-we-item-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/what-we-item-image-2-gold.jpg" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.what_we_image_2') }}" alt="">
                             </figure>
                         </div>
                         <div class="what-we-counter-item-gold">
@@ -338,7 +338,7 @@
                     <div class="what-we-item-gold box-4 wow fadeInUp" data-wow-delay="0.6s">
                         <div class="what-we-item-shape-image-gold">
                             <figure>
-                                <img src="{{ asset('frontend') }}/images/what-we-item-shape-image-2-gold.jpg" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.what_we_shape_2') }}" alt="">
                             </figure>
                         </div>
                         <div class="what-we-item-title-gold">
@@ -349,7 +349,7 @@
                                 <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/learn-more-circle.svg" alt=""></a>
                             </div>
                             <div class="what-we-item-body-image-gold">
-                                <img src="{{ asset('frontend') }}/images/what-we-item-body-image-gold.png" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.what_we_body_image') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
                             <div class="project-item-image-gold">
                                 <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/project-image-1-gold.jpg" alt="LHP Social Housing Project – Hai Phong">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.projects_image_1') }}" alt="LHP Social Housing Project – Hai Phong">
                                     </figure>
                                 </a>
                             </div>
@@ -421,7 +421,7 @@
                             <div class="project-item-image-gold">
                                 <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
-                                        <img src="{{ asset('frontend') }}/images/project-image-2-gold.jpg" alt="Ban Thien Industrial Cluster and factory complex for lease">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.projects_image_2') }}" alt="Ban Thien Industrial Cluster and factory complex for lease">
                                     </figure>
                                 </a>
                             </div>
@@ -455,7 +455,7 @@
                         <div class="why-choose-item-gold">
                             <div class="why-choose-item-image-gold">
                                 <figure class="image-anime reveal">
-                                    <img src="{{ asset('frontend') }}/images/why-choose-item-image-gold.jpg" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.why_choose_image') }}" alt="">
                                 </figure>
                             </div>
                             <div class="why-choose-item-body-gold">
@@ -512,10 +512,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item1_title') }}</h3><p>{{ __('site.land.features.items.item1_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-1-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item2_title') }}</h3><p>{{ __('site.land.features.items.item2_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-2-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item3_title') }}</h3><p>{{ __('site.land.features.items.item3_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-3-gold.png" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item4_title') }}</h3><p>{{ __('site.land.features.items.item4_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ asset('frontend') }}/images/feature-item-image-4-gold.png" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item1_title') }}</h3><p>{{ __('site.land.features.items.item1_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.feature_image_1') }}" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item2_title') }}</h3><p>{{ __('site.land.features.items.item2_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.feature_image_2') }}" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item3_title') }}</h3><p>{{ __('site.land.features.items.item3_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.feature_image_3') }}" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>{{ __('site.land.features.items.item4_title') }}</h3><p>{{ __('site.land.features.items.item4_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.feature_image_4') }}" alt=""></figure></div></div></div>
             </div>
         </div>
     </div>
@@ -525,7 +525,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <div class="cta-box-image-gold"><figure><img src="{{ asset('frontend') }}/images/cta-box-image-gold.png" alt=""></figure></div>
+                    <div class="cta-box-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.cta_image') }}" alt=""></figure></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="cta-box-content-gold">
@@ -632,7 +632,7 @@
                                 <div class="testimonial-author-gold">
                                     <div class="author-image-gold">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="">
+                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.testimonial_author_1') }}" alt="">
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">
@@ -663,7 +663,7 @@
                                 <div class="testimonial-author-gold">
                                     <div class="author-image-gold">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/author-2.jpg" alt="">
+                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.land.testimonial_author_2') }}" alt="">
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">

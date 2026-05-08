@@ -34,6 +34,8 @@
 
     let urlDrafts = $state<Record<number, string>>({});
     let lastPlacementSig = $state('');
+    let searchTerm = $state('');
+    let activeSection = $state('all');
 
     $effect(() => {
         const sig = placements
@@ -73,6 +75,39 @@
         return [...map.entries()].sort((a, b) => a[1].order - b[1].order);
     });
 
+    const sectionFilters = $derived.by(() => {
+        const options = [{ id: 'all', label: 'Tất cả' }];
+        for (const [sectionKey, block] of placementSections) {
+            options.push({
+                id: sectionKey,
+                label: `${block.title} (${block.rows.length})`,
+            });
+        }
+
+        return options;
+    });
+
+    const filteredSections = $derived.by(() => {
+        const normalizedTerm = searchTerm.trim().toLowerCase();
+
+        return placementSections
+            .filter(([sectionKey]) => activeSection === 'all' || sectionKey === activeSection)
+            .map(([sectionKey, block]) => {
+                const rows = block.rows.filter((row) => {
+                    if (normalizedTerm === '') {
+                        return true;
+                    }
+
+                    const haystack = `${row.position_key} ${row.label ?? ''}`.toLowerCase();
+
+                    return haystack.includes(normalizedTerm);
+                });
+
+                return [sectionKey, { ...block, rows }] as const;
+            })
+            .filter(([, block]) => block.rows.length > 0);
+    });
+
     function upload(id: number, file: File) {
         const fd = new FormData();
         fd.append('image', file);
@@ -98,11 +133,37 @@
             hoặc link https). Nếu có cả upload và URL thì upload được ưu tiên.
         </p>
 
+        <div class="rounded-lg border p-4">
+            <p class="mb-3 text-sm font-medium">Lọc nhanh theo trang</p>
+            <div class="mb-3 flex flex-wrap gap-2">
+                {#each sectionFilters as option (option.id)}
+                    <Button
+                        type="button"
+                        variant={activeSection === option.id ? 'default' : 'secondary'}
+                        size="sm"
+                        onclick={() => (activeSection = option.id)}
+                    >
+                        {option.label}
+                    </Button>
+                {/each}
+            </div>
+            <label class="mb-1 block text-xs font-medium text-muted-foreground" for="site-media-search">
+                Tìm theo key / nhãn ảnh
+            </label>
+            <Input
+                id="site-media-search"
+                type="text"
+                placeholder="Ví dụ: sector.host.projects..."
+                bind:value={searchTerm}
+            />
+        </div>
+
         <div class="flex flex-col gap-10">
-            {#each placementSections as [sectionKey, block] (sectionKey)}
+            {#each filteredSections as [sectionKey, block] (sectionKey)}
                 <section class="space-y-4">
                     <div class="border-b pb-2">
                         <h2 class="text-lg font-semibold">{block.title}</h2>
+                        <p class="text-xs text-muted-foreground">{block.rows.length} vị trí ảnh</p>
                     </div>
                     <div class="grid gap-6">
                         {#each block.rows as row (row.id)}

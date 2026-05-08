@@ -109,13 +109,31 @@
                 <div class="col-xl-5">
                     <!-- About Us Image Box Start -->
                     <div class="about-us-image-box wow fadeInUp">
+                            @php
+                                $aboutImageSlides1 = array_values(array_filter([
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_1_slide_2'),
+                                ], fn ($url) => filled($url)));
+                                $aboutImageSlides2 = array_values(array_filter([
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2'),
+                                    \App\Support\SiteMedia::urlOrDefault('home.about.image_2_slide_2'),
+                                ], fn ($url) => filled($url)));
+                            @endphp
                         <!-- About Us Image Box 1 Start -->
                         <div class="about-us-image-box-1">
                             <!-- About Us Image 1 Start -->
                             <div class="about-us-image">
-                                <figure class="image-anime">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_1') }}" alt="">
-                                </figure>
+                                    <div class="swiper pyramid-journey-slider pyramid-journey-slider-1">
+                                        <div class="swiper-wrapper">
+                                            @foreach ($aboutImageSlides1 as $slideUrl)
+                                                <div class="swiper-slide">
+                                                    <figure class="image-anime">
+                                                        <img src="{{ $slideUrl }}" alt="">
+                                                    </figure>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                             </div>
                             <!-- About Us Image 1 End --> 
                         </div>
@@ -125,9 +143,17 @@
                          <div class="about-us-image-box-2">
                             <!-- About Us Image 2 Start -->
                             <div class="about-us-image">
-                                <figure class="image-anime">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_2') }}" alt="">
-                                </figure>
+                                <div class="swiper pyramid-journey-slider pyramid-journey-slider-2">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($aboutImageSlides2 as $slideUrl)
+                                            <div class="swiper-slide">
+                                                <figure class="image-anime">
+                                                    <img src="{{ $slideUrl }}" alt="">
+                                                </figure>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                             <!-- About Us Image 2 End -->
                         
@@ -1224,6 +1250,40 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    var slider1 = document.querySelector('.pyramid-journey-slider-1');
+    if (slider1 && typeof Swiper !== 'undefined') {
+        new Swiper('.pyramid-journey-slider-1', {
+            slidesPerView: 1,
+            speed: 900,
+            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+    }
+
+    var slider2 = document.querySelector('.pyramid-journey-slider-2');
+    if (slider2 && typeof Swiper !== 'undefined') {
+        new Swiper('.pyramid-journey-slider-2', {
+            slidesPerView: 1,
+            speed: 900,
+            loop: true,
+            autoplay: {
+                delay: 3800,
+                disableOnInteraction: false
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+    }
+
     var btn = document.getElementById('home-about-audio-toggle');
     var audio = document.getElementById('home-about-audio');
     if (!btn || !audio) {

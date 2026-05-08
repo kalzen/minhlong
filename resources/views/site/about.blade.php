@@ -30,14 +30,14 @@
                     <div class="about-us-image-box-1">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/about-us-image-1.jpg" alt="{{ __('site.about.image_1_alt') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.image_1') }}" alt="{{ __('site.about.image_1_alt') }}">
                             </figure>
                         </div>
                     </div>
                     <div class="about-us-image-box-2">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/about-us-image-2.jpg" alt="{{ __('site.about.image_2_alt') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.image_2') }}" alt="{{ __('site.about.image_2_alt') }}">
                             </figure>
                         </div>
                         <div class="year-experience-circle">
@@ -92,7 +92,7 @@
                         <div class="about-us-video-box">
                             <div class="about-video-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/about-intro-video-image.jpg" alt="{{ __('site.about.video_poster_alt') }}">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.video_poster') }}" alt="{{ __('site.about.video_poster_alt') }}">
                                 </figure>
                             </div>
                             <div class="video-play-button">
@@ -173,7 +173,7 @@
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/approach-item-image-1.jpg" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_1') }}" alt="">
                         </figure>
                     </div>
                     <div class="approach-item-content">
@@ -194,7 +194,7 @@
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/approach-item-image-2.jpg" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_2') }}" alt="">
                         </figure>
                     </div>
                     <div class="approach-item-content">
@@ -215,7 +215,7 @@
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/approach-item-image-3.jpg" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_3') }}" alt="">
                         </figure>
                     </div>
                     <div class="approach-item-content">

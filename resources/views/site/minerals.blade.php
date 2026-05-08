@@ -83,12 +83,12 @@
                 <div class="about-us-image-box-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-image-box-1-silver">
                         <figure class="image-anime">
-                            <img src="{{ asset('frontend/images/minerals/about-quarry-conveyors.png') }}" alt="{{ __('site.minerals.about.title') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.about_image_1') }}" alt="{{ __('site.minerals.about.title') }}">
                         </figure>
                     </div>
                     <div class="about-image-box-2-silver">
                         <figure>
-                            <img src="https://images.pexels.com/photos/4946889/pexels-photo-4946889.jpeg" alt="{{ __('site.minerals.about.title') }}" loading="lazy" decoding="async">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.about_image_2') }}" alt="{{ __('site.minerals.about.title') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="about-counter-box-silver">
@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div class="service-item-image-silver">
-                        <figure class="image-anime"><img src="https://images.pexels.com/photos/15071424/pexels-photo-15071424.jpeg" alt="{{ __('site.minerals.services.item1_title') }}" loading="lazy" decoding="async"></figure>
+                        <figure class="image-anime"><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.service_image_1') }}" alt="{{ __('site.minerals.services.item1_title') }}" loading="lazy" decoding="async"></figure>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="service-item-image-silver">
-                        <figure class="image-anime"><img src="https://images.pexels.com/photos/6553281/pexels-photo-6553281.jpeg" alt="{{ __('site.minerals.services.item2_title') }}" loading="lazy" decoding="async"></figure>
+                        <figure class="image-anime"><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.service_image_2') }}" alt="{{ __('site.minerals.services.item2_title') }}" loading="lazy" decoding="async"></figure>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="service-item-image-silver">
-                        <figure class="image-anime"><img src="https://images.pexels.com/photos/33122148/pexels-photo-33122148.jpeg" alt="{{ __('site.minerals.services.item3_title') }}" loading="lazy" decoding="async"></figure>
+                        <figure class="image-anime"><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.service_image_3') }}" alt="{{ __('site.minerals.services.item3_title') }}" loading="lazy" decoding="async"></figure>
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <div class="service-item-image-silver">
-                        <figure class="image-anime"><img src="https://images.pexels.com/photos/6034140/pexels-photo-6034140.jpeg" alt="{{ __('site.minerals.services.item4_title') }}" loading="lazy" decoding="async"></figure>
+                        <figure class="image-anime"><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.service_image_4') }}" alt="{{ __('site.minerals.services.item4_title') }}" loading="lazy" decoding="async"></figure>
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="what-we-body-silver">
                         <div class="what-we-body-image-silver">
-                            <figure><img src="https://images.pexels.com/photos/28442180/pexels-photo-28442180.jpeg" alt="{{ __('site.minerals.what_we_do.title') }}" loading="lazy" decoding="async"></figure>
+                            <figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.what_we_body_image') }}" alt="{{ __('site.minerals.what_we_do.title') }}" loading="lazy" decoding="async"></figure>
                         </div>
                         <div class="what-we-counter-box-silver">
                             <div class="what-we-counter-box-title-silver">
@@ -237,7 +237,7 @@
                     </div>
                     <div class="what-we-content-body-silver">
                         <div class="what-we-content-image-silver">
-                            <figure class="image-anime reveal"><img src="https://images.pexels.com/photos/10421754/pexels-photo-10421754.jpeg" alt="{{ __('site.minerals.what_we_do.title') }}" loading="lazy" decoding="async"></figure>
+                            <figure class="image-anime reveal"><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.what_we_content_image') }}" alt="{{ __('site.minerals.what_we_do.title') }}" loading="lazy" decoding="async"></figure>
                         </div>
                         <div class="what-we-items-btn-silver">
                             <div class="what-we-items-list-silver">

@@ -7,8 +7,9 @@ use Inertia\Testing\AssertableInertia as Assert;
 
 test('admin site media index includes section metadata per placement', function () {
     $user = User::factory()->create();
-    SiteMediaPlacement::query()->create([
+    SiteMediaPlacement::query()->updateOrCreate([
         'position_key' => 'sector.land.hero',
+    ], [
         'label' => 'Land hero',
     ]);
 
@@ -19,14 +20,18 @@ test('admin site media index includes section metadata per placement', function 
         ->assertOk()
         ->assertInertia(fn (Assert $page) => $page
             ->component('admin/SiteMedia/Index')
-            ->has('placements', 1)
-            ->has('placements.0', fn (Assert $p) => $p
-                ->where('position_key', 'sector.land.hero')
-                ->where('section', 'sectors')
-                ->where('section_order', 20)
-                ->where('section_title', 'Trang ngành (Land, Host, Power, Minerals)')
-                ->etc()
-            )
+            ->has('placements')
+            ->where('placements', function ($placements): bool {
+                $row = collect($placements)->firstWhere('position_key', 'sector.land.hero');
+                if (! is_array($row)) {
+                    return false;
+                }
+
+                return ($row['section'] ?? null) === 'sector-land'
+                    && ($row['section_order'] ?? null) === 30
+                    && ($row['section_title'] ?? null) === 'Trang Minh Long Land';
+            })
+            ->has('placements.0')
         );
 });
 

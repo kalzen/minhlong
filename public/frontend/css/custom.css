@@ -1121,6 +1121,18 @@ header.main-header .header-sticky.active{
 	border-radius: 10px;
 }
 
+.pyramid-journey-slider{
+	height: 100%;
+}
+
+.pyramid-journey-slider .swiper-wrapper{
+	height: 100%;
+}
+
+.pyramid-journey-slider .swiper-slide{
+	height: 100%;
+}
+
 .about-us-image figure{
 	height: 100%;
 	display: block;

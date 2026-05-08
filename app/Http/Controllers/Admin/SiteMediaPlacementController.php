@@ -19,8 +19,12 @@ class SiteMediaPlacementController extends Controller
     private const SECTION_META = [
         'brand' => ['order' => 0, 'title' => 'Brand & global'],
         'home' => ['order' => 10, 'title' => 'Trang chủ'],
-        'sectors' => ['order' => 20, 'title' => 'Trang ngành (Land, Host, Power, Minerals)'],
-        'seo' => ['order' => 30, 'title' => 'SEO & chia sẻ'],
+        'about' => ['order' => 20, 'title' => 'Trang About'],
+        'sector-land' => ['order' => 30, 'title' => 'Trang Minh Long Land'],
+        'sector-host' => ['order' => 40, 'title' => 'Trang Minh Long Host'],
+        'sector-power' => ['order' => 50, 'title' => 'Trang Minh Long Power'],
+        'sector-minerals' => ['order' => 60, 'title' => 'Trang Minh Long Minerals'],
+        'seo' => ['order' => 70, 'title' => 'SEO & chia sẻ'],
         'other' => ['order' => 90, 'title' => 'Khác'],
     ];
 
@@ -55,7 +59,11 @@ class SiteMediaPlacementController extends Controller
         return match (true) {
             str_starts_with($positionKey, 'brand.') => 'brand',
             str_starts_with($positionKey, 'hero.home.') || str_starts_with($positionKey, 'home.') => 'home',
-            str_starts_with($positionKey, 'sector.') => 'sectors',
+            str_starts_with($positionKey, 'about.') => 'about',
+            str_starts_with($positionKey, 'sector.land.') => 'sector-land',
+            str_starts_with($positionKey, 'sector.host.') => 'sector-host',
+            str_starts_with($positionKey, 'sector.power.') => 'sector-power',
+            str_starts_with($positionKey, 'sector.minerals.') => 'sector-minerals',
             str_starts_with($positionKey, 'og.') => 'seo',
             default => 'other',
         };
