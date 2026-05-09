@@ -56,6 +56,8 @@ return [
             'read_more' => '阅读更多',
             'view' => '查看',
             'empty' => '暂无文章。',
+            'posted_on' => '发布于',
+            'view_all' => '查看全部资讯',
         ],
         'about_section' => [
             'more_about_us' => '了解更多关于我们',

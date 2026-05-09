@@ -56,6 +56,8 @@ return [
             'read_more' => 'Đọc thêm',
             'view' => 'Xem',
             'empty' => 'Chưa có bài viết nào.',
+            'posted_on' => 'Đăng ngày',
+            'view_all' => 'Xem tất cả tin',
         ],
         'about_section' => [
             'more_about_us' => 'Về chúng tôi',

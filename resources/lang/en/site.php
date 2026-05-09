@@ -56,6 +56,8 @@ return [
             'read_more' => 'Read More',
             'view' => 'View',
             'empty' => 'No blog posts available yet.',
+            'posted_on' => 'Posted on',
+            'view_all' => 'View all news',
         ],
         'about_section' => [
             'more_about_us' => 'More About Us',

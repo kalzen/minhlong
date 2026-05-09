@@ -16,9 +16,9 @@ class HomeController extends Controller
             ->where('status', 'published')
             ->forLocale(app()->getLocale())
             ->withFeaturedMedia()
-            ->with('category')
+            ->with(['category', 'creator'])
             ->orderByLatestTranslationGroup()
-            ->limit(3)
+            ->limit(12)
             ->get();
 
         $profileDocuments = collect();
