@@ -16,7 +16,6 @@ class HomeController extends Controller
             ->where('status', 'published')
             ->forLocale(app()->getLocale())
             ->withFeaturedMedia()
-            ->with(['category', 'creator'])
             ->orderByLatestTranslationGroup()
             ->limit(12)
             ->get();

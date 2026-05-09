@@ -3149,17 +3149,9 @@ header.main-header .header-sticky.active{
 	color: var(--white-color);
 }
 
-/* Homepage blog: featured row + compact thumbnail list */
-.home-blog-featured-row{
-	margin-bottom: 10px;
-}
-
-.home-blog-featured-author{
-	font-weight: 700;
-}
-
+/* Homepage blog: compact thumbnail + title rows */
 .home-blog-compact-grid{
-	margin-top: 24px;
+	margin-top: 8px;
 }
 
 .home-blog-compact-item{
