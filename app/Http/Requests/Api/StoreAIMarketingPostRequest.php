@@ -41,14 +41,6 @@ class StoreAIMarketingPostRequest extends FormRequest
             }
         }
 
-        if (! $this->filled('thumbnail_path') && is_array($this->input('image_urls'))) {
-            foreach ($this->input('image_urls') as $url) {
-                if (is_string($url) && trim($url) !== '') {
-                    $this->merge(['thumbnail_path' => trim($url)]);
-                    break;
-                }
-            }
-        }
     }
 
     /**

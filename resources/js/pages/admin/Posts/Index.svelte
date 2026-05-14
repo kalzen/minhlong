@@ -6,13 +6,7 @@
     import { LOCALE_ORDER } from '@/lib/locale-flags';
     import { groupByTranslationGroup } from '@/lib/translation-groups';
     import { cn, toUrl } from '@/lib/utils';
-    import {
-        Card,
-        CardContent,
-        CardDescription,
-        CardHeader,
-        CardTitle,
-    } from '@/components/ui/card';
+    import { Badge } from '@/components/ui/badge';
     import {
         Table,
         TableBody,
@@ -32,6 +26,7 @@
         slug: string;
         locale: string;
         status: string;
+        updated_at: string;
         translation_group_id: string | null;
         category?: { name: string } | null;
     };
@@ -57,7 +52,34 @@
         { title: 'Posts', href: toUrl(posts.index()) },
     ];
 
-    const groups = $derived(groupByTranslationGroup(postPaginator.data));
+    function maxUpdatedAtMs(group: { posts: PostRow[] }): number {
+        return Math.max(...group.posts.map((p) => new Date(p.updated_at).getTime()));
+    }
+
+    /** Nhóm có chỉnh sửa gần đây nhất lên trước (đồng bộ với sort backend). */
+    const groups = $derived.by(() => {
+        const list = groupByTranslationGroup(postPaginator.data);
+
+        return [...list].sort((a, b) => maxUpdatedAtMs(b) - maxUpdatedAtMs(a));
+    });
+
+    function formatDateTime(iso: string): string {
+        try {
+            return new Intl.DateTimeFormat('vi-VN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            }).format(new Date(iso));
+        } catch {
+            return iso;
+        }
+    }
+
+    function groupActivityDisplay(group: { posts: PostRow[] }): string {
+        return formatDateTime(new Date(maxUpdatedAtMs(group)).toISOString());
+    }
     const processingLocaleByGroup = $state<Record<string, string | null>>({});
     const selectedLocaleByGroup = $state<Record<string, string>>({});
     const localeColumns = LOCALE_ORDER;
@@ -168,7 +190,7 @@
 <AppHead title="Posts" />
 
 <AppLayout {breadcrumbs}>
-    <div class="mx-auto flex max-w-6xl flex-col gap-6 p-4 md:p-6">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 p-4 md:p-6">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <h1 class="text-2xl font-semibold tracking-tight">Blog posts</h1>
@@ -178,7 +200,7 @@
             </div>
             <Link
                 href={toUrl(posts.create())}
-                class="inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
+                class="inline-flex h-10 cursor-pointer items-center justify-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
             >
                 New post
             </Link>
@@ -189,7 +211,7 @@
             <Link
                 href={toUrl(posts.index())}
                 class={cn(
-                    'inline-flex h-8 items-center rounded-full border px-3 text-xs font-medium transition',
+                    'inline-flex h-8 cursor-pointer items-center rounded-full border px-3 text-xs font-medium transition-colors',
                     !filters.locale
                         ? 'border-primary bg-primary/10 text-primary'
                         : 'border-border bg-background hover:bg-muted/60',
@@ -220,54 +242,83 @@
                 Chưa có bài viết nào. Tạo bài mới để bắt đầu.
             </div>
         {:else}
-        <Card class="overflow-hidden shadow-sm">
-            <CardHeader class="border-b bg-muted/20 py-4">
-                <CardTitle class="text-base">Danh sách nhóm bài viết</CardTitle>
-                <CardDescription>Mỗi nhóm là 1 dòng. Bấm cờ để sửa hoặc tự dịch AI.</CardDescription>
-            </CardHeader>
-            <CardContent class="p-0">
+            <div
+                class="overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm"
+            >
+                <div
+                    class="flex flex-col gap-1 border-b border-border bg-muted/30 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+                >
+                    <div>
+                        <h2 class="text-sm font-semibold tracking-tight">Danh sách nhóm bài viết</h2>
+                        <p class="text-xs text-muted-foreground">
+                            Ưu tiên nhóm có <strong>cập nhật gần nhất</strong>. Bấm cờ để sửa hoặc tạo bản dịch AI.
+                        </p>
+                    </div>
+                    {#if postPaginator.total != null}
+                        <span class="text-xs tabular-nums text-muted-foreground">
+                            {postPaginator.total} bản ghi
+                        </span>
+                    {/if}
+                </div>
                 <Table>
-                    <TableHeader>
-                        <TableRow class="hover:bg-transparent">
-                            <TableHead class="w-[170px]">Nhóm</TableHead>
-                            <TableHead>Tiêu đề đại diện</TableHead>
-                            <TableHead class="hidden md:table-cell w-[140px]">Danh mục</TableHead>
-                            <TableHead class="w-[320px]">Ngôn ngữ</TableHead>
-                            <TableHead class="w-[260px] text-right">Thao tác</TableHead>
+                    <TableHeader
+                        class="sticky top-0 z-10 bg-muted/95 shadow-[0_1px_0_hsl(var(--border))] backdrop-blur-sm [&_tr]:border-b [&_tr]:hover:bg-transparent"
+                    >
+                        <TableRow>
+                            <TableHead class="w-[88px] whitespace-nowrap py-3">Nhóm</TableHead>
+                            <TableHead class="w-[138px] whitespace-nowrap py-3">Cập nhật</TableHead>
+                            <TableHead class="min-w-[12rem] py-3">Tiêu đề</TableHead>
+                            <TableHead class="hidden w-[7.5rem] py-3 lg:table-cell">Danh mục</TableHead>
+                            <TableHead class="min-w-[11rem] py-3">Ngôn ngữ</TableHead>
+                            <TableHead class="w-[6.5rem] whitespace-nowrap py-3">Trạng thái</TableHead>
+                            <TableHead class="w-[15rem] py-3 text-right">Thao tác</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {#each groups as group (group.key)}
-                            <TableRow>
-                                <TableCell>
+                            <TableRow
+                                class="cursor-default border-b border-border/80 odd:bg-muted/15 transition-colors hover:bg-muted/40"
+                            >
+                                <TableCell class="align-top font-mono text-xs text-muted-foreground">
                                     {#if group.translation_group_id}
-                                        <div class="font-mono text-xs text-muted-foreground">
-                                            {shortGroupId(group.translation_group_id)}
-                                        </div>
+                                        <span title={group.translation_group_id}
+                                            >{shortGroupId(group.translation_group_id)}</span
+                                        >
                                     {:else}
-                                        <span class="text-xs text-muted-foreground">single</span>
+                                        <span title="Không gộp nhóm">—</span>
                                     {/if}
                                 </TableCell>
-                                <TableCell class="max-w-[min(100vw,30rem)] whitespace-normal">
-                                    <span class="font-medium">{primaryPost(group).title}</span>
-                                    <div class="mt-0.5 font-mono text-[11px] text-muted-foreground">
+                                <TableCell
+                                    class="align-top text-xs tabular-nums text-muted-foreground"
+                                    title="Mới nhất trong nhóm (theo updated_at)"
+                                >
+                                    {groupActivityDisplay(group)}
+                                </TableCell>
+                                <TableCell class="align-top">
+                                    <span class="line-clamp-2 font-medium leading-snug" title={primaryPost(group).title}
+                                        >{primaryPost(group).title}</span
+                                    >
+                                    <div class="mt-1 font-mono text-[11px] text-muted-foreground">
                                         /{primaryPost(group).slug}
                                     </div>
                                 </TableCell>
-                                <TableCell class="hidden text-muted-foreground md:table-cell">
+                                <TableCell
+                                    class="hidden align-top text-muted-foreground lg:table-cell lg:max-w-[10rem] lg:truncate"
+                                    title={primaryPost(group).category?.name ?? ''}
+                                >
                                     {primaryPost(group).category?.name ?? '—'}
                                 </TableCell>
-                                <TableCell>
-                                    <div class="flex flex-wrap items-center gap-2">
+                                <TableCell class="align-top">
+                                    <div class="flex flex-wrap gap-1.5">
                                         {#each localeColumns as locale (locale)}
                                             {@const localePost = postByLocale(group, locale)}
                                             <button
                                                 type="button"
                                                 class={cn(
-                                                    'inline-flex h-8 items-center gap-1.5 rounded-full border px-2.5 text-xs font-medium transition disabled:opacity-60',
+                                                    'inline-flex h-8 cursor-pointer items-center gap-1 rounded-full border px-2 text-xs font-medium transition disabled:cursor-not-allowed disabled:opacity-60',
                                                     localePost
-                                                        ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
-                                                        : 'border-destructive/30 bg-destructive/5 text-destructive hover:bg-destructive/10',
+                                                        ? 'border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100'
+                                                        : 'border-destructive/25 bg-destructive/5 text-destructive hover:bg-destructive/10',
                                                 )}
                                                 disabled={processingLocaleByGroup[group.key] != null}
                                                 onclick={() => onLocaleClick(group, locale)}
@@ -275,33 +326,50 @@
                                                 <LocaleFlag locale={locale} size="sm" />
                                                 <span class="uppercase">{locale}</span>
                                                 {#if localePost}
-                                                    <Check class="h-3.5 w-3.5" />
+                                                    <Check class="h-3.5 w-3.5 shrink-0" />
                                                 {:else}
-                                                    <X class="h-3.5 w-3.5" />
+                                                    <X class="h-3.5 w-3.5 shrink-0" />
                                                 {/if}
                                             </button>
                                         {/each}
                                     </div>
                                 </TableCell>
-                                <TableCell class="text-right">
-                                    <div class="flex flex-wrap justify-end gap-2">
+                                <TableCell class="align-top">
+                                    {#if primaryPost(group).status === 'published'}
+                                        <Badge
+                                            variant="outline"
+                                            class="border-emerald-300/80 bg-emerald-50 text-emerald-900"
+                                        >
+                                            Xuất bản
+                                        </Badge>
+                                    {:else}
+                                        <Badge
+                                            variant="outline"
+                                            class="border-amber-300/80 bg-amber-50 text-amber-950"
+                                        >
+                                            Bản nháp
+                                        </Badge>
+                                    {/if}
+                                </TableCell>
+                                <TableCell class="align-top text-right">
+                                    <div class="flex flex-wrap justify-end gap-1.5">
                                         <Link
                                             href={toUrl(posts.edit({ post: primaryPost(group).id }))}
-                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-primary hover:underline"
+                                            class="inline-flex h-8 cursor-pointer items-center rounded-md px-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
                                         >
-                                            Edit
+                                            Sửa
                                         </Link>
                                         {#if missingLocales(group.locales).length > 0}
                                             <button
                                                 type="button"
-                                                class="inline-flex h-8 items-center rounded-md border border-primary/40 bg-primary/5 px-2 text-sm font-medium text-primary hover:bg-primary/10 disabled:opacity-60"
+                                                class="inline-flex h-8 cursor-pointer items-center rounded-md border border-primary/40 bg-primary/5 px-2 text-sm font-medium text-primary hover:bg-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
                                                 disabled={processingLocaleByGroup[group.key] !== null}
                                                 onclick={() => autoTranslateMissing(group)}
                                             >
                                                 Dịch tự động
                                             </button>
                                             <select
-                                                class="h-8 rounded-md border bg-background px-2 text-xs"
+                                                class="h-8 cursor-pointer rounded-md border border-input bg-background px-2 text-xs"
                                                 value={selectedMissingLocale(group)}
                                                 onchange={(event) =>
                                                     (selectedLocaleByGroup[group.key] = (
@@ -315,19 +383,19 @@
                                             </select>
                                             <button
                                                 type="button"
-                                                class="inline-flex h-8 items-center rounded-md border px-2 text-sm font-medium hover:bg-muted disabled:opacity-60"
+                                                class="inline-flex h-8 cursor-pointer items-center rounded-md border border-border px-2 text-sm font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-60"
                                                 disabled={processingLocaleByGroup[group.key] != null}
                                                 onclick={() => addLocale(group)}
                                             >
-                                                Thêm ngôn ngữ
+                                                Thêm
                                             </button>
                                         {/if}
                                         <button
                                             type="button"
-                                            class="inline-flex h-8 items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"
+                                            class="inline-flex h-8 cursor-pointer items-center rounded-md px-2 text-sm font-medium text-destructive hover:underline"
                                             onclick={() => remove(primaryPost(group).id)}
                                         >
-                                            Delete
+                                            Xóa
                                         </button>
                                     </div>
                                 </TableCell>
@@ -335,8 +403,7 @@
                         {/each}
                     </TableBody>
                 </Table>
-            </CardContent>
-        </Card>
+            </div>
         {/if}
 
         {#if postPaginator.links && postPaginator.links.length > 0}
@@ -349,7 +416,7 @@
                         <Link
                             href={toUrl(link.url)}
                             class={cn(
-                                'inline-flex min-w-9 items-center justify-center rounded-md border px-2 py-1.5 text-sm transition',
+                                'inline-flex min-w-9 cursor-pointer items-center justify-center rounded-md border px-2 py-1.5 text-sm transition-colors',
                                 link.active
                                     ? 'border-primary bg-primary text-primary-foreground'
                                     : 'border-transparent bg-background hover:bg-muted',

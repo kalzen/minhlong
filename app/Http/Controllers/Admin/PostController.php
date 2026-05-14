@@ -32,10 +32,7 @@ class PostController extends Controller
         $posts = Post::query()
             ->with('category')
             ->when($request->string('locale')->toString(), fn ($q, $locale) => $q->where('locale', $locale))
-            ->orderByRaw('CASE WHEN translation_group_id IS NULL THEN 1 ELSE 0 END')
-            ->orderBy('translation_group_id')
-            ->orderBy('locale')
-            ->orderByDesc('updated_at')
+            ->orderByLatestTranslationGroupActivity()
             ->paginate(20)
             ->withQueryString();
 

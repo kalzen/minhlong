@@ -1,8 +1,18 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use App\Services\PostAutoTranslationService;
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+
+beforeEach(function () {
+    User::factory()->create([
+        'name' => 'Author One',
+        'email' => 'author-one-aimarketing@example.test',
+    ]);
+});
 
 test('aimarketing api rejects invalid token', function () {
     config(['services.aimarketing.api_token' => 'secret-token']);
@@ -13,7 +23,7 @@ test('aimarketing api rejects invalid token', function () {
     ])->assertUnauthorized();
 });
 
-test('aimarketing api creates vi post and auto creates en zh with shared thumbnail', function () {
+test('aimarketing api creates vi post and en zh translations', function () {
     config(['services.aimarketing.api_token' => 'secret-token']);
 
     app()->bind(PostAutoTranslationService::class, function () {
@@ -34,10 +44,12 @@ test('aimarketing api creates vi post and auto creates en zh with shared thumbna
                         'slug' => Str::slug($locale.'-'.$sourcePost->title),
                         'excerpt' => $sourcePost->excerpt,
                         'content' => $sourcePost->content,
+                        'thumbnail_path' => $sourcePost->thumbnail_path,
                         'status' => $publishTranslated ? 'published' : $sourcePost->status,
                         'published_at' => $publishTranslated ? now() : $sourcePost->published_at,
                         'meta_title' => $sourcePost->meta_title,
                         'meta_description' => $sourcePost->meta_description,
+                        'created_by' => $sourcePost->created_by,
                     ]);
                 }
 
@@ -62,6 +74,7 @@ test('aimarketing api creates vi post and auto creates en zh with shared thumbna
         ->assertJsonStructure([
             'url',
             'translation_group_id',
+            'translation' => ['status', 'reason', 'translated_locales'],
         ]);
 
     $groupId = $response->json('translation_group_id');
@@ -74,11 +87,22 @@ test('aimarketing api creates vi post and auto creates en zh with shared thumbna
     expect($posts)->toHaveCount(3);
     expect($posts->pluck('locale')->all())->toBe(['en', 'vi', 'zh']);
     expect($posts->pluck('thumbnail_path')->unique()->all())->toBe(['frontend/images/post-1.jpg']);
+    expect($posts->pluck('created_by')->unique()->all())->toBe([1]);
     expect($response->json('url'))->toContain('/blog/');
 });
 
 test('aimarketing api accepts body description faq image_urls payload', function () {
     config(['services.aimarketing.api_token' => 'secret-token']);
+
+    $pngBody = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
+
+    Http::fake(function (Request $request) use ($pngBody) {
+        if (str_contains($request->url(), 'cdn.example.com')) {
+            return Http::response($pngBody, 200, ['Content-Type' => 'image/png']);
+        }
+
+        return Http::response('not found', 404);
+    });
 
     app()->bind(PostAutoTranslationService::class, function () {
         return new class extends PostAutoTranslationService
@@ -98,10 +122,12 @@ test('aimarketing api accepts body description faq image_urls payload', function
                         'slug' => Str::slug($locale.'-'.$sourcePost->title),
                         'excerpt' => $sourcePost->excerpt,
                         'content' => $sourcePost->content,
+                        'thumbnail_path' => $sourcePost->thumbnail_path,
                         'status' => $publishTranslated ? 'published' : $sourcePost->status,
                         'published_at' => $publishTranslated ? now() : $sourcePost->published_at,
                         'meta_title' => $sourcePost->meta_title,
                         'meta_description' => $sourcePost->meta_description,
+                        'created_by' => $sourcePost->created_by,
                     ]);
                 }
 
@@ -136,7 +162,9 @@ test('aimarketing api accepts body description faq image_urls payload', function
     $vi = Post::query()->where('translation_group_id', $groupId)->where('locale', 'vi')->first();
 
     expect($vi)->not->toBeNull();
-    expect($vi->thumbnail_path)->toBe($thumbUrl);
+    expect($vi->created_by)->toBe(1);
+    expect($vi->thumbnail_path)->toBeNull();
+    expect($vi->getMedia('featured'))->not->toBeEmpty();
     expect($vi->excerpt)->toBe('Tóm tắt ngắn hiển thị meta description');
     expect($vi->meta_description)->toBe('Tóm tắt ngắn hiển thị meta description');
     expect($vi->content)->toContain('<p>Đoạn mở đầu...</p>');

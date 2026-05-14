@@ -37,6 +37,8 @@ return [
 
     'aimarketing' => [
         'api_token' => env('AIMARKETING_API_TOKEN'),
+        /** User id stored as post author (created_by) for AI Marketing API posts. */
+        'author_user_id' => (int) env('AIMARKETING_AUTHOR_USER_ID', 1),
     ],
 
 ];

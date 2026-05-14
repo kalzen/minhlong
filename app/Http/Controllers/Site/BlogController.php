@@ -59,6 +59,13 @@ class BlogController extends Controller
                 }
             }
 
+            if ($otherLocalePost instanceof Post && $otherLocalePost->locale !== $locale) {
+                session(['locale' => $otherLocalePost->locale]);
+                app()->setLocale($otherLocalePost->locale);
+
+                return redirect()->route('site.blog.show', ['slug' => $otherLocalePost->slug]);
+            }
+
             abort(404);
         }
 

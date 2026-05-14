@@ -47,6 +47,28 @@ test('blog show redirects to localized sibling when slug is for another locale',
         ->assertRedirect(route('site.blog.show', ['slug' => 'tieu-de-vi']));
 });
 
+test('blog show switches session locale when post exists only in another locale for slug', function () {
+    Post::query()->create([
+        'category_id' => null,
+        'translation_group_id' => (string) Str::uuid(),
+        'locale' => 'vi',
+        'title' => 'Chỉ tiếng Việt',
+        'slug' => 'chi-tieng-viet-only',
+        'excerpt' => 'e',
+        'content' => '<p>c</p>',
+        'status' => 'published',
+        'published_at' => now(),
+    ]);
+
+    $this->withSession(['locale' => 'en'])
+        ->get(route('site.blog.show', ['slug' => 'chi-tieng-viet-only']))
+        ->assertRedirect(route('site.blog.show', ['slug' => 'chi-tieng-viet-only']));
+
+    $this->get(route('site.blog.show', ['slug' => 'chi-tieng-viet-only']))
+        ->assertOk()
+        ->assertSee('Chỉ tiếng Việt', false);
+});
+
 test('home lists only posts for session locale', function () {
     Post::query()->create([
         'category_id' => null,

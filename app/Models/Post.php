@@ -100,6 +100,27 @@ class Post extends Model implements HasMedia
     }
 
     /**
+     * Admin listing: newest group activity first (max updated_at among siblings).
+     *
+     * @param  Builder<Post>  $query
+     * @return Builder<Post>
+     */
+    public function scopeOrderByLatestTranslationGroupActivity(Builder $query): Builder
+    {
+        return $query
+            ->orderByRaw(
+                'COALESCE((
+                    select max(grouped.updated_at)
+                    from posts as grouped
+                    where grouped.translation_group_id = posts.translation_group_id
+                ), posts.updated_at) DESC'
+            )
+            ->orderByRaw('CASE WHEN translation_group_id IS NULL THEN 1 ELSE 0 END')
+            ->orderBy('translation_group_id')
+            ->orderBy('locale');
+    }
+
+    /**
      * Sort locale records by newest activity of their translation group first.
      *
      * For translated posts, the newest publish/create time among sibling locales

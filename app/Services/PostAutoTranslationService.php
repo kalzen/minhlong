@@ -74,31 +74,37 @@ class PostAutoTranslationService
             ];
         }
 
-        $apiKey = UserAiApiKey::query()
-            ->where('user_id', $userId)
-            ->where('is_active', true)
-            ->orderByDesc('is_default')
-            ->orderByDesc('id')
-            ->first();
-
-        $providerName = $apiKey?->provider ?? (string) config('ai.default', 'openai');
-        $provider = $this->labFromProvider($providerName);
-        $model = $apiKey?->model ?: $this->defaultModelForProvider($providerName);
+        $apiKey = $this->resolveUserAiApiKeyForTranslation($sourcePost, $userId);
 
         if ($apiKey instanceof UserAiApiKey) {
+            $providerName = (string) $apiKey->provider;
+            $provider = $this->labFromProvider($providerName);
+            $model = $apiKey->model ?: $this->defaultModelForProvider($providerName);
+
             config([
                 "ai.providers.{$providerName}.key" => $apiKey->api_key,
                 'ai.default' => $providerName,
             ]);
-        }
 
-        $providerKey = config("ai.providers.{$providerName}.key");
-        if (! is_string($providerKey) || trim($providerKey) === '') {
-            return [
-                'status' => 'skipped',
-                'reason' => 'missing_provider_key',
-                'translated_locales' => [],
-            ];
+            $providerKey = config("ai.providers.{$providerName}.key");
+            if (! is_string($providerKey) || trim($providerKey) === '') {
+                return [
+                    'status' => 'skipped',
+                    'reason' => 'missing_provider_key',
+                    'translated_locales' => [],
+                ];
+            }
+        } else {
+            $resolved = $this->resolveProviderFromApplicationConfig();
+            if ($resolved === null) {
+                return [
+                    'status' => 'skipped',
+                    'reason' => 'missing_provider_key',
+                    'translated_locales' => [],
+                ];
+            }
+
+            [$providerName, $provider, $model] = $resolved;
         }
 
         $translatedLocales = [];
@@ -188,6 +194,35 @@ class PostAutoTranslationService
         ];
     }
 
+    /**
+     * Resolve an API key row for translation. Logged-in flows use that user's keys.
+     * AI Marketing API uses userId 0: keys come from the post author's user_ai_api_keys
+     * (created_by), falling back to AIMARKETING_AUTHOR_USER_ID when created_by is empty.
+     */
+    private function resolveUserAiApiKeyForTranslation(Post $sourcePost, int $userId): ?UserAiApiKey
+    {
+        if ($userId > 0) {
+            return UserAiApiKey::query()
+                ->where('user_id', $userId)
+                ->where('is_active', true)
+                ->orderByDesc('is_default')
+                ->orderByDesc('id')
+                ->first();
+        }
+
+        $authorUserId = (int) ($sourcePost->created_by ?? 0);
+        if ($authorUserId <= 0) {
+            $authorUserId = (int) config('services.aimarketing.author_user_id', 1);
+        }
+
+        return UserAiApiKey::query()
+            ->where('user_id', $authorUserId)
+            ->where('is_active', true)
+            ->orderByDesc('is_default')
+            ->orderByDesc('id')
+            ->first();
+    }
+
     private function uniqueSlug(string $title, string $locale): string
     {
         $baseSlug = Str::slug($title);
@@ -203,6 +238,44 @@ class PostAutoTranslationService
         }
 
         return $candidate;
+    }
+
+    /**
+     * Fallback when no matching row in user_ai_api_keys: use keys from config/ai.php.
+     * Tries `ai.default` first when it has a key, then other providers supported by PostTranslationAgent.
+     *
+     * @return array{0: string, 1: Lab, 2: string}|null
+     */
+    private function resolveProviderFromApplicationConfig(): ?array
+    {
+        $translationProviders = [
+            'openai',
+            'anthropic',
+            'gemini',
+            'xai',
+            'deepseek',
+            'groq',
+            'mistral',
+        ];
+
+        $default = (string) config('ai.default', 'openai');
+        $tryOrder = array_values(array_unique(array_merge(
+            in_array($default, $translationProviders, true) ? [$default] : [],
+            $translationProviders,
+        )));
+
+        foreach ($tryOrder as $name) {
+            $key = config("ai.providers.{$name}.key");
+            if (is_string($key) && trim($key) !== '') {
+                return [
+                    $name,
+                    $this->labFromProvider($name),
+                    $this->defaultModelForProvider($name),
+                ];
+            }
+        }
+
+        return null;
     }
 
     private function buildPrompt(Post $sourcePost, string $targetLocale): string
