@@ -86,6 +86,7 @@ class BlogController extends Controller
             'metaDescription' => $post->meta_description ?? $post->excerpt,
             'post' => $post,
             'hreflangAlternates' => $alternates,
+            'ogImageUrl' => $post->publicFeaturedImageUrl(),
         ]);
     }
 }

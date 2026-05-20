@@ -13,7 +13,10 @@
         $documentTitle = $useHomeMetaTitle
             ? $globalMetaTitle
             : (($metaTitle ?? $title ?? $globalMetaTitle ?? $siteName).' - '.$siteName);
-        $ogImageRaw = \App\Support\SiteMedia::urlOrDefault('og.default_image');
+        $ogOverride = trim((string) ($ogImageUrl ?? ''));
+        $ogImageRaw = $ogOverride !== ''
+            ? $ogOverride
+            : \App\Support\SiteMedia::urlOrDefault('og.default_image');
         $ogImageAbsolute = $ogImageRaw !== '' ? \App\Support\SiteMedia::absoluteUrl($ogImageRaw) : '';
     @endphp
     <meta charset="utf-8">
