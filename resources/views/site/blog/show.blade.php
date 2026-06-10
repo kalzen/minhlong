@@ -9,13 +9,13 @@
 @endpush
 
 @section('content')
-<div class="page-header parallaxie">
+<div class="page-header parallaxie page-header--article">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header-box">
-                    <h1 class="text-anime-style-3" data-cursor="-opaque">{{ $post->title }}</h1>
-                    <div class="post-single-meta wow fadeInUp">
+                    <h1 class="text-anime-style-3 post-article__title" data-cursor="-opaque">{{ $post->title }}</h1>
+                    <div class="post-single-meta post-article__meta wow fadeInUp">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('site.nav.home') }}</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('site.blog.index') }}">{{ __('site.breadcrumb.blog') }}</a></li>
@@ -44,10 +44,10 @@
         </div>
     </div>
 </div>
-<div class="page-single-post">
+<div class="page-single-post post-article">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
                 @php
                     $featuredHeroUrl = $post->publicFeaturedImageUrl();
                 @endphp
@@ -58,8 +58,8 @@
                     </figure>
                 </div>
                 @endif
-                <div class="post-content">
-                    <div class="post-entry">
+                <div class="post-content post-article__content">
+                    <div class="post-entry post-article__entry">
                         {!! $post->content !!}
                     </div>
                 </div>
