@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\SiteMedia;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,8 +10,10 @@ use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Post extends Model implements HasMedia
+class Post extends Model implements HasMedia, Sitemapable
 {
     use InteractsWithMedia;
 
@@ -169,5 +172,35 @@ class Post extends Model implements HasMedia
         }
 
         return null;
+    }
+
+    public function toSitemapTag(): Url
+    {
+        $tag = Url::create(route('site.blog.show', ['slug' => $this->slug]))
+            ->setLastModificationDate($this->updated_at)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+            ->setPriority(0.8);
+
+        if ($this->translation_group_id !== null) {
+            $siblings = self::query()
+                ->where('translation_group_id', $this->translation_group_id)
+                ->where('status', 'published')
+                ->whereKeyNot($this->getKey())
+                ->get(['locale', 'slug']);
+
+            foreach ($siblings as $sibling) {
+                $tag->addAlternate(
+                    route('site.blog.show', ['slug' => $sibling->slug]),
+                    $sibling->locale
+                );
+            }
+        }
+
+        $featuredImage = $this->publicFeaturedImageUrl();
+        if (filled($featuredImage)) {
+            $tag->addImage(SiteMedia::absoluteUrl($featuredImage), $this->title);
+        }
+
+        return $tag;
     }
 }

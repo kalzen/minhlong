@@ -7,10 +7,38 @@ use App\Http\Controllers\Site\LibraryController;
 use App\Models\AccessLog;
 use App\Models\ActivityLog;
 use App\Models\User;
+use App\Sitemap\SiteSitemapBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/robots.txt', function () {
+    $lines = [
+        'User-agent: *',
+        'Disallow: /admin',
+        'Disallow: /dashboard',
+        'Disallow: /settings',
+        '',
+        'Sitemap: '.url('/sitemap.xml'),
+    ];
+
+    return response(implode("\n", $lines), 200, [
+        'Content-Type' => 'text/plain; charset=UTF-8',
+    ]);
+})->name('site.robots');
+
+Route::get('/sitemap.xml', function (SiteSitemapBuilder $builder) {
+    $path = public_path('sitemap.xml');
+
+    if (! is_file($path)) {
+        $builder->writeToPublic();
+    }
+
+    return response()->file($path, [
+        'Content-Type' => 'application/xml; charset=UTF-8',
+    ]);
+})->name('site.sitemap');
 Route::view('/gioi-thieu', 'site.about', ['title' => 'About Us'])->name('site.about');
 Route::view('/dich-vu', 'site.services', ['title' => 'Services'])->name('site.services');
 Route::view('/minh-long-land', 'site.land', ['title' => 'Minh Long Land'])->name('site.land');
