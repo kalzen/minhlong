@@ -23,6 +23,37 @@ test('aimarketing api rejects invalid token', function () {
     ])->assertUnauthorized();
 });
 
+test('aimarketing api validation failure returns json errors without accept header', function () {
+    config(['services.aimarketing.api_token' => 'secret-token']);
+
+    $this->withHeaders([
+        'Authorization' => 'Bearer secret-token',
+        'Accept' => 'text/html',
+        'Content-Type' => 'application/json',
+    ])
+        ->call(
+            'POST',
+            '/api/posts',
+            [],
+            [],
+            [],
+            [
+                'CONTENT_TYPE' => 'application/json',
+                'HTTP_ACCEPT' => 'text/html',
+                'HTTP_AUTHORIZATION' => 'Bearer secret-token',
+            ],
+            json_encode([
+                'title' => 'Chỉ có title, thiếu body/content',
+                'description' => 'Mô tả',
+            ], JSON_THROW_ON_ERROR)
+        )
+        ->assertUnprocessable()
+        ->assertJsonStructure([
+            'message',
+            'errors' => ['content'],
+        ]);
+});
+
 test('aimarketing api creates vi post and en zh translations', function () {
     config(['services.aimarketing.api_token' => 'secret-token']);
 
