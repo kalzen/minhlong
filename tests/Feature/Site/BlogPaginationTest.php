@@ -20,7 +20,8 @@ test('blog index renders theme pagination markup when there are multiple pages',
     $this->get(route('site.blog.index'))
         ->assertOk()
         ->assertSee('page-pagination', false)
-        ->assertSee('fa-angle-right', false)
+        ->assertSee('page-pagination-list', false)
+        ->assertSee('rel="next"', false)
         ->assertSee('class="active"', false)
-        ->assertDontSee('aria-label="Pagination Navigation"', false);
+        ->assertDontSee('fa-angle-right', false);
 });

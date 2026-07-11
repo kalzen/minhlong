@@ -4566,7 +4566,8 @@ header.main-header .header-sticky.active{
     text-align: center;
 }
 
-.page-pagination ul{
+.page-pagination ul,
+.page-pagination .page-pagination-list{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -4578,7 +4579,9 @@ header.main-header .header-sticky.active{
 }
 
 .page-pagination ul li a,
-.page-pagination ul li span{
+.page-pagination ul li span,
+.page-pagination .page-pagination-list li a,
+.page-pagination .page-pagination-list li span{
     display: flex;
     text-decoration: none;
     justify-content: center;
@@ -4595,14 +4598,26 @@ header.main-header .header-sticky.active{
 	cursor: pointer;
 }
 
-.page-pagination ul li.disabled span{
+.page-pagination ul li a svg,
+.page-pagination ul li span svg,
+.page-pagination .page-pagination-list li a svg,
+.page-pagination .page-pagination-list li span svg{
+	display: block;
+	flex-shrink: 0;
+}
+
+.page-pagination ul li.disabled span,
+.page-pagination .page-pagination-list li.disabled span{
 	opacity: 0.45;
 	cursor: default;
 }
 
 .page-pagination ul li.active span,
 .page-pagination ul li.active a,
-.page-pagination ul li a:hover{
+.page-pagination ul li a:hover,
+.page-pagination .page-pagination-list li.active span,
+.page-pagination .page-pagination-list li.active a,
+.page-pagination .page-pagination-list li a:hover{
     background: var(--accent-color);
 	color: var(--primary-color);
 }
