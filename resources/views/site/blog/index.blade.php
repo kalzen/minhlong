@@ -70,8 +70,8 @@
         </div>
         @if($posts->hasPages())
         <div class="row">
-            <div class="col-12 d-flex justify-content-center mt-4">
-                {{ $posts->links() }}
+            <div class="col-lg-12">
+                {{ $posts->onEachSide(1)->links('vendor.pagination.minhlong') }}
             </div>
         </div>
         @endif
