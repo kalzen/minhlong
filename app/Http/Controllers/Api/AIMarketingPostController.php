@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreAIMarketingPostRequest;
+use App\Jobs\TranslatePostLocalesJob;
 use App\Models\Post;
 use App\Services\PostAimarketingImageSync;
-use App\Services\PostAutoTranslationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +14,8 @@ use Illuminate\Support\Str;
 
 class AIMarketingPostController extends Controller
 {
-    public function __invoke(
-        StoreAIMarketingPostRequest $request,
-        PostAutoTranslationService $postAutoTranslationService
-    ): JsonResponse {
+    public function __invoke(StoreAIMarketingPostRequest $request): JsonResponse
+    {
         $data = $request->validated();
         $translationGroupId = (string) Str::uuid();
         $publishedAt = isset($data['published_at']) ? Carbon::parse($data['published_at']) : now();
@@ -31,23 +29,16 @@ class AIMarketingPostController extends Controller
             ));
         }
 
-        $translationPayload = [
-            'status' => 'skipped',
-            'reason' => null,
-            'translated_locales' => [],
-        ];
+        $authorUserId = (int) config('services.aimarketing.author_user_id', 1);
 
         $viPost = DB::transaction(function () use (
             $data,
             $translationGroupId,
             $publishedAt,
             $status,
-            $postAutoTranslationService,
             $imageUrls,
-            &$translationPayload
+            $authorUserId
         ): Post {
-            $authorUserId = (int) config('services.aimarketing.author_user_id', 1);
-
             $viPost = Post::query()->create([
                 'category_id' => $data['category_id'] ?? null,
                 'translation_group_id' => $translationGroupId,
@@ -64,35 +55,29 @@ class AIMarketingPostController extends Controller
                 'created_by' => $authorUserId > 0 ? $authorUserId : null,
             ]);
 
+            // Featured/content images for the VI post only — keep this request fast.
             PostAimarketingImageSync::sync($viPost, $imageUrls);
-
-            $translationPayload = $postAutoTranslationService->translatePostToLocales(
-                $viPost->fresh(),
-                0,
-                ['en', 'zh'],
-                true
-            );
-
-            Post::query()
-                ->where('translation_group_id', $translationGroupId)
-                ->each(function (Post $post) use ($imageUrls): void {
-                    PostAimarketingImageSync::sync($post, $imageUrls);
-                });
-
-            Post::query()
-                ->where('translation_group_id', $translationGroupId)
-                ->whereIn('locale', ['en', 'zh'])
-                ->update([
-                    'category_id' => $viPost->category_id,
-                ]);
 
             return $viPost->fresh();
         });
 
+        // AI translation (en/zh) is slow; run after the HTTP response so clients do not hit cURL 28.
+        TranslatePostLocalesJob::dispatch(
+            $viPost->id,
+            $authorUserId > 0 ? $authorUserId : 0,
+            ['en', 'zh'],
+            true,
+            $imageUrls,
+        )->afterCommit()->afterResponse();
+
         return response()->json([
             'url' => route('site.blog.show', ['slug' => $viPost->slug]),
             'translation_group_id' => $viPost->translation_group_id,
-            'translation' => $translationPayload,
+            'translation' => [
+                'status' => 'queued',
+                'reason' => null,
+                'translated_locales' => [],
+            ],
         ]);
     }
 

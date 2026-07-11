@@ -106,7 +106,8 @@ test('aimarketing api creates vi post and en zh translations', function () {
             'url',
             'translation_group_id',
             'translation' => ['status', 'reason', 'translated_locales'],
-        ]);
+        ])
+        ->assertJsonPath('translation.status', 'queued');
 
     $groupId = $response->json('translation_group_id');
 
@@ -115,6 +116,7 @@ test('aimarketing api creates vi post and en zh translations', function () {
         ->orderBy('locale')
         ->get();
 
+    // With QUEUE_CONNECTION=sync, afterResponse still runs the job before the test ends.
     expect($posts)->toHaveCount(3);
     expect($posts->pluck('locale')->all())->toBe(['en', 'vi', 'zh']);
     expect($posts->pluck('thumbnail_path')->unique()->all())->toBe(['frontend/images/post-1.jpg']);

@@ -92,7 +92,7 @@ final class PostAimarketingImageSync
     private static function attachFromRemoteUrl(Post $post, string $url, string $collection): void
     {
         try {
-            $response = Http::timeout(120)->retry(2, 500)->get($url);
+            $response = Http::timeout(20)->connectTimeout(5)->retry(1, 300)->get($url);
             if (! $response->successful()) {
                 return;
             }
