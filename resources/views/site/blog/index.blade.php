@@ -22,9 +22,9 @@
     <div class="container">
         @php
             $defaultListingImages = [
-                asset('frontend/images/post-1.jpg'),
-                asset('frontend/images/post-2.jpg'),
-                asset('frontend/images/post-3.jpg'),
+                asset('frontend/images/post-1.webp'),
+                asset('frontend/images/post-2.webp'),
+                asset('frontend/images/post-3.webp'),
             ];
         @endphp
         <div class="row">

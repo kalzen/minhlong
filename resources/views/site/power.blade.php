@@ -18,7 +18,7 @@
                     </div>
                     <div class="hero-content-body-silver wow fadeInUp" data-wow-delay="0.4s">
                         <div class="hero-body-item-silver"><div class="icon-box"><img src="{{ asset('frontend/images/icon-hero-body-item-1-silver.svg') }}" alt=""></div><div class="hero-body-item-content-silver"><h3>{{ __('site.power.hero.item1_title') }}</h3></div></div>
-                        <div class="hero-body-item-silver"><div class="icon-box"><img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt=""></div><div class="hero-body-item-content-silver"><h3>{{ __('site.power.hero.item2_title') }}</h3></div></div>
+                        <div class="hero-body-item-silver"><div class="icon-box"><img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div><div class="hero-body-item-content-silver"><h3>{{ __('site.power.hero.item2_title') }}</h3></div></div>
                     </div>
                     <div class="hero-content-footer-silver wow fadeInUp" data-wow-delay="0.6s">
                         <div class="hero-btn"><a href="{{ route('site.contact') }}" class="btn-default btn-highlighted">{{ __('site.power.hero.cta') }}</a></div>
@@ -29,7 +29,7 @@
             <div class="col-xl-6">
                 <div class="hero-image-silver">
                     <figure>
-                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.hero') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}">
+                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.hero') }}" alt="{{ __('site.power.hero.brand') }} — {{ __('site.power.hero.title') }}" loading="lazy" decoding="async">
                     </figure>
                 </div>
             </div>
@@ -44,12 +44,12 @@
                 <div class="about-us-image-box-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-image-box-1-silver">
                         <figure class="image-anime">
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_1') }}" alt="{{ __('site.power.about.title') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_1') }}" alt="{{ __('site.power.about.title') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="about-image-box-2-silver">
                         <figure>
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_2') }}" alt="{{ __('site.power.about.headline') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.about_image_2') }}" alt="{{ __('site.power.about.headline') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="about-counter-box-silver">
@@ -97,7 +97,7 @@
                     <div class="service-item-silver wow fadeInUp" @if($i > 1) data-wow-delay="{{ (string) (($i - 1) * 0.2) }}s" @endif>
                         <div class="service-item-header-silver">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend/images/icon-service-item-silver-'.$i.'.svg') }}" alt="">
+                                <img src="{{ asset('frontend/images/icon-service-item-silver-'.$i.'.svg') }}" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="service-item-content-silver">
                                 <h3>{{ __('site.power.services.item'.$i.'_title') }}</h3>
@@ -138,7 +138,7 @@
                     <div class="what-we-body-silver">
                         <div class="what-we-body-image-silver">
                             <figure>
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_body_image') }}" alt="{{ __('site.power.what_we_do.counter') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_body_image') }}" alt="{{ __('site.power.what_we_do.counter') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="what-we-counter-box-silver">
@@ -172,14 +172,14 @@
                     <div class="what-we-content-body-silver">
                         <div class="what-we-content-image-silver">
                             <figure class="image-anime reveal">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_content_image') }}" alt="{{ __('site.power.what_we_do.title') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.power.what_we_content_image') }}" alt="{{ __('site.power.what_we_do.title') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="what-we-items-btn-silver">
                             <div class="what-we-items-list-silver">
                                 <div class="what-we-item-silver wow fadeInUp">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-1-silver.svg') }}" alt="">
+                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.power.what_we_do.item1_title') }}</h3>
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="what-we-item-silver wow fadeInUp" data-wow-delay="0.2s">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-2-silver.svg') }}" alt="">
+                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.power.what_we_do.item2_title') }}</h3>
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="what-we-item-silver wow fadeInUp" data-wow-delay="0.4s">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-3-silver.svg') }}" alt="">
+                                        <img src="{{ asset('frontend/images/icon-what-we-do-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.power.what_we_do.item3_title') }}</h3>
@@ -236,7 +236,7 @@
                 <div class="award-item-list-silver">
                     <div class="award-item-silver wow fadeInUp">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-award-item-1-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-award-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.power.award.item1_title') }}</h3>
@@ -250,7 +250,7 @@
 
                     <div class="award-item-silver wow fadeInUp" data-wow-delay="0.2s">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-award-item-2-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-award-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.power.award.item2_title') }}</h3>
@@ -264,7 +264,7 @@
 
                     <div class="award-item-silver wow fadeInUp" data-wow-delay="0.4s">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-award-item-3-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-award-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.power.award.item3_title') }}</h3>
@@ -297,7 +297,7 @@
                 <div class="pricing-item-silver wow fadeInUp">
                     <div class="pricing-item-header-silver">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-pricing-1-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-pricing-1-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.power.delivery_models.plan1_title') }}</h3>
@@ -325,7 +325,7 @@
                 <div class="pricing-item-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="pricing-item-header-silver">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-pricing-2-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-pricing-2-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.power.delivery_models.plan2_title') }}</h3>
@@ -353,7 +353,7 @@
                 <div class="pricing-item-silver wow fadeInUp" data-wow-delay="0.4s">
                     <div class="pricing-item-header-silver">
                         <div class="icon-box">
-                            <img src="{{ asset('frontend/images/icon-pricing-3-silver.svg') }}" alt="">
+                            <img src="{{ asset('frontend/images/icon-pricing-3-silver.svg') }}" alt="" loading="lazy" decoding="async">
                         </div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.power.delivery_models.plan3_title') }}</h3>
@@ -380,9 +380,9 @@
             <div class="col-lg-12">
                 <div class="pricing-benefit-list-silver wow fadeInUp" data-wow-delay="0.6s">
                     <ul>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-1.svg') }}" alt="">{{ __('site.power.delivery_models.benefit1') }}</li>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-2.svg') }}" alt="">{{ __('site.power.delivery_models.benefit2') }}</li>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-3.svg') }}" alt="">{{ __('site.power.delivery_models.benefit3') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-1.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.power.delivery_models.benefit1') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-2.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.power.delivery_models.benefit2') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-3.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.power.delivery_models.benefit3') }}</li>
                     </ul>
                 </div>
             </div>
@@ -407,7 +407,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>1</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-1-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.power.working_process.step1_title') }}</h3>
                                 <p>{{ __('site.power.working_process.step1_desc') }}</p>
@@ -418,7 +418,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>2</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-2-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.power.working_process.step2_title') }}</h3>
                                 <p>{{ __('site.power.working_process.step2_desc') }}</p>
@@ -429,7 +429,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>3</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-3-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.power.working_process.step3_title') }}</h3>
                                 <p>{{ __('site.power.working_process.step3_desc') }}</p>
@@ -440,7 +440,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>4</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-4-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-4-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.power.working_process.step4_title') }}</h3>
                                 <p>{{ __('site.power.working_process.step4_desc') }}</p>
@@ -453,7 +453,7 @@
     </div>
 </div>
 
-<div class="our-testimonials-silver"><div class="container"><div class="row"><div class="col-xl-5"><div class="our-testimonial-content-silver"><div class="section-title"><h3 class="wow fadeInUp">{{ __('site.power.testimonials.title') }}</h3><h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.power.testimonials.subtitle') }}</h2></div></div></div><div class="col-xl-7"><div class="testimonial-slider-box"><div class="section-footer-text section-footer-contact wow fadeInUp" data-wow-delay="0.2s"><p><span><img src="{{ asset('frontend/images/icon-phone-primary.svg') }}" alt=""></span> {{ __('site.power.testimonials.prompt') }} <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a></p></div></div></div></div></div></div>
+<div class="our-testimonials-silver"><div class="container"><div class="row"><div class="col-xl-5"><div class="our-testimonial-content-silver"><div class="section-title"><h3 class="wow fadeInUp">{{ __('site.power.testimonials.title') }}</h3><h2 class="text-anime-style-3" data-cursor="-opaque">{{ __('site.power.testimonials.subtitle') }}</h2></div></div></div><div class="col-xl-7"><div class="testimonial-slider-box"><div class="section-footer-text section-footer-contact wow fadeInUp" data-wow-delay="0.2s"><p><span><img src="{{ asset('frontend/images/icon-phone-primary.svg') }}" alt="" loading="lazy" decoding="async"></span> {{ __('site.power.testimonials.prompt') }} <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a></p></div></div></div></div></div></div>
 
 <div class="our-blog">
     <div class="container">

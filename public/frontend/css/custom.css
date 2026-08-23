@@ -383,7 +383,7 @@ a:focus{
 
 .dark-section{
 	background-color: var(--primary-color);
-	background-image: url('../images/dark-section-bg-image.png');
+	background-image: url('../images/dark-section-bg-image.webp');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -752,7 +752,7 @@ header.main-header .header-sticky.active{
 
 .hero{
 	position: relative;
-	background-image: url('../images/hero-bg-image.jpg');
+	background-image: url('../images/hero-bg-image.webp');
 	padding: 265px 0 300px;
 }
 
@@ -1868,12 +1868,12 @@ header.main-header .header-sticky.active{
 
 .our-story{
 	position: relative;
-	background-image: url('../images/our-story-bg-image.jpg');
+	background-image: url('../images/our-story-bg-image.webp');
 	padding: 200px 0;
 }
 
 .our-story.our-story-home-bg{
-	background-image: url('../images/MinhLonggroup-dark-section.png');
+	background-image: url('../images/MinhLonggroup-dark-section.webp');
 }
 
 .our-story::before{
@@ -2664,13 +2664,13 @@ header.main-header .header-sticky.active{
 
 .cta-box{
 	position: relative;
-	background-image: url('../images/cta-box-bg-img.jpg');
+	background-image: url('../images/cta-box-bg-img.webp');
 	padding: 150px 0;
 	overflow: hidden;
 }
 
 .cta-box.cta-box-home-bg{
-	background-image: url('../images/minhlong-group-background-2.png');
+	background-image: url('../images/minhlong-group-background-2.webp');
 }
 
 .cta-box.cta-box-home-bg .cta-box-content--home{
@@ -3239,7 +3239,7 @@ header.main-header .header-sticky.active{
 
 .main-footer{
     position: relative;
-    background-image: url('../images/footer-bg-image.jpg');
+    background-image: url('../images/footer-bg-image.webp');
     overflow: hidden;
 }
 
@@ -3598,7 +3598,7 @@ header.main-header .header-sticky.active{
 
 .page-header{
 	position: relative;
-	background: url('../images/page-header-bg.jpg') no-repeat;
+	background: url('../images/page-header-bg.webp') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	padding: 275px 0 170px;
@@ -9086,7 +9086,7 @@ header.main-header.header-gold .header-sticky.active{
 
 .intro-video-gold{
 	position: relative;
-	background: url('../images/intro-video-bg-gold.jpg') no-repeat;
+	background: url('../images/intro-video-bg-gold.webp') no-repeat;
 	background-position: center center;
 	background-size: cover;
 	padding: 100px 0 0;
@@ -10337,7 +10337,7 @@ header.main-header.header-silver .header-sticky.active{
 }
 
 .hero-silver{
-	background-image: url('../images/hero-bg-image-silver.png');
+	background-image: url('../images/hero-bg-image-silver.webp');
 	background-position: center center;
 	background-position: center center;
 	background-size: cover;
@@ -11246,7 +11246,7 @@ header.main-header.header-silver .header-sticky.active{
 
 .our-working-process-silver{
 	position: relative;
-	background-image: url('../images/working-process-bg-silver.jpg');
+	background-image: url('../images/working-process-bg-silver.webp');
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 100px 0;
@@ -11254,7 +11254,7 @@ header.main-header.header-silver .header-sticky.active{
 }
 
 .our-working-process-silver.our-working-process-power-bg{
-	background-image: url('../images/power-background.png');
+	background-image: url('../images/power-background.webp');
 }
 
 .our-working-process-silver::before{

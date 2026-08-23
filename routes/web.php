@@ -8,10 +8,55 @@ use App\Models\AccessLog;
 use App\Models\ActivityLog;
 use App\Models\User;
 use App\Sitemap\SiteSitemapBuilder;
+use App\Support\SitePages;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', HomeController::class)->name('home');
+/*
+ | Public pages are registered once per locale from config/site_pages.php so
+ | that each language lives on its own URL. Route names carry the locale
+ | suffix (site.about.vi); route('site.about') resolves to the right one via
+ | App\Routing\LocalizedUrlGenerator.
+ */
+$pages = SitePages::all();
+
+foreach (SitePages::locales() as $locale) {
+    $slug = fn (string $key) => $pages[$key]['slugs'][$locale] ?? null;
+
+    Route::get('/'.ltrim((string) $slug('home'), '/'), HomeController::class)
+        ->defaults('locale', $locale)
+        ->name('home.'.$locale);
+
+    foreach (['about', 'services', 'land', 'power', 'host', 'minerals'] as $key) {
+        Route::view('/'.$slug($key), $pages[$key]['view'])
+            ->defaults('locale', $locale)
+            ->name($pages[$key]['name'].'.'.$locale);
+    }
+
+    Route::get('/'.$slug('blog'), [BlogController::class, 'index'])
+        ->defaults('locale', $locale)
+        ->name('site.blog.index.'.$locale);
+
+    Route::get('/'.$slug('blog').'/{slug}', [BlogController::class, 'show'])
+        ->defaults('locale', $locale)
+        ->name('site.blog.show.'.$locale);
+
+    Route::get('/'.$slug('contact'), [ContactController::class, 'show'])
+        ->defaults('locale', $locale)
+        ->name('site.contact.'.$locale);
+
+    Route::post('/'.$slug('contact'), [ContactController::class, 'store'])
+        ->defaults('locale', $locale)
+        ->name('site.contact.store.'.$locale);
+
+    Route::get('/'.$slug('library'), [LibraryController::class, 'index'])
+        ->defaults('locale', $locale)
+        ->name('site.library.index.'.$locale);
+
+    Route::get('/'.$slug('library').'/{libraryDocument}/'.$pages['library']['download_slugs'][$locale], [LibraryController::class, 'download'])
+        ->defaults('locale', $locale)
+        ->name('site.library.download.'.$locale);
+}
 
 Route::get('/robots.txt', function () {
     $lines = [
@@ -19,52 +64,44 @@ Route::get('/robots.txt', function () {
         'Disallow: /admin',
         'Disallow: /dashboard',
         'Disallow: /settings',
+        'Disallow: /login',
+        'Disallow: /register',
+        'Disallow: /forgot-password',
+        'Disallow: /reset-password',
+        'Disallow: /lang/',
+        ...collect(SitePages::all()['library']['download_slugs'] ?? [])
+            ->map(fn (string $downloadSlug, string $locale) => 'Disallow: /'
+                .SitePages::all()['library']['slugs'][$locale].'/*/'.$downloadSlug)
+            ->values()
+            ->all(),
+        'Allow: /',
         '',
         'Sitemap: '.url('/sitemap.xml'),
     ];
 
     return response(implode("\n", $lines), 200, [
         'Content-Type' => 'text/plain; charset=UTF-8',
+        'Cache-Control' => 'public, max-age=3600',
     ]);
 })->name('site.robots');
 
 Route::get('/sitemap.xml', function (SiteSitemapBuilder $builder) {
-    $path = public_path('sitemap.xml');
+    $builder->refreshIfStale();
 
-    if (! is_file($path)) {
-        $builder->writeToPublic();
-    }
-
-    return response()->file($path, [
+    return response()->file($builder->path(), [
         'Content-Type' => 'application/xml; charset=UTF-8',
+        'Cache-Control' => 'public, max-age=3600',
     ]);
 })->name('site.sitemap');
-Route::view('/gioi-thieu', 'site.about', ['title' => 'About Us'])->name('site.about');
-Route::view('/dich-vu', 'site.services', ['title' => 'Services'])->name('site.services');
-Route::view('/minh-long-land', 'site.land', ['title' => 'Minh Long Land'])->name('site.land');
-Route::view('/minh-long-power', 'site.power', ['title' => 'Minh Long Power'])->name('site.power');
-Route::view('/minh-long-host', 'site.host', ['title' => 'Minh Long Host'])->name('site.host');
-Route::view('/minh-long-minerals', 'site.minerals', ['title' => 'Minh Long Minerals'])->name('site.minerals');
-
 Route::get('/lang/{locale}', function (string $locale) {
-    $supportedLocales = ['en', 'vi', 'zh'];
-    if (! in_array($locale, $supportedLocales, true)) {
+    if (! SitePages::isSupported($locale)) {
         abort(404);
     }
 
     session(['locale' => $locale]);
 
-    return redirect()->to(url()->previous() ?: route('home'));
+    return redirect()->to(route('home.'.$locale));
 })->name('site.lang');
-
-Route::get('/blog', [BlogController::class, 'index'])->name('site.blog.index');
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('site.blog.show');
-Route::get('/lien-he', [ContactController::class, 'show'])->name('site.contact');
-Route::post('/lien-he', [ContactController::class, 'store'])->name('site.contact.store');
-
-Route::get('/thu-vien', [LibraryController::class, 'index'])->name('site.library.index');
-Route::get('/thu-vien/{libraryDocument}/tai-xuong', [LibraryController::class, 'download'])
-    ->name('site.library.download');
 
 Route::inertia('/welcome', 'Welcome')->name('welcome');
 

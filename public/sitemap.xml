@@ -1,94 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-    <loc>http://localhost/minhlong/pubic</loc>
+    <loc>http://localhost/minhlong/public/vi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/zh" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/gioi-thieu</loc>
+    <loc>http://localhost/minhlong/public</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/vi" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/zh" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/zh</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/vi" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public" />
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/gioi-thieu</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/about-us" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/guanyu-women" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/dich-vu</loc>
+    <loc>http://localhost/minhlong/public/about-us</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/gioi-thieu" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/guanyu-women" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/minh-long-land</loc>
+    <loc>http://localhost/minhlong/public/guanyu-women</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/gioi-thieu" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/about-us" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/minh-long-power</loc>
+    <loc>http://localhost/minhlong/public/dich-vu</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/services" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/fuwu" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/minh-long-host</loc>
+    <loc>http://localhost/minhlong/public/services</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/dich-vu" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/fuwu" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/minh-long-minerals</loc>
+    <loc>http://localhost/minhlong/public/fuwu</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/dich-vu" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/services" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/blog</loc>
+    <loc>http://localhost/minhlong/public/minh-long-land</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-land-real-estate" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-land-fangdichan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-land-real-estate</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-land" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-land-fangdichan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-land-fangdichan</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-land" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-land-real-estate" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-power</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-power-energy" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-power-nengyuan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-power-energy</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-power" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-power-nengyuan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-power-nengyuan</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-power" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-power-energy" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-host</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-host-operations" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-host-yunying" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-host-operations</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-host" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-host-yunying" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-host-yunying</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-host" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-host-operations" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-minerals</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-minerals-supply" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-minerals-kuangchan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-minerals-supply</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-minerals" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/minh-long-minerals-kuangchan" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/minh-long-minerals-kuangchan</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/minh-long-minerals" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/minh-long-minerals-supply" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/news" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/xinwen" />
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/lien-he</loc>
+    <loc>http://localhost/minhlong/public/news</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/blog" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/xinwen" />
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/xinwen</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/news" />
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/lien-he</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/contact-us" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/lianxi-women" />
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/thu-vien</loc>
+    <loc>http://localhost/minhlong/public/contact-us</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/lien-he" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/lianxi-women" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/lianxi-women</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/lien-he" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/contact-us" />
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/thu-vien</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/document-library" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/ziliaoku" />
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
             </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/blog/plan-industrial-zone-factory-project-faster-delivery</loc>
-    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/pubic/blog/lap-ke-hoach-nha-may-khu-cong-nghiep-ban-giao-nhanh" />
-    <lastmod>2026-04-11T09:06:26+00:00</lastmod>
+    <loc>http://localhost/minhlong/public/document-library</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/thu-vien" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://localhost/minhlong/public/ziliaoku" />
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/ziliaoku</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/thu-vien" />
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/document-library" />
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://localhost/minhlong/public/news/plan-industrial-zone-factory-project-faster-delivery</loc>
+    <xhtml:link rel="alternate" hreflang="vi" href="http://localhost/minhlong/public/blog/lap-ke-hoach-nha-may-khu-cong-nghiep-ban-giao-nhanh" />
+    <lastmod>2026-08-23T19:20:20+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-    <image:loc>http://localhost/minhlong/pubic/frontend/images/post-1.jpg</image:loc>
+    <image:loc>http://localhost/minhlong/public/frontend/images/post-1.jpg</image:loc>
     <image:caption>How to plan an industrial-zone factory project for faster delivery</image:caption>
 </image:image>
         </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/blog/lap-ke-hoach-nha-may-khu-cong-nghiep-ban-giao-nhanh</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/pubic/blog/plan-industrial-zone-factory-project-faster-delivery" />
+    <loc>http://localhost/minhlong/public/blog/lap-ke-hoach-nha-may-khu-cong-nghiep-ban-giao-nhanh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost/minhlong/public/news/plan-industrial-zone-factory-project-faster-delivery" />
     <lastmod>2026-04-11T09:06:26+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-    <image:loc>http://localhost/minhlong/pubic/frontend/images/post-1.jpg</image:loc>
+    <image:loc>http://localhost/minhlong/public/frontend/images/post-1.jpg</image:loc>
     <image:caption>Cách lập kế hoạch nhà máy trong khu công nghiệp để bàn giao nhanh hơn</image:caption>
 </image:image>
         </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/blog/me-coordination-strategies-reduce-rework-factory-sites</loc>
+    <loc>http://localhost/minhlong/public/news/me-coordination-strategies-reduce-rework-factory-sites</loc>
     <lastmod>2026-04-11T09:06:26+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-    <image:loc>http://localhost/minhlong/pubic/frontend/images/post-2.jpg</image:loc>
+    <image:loc>http://localhost/minhlong/public/frontend/images/post-2.jpg</image:loc>
     <image:caption>M&amp;E coordination strategies that reduce rework on factory sites</image:caption>
 </image:image>
         </url>
     <url>
-    <loc>http://localhost/minhlong/pubic/blog/qa-qc-checklist-steel-structure-fire-protection-packages</loc>
+    <loc>http://localhost/minhlong/public/news/qa-qc-checklist-steel-structure-fire-protection-packages</loc>
     <lastmod>2026-04-11T09:06:26+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-    <image:loc>http://localhost/minhlong/pubic/frontend/images/post-3.jpg</image:loc>
+    <image:loc>http://localhost/minhlong/public/frontend/images/post-3.jpg</image:loc>
     <image:caption>QA/QC checklist for steel structure and fire protection packages</image:caption>
 </image:image>
         </url>

@@ -1,6 +1,48 @@
 <?php
 
 return [
+    'seo' => [
+        'home' => [
+            'title' => 'Tập đoàn đa ngành: xây dựng, năng lượng, đất đai, khoáng sản',
+            'description' => 'Minh Long Group hoạt động trong tổng thầu xây dựng công nghiệp, năng lượng, bất động sản khu công nghiệp và khoáng sản, vận hành theo hệ thống đồng bộ.',
+        ],
+        'about' => [
+            'title' => 'Giới thiệu tập đoàn',
+            'description' => 'Tìm hiểu về lịch sử, tầm nhìn, giá trị cốt lõi và mô hình vận hành đa lĩnh vực của Minh Long Group trong hành trình phát triển bền vững.',
+        ],
+        'services' => [
+            'title' => 'Dịch vụ tổng thầu và vận hành công nghiệp',
+            'description' => 'Năng lực tích hợp của Minh Long Group: thi công xây dựng, năng lượng, phát triển đất đai, khoáng sản và dịch vụ vận hành cho dự án công nghiệp.',
+        ],
+        'land' => [
+            'title' => 'Bất động sản và hạ tầng khu công nghiệp',
+            'description' => 'Minh Long Land phát triển quỹ đất, hạ tầng và bất động sản khu công nghiệp, đồng hành cùng nhà đầu tư từ khảo sát tới bàn giao dự án.',
+        ],
+        'power' => [
+            'title' => 'Năng lượng tái tạo và điện công nghiệp',
+            'description' => 'Minh Long Power đầu tư và triển khai các giải pháp năng lượng tái tạo, điện công nghiệp, tối ưu chi phí vận hành cho nhà máy và khu công nghiệp.',
+        ],
+        'host' => [
+            'title' => 'Dịch vụ vận hành và quản lý hạ tầng',
+            'description' => 'Minh Long Host cung cấp dịch vụ vận hành, bảo trì và quản lý hạ tầng kỹ thuật cho nhà máy, khu công nghiệp và các công trình quy mô lớn.',
+        ],
+        'minerals' => [
+            'title' => 'Khai thác và cung ứng khoáng sản',
+            'description' => 'Minh Long Minerals khai thác, chế biến và cung ứng khoáng sản, vật liệu xây dựng với nguồn gốc minh bạch và năng lực cung ứng ổn định.',
+        ],
+        'blog' => [
+            'title' => 'Tin tức và góc nhìn ngành',
+            'description' => 'Cập nhật tin tức, phân tích và kinh nghiệm triển khai dự án về xây dựng, năng lượng, bất động sản công nghiệp và khoáng sản từ Minh Long Group.',
+        ],
+        'contact' => [
+            'title' => 'Liên hệ hợp tác',
+            'description' => 'Liên hệ Minh Long Group để trao đổi nhu cầu dự án xây dựng, năng lượng, đất đai hoặc khoáng sản. Đội ngũ tư vấn phản hồi trong giờ làm việc.',
+        ],
+        'library' => [
+            'title' => 'Thư viện tài liệu và hồ sơ năng lực',
+            'description' => 'Tải hồ sơ năng lực, brochure và tài liệu dự án của Minh Long Group phục vụ đánh giá đối tác, đấu thầu và hợp tác đầu tư.',
+        ],
+    ],
     'lang' => [
         'choose' => 'Chọn ngôn ngữ của bạn',
         'english' => 'English',

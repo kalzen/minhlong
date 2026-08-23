@@ -1,6 +1,48 @@
 <?php
 
 return [
+    'seo' => [
+        'home' => [
+            'title' => 'Construction, energy, land and minerals group',
+            'description' => 'Minh Long Group delivers industrial construction, energy, industrial land development and mineral supply through one integrated operating system.',
+        ],
+        'about' => [
+            'title' => 'About the group',
+            'description' => 'Learn about the history, vision, core values and multi-sector operating model behind Minh Long Group\'s long-term growth journey.',
+        ],
+        'services' => [
+            'title' => 'General contracting and industrial operations',
+            'description' => 'Minh Long Group\'s integrated capability: construction delivery, energy, land development, minerals and operations services for industrial projects.',
+        ],
+        'land' => [
+            'title' => 'Industrial land and infrastructure development',
+            'description' => 'Minh Long Land develops land banks, infrastructure and industrial real estate, supporting investors from site survey through project handover.',
+        ],
+        'power' => [
+            'title' => 'Renewable energy and industrial power',
+            'description' => 'Minh Long Power invests in and delivers renewable energy and industrial power solutions that cut operating costs for factories and industrial parks.',
+        ],
+        'host' => [
+            'title' => 'Facility operations and infrastructure management',
+            'description' => 'Minh Long Host provides operations, maintenance and technical infrastructure management for factories, industrial parks and large-scale facilities.',
+        ],
+        'minerals' => [
+            'title' => 'Mineral extraction and supply',
+            'description' => 'Minh Long Minerals extracts, processes and supplies minerals and construction materials with transparent sourcing and reliable delivery capacity.',
+        ],
+        'blog' => [
+            'title' => 'News and industry insights',
+            'description' => 'News, analysis and project delivery experience across construction, energy, industrial real estate and minerals from Minh Long Group.',
+        ],
+        'contact' => [
+            'title' => 'Contact us',
+            'description' => 'Contact Minh Long Group to discuss construction, energy, land or minerals project needs. Our advisory team responds during business hours.',
+        ],
+        'library' => [
+            'title' => 'Document library and company profile',
+            'description' => 'Download Minh Long Group\'s company profile, brochures and project documents for partner evaluation, tendering and investment discussions.',
+        ],
+    ],
     'lang' => [
         'choose' => 'Choose your language',
         'english' => 'English',

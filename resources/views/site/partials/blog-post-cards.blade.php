@@ -6,9 +6,9 @@
 @endphp
 @php
     $defaultListingImages = [
-        asset('frontend/images/post-1.jpg'),
-        asset('frontend/images/post-2.jpg'),
-        asset('frontend/images/post-3.jpg'),
+        asset('frontend/images/post-1.webp'),
+        asset('frontend/images/post-2.webp'),
+        asset('frontend/images/post-3.webp'),
     ];
 @endphp
 @forelse($posts ?? [] as $index => $post)
@@ -52,7 +52,7 @@
                 <div class="post-featured-image">
                     <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ $viewCursorLabel }}">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/post-1.jpg" alt="" loading="lazy">
+                            <img src="{{ asset('frontend') }}/images/post-1.webp" alt="" loading="lazy">
                         </figure>
                     </a>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="post-featured-image">
                     <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ $viewCursorLabel }}">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/post-2.jpg" alt="" loading="lazy">
+                            <img src="{{ asset('frontend') }}/images/post-2.webp" alt="" loading="lazy">
                         </figure>
                     </a>
                 </div>
@@ -98,7 +98,7 @@
                 <div class="post-featured-image">
                     <a href="{{ route('site.blog.index') }}" data-cursor-text="{{ $viewCursorLabel }}">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/post-3.jpg" alt="" loading="lazy">
+                            <img src="{{ asset('frontend') }}/images/post-3.webp" alt="" loading="lazy">
                         </figure>
                     </a>
                 </div>

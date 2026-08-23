@@ -60,7 +60,7 @@
                         </div>
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-mail-primary.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-mail-primary.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-item-content">
                                 <h3>{{ __('site.contact.email') }}</h3>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="contact-info-item wow fadeInUp" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-location-primary.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-location-primary.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="contact-info-item-content">
                                 <h3>{{ __('site.contact.location') }}</h3>

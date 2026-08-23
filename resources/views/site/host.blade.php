@@ -70,17 +70,17 @@
                             <div class="satisfy-client-images">
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_1') }}" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_1') }}" alt="" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_2') }}" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_2') }}" alt="" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <div class="satisfy-client-image">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_3') }}" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_client_author_3') }}" alt="" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="hero-video-image-gold">
                                 <figure>
                                     <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_video_poster') }}" alt="{{ __('site.host.hero.brand') }}">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.hero_video_poster') }}" alt="{{ __('site.host.hero.brand') }}" loading="lazy" decoding="async">
                                     </a>
                                 </figure>
                                 <div class="video-play-button">
@@ -126,7 +126,7 @@
                     <div class="about-us-images-gold wow fadeInUp" data-wow-delay="0.2s">
                         <div class="about-us-image-gold">
                             <figure>
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.about_image') }}" alt="{{ __('site.host.about.title') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.about_image') }}" alt="{{ __('site.host.about.title') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="about-us-image-title-gold">
@@ -154,7 +154,7 @@
                             <div class="about-body-items-list-gold">
                                 <div class="about-us-body-item-gold">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-1.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-1.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
                                         <h3>{{ __('site.host.about.items.item1_title') }}</h3>
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="about-us-body-item-gold">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-2.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-2.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
                                         <h3>{{ __('site.host.about.items.item2_title') }}</h3>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="about-us-body-item-gold">
                                     <div class="icon-box">
-                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-3.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/icon-about-us-body-item-3.svg" alt="" loading="lazy" decoding="async">
                                     </div>
                                     <div class="about-us-body-item-content-gold">
                                         <h3>{{ __('site.host.about.items.item3_title') }}</h3>
@@ -210,7 +210,7 @@
                     <div class="service-item-gold active wow fadeInUp">
                         <div class="service-item-header-gold">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-1.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
@@ -230,7 +230,7 @@
                     <div class="service-item-gold wow fadeInUp" data-wow-delay="0.2s">
                         <div class="service-item-header-gold">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-2.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-2.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
@@ -250,7 +250,7 @@
                     <div class="service-item-gold wow fadeInUp" data-wow-delay="0.4s">
                         <div class="service-item-header-gold">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-3.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-service-item-gold-3.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="service-item-content-gold">
                                 <p>
@@ -291,12 +291,12 @@
                                 <h3>{{ __('site.host.what_we_do.item1_title') }}</h3>
                             </div>
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-what-we-item-1-gold.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-what-we-item-1-gold.svg" alt="" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <div class="what-we-item-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_image_1') }}" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_image_1') }}" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                     </div>
@@ -307,11 +307,11 @@
                         <div class="what-we-item-header-gold">
                             <div class="what-we-item-shape-image-gold">
                                 <figure>
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_shape_1') }}" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_shape_1') }}" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="what-we-item-btn-gold">
-                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt=""></a>
+                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt="" loading="lazy" decoding="async"></a>
                             </div>
                         </div>
                         <div class="what-we-item-title-gold">
@@ -324,7 +324,7 @@
                     <div class="what-we-counter-box-gold box-3 wow fadeInUp" data-wow-delay="0.4s">
                         <div class="what-we-item-image-gold">
                             <figure class="image-anime">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_image_2') }}" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_image_2') }}" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="what-we-counter-item-gold">
@@ -338,7 +338,7 @@
                     <div class="what-we-item-gold box-4 wow fadeInUp" data-wow-delay="0.6s">
                         <div class="what-we-item-shape-image-gold">
                             <figure>
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_shape_2') }}" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_shape_2') }}" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="what-we-item-title-gold">
@@ -346,10 +346,10 @@
                         </div>
                         <div class="what-we-item-body-gold">
                             <div class="learn-more-circle-gold">
-                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/learn-more-circle.svg" alt=""></a>
+                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/learn-more-circle.svg" alt="" loading="lazy" decoding="async"></a>
                             </div>
                             <div class="what-we-item-body-image-gold">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_body_image') }}" alt="">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.what_we_body_image') }}" alt="" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -359,8 +359,8 @@
                     <div class="what-we-contect-list-gold wow fadeInUp" data-wow-delay="0.4s">
                         <h3>{{ __('site.host.contact.today') }}</h3>
                         <ul>
-                            <li><img src="{{ asset('frontend') }}/images/icon-phone-accent.svg" alt=""><a href="tel:{{ preg_replace('/\s+/', '', $settings['contact_phone'] ?? '088 6656 899') }}">{{ $settings['contact_phone'] ?? '088 6656 899' }}</a></li>
-                            <li><img src="{{ asset('frontend') }}/images/icon-mail-accent.svg" alt=""><a href="mailto:{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}">{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}</a></li>
+                            <li><img src="{{ asset('frontend') }}/images/icon-phone-accent.svg" alt="" loading="lazy" decoding="async"><a href="tel:{{ preg_replace('/\s+/', '', $settings['contact_phone'] ?? '088 6656 899') }}">{{ $settings['contact_phone'] ?? '088 6656 899' }}</a></li>
+                            <li><img src="{{ asset('frontend') }}/images/icon-mail-accent.svg" alt="" loading="lazy" decoding="async"><a href="mailto:{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}">{{ $settings['contact_email'] ?? 'info@mlgroup.vn' }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -393,7 +393,7 @@
                             <div class="project-item-image-gold">
                                 <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.projects_image_1') }}" alt="{{ __('site.host.projects.project1_title') }}">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.projects_image_1') }}" alt="{{ __('site.host.projects.project1_title') }}" loading="lazy" decoding="async">
                                     </figure>
                                 </a>
                             </div>
@@ -409,7 +409,7 @@
                             </div>
 
                             <div class="project-readmore-btn-gold">
-                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt=""></a>
+                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt="" loading="lazy" decoding="async"></a>
                             </div>
                         </div>
                     </div>
@@ -421,7 +421,7 @@
                             <div class="project-item-image-gold">
                                 <a href="{{ route('site.contact') }}" data-cursor-text="{{ __('site.common.view') }}">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.projects_image_2') }}" alt="{{ __('site.host.projects.project2_title') }}">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.projects_image_2') }}" alt="{{ __('site.host.projects.project2_title') }}" loading="lazy" decoding="async">
                                     </figure>
                                 </a>
                             </div>
@@ -437,7 +437,7 @@
                             </div>
 
                             <div class="project-readmore-btn-gold">
-                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt=""></a>
+                                <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-accent.svg" alt="" loading="lazy" decoding="async"></a>
                             </div>
                         </div>
                     </div>
@@ -455,12 +455,12 @@
                         <div class="why-choose-item-gold">
                             <div class="why-choose-item-image-gold">
                                 <figure class="image-anime reveal">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.why_choose_image') }}" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.why_choose_image') }}" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="why-choose-item-body-gold">
                                 <div class="why-choose-item-btn-gold">
-                                    <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-white.svg" alt=""></a>
+                                    <a href="{{ route('site.contact') }}"><img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async"></a>
                                 </div>
                                 <div class="why-choose-item-content-gold">
                                     <h3>{{ __('site.host.why_choose.investor_infra_title') }}</h3>
@@ -484,7 +484,7 @@
                         </div>
                         <div class="why-choose-body-gold wow fadeInUp" data-wow-delay="0.4s">
                             <div class="why-choose-body-item-gold">
-                                <div class="icon-box"><img src="{{ asset('frontend') }}/images/icon-why-choose-body-item-1-gold.svg" alt=""></div>
+                                <div class="icon-box"><img src="{{ asset('frontend') }}/images/icon-why-choose-body-item-1-gold.svg" alt="" loading="lazy" decoding="async"></div>
                                 <div class="why-choose-body-item-content-gold">
                                     <h2>{{ __('site.host.why_choose.governance_title') }}</h2>
                                     <p>{{ __('site.host.why_choose.governance_desc') }}</p>
@@ -512,10 +512,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item1_title') }}</h3><p>{{ __('site.host.features.items.item1_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_1') }}" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item2_title') }}</h3><p>{{ __('site.host.features.items.item2_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_2') }}" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item3_title') }}</h3><p>{{ __('site.host.features.items.item3_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_3') }}" alt=""></figure></div></div></div>
-                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item4_title') }}</h3><p>{{ __('site.host.features.items.item4_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_4') }}" alt=""></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item1_title') }}</h3><p>{{ __('site.host.features.items.item1_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_1') }}" alt="" loading="lazy" decoding="async"></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.2s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item2_title') }}</h3><p>{{ __('site.host.features.items.item2_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_2') }}" alt="" loading="lazy" decoding="async"></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.4s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item3_title') }}</h3><p>{{ __('site.host.features.items.item3_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_3') }}" alt="" loading="lazy" decoding="async"></figure></div></div></div>
+                <div class="col-xl-3 col-md-6"><div class="feature-item-gold wow fadeInUp" data-wow-delay="0.6s"><div class="feature-item-content-gold"><h3>{{ __('site.host.features.items.item4_title') }}</h3><p>{{ __('site.host.features.items.item4_desc') }}</p></div><div class="feature-item-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.feature_image_4') }}" alt="" loading="lazy" decoding="async"></figure></div></div></div>
             </div>
         </div>
     </div>
@@ -525,7 +525,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <div class="cta-box-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.cta_image') }}" alt=""></figure></div>
+                    <div class="cta-box-image-gold"><figure><img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.cta_image') }}" alt="" loading="lazy" decoding="async"></figure></div>
                 </div>
                 <div class="col-lg-6">
                     <div class="cta-box-content-gold">
@@ -562,7 +562,7 @@
                                 <p class="wow fadeInUp" data-wow-delay="0.2s">{{ __('site.host.intro_video.description') }}</p>
                             </div>
                             <div class="intro-video-button-gold">
-                                <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}"><img src="{{ asset('frontend') }}/images/intero-video-circle.svg" alt=""></a>
+                                <a href="https://www.youtube.com/watch?v=hDwNapdDdQA" class="popup-video" data-cursor-text="{{ __('site.common.play') }}"><img src="{{ asset('frontend') }}/images/intero-video-circle.svg" alt="" loading="lazy" decoding="async"></a>
                             </div>
                         </div>
                         <div class="intro-video-counter-box-gold">
@@ -632,7 +632,7 @@
                                 <div class="testimonial-author-gold">
                                     <div class="author-image-gold">
                                         <figure class="image-anime">
-                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.testimonial_author_1') }}" alt="">
+                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.testimonial_author_1') }}" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">
@@ -641,7 +641,7 @@
                                     </div>
                                 </div>
                                 <div class="testimonial-quote-gold">
-                                    <img src="{{ asset('frontend') }}/images/testimonial-quote-gold.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/testimonial-quote-gold.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                             </div>
                         </div>
@@ -663,7 +663,7 @@
                                 <div class="testimonial-author-gold">
                                     <div class="author-image-gold">
                                         <figure class="image-anime">
-                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.testimonial_author_2') }}" alt="">
+                                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.host.testimonial_author_2') }}" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="author-content-gold">
@@ -672,7 +672,7 @@
                                     </div>
                                 </div>
                                 <div class="testimonial-quote-gold">
-                                    <img src="{{ asset('frontend') }}/images/testimonial-quote-gold.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/testimonial-quote-gold.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                             </div>
                         </div>

@@ -24,7 +24,8 @@ class BlogController extends Controller
             ->paginate(9);
 
         return view('site.blog.index', [
-            'title' => 'Blog',
+            'title' => __('site.seo.blog.title'),
+            'metaDescription' => __('site.seo.blog.description'),
             'posts' => $posts,
         ]);
     }
@@ -42,31 +43,23 @@ class BlogController extends Controller
             ->first();
 
         if (! $post instanceof Post) {
+            // The slug belongs to another language (or arrived on a legacy URL).
+            // Send it to that post's own localized URL with a permanent redirect
+            // so link equity follows the content instead of dead-ending in a 404.
             $otherLocalePost = Post::query()
                 ->where('status', 'published')
                 ->where('slug', $slug)
                 ->first();
 
-            if ($otherLocalePost instanceof Post && $otherLocalePost->translation_group_id !== null) {
-                $localized = Post::query()
-                    ->where('status', 'published')
-                    ->where('locale', $locale)
-                    ->where('translation_group_id', $otherLocalePost->translation_group_id)
-                    ->first();
-
-                if ($localized instanceof Post) {
-                    return redirect()->route('site.blog.show', ['slug' => $localized->slug]);
-                }
+            if (! $otherLocalePost instanceof Post) {
+                abort(404);
             }
 
-            if ($otherLocalePost instanceof Post && $otherLocalePost->locale !== $locale) {
-                session(['locale' => $otherLocalePost->locale]);
-                app()->setLocale($otherLocalePost->locale);
-
-                return redirect()->route('site.blog.show', ['slug' => $otherLocalePost->slug]);
-            }
-
-            abort(404);
+            return redirect()->route(
+                'site.blog.show.'.$otherLocalePost->locale,
+                ['slug' => $otherLocalePost->slug],
+                301
+            );
         }
 
         $alternates = [];
@@ -77,7 +70,7 @@ class BlogController extends Controller
                 ->get(['locale', 'slug']);
 
             foreach ($siblings as $row) {
-                $alternates[$row->locale] = route('site.blog.show', ['slug' => $row->slug]);
+                $alternates[$row->locale] = route('site.blog.show.'.$row->locale, ['slug' => $row->slug]);
             }
         }
 
@@ -85,6 +78,7 @@ class BlogController extends Controller
             'title' => $post->meta_title ?? $post->title,
             'metaDescription' => $post->meta_description ?? $post->excerpt,
             'post' => $post,
+            'ogType' => 'article',
             'hreflangAlternates' => $alternates,
             'ogImageUrl' => $post->publicFeaturedImageUrl(),
         ]);

@@ -26,7 +26,7 @@
                         </div>
                         <div class="hero-body-item-silver">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt="">
+                                <img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="hero-body-item-content-silver">
                                 <h3>{{ __('site.minerals.hero.item2_title') }}</h3>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="hero-body-item-silver" data-wow-delay="0.2s">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend/images/icon-hero-body-item-1-silver.svg') }}" alt="">
+                                <img src="{{ asset('frontend/images/icon-hero-body-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="hero-body-item-content-silver">
                                 <h3>{{ __('site.minerals.hero.item3_title') }}</h3>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="hero-body-item-silver" data-wow-delay="0.4s">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt="">
+                                <img src="{{ asset('frontend/images/icon-hero-body-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="hero-body-item-content-silver">
                                 <h3>{{ __('site.minerals.hero.item4_title') }}</h3>
@@ -83,7 +83,7 @@
                 <div class="about-us-image-box-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-image-box-1-silver">
                         <figure class="image-anime">
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.about_image_1') }}" alt="{{ __('site.minerals.about.title') }}">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('sector.minerals.about_image_1') }}" alt="{{ __('site.minerals.about.title') }}" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="about-image-box-2-silver">
@@ -128,7 +128,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="service-item-silver wow fadeInUp">
                     <div class="service-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-1.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-1.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="service-item-content-silver">
                             <h3>{{ __('site.minerals.services.item1_title') }}</h3>
                             <p>{{ __('site.minerals.services.item1_desc') }}</p>
@@ -143,7 +143,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="service-item-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="service-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-2.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-2.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="service-item-content-silver">
                             <h3>{{ __('site.minerals.services.item2_title') }}</h3>
                             <p>{{ __('site.minerals.services.item2_desc') }}</p>
@@ -158,7 +158,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="service-item-silver wow fadeInUp" data-wow-delay="0.4s">
                     <div class="service-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-3.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-3.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="service-item-content-silver">
                             <h3>{{ __('site.minerals.services.item3_title') }}</h3>
                             <p>{{ __('site.minerals.services.item3_desc') }}</p>
@@ -173,7 +173,7 @@
             <div class="col-xl-3 col-md-6">
                 <div class="service-item-silver wow fadeInUp" data-wow-delay="0.6s">
                     <div class="service-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-4.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-service-item-silver-4.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="service-item-content-silver">
                             <h3>{{ __('site.minerals.services.item4_title') }}</h3>
                             <p>{{ __('site.minerals.services.item4_desc') }}</p>
@@ -242,21 +242,21 @@
                         <div class="what-we-items-btn-silver">
                             <div class="what-we-items-list-silver">
                                 <div class="what-we-item-silver wow fadeInUp">
-                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-1-silver.svg') }}" alt=""></div>
+                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.minerals.what_we_do.item1_title') }}</h3>
                                         <p>{{ __('site.minerals.what_we_do.item1_desc') }}</p>
                                     </div>
                                 </div>
                                 <div class="what-we-item-silver wow fadeInUp" data-wow-delay="0.2s">
-                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-2-silver.svg') }}" alt=""></div>
+                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.minerals.what_we_do.item2_title') }}</h3>
                                         <p>{{ __('site.minerals.what_we_do.item2_desc') }}</p>
                                     </div>
                                 </div>
                                 <div class="what-we-item-silver wow fadeInUp" data-wow-delay="0.4s">
-                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-3-silver.svg') }}" alt=""></div>
+                                    <div class="icon-box"><img src="{{ asset('frontend/images/icon-what-we-do-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                                     <div class="what-we-item-content-silver">
                                         <h3>{{ __('site.minerals.what_we_do.item3_title') }}</h3>
                                         <p>{{ __('site.minerals.what_we_do.item3_desc') }}</p>
@@ -293,7 +293,7 @@
             <div class="col-xl-6">
                 <div class="award-item-list-silver">
                     <div class="award-item-silver wow fadeInUp">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-1-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.minerals.award.item1_title') }}</h3>
                             <ul>
@@ -305,7 +305,7 @@
                     </div>
 
                     <div class="award-item-silver wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-2-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.minerals.award.item2_title') }}</h3>
                             <ul>
@@ -317,7 +317,7 @@
                     </div>
 
                     <div class="award-item-silver wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-3-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-award-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="award-item-content-silver">
                             <h3>{{ __('site.minerals.award.item3_title') }}</h3>
                             <ul>
@@ -348,7 +348,7 @@
             <div class="col-xl-4 col-md-6">
                 <div class="pricing-item-silver wow fadeInUp">
                     <div class="pricing-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-1-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-1-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.minerals.delivery_models.plan1_title') }}</h3>
                             <p>{{ __('site.minerals.delivery_models.plan1_desc') }}</p>
@@ -374,7 +374,7 @@
             <div class="col-xl-4 col-md-6">
                 <div class="pricing-item-silver wow fadeInUp" data-wow-delay="0.2s">
                     <div class="pricing-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-2-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.minerals.delivery_models.plan2_title') }}</h3>
                             <p>{{ __('site.minerals.delivery_models.plan2_desc') }}</p>
@@ -400,7 +400,7 @@
             <div class="col-xl-4 col-md-6">
                 <div class="pricing-item-silver wow fadeInUp" data-wow-delay="0.4s">
                     <div class="pricing-item-header-silver">
-                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-3-silver.svg') }}" alt=""></div>
+                        <div class="icon-box"><img src="{{ asset('frontend/images/icon-pricing-3-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                         <div class="pricing-item-content-silver">
                             <h3>{{ __('site.minerals.delivery_models.plan3_title') }}</h3>
                             <p>{{ __('site.minerals.delivery_models.plan3_desc') }}</p>
@@ -426,9 +426,9 @@
             <div class="col-lg-12">
                 <div class="pricing-benefit-list-silver wow fadeInUp" data-wow-delay="0.6s">
                     <ul>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-1.svg') }}" alt="">{{ __('site.minerals.delivery_models.benefit1') }}</li>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-2.svg') }}" alt="">{{ __('site.minerals.delivery_models.benefit2') }}</li>
-                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-3.svg') }}" alt="">{{ __('site.minerals.delivery_models.benefit3') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-1.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.minerals.delivery_models.benefit1') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-2.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.minerals.delivery_models.benefit2') }}</li>
+                        <li><img src="{{ asset('frontend/images/icon-pricing-benefit-3.svg') }}" alt="" loading="lazy" decoding="async">{{ __('site.minerals.delivery_models.benefit3') }}</li>
                     </ul>
                 </div>
             </div>
@@ -453,7 +453,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>1</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-1-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-1-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.minerals.working_process.step1_title') }}</h3>
                                 <p>{{ __('site.minerals.working_process.step1_desc') }}</p>
@@ -464,7 +464,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>2</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-2-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-2-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.minerals.working_process.step2_title') }}</h3>
                                 <p>{{ __('site.minerals.working_process.step2_desc') }}</p>
@@ -475,7 +475,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>3</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-3-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-3-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.minerals.working_process.step3_title') }}</h3>
                                 <p>{{ __('site.minerals.working_process.step3_desc') }}</p>
@@ -486,7 +486,7 @@
                     <div class="working-process-item-silver">
                         <div class="working-process-no-silver"><h2>4</h2></div>
                         <div class="working-process-body-silver">
-                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-4-silver.svg') }}" alt=""></div>
+                            <div class="icon-box"><img src="{{ asset('frontend/images/icon-process-item-4-silver.svg') }}" alt="" loading="lazy" decoding="async"></div>
                             <div class="working-process-item-content-silver">
                                 <h3>{{ __('site.minerals.working_process.step4_title') }}</h3>
                                 <p>{{ __('site.minerals.working_process.step4_desc') }}</p>
@@ -514,7 +514,7 @@
                 <div class="testimonial-slider-box">
                     <div class="section-footer-text section-footer-contact wow fadeInUp" data-wow-delay="0.2s">
                         <p>
-                            <span><img src="{{ asset('frontend/images/icon-phone-primary.svg') }}" alt=""></span>
+                            <span><img src="{{ asset('frontend/images/icon-phone-primary.svg') }}" alt="" loading="lazy" decoding="async"></span>
                             {{ __('site.minerals.testimonials.prompt') }}
                             <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a>
                         </p>

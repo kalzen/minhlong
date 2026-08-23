@@ -71,7 +71,7 @@ class AIMarketingPostController extends Controller
         )->afterCommit()->afterResponse();
 
         return response()->json([
-            'url' => route('site.blog.show', ['slug' => $viPost->slug]),
+            'url' => route('site.blog.show.'.$viPost->locale, ['slug' => $viPost->slug]),
             'translation_group_id' => $viPost->translation_group_id,
             'translation' => [
                 'status' => 'queued',

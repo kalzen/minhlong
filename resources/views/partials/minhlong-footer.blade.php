@@ -7,30 +7,30 @@
     <div class="footer-scrolling-ticker">
         <div class="scrolling-ticker-box">
             <div class="scrolling-content">
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Industrial EPC</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Factory Construction</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Steel Structure Works</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">M&amp;E Systems</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Fire Protection (PCCC)</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Industrial Zone Projects</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Turnkey Delivery</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Schedule &amp; Safety Commitment</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Quality Control (QA/QC)</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Cost-Optimized Execution</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Industrial EPC</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Industrial EPC</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Factory Construction</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Steel Structure Works</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">M&amp;E Systems</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Fire Protection (PCCC)</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Industrial Zone Projects</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Turnkey Delivery</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Schedule &amp; Safety Commitment</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Quality Control (QA/QC)</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Cost-Optimized Execution</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Industrial EPC</span>
             </div>
             <div class="scrolling-content">
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Factory Construction</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Industrial EPC</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">M&amp;E Systems</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Steel Structure Works</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Industrial Zone Projects</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Fire Protection (PCCC)</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Cost-Optimized Execution</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Turnkey Delivery</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">QA/QC Standards</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Schedule &amp; Safety Commitment</span>
-                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="">Factory Construction</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Factory Construction</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Industrial EPC</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">M&amp;E Systems</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Steel Structure Works</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Industrial Zone Projects</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Fire Protection (PCCC)</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Cost-Optimized Execution</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Turnkey Delivery</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">QA/QC Standards</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Schedule &amp; Safety Commitment</span>
+                <span><img src="{{ asset('frontend/images/icon-asterisk.svg') }}" alt="" loading="lazy" decoding="async">Factory Construction</span>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                 <div class="col-xl-4">
                     <div class="about-footer">
                         <div class="footer-logo d-flex align-items-center gap-2">
-                            <img src="{{ asset('frontend/images/logo.png') }}" alt="{{ $siteName }}" style="height: 40px; width: auto;">
+                            <img src="{{ asset('frontend/images/logo.png') }}" alt="{{ $siteName }}" style="height: 40px; width: auto;" loading="lazy" decoding="async">
                             <span style="color: #ffffff; font-weight: 700; letter-spacing: 0.08em;">MINH LONG GROUP</span>
                         </div>
                         <div class="footer-working-hours">
@@ -65,8 +65,8 @@
                         <div class="footer-links footer-contact-links">
                             <h3>{{ __('site.footer.get_in_touch') }}</h3>
                             <ul>
-                                <li><img src="{{ asset('frontend/images/icon-phone-white.svg') }}" alt=""> Phone: <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a></li>
-                                <li><img src="{{ asset('frontend/images/icon-mail-white.svg') }}" alt=""> Email: <a href="mailto:{{ $email }}">{{ $email }}</a></li>
+                                <li><img src="{{ asset('frontend/images/icon-phone-white.svg') }}" alt="" loading="lazy" decoding="async"> Phone: <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}">{{ $phone }}</a></li>
+                                <li><img src="{{ asset('frontend/images/icon-mail-white.svg') }}" alt="" loading="lazy" decoding="async"> Email: <a href="mailto:{{ $email }}">{{ $email }}</a></li>
                             </ul>
                         </div>
                         <div class="footer-links footer-newsletter-form">

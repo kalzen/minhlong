@@ -39,7 +39,7 @@
                                         @foreach ($heroInfoSlides1 as $slideUrl)
                                             <div class="swiper-slide">
                                                 <figure class="image-anime reveal">
-                                                    <img src="{{ $slideUrl }}" alt="">
+                                                    <img src="{{ $slideUrl }}" alt="" loading="lazy" decoding="async">
                                                 </figure>
                                             </div>
                                         @endforeach
@@ -67,7 +67,7 @@
                                     @foreach ($heroInfoSlides2 as $slideUrl)
                                         <div class="swiper-slide">
                                             <figure class="image-anime reveal">
-                                                <img src="{{ $slideUrl }}" alt="">
+                                                <img src="{{ $slideUrl }}" alt="" loading="lazy" decoding="async">
                                             </figure>
                                         </div>
                                     @endforeach
@@ -81,34 +81,34 @@
                             <!-- Hero Info Header Start -->
                             <div class="hero-info-header">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-hero-info-1.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-hero-info-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
         
                                 <!-- Satisfy Client Images Start -->
                                 <div class="satisfy-client-images">
                                     <div class="satisfy-client-image">
                                         <figure class="image-anime">
-                                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=160&q=80" alt="Global partner office">
+                                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=160&q=80" alt="Global partner office" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="satisfy-client-image">
                                         <figure class="image-anime">
-                                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=160&q=80" alt="Business partner team">
+                                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=160&q=80" alt="Business partner team" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="satisfy-client-image">
                                         <figure class="image-anime">
-                                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=160&q=80" alt="Corporate partner">
+                                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=160&q=80" alt="Corporate partner" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="satisfy-client-image">
                                         <figure class="image-anime">
-                                            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=160&q=80" alt="International partner">
+                                            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=160&q=80" alt="International partner" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                     <div class="satisfy-client-image">
                                         <figure class="image-anime">
-                                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=160&q=80" alt="Global company">
+                                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=160&q=80" alt="Global company" loading="lazy" decoding="async">
                                         </figure>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                             
                             <!-- Hero Info BG Icon Start -->
                             <div class="hero-info-bg-icon">
-                                <img src="{{ asset('frontend') }}/images/icon-hero-info-bg-1.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-hero-info-bg-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <!-- Hero Info BG Icon End -->
                         </div>
@@ -150,7 +150,7 @@
                             <!-- About Us Image 1 Start -->
                             <div class="about-us-image">
                                 <figure class="image-anime">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_1') }}" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_1') }}" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <!-- About Us Image 1 End --> 
@@ -162,14 +162,14 @@
                             <!-- About Us Image 2 Start -->
                             <div class="about-us-image">
                                 <figure class="image-anime">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_2') }}" alt="">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.image_2') }}" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <!-- About Us Image 2 End -->
                         
                             <!-- Year Experience Circle Start -->
                             <div class="year-experience-circle">
-                                <img src="{{ asset('frontend') }}/images/year-experience-circle-accent.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/year-experience-circle-accent.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <!-- Year Experience Circle End -->
                         </div>
@@ -194,7 +194,7 @@
                             <!-- About Body Item Start -->
                             <div class="about-body-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="about-body-item-content">
                                     <h3>{{ __('site.about.item1_title') }}</h3>
@@ -206,7 +206,7 @@
                             <!-- About Body Item Start -->
                             <div class="about-body-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="about-body-item-content">
                                     <h3>{{ __('site.about.item2_title') }}</h3>
@@ -268,7 +268,7 @@
                                 <!-- Intro Video Image Start -->
                                 <div class="about-video-image">
                                     <figure class="image-anime">
-                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.video_poster') }}" alt="">
+                                        <img src="{{ \App\Support\SiteMedia::urlOrDefault('home.about.video_poster') }}" alt="" loading="lazy" decoding="async">
                                     </figure>
                                 </div>
                                 <!-- Intro Video Image End -->
@@ -342,12 +342,12 @@
                         <div class="service-image-box">
                             <div class="service-item-image">
                                 <figure class="image-anime">
-                                    <img src="{{ $sector['image'] }}" alt="{{ __('site.home.services_section.items.'.$index.'.title') }}">
+                                    <img src="{{ $sector['image'] }}" alt="{{ __('site.home.services_section.items.'.$index.'.title') }}" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="service-item-btn">
                                 <a href="{{ route($sector['route']) }}">
-                                    <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/arrow-primary.svg" alt="" loading="lazy" decoding="async">
                                 </a>
                             </div>
                         </div>
@@ -403,7 +403,7 @@
                             <!-- What We Do Item Start -->
                             <div class="what-we-do-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-1.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="what-we-do-item-body">
                                     <h3>{{ __('site.home.what_we_do_section.item1_title') }}</h3>
@@ -418,7 +418,7 @@
                             <!-- What We Do Item Start -->
                             <div class="what-we-do-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-2.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-what-we-do-item-2.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="what-we-do-item-body">
                                     <h3>{{ __('site.home.what_we_do_section.item2_title') }}</h3>
@@ -502,7 +502,7 @@
                     <!-- What We Do Image Start -->
                     <div class="what-we-do-image wow fadeInUp" data-wow-delay="0.2s">
                         <figure>
-                            <img src="{{ asset('frontend') }}/images/what-we-do-image.png" alt="">
+                            <img src="{{ asset('frontend') }}/images/what-we-do-image.webp" alt="" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <!-- What We Do Image End -->
@@ -516,11 +516,11 @@
                     <div class="satisfy-client-images">
                         <div class="satisfy-client-image">
                             <figure class="image-anime">
-                                <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="">
+                                <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="satisfy-client-image add-more">
-                            <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="">
+                            <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="" loading="lazy" decoding="async">
                         </div>
                     </div>
                     <!-- Satisfy Client Images End -->
@@ -549,7 +549,7 @@
                         <!-- Watch Video Circle Start -->
                         <div class="watch-video-circle">
                             <a href="https://www.youtube.com/watch?v=4hWRk3EEybA" class="popup-video" data-cursor-text="Play">
-                                <img src="{{ asset('frontend') }}/images/watch-video-circle.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/watch-video-circle.svg" alt="" loading="lazy" decoding="async">
                             </a>
                         </div>
                         <!-- Watch Video Circle End -->
@@ -571,11 +571,11 @@
                         <h3 class="wow fadeInUp">{{ __('site.home.features_section.title') }}</h3>
                         <h2 class="text-effect" data-cursor="-opaque">
                             {{ __('site.home.features_section.subtitle_part1') }}
-                            <span class="feature-title-img-1"><img src="{{ asset('frontend') }}/images/icon-feature-title-1.svg" alt=""></span>
+                            <span class="feature-title-img-1"><img src="{{ asset('frontend') }}/images/icon-feature-title-1.svg" alt="" loading="lazy" decoding="async"></span>
                             {{ __('site.home.features_section.subtitle_part2') }}
-                            <span class="feature-title-img-2"><img src="{{ asset('frontend') }}/images/icon-feature-title-2.svg" alt=""></span>
+                            <span class="feature-title-img-2"><img src="{{ asset('frontend') }}/images/icon-feature-title-2.svg" alt="" loading="lazy" decoding="async"></span>
                             {{ __('site.home.features_section.subtitle_part3') }}
-                            <span class="feature-title-img-3"><img src="{{ asset('frontend') }}/images/author-1.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-2.jpg" alt=""><img src="{{ asset('frontend') }}/images/author-3.jpg" alt=""></span>
+                            <span class="feature-title-img-3"><img src="{{ asset('frontend') }}/images/author-1.jpg" alt="" loading="lazy" decoding="async"><img src="{{ asset('frontend') }}/images/author-2.jpg" alt="" loading="lazy" decoding="async"><img src="{{ asset('frontend') }}/images/author-3.jpg" alt="" loading="lazy" decoding="async"></span>
                             {{ __('site.home.features_section.subtitle_part4') }}
                         </h2>
                     </div>
@@ -589,7 +589,7 @@
                     <div class="feature-item box-1 wow fadeInUp">
                         <div class="feature-item-shape-image">
                             <figure>
-                                <img src="{{ asset('frontend') }}/images/feature-item-image-1.jpg" alt="">
+                                <img src="{{ asset('frontend') }}/images/feature-item-image-1.jpg" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="feature-item-content-box">
@@ -622,7 +622,7 @@
                         </div>
                         <div class="feature-item-image">
                             <figure>
-                                <img src="{{ asset('frontend') }}/images/feature-item-image-2.png" alt="">
+                                <img src="{{ asset('frontend') }}/images/feature-item-image-2.webp" alt="" loading="lazy" decoding="async">
                             </figure>
                         </div>
                     </div>
@@ -658,11 +658,11 @@
                         <div class="satisfy-client-images">
                             <div class="satisfy-client-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="satisfy-client-image add-more">
-                                <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <!-- Satisfy Client Images End -->
@@ -753,7 +753,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-1.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-1.jpg" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -769,7 +769,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -784,7 +784,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-2.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-2.webp" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -800,7 +800,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -815,7 +815,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-3.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-3.webp" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -831,7 +831,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -846,7 +846,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-4.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-4.jpg" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -862,7 +862,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -877,7 +877,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-5.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-5.webp" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -893,7 +893,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -908,7 +908,7 @@
                                 <div class="project-item-image">
                                     <a href="project-single.html" data-cursor-text="View">
                                         <figure class="image-anime">
-                                            <img src="{{ asset('frontend') }}/images/project-image-6.jpg" alt="">
+                                            <img src="{{ asset('frontend') }}/images/project-image-6.webp" alt="" loading="lazy" decoding="async">
                                         </figure>
                                     </a>
                                 </div>
@@ -924,7 +924,7 @@
                                 <!-- Project Item Button Start -->
                                 <div class="project-item-btn">
                                     <a href="project-single.html">
-                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="">
+                                        <img src="{{ asset('frontend') }}/images/arrow-white.svg" alt="" loading="lazy" decoding="async">
                                     </a>
                                 </div>
                                 <!-- Project Item Button End -->
@@ -942,17 +942,17 @@
                         <div class="satisfy-client-images">
                             <div class="satisfy-client-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/author-1.jpg" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="satisfy-client-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/author-2.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/author-2.jpg" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="satisfy-client-image">
                                 <figure class="image-anime">
-                                    <img src="{{ asset('frontend') }}/images/author-3.jpg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/author-3.jpg" alt="" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                         </div>
@@ -986,7 +986,7 @@
                             <!-- CTA Box Item Start -->
                             <div class="cta-box-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-cta-box-item-1.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-cta-box-item-1.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="cta-box-item-content">
                                     <h3>{{ __('site.home.cta_box.item1') }}</h3>
@@ -997,7 +997,7 @@
                             <!-- CTA Box Item Start -->
                             <div class="cta-box-item">
                                 <div class="icon-box">
-                                    <img src="{{ asset('frontend') }}/images/icon-cta-box-item-2.svg" alt="">
+                                    <img src="{{ asset('frontend') }}/images/icon-cta-box-item-2.svg" alt="" loading="lazy" decoding="async">
                                 </div>
                                 <div class="cta-box-item-content">
                                     <h3>{{ __('site.home.cta_box.item2') }}</h3>
@@ -1048,7 +1048,7 @@
                         <!-- Faq Contact Box Start -->
                         <div class="faq-contact-box wow fadeInUp" data-wow-delay="0.6s">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="faq-contact-box-content">
                                 <h3>{{ __('site.home.faqs.contact_title') }}</h3>
@@ -1181,7 +1181,7 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <div class="testimonial-company-logo">
-                                                <img src="{{ asset('frontend') }}/images/company-logo-1.svg" alt="">
+                                                <img src="{{ asset('frontend') }}/images/company-logo-1.svg" alt="" loading="lazy" decoding="async">
                                             </div> 
                                             <div class="testimonial-item-body">
                                                 <div class="testimonial-item-content">
@@ -1202,7 +1202,7 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <div class="testimonial-company-logo">
-                                                <img src="{{ asset('frontend') }}/images/company-logo-2.svg" alt="">
+                                                <img src="{{ asset('frontend') }}/images/company-logo-2.svg" alt="" loading="lazy" decoding="async">
                                             </div> 
                                             <div class="testimonial-item-body">
                                                 <div class="testimonial-item-content">
@@ -1223,7 +1223,7 @@
                                         <!-- Testimonial Item Start -->
                                         <div class="testimonial-item">
                                             <div class="testimonial-company-logo">
-                                                <img src="{{ asset('frontend') }}/images/company-logo-3.svg" alt="">
+                                                <img src="{{ asset('frontend') }}/images/company-logo-3.svg" alt="" loading="lazy" decoding="async">
                                             </div> 
                                             <div class="testimonial-item-body">
                                                 <div class="testimonial-item-content">
@@ -1246,7 +1246,7 @@
     
                         <!-- Section Footer Text Start -->
                         <div class="section-footer-text section-footer-contact wow fadeInUp" data-wow-delay="0.2s">   
-                            <p><span><img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt=""></span> Need a reliable EPC contractor for your factory? <a href="{{ route('site.contact') }}">Talk to Minh Long today</a></p>
+                            <p><span><img src="{{ asset('frontend') }}/images/icon-phone-primary.svg" alt="" loading="lazy" decoding="async"></span> Need a reliable EPC contractor for your factory? <a href="{{ route('site.contact') }}">Talk to Minh Long today</a></p>
                         </div>
                         <!-- Section Footer Text End -->
                     </div>

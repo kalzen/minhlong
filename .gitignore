@@ -29,3 +29,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Generated at runtime from the database; committing it would ship
+# whatever APP_URL the last developer had.
+/public/sitemap.xml

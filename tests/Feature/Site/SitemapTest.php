@@ -37,9 +37,15 @@ test('sitemap generate command writes public xml with static and blog urls', fun
     $xml = file_get_contents($this->sitemapPath);
 
     expect($xml)->toContain('<urlset');
-    expect($xml)->toContain(route('home'));
-    expect($xml)->toContain(route('site.blog.index'));
-    expect($xml)->toContain(route('site.blog.show', ['slug' => 'bai-viet-sitemap']));
+
+    // Every language variant of every page must be listed, not just the default.
+    foreach (['vi', 'en', 'zh'] as $locale) {
+        expect($xml)->toContain(route('home.'.$locale));
+        expect($xml)->toContain(route('site.blog.index.'.$locale));
+        expect($xml)->toContain(route('site.about.'.$locale));
+    }
+
+    expect($xml)->toContain(route('site.blog.show.vi', ['slug' => 'bai-viet-sitemap']));
 });
 
 test('sitemap route serves generated xml', function () {
@@ -51,7 +57,7 @@ test('sitemap route serves generated xml', function () {
 
     expect(file_get_contents($this->sitemapPath))
         ->toContain('<urlset')
-        ->toContain(route('home'));
+        ->toContain(route('home.'.config('site_pages.default_locale')));
 });
 
 test('robots txt references sitemap url', function () {
@@ -59,7 +65,8 @@ test('robots txt references sitemap url', function () {
         ->assertOk()
         ->assertHeader('content-type', 'text/plain; charset=UTF-8')
         ->assertSee('Sitemap: '.url('/sitemap.xml'), false)
-        ->assertSee('Disallow: /admin', false);
+        ->assertSee('Disallow: /admin', false)
+        ->assertSee('Disallow: /lang/', false);
 });
 
 test('published blog post includes hreflang alternates in sitemap', function () {
@@ -94,7 +101,7 @@ test('published blog post includes hreflang alternates in sitemap', function () 
     $xml = file_get_contents($this->sitemapPath);
 
     expect($xml)->toContain('hreflang="vi"');
-    expect($xml)->toContain(route('site.blog.show', ['slug' => 'bai-viet-sitemap-post']));
+    expect($xml)->toContain(route('site.blog.show.vi', ['slug' => 'bai-viet-sitemap-post']));
     expect($xml)->toContain('hreflang="en"');
-    expect($xml)->toContain(route('site.blog.show', ['slug' => 'english-sitemap-post']));
+    expect($xml)->toContain(route('site.blog.show.en', ['slug' => 'english-sitemap-post']));
 });

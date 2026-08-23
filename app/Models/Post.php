@@ -176,7 +176,7 @@ class Post extends Model implements HasMedia, Sitemapable
 
     public function toSitemapTag(): Url
     {
-        $tag = Url::create(route('site.blog.show', ['slug' => $this->slug]))
+        $tag = Url::create(route('site.blog.show.'.$this->locale, ['slug' => $this->slug]))
             ->setLastModificationDate($this->updated_at)
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
             ->setPriority(0.8);
@@ -190,7 +190,7 @@ class Post extends Model implements HasMedia, Sitemapable
 
             foreach ($siblings as $sibling) {
                 $tag->addAlternate(
-                    route('site.blog.show', ['slug' => $sibling->slug]),
+                    route('site.blog.show.'.$sibling->locale, ['slug' => $sibling->slug]),
                     $sibling->locale
                 );
             }

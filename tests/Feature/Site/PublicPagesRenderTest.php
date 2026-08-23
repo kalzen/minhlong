@@ -10,19 +10,19 @@ test('home page our services section links to land host minerals and power', fun
     $response->assertSee(route('site.host'), false);
     $response->assertSee(route('site.minerals'), false);
     $response->assertSee(route('site.power'), false);
-    $response->assertSee('minhlong-land.png', false);
-    $response->assertSee('minhlong-host.jpg', false);
+    $response->assertSee('minhlong-land.webp', false);
+    $response->assertSee('minhlong-host.webp', false);
     $response->assertSee('service-item--home-image-full', false);
-    $response->assertSee('minerals/about-quarry-conveyors.png', false);
-    $response->assertSee('minhlong-power.jpg', false);
+    $response->assertSee('minerals/about-quarry-conveyors.webp', false);
+    $response->assertSee('minhlong-power.webp', false);
 });
 
 test('minh long power page renders what we do stats block', function () {
     $response = $this->get(route('site.power'));
 
     $response->assertOk();
-    $response->assertSee('power-3.jpg', false);
-    $response->assertSee('power-4.jpg', false);
+    $response->assertSee('power-3.webp', false);
+    $response->assertSee('power-4.webp', false);
     $response->assertSee('our-working-process-power-bg', false);
     $response->assertSee('what-we-counter-box-silver', false);
     $response->assertSee('what-we-counter-info-silver', false);
@@ -42,8 +42,8 @@ test('minh long host page renders and uses host image assets', function () {
 
     $response->assertOk();
     $response->assertSee('hero-gold', false);
-    $response->assertSee('minhlong-host-1.png', false);
-    $response->assertSee('minhlong-host-5.JPG', false);
+    $response->assertSee('minhlong-host-1.webp', false);
+    $response->assertSee('minhlong-host-5.webp', false);
 });
 
 test('about page renders group positioning copy from translations', function () {

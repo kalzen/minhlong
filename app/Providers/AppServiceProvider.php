@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Models\Setting;
+use App\Routing\LocalizedUrlGenerator;
+use App\Sitemap\SiteSitemapBuilder;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +23,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Swap in a URL generator that understands per-locale route names, so
+        // existing route('site.about') calls keep working and point at the
+        // slug for the language currently being read.
+        $this->app->extend('url', function (UrlGenerator $url, $app) {
+            $localized = new LocalizedUrlGenerator(
+                $app['router']->getRoutes(),
+                $url->getRequest(),
+                $app['config']['app.asset_url']
+            );
+
+            $localized->setSessionResolver(fn () => $app['session'] ?? null);
+            $localized->setKeyResolver(function () use ($app) {
+                $config = $app->make('config');
+
+                return [$config->get('app.key'), ...($config->get('app.previous_keys') ?? [])];
+            });
+
+            $app->rebinding('request', fn ($app, $request) => $localized->setRequest($request));
+            $app->rebinding('routes', fn ($app, $routes) => $localized->setRoutes($routes));
+
+            return $localized;
+        });
     }
 
     /**
@@ -29,6 +53,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->keepSitemapFresh();
+        $this->sharePageSeoDefaults();
 
         Model::shouldBeStrict(! app()->isProduction());
 
@@ -71,6 +97,57 @@ class AppServiceProvider extends ServiceProvider
                     ->get()
                 : collect());
         });
+    }
+
+    /**
+     * Give every static public page its own title and meta description.
+     *
+     * Route::view() pages carry no controller, so without this they would all
+     * inherit the site-wide description and compete as near-duplicates.
+     */
+    protected function sharePageSeoDefaults(): void
+    {
+        $seoKeyByView = [
+            'site.home' => 'home',
+            'site.about' => 'about',
+            'site.services' => 'services',
+            'site.land' => 'land',
+            'site.power' => 'power',
+            'site.host' => 'host',
+            'site.minerals' => 'minerals',
+            'site.contact' => 'contact',
+            'site.library.index' => 'library',
+        ];
+
+        foreach ($seoKeyByView as $viewName => $seoKey) {
+            View::composer($viewName, function ($view) use ($seoKey): void {
+                $data = $view->getData();
+
+                if (! array_key_exists('metaTitle', $data)) {
+                    $view->with('metaTitle', __('site.seo.'.$seoKey.'.title'));
+                }
+
+                if (! array_key_exists('metaDescription', $data)) {
+                    $view->with('metaDescription', __('site.seo.'.$seoKey.'.description'));
+                }
+            });
+        }
+    }
+
+    /**
+     * Invalidate the cached sitemap.xml whenever indexable content changes,
+     * so publishing a post is reflected on the next /sitemap.xml request.
+     */
+    protected function keepSitemapFresh(): void
+    {
+        $invalidate = function (): void {
+            if (! app()->runningUnitTests()) {
+                app(SiteSitemapBuilder::class)->invalidate();
+            }
+        };
+
+        Post::saved($invalidate);
+        Post::deleted($invalidate);
     }
 
     /**

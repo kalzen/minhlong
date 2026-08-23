@@ -37,11 +37,11 @@
                     <div class="about-us-image-box-2">
                         <div class="about-us-image">
                             <figure class="image-anime">
-                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.image_2') }}" alt="{{ __('site.about.image_2_alt') }}">
+                                <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.image_2') }}" alt="{{ __('site.about.image_2_alt') }}" loading="lazy" decoding="async">
                             </figure>
                         </div>
                         <div class="year-experience-circle">
-                            <img src="{{ asset('frontend') }}/images/year-experience-circle-accent.svg" alt="">
+                            <img src="{{ asset('frontend') }}/images/year-experience-circle-accent.svg" alt="" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="about-us-body wow fadeInUp" data-wow-delay="0.4s">
                         <div class="about-body-item">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-about-item-1.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="about-body-item-content">
                                 <h3>{{ __('site.about.item1_title') }}</h3>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="about-body-item">
                             <div class="icon-box">
-                                <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="">
+                                <img src="{{ asset('frontend') }}/images/icon-about-item-2.svg" alt="" loading="lazy" decoding="async">
                             </div>
                             <div class="about-body-item-content">
                                 <h3>{{ __('site.about.item2_title') }}</h3>
@@ -92,7 +92,7 @@
                         <div class="about-us-video-box">
                             <div class="about-video-image">
                                 <figure class="image-anime">
-                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.video_poster') }}" alt="{{ __('site.about.video_poster_alt') }}">
+                                    <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.overview.video_poster') }}" alt="{{ __('site.about.video_poster_alt') }}" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                             <div class="video-play-button">
@@ -169,11 +169,11 @@
             <div class="col-xl-4 col-md-6">
                 <div class="approach-item box-1 wow fadeInUp">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend') }}/images/approach-item-bg-1.svg" alt="">
+                        <img src="{{ asset('frontend') }}/images/approach-item-bg-1.svg" alt="" loading="lazy" decoding="async">
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_1') }}" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_1') }}" alt="" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="approach-item-content">
@@ -190,11 +190,11 @@
             <div class="col-xl-4 col-md-6">
                 <div class="approach-item box-2 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend') }}/images/approach-item-bg-2.svg" alt="">
+                        <img src="{{ asset('frontend') }}/images/approach-item-bg-2.svg" alt="" loading="lazy" decoding="async">
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_2') }}" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_2') }}" alt="" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="approach-item-content">
@@ -211,11 +211,11 @@
             <div class="col-xl-4 col-md-6">
                 <div class="approach-item box-3 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="icon-box">
-                        <img src="{{ asset('frontend') }}/images/approach-item-bg-3.svg" alt="">
+                        <img src="{{ asset('frontend') }}/images/approach-item-bg-3.svg" alt="" loading="lazy" decoding="async">
                     </div>
                     <div class="approach-item-image">
                         <figure>
-                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_3') }}" alt="">
+                            <img src="{{ \App\Support\SiteMedia::urlOrDefault('about.approach.image_3') }}" alt="" loading="lazy" decoding="async">
                         </figure>
                     </div>
                     <div class="approach-item-content">

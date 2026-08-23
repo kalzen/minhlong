@@ -1,9 +1,9 @@
 @php
     $postsCol = collect($posts ?? []);
     $defaultListingImages = [
-        asset('frontend/images/post-1.jpg'),
-        asset('frontend/images/post-2.jpg'),
-        asset('frontend/images/post-3.jpg'),
+        asset('frontend/images/post-1.webp'),
+        asset('frontend/images/post-2.webp'),
+        asset('frontend/images/post-3.webp'),
     ];
     $blogIndexUrl = route('site.blog.index');
     $postImageSrc = static function ($post, int $index) use ($defaultListingImages): string {

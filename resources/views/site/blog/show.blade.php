@@ -1,13 +1,5 @@
 @extends('layouts.minhlong')
 
-@push('head')
-    @isset($hreflangAlternates)
-        @foreach ($hreflangAlternates as $locale => $url)
-            <link rel="alternate" hreflang="{{ $locale }}" href="{{ $url }}">
-        @endforeach
-    @endisset
-@endpush
-
 @section('content')
 <div class="page-header parallaxie page-header--article">
     <div class="container">
@@ -54,7 +46,7 @@
                 @if(filled($featuredHeroUrl))
                 <div class="post-image">
                     <figure class="image-anime reveal">
-                        <img src="{{ $featuredHeroUrl }}" alt="{{ $post->title }}">
+                        <img src="{{ $featuredHeroUrl }}" alt="{{ $post->title }}" width="1200" height="675" fetchpriority="high" decoding="async">
                     </figure>
                 </div>
                 @endif

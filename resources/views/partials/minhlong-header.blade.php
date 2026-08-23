@@ -45,19 +45,19 @@
                                 </a>
                                 <ul>
                                     <li class="nav-item">
-                                        <a class="nav-link d-flex align-items-center" href="{{ route('site.lang', ['locale' => 'en']) }}">
+                                        <a class="nav-link d-flex align-items-center" href="{{ $localeSwitchUrls['en'] }}">
                                             <img src="{{ asset('frontend/images/flag/united-states.png') }}" alt="English" width="18" height="18" style="border-radius:999px; object-fit:cover; margin-right:8px;">
                                             {{ __('site.lang.english') }}
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link d-flex align-items-center" href="{{ route('site.lang', ['locale' => 'vi']) }}">
+                                        <a class="nav-link d-flex align-items-center" href="{{ $localeSwitchUrls['vi'] }}">
                                             <img src="{{ asset('frontend/images/flag/vietnam.png') }}" alt="Tiếng Việt" width="18" height="18" style="border-radius:999px; object-fit:cover; margin-right:8px;">
                                             {{ __('site.lang.vietnamese') }}
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link d-flex align-items-center" href="{{ route('site.lang', ['locale' => 'zh']) }}">
+                                        <a class="nav-link d-flex align-items-center" href="{{ $localeSwitchUrls['zh'] }}">
                                             <img src="{{ asset('frontend/images/flag/china.png') }}" alt="中文" width="18" height="18" style="border-radius:999px; object-fit:cover; margin-right:8px;">
                                             {{ __('site.lang.chinese') }}
                                         </a>
